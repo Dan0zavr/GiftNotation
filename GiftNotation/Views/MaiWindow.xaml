@@ -1,0 +1,86 @@
+﻿<Window x:Class="GiftNotation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GiftNotation"
+        mc:Ignorable="d"
+        Title="Виш-листы" Height="440" Width="600"
+        WindowStartupLocation="CenterScreen">
+
+    <!--Создание фрейма-->
+
+
+
+    <Window.Resources>
+        <!--Определение цвета -->
+        <SolidColorBrush x:Key="ColorMainWindow" Color="#D1C7BD" />
+        <SolidColorBrush x:Key="ColorMenu" Color="#72383D" />
+
+        <SolidColorBrush x:Key="ColorButton" Color="#AC9C8D" />
+
+        <SolidColorBrush x:Key="SecondTextColor" Color="White" />
+
+        <SolidColorBrush x:Key="PrimaryGrayColor" Color="#ffffff" />
+
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+                <Setter Property="Background" Value="{DynamicResource ColorButton}"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="Medium" />
+            <Setter Property="Foreground" Value="Black" >
+
+            </Setter>
+
+        </Style>
+
+    </Window.Resources>
+
+
+   <Grid Background="{DynamicResource ColorMainWindow}">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="*"/>
+            <!-- Основное пространство-->
+            <RowDefinition Height="Auto"/>
+            <!--Для кнопок вниз-->
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="77*"/>
+            <ColumnDefinition Width="323*"/>
+        </Grid.ColumnDefinitions>
+        <Viewbox Stretch="Uniform" StretchDirection="UpOnly" Margin="120,10,0,0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <Calendar Name="eventCalendar"/>
+        </Viewbox>
+
+
+
+        <StackPanel DockPanel.Dock="Left" Background="{DynamicResource ColorMenu}" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,0,484,0" >
+            
+            <Button Content="Виш-лист" Margin="5" Height="25" Click="Button_ClickVish_List"/>
+            <Button Content="Мои друзья" Margin="5" Height="25" Click="Button_Click_MyFriends"/>
+            <Button Content="Мой профиль" Height="25" Margin="5" Click="Button_Click_MyProfil"/>
+            <Button Content="Настройки" Height="25" Margin="5" Click="Button_Click_Setting"/>
+        </StackPanel>
+        
+        <Frame Name="MainFrame" NavigationUIVisibility="Hidden" Grid.Column="1" Grid.RowSpan="2"/>
+        
+
+        <!--<StackPanel Grid.Row="1" VerticalAlignment="Bottom" Background="{DynamicResource PrimaryColorSiren}"> -->
+        <!--<Button Content="Мой профиль" Height="25" Margin="5"/> -->
+        <!--<Button Content="Настройки" Height="25" Margin="5"/> -->
+        <!--</StackPanel> -->
+    </Grid>
+</Window>
