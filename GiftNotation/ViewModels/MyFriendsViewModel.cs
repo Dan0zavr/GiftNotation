@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GiftNotation.ViewModels
 {
-    internal class MyFriendsViewModel
+    public class MyFriendsViewModel : ViewModelBase
     {
     }
 }

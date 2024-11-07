@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using GiftNotation.ViewModels;
 using GiftNotation.Services;
 using GiftNotation.Data;
+using GiftNotation;
 
 
 
@@ -21,6 +22,7 @@ namespace GiftNotation
         protected override void OnStartup(StartupEventArgs e)
         {
             Window window = new MainWindow();
+            window.DataContext = new MainViewModel();
             window.Show();
 
             base.OnStartup(e);

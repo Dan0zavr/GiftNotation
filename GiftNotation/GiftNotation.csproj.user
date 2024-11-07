@@ -7,18 +7,24 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Controls\NavigationPanel.xaml.cs">
+    <Compile Update="Controls\NavigationBar.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Controls\NavigationPanel.xaml">
+    <Page Update="Controls\NavigationBar.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\MaiWindow.xaml">
+    <Page Update="Styles\General.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Page1.xaml">
+    <Page Update="Views\Calendar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\MyFriends.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
