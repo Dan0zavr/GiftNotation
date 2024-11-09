@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\App.xaml
-3-1624455823
+5324111052
 
-20-1878521070
+27-1265756253
 216-1189241630
-Controls\NavigationPanel.xaml;Views\MaiWindow.xaml;Views\Page1.xaml;
+Controls\NavigationBar.xaml;Styles\General.xaml;Views\Calendar.xaml;Views\MainWindow.xaml;Views\MyFriends.xaml;
 
 False
 
