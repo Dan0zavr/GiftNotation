@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using GiftNotation.Services;
 using GiftNotation.State.Navigators;
 using GiftNotation.ViewModels;
 
@@ -13,40 +14,39 @@ namespace GiftNotation.Commands
     {
         public event EventHandler? CanExecuteChanged;
 
-        private INavigator _navigator;
+        private readonly INavigator _navigator;
+        private readonly IMyFriendsService _friendsService;
 
-        public UpdateCurrentVMCommand(INavigator navigator)
+        // Конструктор команды, принимающий INavigator и IMyFriendsService через DI
+        public UpdateCurrentVMCommand(INavigator navigator, IMyFriendsService friendsService)
         {
             _navigator = navigator;
+            _friendsService = friendsService;
         }
 
-        public bool CanExecute(object? parameter)
-        {
-            return true;
-        }
+        // Команда доступна для выполнения всегда
+        public bool CanExecute(object? parameter) => true;
 
+        // Выполняется при нажатии на кнопку в панели управления
         public void Execute(object? parameter)
         {
-            if (parameter is ViewType)
+            if (parameter is ViewType viewType)
             {
-                ViewType viewType = (ViewType)parameter;
-
                 switch (viewType)
                 {
                     case ViewType.Calendar:
+                        // Создание новой модели представления для Calendar
                         _navigator.CurrentViewModel = new CalendarViewModel();
                         break;
 
                     case ViewType.MyFriends:
-                        _navigator.CurrentViewModel  = new MyFriendsViewModel();
+                        // Создание MyFriendsViewModel с использованием переданного сервиса
+                        _navigator.CurrentViewModel = new MyFriendsViewModel(_friendsService);
                         break;
 
                     default:
                         break;
-
-
                 }
-
             }
         }
     }

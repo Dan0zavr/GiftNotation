@@ -36,8 +36,16 @@
 
 
     <Grid>
-        <Label Name="MyFriendsLabel" Content="Мои друзья" FontSize="16" FontWeight="Bold" Height="25" Width="140" Margin="-30,10,0,390" />
-        <DataGrid x:Name="DataGrid" CanUserAddRows="True" PreviewKeyDown="DataGrid_PreviewKeyDown" Width="450" Height="300" Margin="-20,-20,0,0" AutoGenerateColumns="False">
+        <Label Name="MyFriendsLabel" Content="Мои друзья" FontSize="16" FontWeight="Bold" Height="25" Width="140" Margin="10" />
+
+        <!-- Привязка ItemsSource к коллекции Friends -->
+        <DataGrid x:Name="DataGrid" 
+                  ItemsSource="{Binding Friends}" 
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="True" 
+                  Width="450" 
+                  Height="300" 
+                  Margin="10,40,10,10">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Человек" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="100" />
 
@@ -69,5 +77,5 @@
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
-    
+
 </UserControl>

@@ -8,6 +8,7 @@ using GiftNotation.ViewModels;
 
 namespace GiftNotation.State.Navigators
 {
+    //Перечисление страниц
     enum ViewType
     {
         Calendar,
@@ -17,7 +18,7 @@ namespace GiftNotation.State.Navigators
     public interface INavigator
     {
         ViewModelBase CurrentViewModel { get; set; }
-
+        
         ICommand UpdateCurrentVMCommand { get; }
     }
 }

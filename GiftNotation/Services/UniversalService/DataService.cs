@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using GiftNotation.Data;
 
-namespace GiftNotation.Services
+namespace GiftNotation.Services.UniversalService
 {
-    public class UniversalService<T> : IDataService<T> where T : class
+    public class DataService<T> : IDataService<T> where T : class
     {
         private readonly GiftNotationDbContext _context;
 
-        public UniversalService(GiftNotationDbContext context)
+        public DataService(GiftNotationDbContext context)
         {
             _context = context;
         }
@@ -52,7 +52,7 @@ namespace GiftNotation.Services
 
             if (entityToUpdate == null)
             {
-                return false; 
+                return false;
             }
 
             _context.Entry(entityToUpdate).CurrentValues.SetValues(entity);

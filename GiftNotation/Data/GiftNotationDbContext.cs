@@ -20,6 +20,7 @@ namespace GiftNotation.Data
         public DbSet<GiftEvent> eventContact { get; set; }
         public DbSet<RelationshipType> relationshipType { get; set; }
         public DbSet<Status> status { get; set; }
+        public DbSet<MyFriends> friends { get; set; }
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

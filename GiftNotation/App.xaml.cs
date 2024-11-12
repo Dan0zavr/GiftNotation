@@ -7,6 +7,8 @@ using GiftNotation.ViewModels;
 using GiftNotation.Services;
 using GiftNotation.Data;
 using GiftNotation;
+using GiftNotation.Commands;
+using GiftNotation.State.Navigators;
 
 
 
@@ -21,16 +23,34 @@ namespace GiftNotation
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            Window window = new MainWindow();
-            window.DataContext = new MainViewModel();
-            window.Show();
-
             base.OnStartup(e);
 
-            
+            var serviceCollection = new ServiceCollection();
+            ConfigureServices(serviceCollection);
+
+            ServiceProvider = serviceCollection.BuildServiceProvider();
+
+            // Получение экземпляра MainWindow через DI-контейнер
+            var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+            mainWindow.DataContext = ServiceProvider.GetRequiredService<MainViewModel>();
+            mainWindow.Show();
         }
 
+        private void ConfigureServices(IServiceCollection services)
+        {
+            // Регистрация DbContext и других сервисов
+            services.AddDbContext<GiftNotationDbContext>();
+            services.AddTransient<IMyFriendsService, MyFriendsService>();
+            services.AddSingleton<INavigator, Navigator>();
+            services.AddSingleton<UpdateCurrentVMCommand>();
 
+            // Регистрация ViewModels
+            services.AddSingleton<MainViewModel>();
+            services.AddTransient<MyFriendsViewModel>();
+
+            // Регистрация MainWindow
+            services.AddTransient<MainWindow>(); // Регистрация MainWindow как службы
+        }
     }
 
 }

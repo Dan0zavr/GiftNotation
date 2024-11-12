@@ -10,7 +10,7 @@
         Title="Виш-листы" Height="440" Width="600"
         WindowStartupLocation="CenterScreen">
 
-    <!--Создание фрейма-->
+    <!--Главное окно, где будут отображаться другие страницы(User Control)-->
 
 
 

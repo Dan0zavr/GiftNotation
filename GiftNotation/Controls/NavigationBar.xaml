@@ -7,9 +7,9 @@
              xmlns:navigation="clr-namespace:GiftNotation.State.Navigators"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
+    <!--Панель навигации, экспортирована в MainWindow-->
     <StackPanel DockPanel.Dock="Left" Background="{DynamicResource ColorMenu}">
-
+        <!--(К кнопкам нужно привязывать команды) Через CommandParameter передаётся представление, которое нужно отобразить-->
         <Button Content="Виш-лист" Margin="5" Height="25" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Calendar}"/>
         <Button Content="Мои друзья" Margin="5" Height="25" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.MyFriends}"/>
         <Button Content="Мой профиль" Height="25" Margin="5" />

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GiftNotation.Services
+namespace GiftNotation.Services.UniversalService
 {
     public interface IDataService<T>
     {
