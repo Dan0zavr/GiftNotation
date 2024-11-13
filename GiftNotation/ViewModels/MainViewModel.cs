@@ -11,13 +11,15 @@ namespace GiftNotation.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public INavigator Navigator { get; }
+        public INavigator Navigator { get; set; }
+        
         public ICommand UpdateCurrentVMCommand { get; }
 
         public MainViewModel(INavigator navigator, UpdateCurrentVMCommand updateCurrentVMCommand)
         {
             Navigator = navigator;
-            UpdateCurrentVMCommand = updateCurrentVMCommand;
+            UpdateCurrentVMCommand = navigator.UpdateCurrentVMCommand;
+            UpdateCurrentVMCommand.Execute(ViewType.Calendar);
         }
     }
 }

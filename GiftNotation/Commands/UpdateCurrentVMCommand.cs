@@ -7,6 +7,7 @@ using System.Windows.Input;
 using GiftNotation.Services;
 using GiftNotation.State.Navigators;
 using GiftNotation.ViewModels;
+using GiftNotation.ViewModels.Factories;
 
 namespace GiftNotation.Commands
 {
@@ -15,13 +16,13 @@ namespace GiftNotation.Commands
         public event EventHandler? CanExecuteChanged;
 
         private readonly INavigator _navigator;
-        private readonly IMyFriendsService _friendsService;
+        private readonly IGiftNotationViewModelAbstractFactory _viewModelFactory;
 
         // Конструктор команды, принимающий INavigator и IMyFriendsService через DI
-        public UpdateCurrentVMCommand(INavigator navigator, IMyFriendsService friendsService)
+        public UpdateCurrentVMCommand(INavigator navigator, IGiftNotationViewModelAbstractFactory viewModelFactory)
         {
             _navigator = navigator;
-            _friendsService = friendsService;
+            _viewModelFactory = viewModelFactory;
         }
 
         // Команда доступна для выполнения всегда
@@ -30,23 +31,12 @@ namespace GiftNotation.Commands
         // Выполняется при нажатии на кнопку в панели управления
         public void Execute(object? parameter)
         {
-            if (parameter is ViewType viewType)
+            if (parameter is ViewType)
             {
-                switch (viewType)
-                {
-                    case ViewType.Calendar:
-                        // Создание новой модели представления для Calendar
-                        _navigator.CurrentViewModel = new CalendarViewModel();
-                        break;
+                ViewType viewType = (ViewType)parameter;
 
-                    case ViewType.MyFriends:
-                        // Создание MyFriendsViewModel с использованием переданного сервиса
-                        _navigator.CurrentViewModel = new MyFriendsViewModel(_friendsService);
-                        break;
-
-                    default:
-                        break;
-                }
+                _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(viewType);
+                
             }
         }
     }

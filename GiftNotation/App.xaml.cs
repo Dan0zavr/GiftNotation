@@ -9,7 +9,8 @@ using GiftNotation.Data;
 using GiftNotation;
 using GiftNotation.Commands;
 using GiftNotation.State.Navigators;
-
+using Microsoft.Extensions.Hosting;
+using GiftNotation.ViewModels.Factories;
 
 
 namespace GiftNotation
@@ -19,38 +20,62 @@ namespace GiftNotation
     /// </summary>
     public partial class App : Application
     {
-        public static ServiceProvider ServiceProvider { get; private set; }
+        public static ServiceProvider ServiceProvider { get; }
+
+        //private readonly IHost _host;
+
+        //public App()
+        //{
+        //    _host = CreateHostBuilder().Build();
+        //}
+
+        //public static IHostBuilder CreateHostBuilder(string[] args = null)
+        //{
+        //    return Host.CreateDefaultBuilder(args)
+        //        .ConfigureServices(s => { });
+        //}
 
         protected override void OnStartup(StartupEventArgs e)
         {
+            
+            IServiceProvider serviceProvider = CreateServiceProvider();
+
+            Window window = new MainWindow();
+
+            window.DataContext = serviceProvider.GetRequiredService<MainViewModel>();
+
+            
+            window.Show();
             base.OnStartup(e);
-
-            var serviceCollection = new ServiceCollection();
-            ConfigureServices(serviceCollection);
-
-            ServiceProvider = serviceCollection.BuildServiceProvider();
-
-            // Получение экземпляра MainWindow через DI-контейнер
-            var mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
-            mainWindow.DataContext = ServiceProvider.GetRequiredService<MainViewModel>();
-            mainWindow.Show();
         }
 
-        private void ConfigureServices(IServiceCollection services)
+        private IServiceProvider CreateServiceProvider()
         {
-            // Регистрация DbContext и других сервисов
-            services.AddDbContext<GiftNotationDbContext>();
-            services.AddTransient<IMyFriendsService, MyFriendsService>();
-            services.AddSingleton<INavigator, Navigator>();
-            services.AddSingleton<UpdateCurrentVMCommand>();
+            IServiceCollection services = new ServiceCollection();
 
             // Регистрация ViewModels
             services.AddSingleton<MainViewModel>();
-            services.AddTransient<MyFriendsViewModel>();
+            services.AddScoped<INavigator, Navigator>();
+
+            // Регистрация DbContext и других сервисов
+            services.AddDbContext<GiftNotationDbContext>();
+            services.AddSingleton<GiftNotationDbContextFactory>();
+            services.AddSingleton<IMyFriendsService, MyFriendsService>();
+            services.AddSingleton<IContactService, ContactService>();
+            services.AddSingleton<UpdateCurrentVMCommand>();
+
+            //Регистрация фабрик
+            services.AddSingleton<IGiftNotationViewModelAbstractFactory, GiftNotationViewModelAbstractFactory>();
+            services.AddSingleton<IGiftNotationViewModelFactory<CalendarViewModel>, HomeViewModelFactory>();
+            services.AddSingleton<IGiftNotationViewModelFactory<MyFriendsViewModel>, MyFriendsViewModelFactory>();
+
 
             // Регистрация MainWindow
-            services.AddTransient<MainWindow>(); // Регистрация MainWindow как службы
+            services.AddScoped<MainWindow>(); // Регистрация MainWindow как службы
+
+            return services.BuildServiceProvider();
         }
+
     }
 
 }

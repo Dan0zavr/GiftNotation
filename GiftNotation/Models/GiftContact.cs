@@ -8,6 +8,7 @@ namespace GiftNotation.Models
 {
     public class GiftContact
     {
+        
         public int giftId { get; set; }
         public int contectId { get; set; }
     }

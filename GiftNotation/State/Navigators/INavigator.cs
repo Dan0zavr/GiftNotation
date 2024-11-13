@@ -9,7 +9,7 @@ using GiftNotation.ViewModels;
 namespace GiftNotation.State.Navigators
 {
     //Перечисление страниц
-    enum ViewType
+    public enum ViewType
     {
         Calendar,
         MyFriends
