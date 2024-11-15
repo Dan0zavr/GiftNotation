@@ -3,83 +3,52 @@
   "WorkspaceRootPath": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\views\\calendar.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\views\\calendar.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Migrations\\20241115083429_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:GiftNotation\\Migrations\\20241115083429_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\views\\myfriends.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\views\\myfriends.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\models\\status.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\models\\status.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\models\\relptype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\models\\relptype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\controls\\navigationbar.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\controls\\navigationbar.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\models\\eventtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\models\\eventtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\views\\calendar.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\views\\calendar.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\models\\giftevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\models\\giftevent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\viewmodels\\calendarviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\viewmodels\\calendarviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\models\\giftcontact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\models\\giftcontact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\views\\myfriends.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\views\\myfriends.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\models\\eventcontact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\models\\eventcontact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\models\\gift.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\models\\gift.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\state\\navigators\\inavigator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\state\\navigators\\inavigator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\models\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\models\\event.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\state\\navigators\\navigator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\state\\navigators\\navigator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\models\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\models\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\commands\\updatecurrentvmcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\commands\\updatecurrentvmcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\data\\giftnotationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\data\\giftnotationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\app.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\globalfunctions\\notifyoblect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\globalfunctions\\notifyoblect.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Haier\\AppData\\Local\\Temp\\.vsdbgsrc\\ee34aec267e065140087abd7fd236fad482e6d3ee1f4162ad1b181c8d9923474\\XamlReader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\viewmodels\\mainviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\giftnotation.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\giftnotation.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\viewmodels\\viewmodelbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\viewmodels\\viewmodelbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\viewmodels\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\viewmodels\\relaycommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\viewmodels\\myfriendsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\viewmodels\\myfriendsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\styles\\general.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\styles\\general.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Migrations\\20241115082754_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:GiftNotation\\Migrations\\20241115082754_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -88,248 +57,172 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 210,
-          "SelectedChildIndex": 4,
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Views\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "GiftNotation\\Views\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Views\\MainWindow.xaml",
-              "RelativeToolTip": "GiftNotation\\Views\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-07T14:09:10.619Z"
+              "DocumentIndex": 0,
+              "Title": "20241115083429_init.cs",
+              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Migrations\\20241115083429_init.cs",
+              "RelativeDocumentMoniker": "GiftNotation\\Migrations\\20241115083429_init.cs",
+              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Migrations\\20241115083429_init.cs",
+              "RelativeToolTip": "GiftNotation\\Migrations\\20241115083429_init.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-15T08:34:29.439Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "MyFriends.xaml",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Views\\MyFriends.xaml",
-              "RelativeDocumentMoniker": "GiftNotation\\Views\\MyFriends.xaml",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Views\\MyFriends.xaml",
-              "RelativeToolTip": "GiftNotation\\Views\\MyFriends.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-07T17:32:57.407Z"
+              "Title": "Status.cs",
+              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\Status.cs",
+              "RelativeDocumentMoniker": "GiftNotation\\Models\\Status.cs",
+              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\Status.cs",
+              "RelativeToolTip": "GiftNotation\\Models\\Status.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-15T08:34:12.466Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "NavigationBar.xaml",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Controls\\NavigationBar.xaml",
-              "RelativeDocumentMoniker": "GiftNotation\\Controls\\NavigationBar.xaml",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Controls\\NavigationBar.xaml",
-              "RelativeToolTip": "GiftNotation\\Controls\\NavigationBar.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-07T15:22:17.17Z"
+              "DocumentIndex": 2,
+              "Title": "RelpType.cs",
+              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\RelpType.cs",
+              "RelativeDocumentMoniker": "GiftNotation\\Models\\RelpType.cs",
+              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\RelpType.cs",
+              "RelativeToolTip": "GiftNotation\\Models\\RelpType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-15T08:34:01.849Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Calendar.xaml",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Views\\Calendar.xaml",
-              "RelativeDocumentMoniker": "GiftNotation\\Views\\Calendar.xaml",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Views\\Calendar.xaml",
-              "RelativeToolTip": "GiftNotation\\Views\\Calendar.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-07T17:32:07.082Z",
+              "DocumentIndex": 11,
+              "Title": "20241115082754_init.cs",
+              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Migrations\\20241115082754_init.cs",
+              "RelativeDocumentMoniker": "GiftNotation\\Migrations\\20241115082754_init.cs",
+              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Migrations\\20241115082754_init.cs",
+              "RelativeToolTip": "GiftNotation\\Migrations\\20241115082754_init.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-15T08:27:54.339Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Calendar.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Views\\Calendar.xaml.cs",
-              "RelativeDocumentMoniker": "GiftNotation\\Views\\Calendar.xaml.cs",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Views\\Calendar.xaml.cs",
-              "RelativeToolTip": "GiftNotation\\Views\\Calendar.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAvAAAAAAAAAA==",
+              "Title": "GiftEvent.cs",
+              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\GiftEvent.cs",
+              "RelativeDocumentMoniker": "GiftNotation\\Models\\GiftEvent.cs",
+              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\GiftEvent.cs",
+              "RelativeToolTip": "GiftNotation\\Models\\GiftEvent.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T17:32:18.305Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "CalendarViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\ViewModels\\CalendarViewModel.cs",
-              "RelativeDocumentMoniker": "GiftNotation\\ViewModels\\CalendarViewModel.cs",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\ViewModels\\CalendarViewModel.cs",
-              "RelativeToolTip": "GiftNotation\\ViewModels\\CalendarViewModel.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABEAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T07:58:19.277Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "UpdateCurrentVMCommand.cs",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Commands\\UpdateCurrentVMCommand.cs",
-              "RelativeDocumentMoniker": "GiftNotation\\Commands\\UpdateCurrentVMCommand.cs",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Commands\\UpdateCurrentVMCommand.cs",
-              "RelativeToolTip": "GiftNotation\\Commands\\UpdateCurrentVMCommand.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAAAC4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T12:09:40.801Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Navigator.cs",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\State\\Navigators\\Navigator.cs",
-              "RelativeDocumentMoniker": "GiftNotation\\State\\Navigators\\Navigator.cs",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\State\\Navigators\\Navigator.cs",
-              "RelativeToolTip": "GiftNotation\\State\\Navigators\\Navigator.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAkAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T12:07:15.981Z"
+              "WhenOpened": "2024-11-15T07:01:39.624Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "INavigator.cs",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\State\\Navigators\\INavigator.cs",
-              "RelativeDocumentMoniker": "GiftNotation\\State\\Navigators\\INavigator.cs",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\State\\Navigators\\INavigator.cs",
-              "RelativeToolTip": "GiftNotation\\State\\Navigators\\INavigator.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
+              "Title": "Event.cs",
+              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\Event.cs",
+              "RelativeDocumentMoniker": "GiftNotation\\Models\\Event.cs",
+              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\Event.cs",
+              "RelativeToolTip": "GiftNotation\\Models\\Event.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T12:03:23.284Z"
+              "WhenOpened": "2024-11-15T07:00:36.213Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "App.xaml",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\App.xaml",
-              "RelativeDocumentMoniker": "GiftNotation\\App.xaml",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\App.xaml",
-              "RelativeToolTip": "GiftNotation\\App.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-07T12:58:02.785Z"
+              "Title": "Gift.cs",
+              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\Gift.cs",
+              "RelativeDocumentMoniker": "GiftNotation\\Models\\Gift.cs",
+              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\Gift.cs",
+              "RelativeToolTip": "GiftNotation\\Models\\Gift.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T21:15:49.446Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GiftContact.cs",
+              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\GiftContact.cs",
+              "RelativeDocumentMoniker": "GiftNotation\\Models\\GiftContact.cs",
+              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\GiftContact.cs",
+              "RelativeToolTip": "GiftNotation\\Models\\GiftContact.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T21:09:56.821Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EventType.cs",
+              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\EventType.cs",
+              "RelativeDocumentMoniker": "GiftNotation\\Models\\EventType.cs",
+              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\EventType.cs",
+              "RelativeToolTip": "GiftNotation\\Models\\EventType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-14T20:15:34.994Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 6,
-              "Title": "MyFriends.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Views\\MyFriends.xaml.cs",
-              "RelativeDocumentMoniker": "GiftNotation\\Views\\MyFriends.xaml.cs",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Views\\MyFriends.xaml.cs",
-              "RelativeToolTip": "GiftNotation\\Views\\MyFriends.xaml.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAQwCUAAAALAAAAAAAAAA==",
+              "Title": "EventContact.cs",
+              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\EventContact.cs",
+              "RelativeDocumentMoniker": "GiftNotation\\Models\\EventContact.cs",
+              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\EventContact.cs",
+              "RelativeToolTip": "GiftNotation\\Models\\EventContact.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T17:35:09.915Z"
+              "WhenOpened": "2024-11-14T20:15:10.983Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "App.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\App.xaml.cs",
-              "RelativeDocumentMoniker": "GiftNotation\\App.xaml.cs",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\App.xaml.cs",
-              "RelativeToolTip": "GiftNotation\\App.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAqAAAAAAAAAA==",
+              "DocumentIndex": 10,
+              "Title": "GiftNotationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Data\\GiftNotationDbContext.cs",
+              "RelativeDocumentMoniker": "GiftNotation\\Data\\GiftNotationDbContext.cs",
+              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Data\\GiftNotationDbContext.cs",
+              "RelativeToolTip": "GiftNotation\\Data\\GiftNotationDbContext.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwAUAAAAcAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T12:58:05.764Z"
+              "WhenOpened": "2024-11-14T20:13:53.796Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "NotifyOblect.cs",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\GlobalFunctions\\NotifyOblect.cs",
-              "RelativeDocumentMoniker": "GiftNotation\\GlobalFunctions\\NotifyOblect.cs",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\GlobalFunctions\\NotifyOblect.cs",
-              "RelativeToolTip": "GiftNotation\\GlobalFunctions\\NotifyOblect.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAdAAAAAAAAAA==",
+              "DocumentIndex": 9,
+              "Title": "Contact.cs",
+              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\Contact.cs",
+              "RelativeDocumentMoniker": "GiftNotation\\Models\\Contact.cs",
+              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Models\\Contact.cs",
+              "RelativeToolTip": "GiftNotation\\Models\\Contact.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T16:30:42.293Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "XamlReader.cs",
-              "DocumentMoniker": "C:\\Users\\Haier\\AppData\\Local\\Temp\\.vsdbgsrc\\ee34aec267e065140087abd7fd236fad482e6d3ee1f4162ad1b181c8d9923474\\XamlReader.cs",
-              "RelativeDocumentMoniker": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\ee34aec267e065140087abd7fd236fad482e6d3ee1f4162ad1b181c8d9923474\\XamlReader.cs",
-              "ToolTip": "C:\\Users\\Haier\\AppData\\Local\\Temp\\.vsdbgsrc\\ee34aec267e065140087abd7fd236fad482e6d3ee1f4162ad1b181c8d9923474\\XamlReader.cs [\u0422\u043E\u043B\u044C\u043A\u043E \u0447\u0442\u0435\u043D\u0438\u0435]",
-              "RelativeToolTip": "..\\..\\..\\AppData\\Local\\Temp\\.vsdbgsrc\\ee34aec267e065140087abd7fd236fad482e6d3ee1f4162ad1b181c8d9923474\\XamlReader.cs [\u0422\u043E\u043B\u044C\u043A\u043E \u0447\u0442\u0435\u043D\u0438\u0435]",
-              "ViewState": "AgIAAOsBAAAAAAAAAAAWwP4BAAACAAAAAQAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T16:46:55.536Z",
-              "EditorCaption": " [\u0422\u043E\u043B\u044C\u043A\u043E \u0447\u0442\u0435\u043D\u0438\u0435]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "MainViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\ViewModels\\MainViewModel.cs",
-              "RelativeDocumentMoniker": "GiftNotation\\ViewModels\\MainViewModel.cs",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\ViewModels\\MainViewModel.cs",
-              "RelativeToolTip": "GiftNotation\\ViewModels\\MainViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T15:24:08.58Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "ViewModelBase.cs",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\ViewModels\\ViewModelBase.cs",
-              "RelativeDocumentMoniker": "GiftNotation\\ViewModels\\ViewModelBase.cs",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\ViewModels\\ViewModelBase.cs",
-              "RelativeToolTip": "GiftNotation\\ViewModels\\ViewModelBase.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T15:17:22.486Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "GiftNotation.csproj",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\GiftNotation.csproj",
-              "RelativeDocumentMoniker": "GiftNotation\\GiftNotation.csproj",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\GiftNotation.csproj",
-              "RelativeToolTip": "GiftNotation\\GiftNotation.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-11-07T16:28:41.951Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "RelayCommand.cs",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\ViewModels\\RelayCommand.cs",
-              "RelativeDocumentMoniker": "GiftNotation\\ViewModels\\RelayCommand.cs",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\ViewModels\\RelayCommand.cs",
-              "RelativeToolTip": "GiftNotation\\ViewModels\\RelayCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T08:02:11.614Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "MyFriendsViewModel.cs",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\ViewModels\\MyFriendsViewModel.cs",
-              "RelativeDocumentMoniker": "GiftNotation\\ViewModels\\MyFriendsViewModel.cs",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\ViewModels\\MyFriendsViewModel.cs",
-              "RelativeToolTip": "GiftNotation\\ViewModels\\MyFriendsViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-07T14:18:00.194Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "General.xaml",
-              "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Styles\\General.xaml",
-              "RelativeDocumentMoniker": "GiftNotation\\Styles\\General.xaml",
-              "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Styles\\General.xaml",
-              "RelativeToolTip": "GiftNotation\\Styles\\General.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-07T13:01:35.16Z"
+              "WhenOpened": "2024-11-14T20:04:40.724Z",
+              "EditorCaption": ""
             }
           ]
         }
