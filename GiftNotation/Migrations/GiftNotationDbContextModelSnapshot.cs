@@ -15,145 +15,301 @@ namespace GiftNotation.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "8.0.10");
+            modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
 
             modelBuilder.Entity("GiftNotation.Models.Contact", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("ContactId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("date")
+                    b.Property<DateTime?>("Bday")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("name")
+                    b.Property<string>("ContactName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("relationshipId")
+                    b.Property<int>("RelpTypeId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("id");
+                    b.HasKey("ContactId");
 
-                    b.ToTable("contact");
+                    b.HasIndex("RelpTypeId");
+
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("GiftNotation.Models.Event", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("EventId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("date")
+                    b.Property<DateTime>("EventDate")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("eventTypeId")
+                    b.Property<string>("EventName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("EventTypeId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("name")
-                        .HasColumnType("TEXT");
+                    b.HasKey("EventId");
 
-                    b.HasKey("id");
+                    b.HasIndex("EventTypeId");
 
-                    b.ToTable("events");
+                    b.ToTable("Events");
+                });
+
+            modelBuilder.Entity("GiftNotation.Models.EventContact", b =>
+                {
+                    b.Property<int>("EventId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ContactId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("EventId", "ContactId");
+
+                    b.HasIndex("ContactId");
+
+                    b.ToTable("EventContacts");
                 });
 
             modelBuilder.Entity("GiftNotation.Models.EventType", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("EventTypeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("name")
+                    b.Property<string>("EventTypeName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("id");
+                    b.HasKey("EventTypeId");
 
-                    b.ToTable("eventType");
+                    b.ToTable("EventTypes");
                 });
 
             modelBuilder.Entity("GiftNotation.Models.Gift", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("GiftId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("description")
+                    b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("name")
+                    b.Property<string>("GiftName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("picturePath")
+                    b.Property<string>("GiftPic")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("price")
+                    b.Property<decimal?>("Price")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("StatusId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("statusId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("url")
+                    b.Property<string>("Url")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("id");
+                    b.HasKey("GiftId");
 
-                    b.ToTable("gift");
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("Gifts");
                 });
 
             modelBuilder.Entity("GiftNotation.Models.GiftContact", b =>
                 {
-                    b.Property<int>("contectId")
+                    b.Property<int>("GiftId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("giftId")
+                    b.Property<int>("ContactId")
                         .HasColumnType("INTEGER");
 
-                    b.ToTable("giftContact");
+                    b.HasKey("GiftId", "ContactId");
+
+                    b.HasIndex("ContactId");
+
+                    b.ToTable("GiftContacts");
                 });
 
             modelBuilder.Entity("GiftNotation.Models.GiftEvent", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("GiftId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("EventId")
+                        .HasColumnType("INTEGER");
 
-                    b.ToTable("giftEvent");
+                    b.HasKey("GiftId", "EventId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("GiftEvents");
                 });
 
-            modelBuilder.Entity("GiftNotation.Models.MyFriends", b =>
+            modelBuilder.Entity("GiftNotation.Models.RelpType", b =>
                 {
-                    b.ToTable("friends");
-                });
-
-            modelBuilder.Entity("GiftNotation.Models.RelationshipType", b =>
-                {
-                    b.Property<int>("id")
+                    b.Property<int>("RelpTypeId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("name")
+                    b.Property<string>("RelpTypeName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("id");
+                    b.HasKey("RelpTypeId");
 
-                    b.ToTable("relationshipType");
+                    b.ToTable("RelpTypes");
                 });
 
             modelBuilder.Entity("GiftNotation.Models.Status", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("StatusId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("name")
+                    b.Property<string>("StatusName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("id");
+                    b.HasKey("StatusId");
 
-                    b.ToTable("status");
+                    b.ToTable("Statuses");
+                });
+
+            modelBuilder.Entity("GiftNotation.Models.Contact", b =>
+                {
+                    b.HasOne("GiftNotation.Models.RelpType", "RelpType")
+                        .WithMany("Contacts")
+                        .HasForeignKey("RelpTypeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("RelpType");
+                });
+
+            modelBuilder.Entity("GiftNotation.Models.Event", b =>
+                {
+                    b.HasOne("GiftNotation.Models.EventType", "EventType")
+                        .WithMany("Events")
+                        .HasForeignKey("EventTypeId");
+
+                    b.Navigation("EventType");
+                });
+
+            modelBuilder.Entity("GiftNotation.Models.EventContact", b =>
+                {
+                    b.HasOne("GiftNotation.Models.Contact", "Contact")
+                        .WithMany("EventContacts")
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GiftNotation.Models.Event", "Event")
+                        .WithMany("EventContacts")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Contact");
+
+                    b.Navigation("Event");
+                });
+
+            modelBuilder.Entity("GiftNotation.Models.Gift", b =>
+                {
+                    b.HasOne("GiftNotation.Models.Status", "Status")
+                        .WithMany("Gifts")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Status");
+                });
+
+            modelBuilder.Entity("GiftNotation.Models.GiftContact", b =>
+                {
+                    b.HasOne("GiftNotation.Models.Contact", "Contact")
+                        .WithMany("GiftContacts")
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GiftNotation.Models.Gift", "Gift")
+                        .WithMany("GiftContacts")
+                        .HasForeignKey("GiftId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Contact");
+
+                    b.Navigation("Gift");
+                });
+
+            modelBuilder.Entity("GiftNotation.Models.GiftEvent", b =>
+                {
+                    b.HasOne("GiftNotation.Models.Event", "Event")
+                        .WithMany("GiftEvents")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("GiftNotation.Models.Gift", "Gift")
+                        .WithMany("GiftEvents")
+                        .HasForeignKey("GiftId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Event");
+
+                    b.Navigation("Gift");
+                });
+
+            modelBuilder.Entity("GiftNotation.Models.Contact", b =>
+                {
+                    b.Navigation("EventContacts");
+
+                    b.Navigation("GiftContacts");
+                });
+
+            modelBuilder.Entity("GiftNotation.Models.Event", b =>
+                {
+                    b.Navigation("EventContacts");
+
+                    b.Navigation("GiftEvents");
+                });
+
+            modelBuilder.Entity("GiftNotation.Models.EventType", b =>
+                {
+                    b.Navigation("Events");
+                });
+
+            modelBuilder.Entity("GiftNotation.Models.Gift", b =>
+                {
+                    b.Navigation("GiftContacts");
+
+                    b.Navigation("GiftEvents");
+                });
+
+            modelBuilder.Entity("GiftNotation.Models.RelpType", b =>
+                {
+                    b.Navigation("Contacts");
+                });
+
+            modelBuilder.Entity("GiftNotation.Models.Status", b =>
+                {
+                    b.Navigation("Gifts");
                 });
 #pragma warning restore 612, 618
         }

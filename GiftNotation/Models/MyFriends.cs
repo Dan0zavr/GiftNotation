@@ -8,9 +8,5 @@ namespace GiftNotation.Models
 {
     public class MyFriends
     {
-        string? name { get; }
-        string? relationship { get; }
-        DateTime? date { get; }
-        Gift? gift { get; }
     }
 }

@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
-namespace GiftNotation.Models
+namespace GiftNotation.Models;
+
+public class EventType
 {
-    public class EventType
-    {
-        [Key]
-        public int id {  get; set; }
-        public string? name { get; set; }
-
-    }
+    public int EventTypeId { get; set; }
+    public string EventTypeName { get; set; }
+    public ICollection<Event> Events { get; set; }
 }
+

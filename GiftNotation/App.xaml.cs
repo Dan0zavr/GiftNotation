@@ -11,6 +11,7 @@ using GiftNotation.Commands;
 using GiftNotation.State.Navigators;
 using Microsoft.Extensions.Hosting;
 using GiftNotation.ViewModels.Factories;
+using Microsoft.Extensions.Configuration;
 
 
 namespace GiftNotation
@@ -20,62 +21,63 @@ namespace GiftNotation
     /// </summary>
     public partial class App : Application
     {
-        public static ServiceProvider ServiceProvider { get; }
+        private readonly IHost _host;
 
-        //private readonly IHost _host;
+        public App()
+        {
+            _host = CreateHostBuilder().Build();
+        }
 
-        //public App()
-        //{
-        //    _host = CreateHostBuilder().Build();
-        //}
+        public static IHostBuilder CreateHostBuilder(string[] args = null)
+        {
+            return Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(c =>
+                {
+                    c.AddJsonFile("appsettings.json");
+                })
+                .ConfigureServices((context, services) => {
 
-        //public static IHostBuilder CreateHostBuilder(string[] args = null)
-        //{
-        //    return Host.CreateDefaultBuilder(args)
-        //        .ConfigureServices(s => { });
-        //}
+                    // Регистрация ViewModels
+                    services.AddSingleton<MainViewModel>();
+                    services.AddSingleton<INavigator, Navigator>();
+
+                    // Регистрация DbContext и других сервисов
+                    string connectionString = context.Configuration.GetConnectionString("default");
+                    services.AddDbContext<GiftNotationDbContext>(o => o.UseSqlite(connectionString));
+
+                    // Регистрация сервисов как Scoped
+                    services.AddScoped<IMyFriendsService, MyFriendsService>();
+                    services.AddScoped<IContactService, ContactService>();
+                    services.AddSingleton<UpdateCurrentVMCommand>();
+
+                    // Регистрация фабрик
+                    services.AddSingleton<IGiftNotationViewModelAbstractFactory, GiftNotationViewModelAbstractFactory>();
+                    services.AddSingleton<IGiftNotationViewModelFactory<CalendarViewModel>, HomeViewModelFactory>();
+                    services.AddSingleton<IGiftNotationViewModelFactory<MyFriendsViewModel>, MyFriendsViewModelFactory>();
+
+                    // Регистрация MainWindow
+                    services.AddSingleton<MainWindow>();
+                });
+        }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            
-            IServiceProvider serviceProvider = CreateServiceProvider();
+            _host.Start();
 
-            Window window = new MainWindow();
-
-            window.DataContext = serviceProvider.GetRequiredService<MainViewModel>();
-
-            
+            var window = _host.Services.GetRequiredService<MainWindow>();
+            window.DataContext = _host.Services.GetRequiredService<MainViewModel>();
             window.Show();
+
             base.OnStartup(e);
         }
 
-        private IServiceProvider CreateServiceProvider()
+        protected override async void OnExit(ExitEventArgs e)
         {
-            IServiceCollection services = new ServiceCollection();
+            await _host.StopAsync();
+            _host.Dispose();
 
-            // Регистрация ViewModels
-            services.AddSingleton<MainViewModel>();
-            services.AddScoped<INavigator, Navigator>();
-
-            // Регистрация DbContext и других сервисов
-            services.AddDbContext<GiftNotationDbContext>();
-            services.AddSingleton<GiftNotationDbContextFactory>();
-            services.AddSingleton<IMyFriendsService, MyFriendsService>();
-            services.AddSingleton<IContactService, ContactService>();
-            services.AddSingleton<UpdateCurrentVMCommand>();
-
-            //Регистрация фабрик
-            services.AddSingleton<IGiftNotationViewModelAbstractFactory, GiftNotationViewModelAbstractFactory>();
-            services.AddSingleton<IGiftNotationViewModelFactory<CalendarViewModel>, HomeViewModelFactory>();
-            services.AddSingleton<IGiftNotationViewModelFactory<MyFriendsViewModel>, MyFriendsViewModelFactory>();
-
-
-            // Регистрация MainWindow
-            services.AddScoped<MainWindow>(); // Регистрация MainWindow как службы
-
-            return services.BuildServiceProvider();
+            base.OnExit(e);
         }
-
     }
 
 }
