@@ -21,6 +21,26 @@
                 <views:MyFriends/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:GiftViewModel}">
+                <views:GiftsView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:EventViewModel}">
+                <views:Page3/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:ContactViewModel}">
+                <views:People/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:ProfileViewModel}">
+                <views:Profile/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
+                <views:SettingsView/>
+            </DataTemplate>
+
         </ResourceDictionary>
         
     </Application.Resources>

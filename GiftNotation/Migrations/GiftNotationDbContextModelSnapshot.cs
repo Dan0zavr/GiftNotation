@@ -111,8 +111,11 @@ namespace GiftNotation.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal?>("Price")
-                        .HasColumnType("TEXT");
+                    b.Property<bool>("Gifted")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
 
                     b.Property<int>("StatusId")
                         .HasColumnType("INTEGER");

@@ -12,7 +12,11 @@ namespace GiftNotation.State.Navigators
     public enum ViewType
     {
         Calendar,
-        MyFriends
+        Contacts,
+        Events,
+        Gifts,
+        Profile,
+        Settings
     }
 
     public interface INavigator

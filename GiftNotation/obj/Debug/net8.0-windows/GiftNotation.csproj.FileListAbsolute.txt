@@ -178,3 +178,15 @@ C:\Users\Haier\source\repos\GiftNotation\GiftNotation\bin\Debug\net8.0-windows\t
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\bin\Debug\net8.0-windows\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\bin\Debug\net8.0-windows\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\bin\Debug\net8.0-windows\runtimes\linux-musl-s390x\native\libe_sqlite3.so
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\EventDetailsWindow.g.cs
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\Page3.g.cs
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\People.g.cs
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\EventDetailsWindow.baml
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\Page3.baml
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\People.baml
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\GiftsView.g.cs
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\GiftsView.baml
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\SettingsView.g.cs
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\SettingsView.baml
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\Profile.g.cs
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\Profile.baml
