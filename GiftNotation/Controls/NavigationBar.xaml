@@ -8,12 +8,18 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <!--Панель навигации, экспортирована в MainWindow-->
-    <StackPanel DockPanel.Dock="Left" Background="{DynamicResource ColorMenu}">
-        <!--(К кнопкам нужно привязывать команды) Через CommandParameter передаётся представление, которое нужно отобразить-->
-        <Button Content="Виш-лист" Margin="5" Height="25" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Calendar}"/>
-        <Button Content="Мои друзья" Margin="5" Height="25" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.MyFriends}"/>
-        <Button Content="Мой профиль" Height="25" Margin="5" />
-        <Button Content="Настройки" Height="25" Margin="5" />
-    </StackPanel>
+    <StackPanel DockPanel.Dock="Left" Background="{DynamicResource ColorMenu}" Width="130" Grid.RowSpan="2" Grid.Column="0" HorizontalAlignment="Right" >
+        <Button Cursor ="Hand" Margin="-90,2,0,0" HorizontalAlignment="Center" Height="30" Width="30" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Calendar}">
+            <Image Source="pack://application:,,,/Controls/homeback.png"/>
+    </Button>
+
+    <Button Content="Подарки" Margin="0,5,0,0" Height="25" Width="100" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Gifts}"/>
+            <Button Content="Праздники" Margin="0,5,0,0" Width="100" Height="25" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Events}"/>
+            <Button Content="Люди" Margin="0,5,0,0" Width="100" Height="25" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Contacts}"/>
+            <Button Content="Мой профиль" Width="100" Height="25" Margin="0,220,0,5" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Profile}"/>
+            <Button Content="Настройки" Width="100" Height="25" Margin="0,2,0,0" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Settings}"/>
+
+
+</StackPanel>
     
 </UserControl>

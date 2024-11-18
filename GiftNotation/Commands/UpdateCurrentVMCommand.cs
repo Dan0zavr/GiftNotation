@@ -17,12 +17,14 @@ namespace GiftNotation.Commands
 
         private readonly INavigator _navigator;
         private readonly IGiftNotationViewModelAbstractFactory _viewModelFactory;
+        
 
         // Конструктор команды, принимающий INavigator и IMyFriendsService через DI
         public UpdateCurrentVMCommand(INavigator navigator, IGiftNotationViewModelAbstractFactory viewModelFactory)
         {
             _navigator = navigator;
             _viewModelFactory = viewModelFactory;
+            
         }
 
         // Команда доступна для выполнения всегда

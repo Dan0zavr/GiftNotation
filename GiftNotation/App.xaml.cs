@@ -40,6 +40,11 @@ namespace GiftNotation
                     // Регистрация ViewModels
                     services.AddSingleton<MainViewModel>();
                     services.AddSingleton<INavigator, Navigator>();
+                    services.AddScoped<ContactViewModel>();
+                    services.AddScoped<EventViewModel>();
+                    services.AddScoped<GiftViewModel>();
+                    services.AddScoped<SettingsViewModel>();
+                    services.AddScoped <ProfileViewModel>();
 
                     // Регистрация DbContext и других сервисов
                     string connectionString = context.Configuration.GetConnectionString("default");
