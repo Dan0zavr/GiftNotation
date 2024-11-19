@@ -1,88 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GiftNotation.Data;
+using GiftNotation.Models;
+using GiftNotation.Services;
+using GiftNotation.State;
+using System;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+
 
 namespace GiftNotation.ViewModels
 {
     public class GiftViewModel : ViewModelBase
     {
-        private string _giftName;
-        private string _description;
-        private string _url;
-        private double _price;
-        private string _picture;
+        private ObservableCollection<Gifts> _gifts;
+        private GiftService _giftService;
 
-        public string GiftName
+        public ObservableCollection<Gifts> Gifts
         {
-            get 
-            {
-                return _giftName; 
-            }
-            set 
-            {
-                _giftName = value; 
-                OnPropertyChanged(nameof(GiftName));
-            }
+            get { return _gifts; }
+            set { SetProperty(ref _gifts, value); }
         }
 
-        public string Description
+        public GiftViewModel(GiftService giftService)
         {
-            get
-            {
-                return _description;
-            }
-            set
-            {
-                _description = value;
-                OnPropertyChanged(nameof(Description));
-            }
+            _giftService = giftService;
+            // Загрузка данных из базы данных или другого источника
+            LoadGifts();
         }
 
-        public string URL
+        private async void LoadGifts()
         {
-            get
-            {
-                return _url;
-            }
-            set
-            {
-                _url = value;
-                OnPropertyChanged(nameof(URL));
-            }
+            // Здесь вы можете подключиться к базе данных через сервис или репозиторий
+            var gifts = await _giftService.GetGiftsAsync(); // Это пример, ваш метод получения данных
+            Gifts = new ObservableCollection<Gifts>(gifts);
         }
-
-        public double Price
-        {
-            get
-            {
-                return _price;
-            }
-            set
-            {
-                _price = value;
-                OnPropertyChanged(nameof(Price));
-            }
-        }
-
-        public string Picture
-        {
-            get
-            {
-                return _picture;
-            }
-            set
-            {
-                _url = value;
-                OnPropertyChanged(nameof(Picture));
-            }
-        }
-
-        ICommand AddGiftCommand { get; set; }
-        ICommand DeleteGiftCommand { get; set; }
-        ICommand EditGiftCommand { get; set; }
 
     }
 }

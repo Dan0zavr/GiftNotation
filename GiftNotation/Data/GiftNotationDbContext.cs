@@ -15,7 +15,7 @@ public partial class GiftNotationDbContext : DbContext
     public DbSet<Contact> Contacts { get; set; }
     public DbSet<Event> Events { get; set; }
     public DbSet<EventType> EventTypes { get; set; }
-    public DbSet<Gift> Gifts { get; set; }
+    public DbSet<Gifts> Gifts { get; set; }
     public DbSet<RelpType> RelpTypes { get; set; }
     public DbSet<Status> Statuses { get; set; }
     public DbSet<GiftContact> GiftContacts { get; set; }
@@ -24,6 +24,8 @@ public partial class GiftNotationDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Gifts>()
+            .HasKey(ec => new { ec.GiftId });
         // Конфигурация таблицы-связи `event_contact`
         modelBuilder.Entity<EventContact>()
             .HasKey(ec => new { ec.EventId, ec.ContactId });

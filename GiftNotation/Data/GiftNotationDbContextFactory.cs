@@ -11,20 +11,22 @@ using System.Threading.Tasks;
 
 namespace GiftNotation.Data
 {
-    public class GiftNotationDbContextFactory : IDesignTimeDbContextFactory<GiftNotationDbContext>
+    public class GiftNotationDbContextFactory
     {
-        public GiftNotationDbContext CreateDbContext(string[] args)
+        private readonly string _connectionString;
+
+        public GiftNotationDbContextFactory(string connectionString)
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
+            _connectionString = connectionString;
+        }
 
-            var optionsBuilder = new DbContextOptionsBuilder<GiftNotationDbContext>();
-            var connectionString = configuration.GetConnectionString("default");
-            optionsBuilder.UseSqlite(connectionString);
+        public GiftNotationDbContext CreateDbContext()
+        {
+            DbContextOptionsBuilder<GiftNotationDbContext> options = new DbContextOptionsBuilder<GiftNotationDbContext>();
 
-            return new GiftNotationDbContext(optionsBuilder.Options);
+            options.UseSqlite(_connectionString);
+
+            return new GiftNotationDbContext(options.Options);
         }
     }
 }
