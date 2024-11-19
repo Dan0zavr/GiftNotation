@@ -49,10 +49,12 @@ namespace GiftNotation
                     // Регистрация DbContext и других сервисов
                     string connectionString = context.Configuration.GetConnectionString("default");
                     services.AddDbContext<GiftNotationDbContext>(o => o.UseSqlite(connectionString));
+                    services.AddSingleton(new GiftNotationDbContextFactory(connectionString));
 
                     // Регистрация сервисов как Scoped
                     services.AddScoped<IMyFriendsService, MyFriendsService>();
                     services.AddScoped<IContactService, ContactService>();
+                    services.AddScoped<GiftService>();
                     services.AddSingleton<UpdateCurrentVMCommand>();
 
                     // Регистрация фабрик
@@ -68,6 +70,13 @@ namespace GiftNotation
         protected override void OnStartup(StartupEventArgs e)
         {
             _host.Start();
+
+            GiftNotationDbContextFactory contextFactory = _host.Services.GetRequiredService<GiftNotationDbContextFactory>();
+
+            using(GiftNotationDbContext context = contextFactory.CreateDbContext())
+            {
+                context.Database.Migrate();
+            }
 
             var window = _host.Services.GetRequiredService<MainWindow>();
             window.DataContext = _host.Services.GetRequiredService<MainViewModel>();

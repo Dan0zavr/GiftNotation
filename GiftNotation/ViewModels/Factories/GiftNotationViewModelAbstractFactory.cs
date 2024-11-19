@@ -1,10 +1,12 @@
 ﻿using GiftNotation.Services;
 using GiftNotation.State.Navigators;
+using GiftNotation.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace GiftNotation.ViewModels.Factories
 {
@@ -17,9 +19,11 @@ namespace GiftNotation.ViewModels.Factories
         private readonly EventViewModel _eventViewModel;
         private readonly SettingsViewModel _settigsViewModel;
         private readonly ProfileViewModel _profileViewModel;
+        private readonly GiftService _giftService;
 
         public GiftNotationViewModelAbstractFactory(IGiftNotationViewModelFactory<CalendarViewModel> calendarViewModelFactory, IGiftNotationViewModelFactory<MyFriendsViewModel> myfriendsViewModelFactory,
-            ContactViewModel contactViewModel, GiftViewModel giftViewModel, EventViewModel eventViewModel, SettingsViewModel settigsViewModel, ProfileViewModel profileViewModel)
+            ContactViewModel contactViewModel, GiftViewModel giftViewModel, EventViewModel eventViewModel, SettingsViewModel settigsViewModel, ProfileViewModel profileViewModel,
+            GiftService giftService)
         {
             _calendarViewModelFactory = calendarViewModelFactory;
             _myfriendsViewModelFactory = myfriendsViewModelFactory;
@@ -28,6 +32,7 @@ namespace GiftNotation.ViewModels.Factories
             _eventViewModel = eventViewModel;
             _settigsViewModel = settigsViewModel;
             _profileViewModel = profileViewModel;
+            _giftService = giftService;
 
         }
 
@@ -43,7 +48,7 @@ namespace GiftNotation.ViewModels.Factories
                 case ViewType.Events:
                     return new EventViewModel();
                 case ViewType.Gifts:
-                    return new GiftViewModel();
+                    return new GiftViewModel(_giftService);
                 case ViewType.Settings:
                     return new SettingsViewModel();
                 case ViewType.Profile:

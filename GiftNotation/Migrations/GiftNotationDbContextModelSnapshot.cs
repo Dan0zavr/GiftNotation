@@ -128,7 +128,7 @@ namespace GiftNotation.Migrations
 
                     b.HasIndex("StatusId");
 
-                    b.ToTable("Gifts");
+                    b.ToTable("Gifts", (string)null);
                 });
 
             modelBuilder.Entity("GiftNotation.Models.GiftContact", b =>
