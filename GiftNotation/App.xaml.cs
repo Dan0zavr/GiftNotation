@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using GiftNotation.ViewModels;
 using GiftNotation.Services;
 using GiftNotation.Data;
-using GiftNotation;
+using GiftNotation.Views;
 using GiftNotation.Commands;
 using GiftNotation.State.Navigators;
 using Microsoft.Extensions.Hosting;

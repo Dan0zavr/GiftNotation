@@ -21,13 +21,22 @@
 
         <TextBlock TextAlignment="Center" FontStyle="Italic" FontSize="10" Margin="20,95,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Text="Тип" />
 
-       
+
 
         <ComboBox x:Name="Tip_prasdnicaa" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="65,90,0,0" Width="100" RenderTransformOrigin="0.534,1.109" SelectionChanged="ComboBox_SelectionChanged"/>
 
         <TextBlock TextAlignment="Center" FontStyle="Italic" FontSize="10" Margin="20,130,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Text="Люди" />
 
         <TextBlock TextAlignment="Center" FontStyle="Italic" FontSize="10" Margin="20,169,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Text="Подарки" />
+
+        <Button x:Name="Button_PlusPeople" Cursor="Hand" HorizontalAlignment="Left" Height="20" Width="20" Margin="65,130,0,94" Click="Button_PlusPeople_Click">
+            <TextBlock Text="+" Height="20" Width="20" HorizontalAlignment="Stretch" Margin="4,-2,0,0"/>
+        </Button>
+
+        <Button x:Name="Button_PlusGifts" Cursor="Hand" HorizontalAlignment="Left" Height="20" Width="20" Margin="65,169,0,55" Click="Button_PlusGifts_Click">
+            <TextBlock Text="+" Height="20" Width="20" Margin="4,-2,0,0"/>
+        </Button>
+
 
     </Grid>
 </Window>

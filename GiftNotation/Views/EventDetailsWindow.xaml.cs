@@ -49,13 +49,23 @@ namespace виш_лист_попытка_33334
             "23 февраля",
             "Годовщина"
         };
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Получение выбранного типа отношения
             if (Tip_prasdnicaa.SelectedItem != null)
             {
                 Tip_prasdnicaa.SelectedItem.ToString();
             }
+        }
+
+        private void Button_PlusPeople_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_PlusGifts_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

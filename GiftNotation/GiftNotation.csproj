@@ -28,6 +28,7 @@
 
   <ItemGroup>
     <Folder Include="Commands\GiftCommands\" />
+    <Folder Include="Migrations\" />
     <Folder Include="Pictures\" />
   </ItemGroup>
 
