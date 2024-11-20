@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:GiftNotation.Views"
+      xmlns:local="clr-namespace:виш_лист_попытка_33334"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="650"
       Background="#FBE4D8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
@@ -36,7 +36,7 @@
 
     <Grid>
         <Label Name="MyFriendsLabel" Content="Люди" HorizontalAlignment="Center"  VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Height="25" Width="126" Margin="0,10,0,0" />
-        <DataGrid x:Name="DataGrid" CanUserAddRows="True" PreviewKeyDown="DataGrid_PreviewKeyDown"  ItemsSource="{Binding People}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="300" Width="500" AutoGenerateColumns="False">
+        <DataGrid x:Name="DataGrid" CanUserAddRows="True" ItemsSource="{Binding People}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="300" Width="500" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Человек" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="100" />
 

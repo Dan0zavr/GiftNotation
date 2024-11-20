@@ -21,6 +21,9 @@
     <Page Update="Views\Calendar.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\MyFriends.xaml">
       <SubType>Designer</SubType>
     </Page>

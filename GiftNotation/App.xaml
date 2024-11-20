@@ -17,15 +17,15 @@
                 <views:Calendar/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodels:MyFriendsViewModel}">
-                <views:MyFriends/>
+            <DataTemplate DataType="{x:Type viewmodels:ContactViewModel}">
+                <views:People/>
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewmodels:GiftViewModel}">
                 <views:GiftsView/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodels:EventViewModel}">
+            <!--<DataTemplate DataType="{x:Type viewmodels:EventViewModel}">
                 <views:Page3/>
             </DataTemplate>
 
@@ -39,7 +39,7 @@
 
             <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
                 <views:SettingsView/>
-            </DataTemplate>
+            </DataTemplate>-->
 
         </ResourceDictionary>
         

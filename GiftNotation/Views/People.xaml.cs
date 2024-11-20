@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Security.Cryptography.X509Certificates;
-using GiftNotation.Models;
 
 namespace GiftNotation.Views
 {
@@ -23,34 +22,34 @@ namespace GiftNotation.Views
     /// </summary>
     public partial class People : UserControl
     {
-        public ObservableCollection<Contact> Peoples { get; set; }
+        //public ObservableCollection<Person> People { get; set; }
         
         public People()
         {
             InitializeComponent();
 
-            Peoples = new ObservableCollection<Contact>();
-            DataContext = this;
+            //People = new ObservableCollection<Person>();
+            //DataContext = this;
         }
 
-        public void AddPeople(string name, int ship, DateTime birthday/*Gift gift*/)
-        {
-            Peoples.Add(new Contact { ContactName = name, RelpTypeId = ship, Bday = birthday, /*Gift = gift*/ }) ;
-        }
+        //public void AddPeople(string name, string ship, DateTime birthday, string gift)
+        //{
+        //    People.Add(new Person { Name = name, Ship = ship, Birthday = birthday, Gift = gift }) ;
+        //}
 
-        public void DataGrid_PreviewKeyDown(object sender, KeyEventArgs e)
-        {
-            if(e.Key == Key.Enter) //Проверка нажатия клавиши. То есть, если нажата Enter
-            {
-                var dataGrid = sender as DataGrid;
-                if (dataGrid != null && dataGrid.CurrentCell.Column.DisplayIndex == dataGrid.Columns.Count-1)
-                {
-                    dataGrid.CommitEdit();
-                    dataGrid.BeginEdit();
-                    e.Handled = false;
-                }
-            }
-        }
+        //public void DataGrid_PreviewKeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if(e.Key == Key.Enter) //Проверка нажатия клавиши. То есть, если нажата Enter
+        //    {
+        //        var dataGrid = sender as DataGrid;
+        //        if (dataGrid != null && dataGrid.CurrentCell.Column.DisplayIndex == dataGrid.Columns.Count-1)
+        //        {
+        //            dataGrid.CommitEdit();
+        //            dataGrid.BeginEdit();
+        //            e.Handled = false;
+        //        }
+        //    }
+        //}
 
         
     }

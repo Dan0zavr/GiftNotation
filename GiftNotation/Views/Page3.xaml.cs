@@ -13,12 +13,12 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace GiftNotation.Views
+namespace виш_лист_попытка_33334
 {
     /// <summary>
     /// Логика взаимодействия для Page3.xaml
     /// </summary>
-    public partial class Page3 : UserControl
+    public partial class Page3 : Page
     {
         public Page3()
         {

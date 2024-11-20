@@ -14,8 +14,6 @@ public class Gifts
     public string Url { get; set; }
     public double Price { get; set; }
     public string GiftPic { get; set; }
-    public bool Gifted { get; set; }
-
     public int StatusId { get; set; }
     public Status Status { get; set; }
 

@@ -93,44 +93,6 @@ namespace GiftNotation.Migrations
                     b.ToTable("EventTypes");
                 });
 
-            modelBuilder.Entity("GiftNotation.Models.Gift", b =>
-                {
-                    b.Property<int>("GiftId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("GiftName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("GiftPic")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("Gifted")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("REAL");
-
-                    b.Property<int>("StatusId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("GiftId");
-
-                    b.HasIndex("StatusId");
-
-                    b.ToTable("Gifts", (string)null);
-                });
-
             modelBuilder.Entity("GiftNotation.Models.GiftContact", b =>
                 {
                     b.Property<int>("GiftId")
@@ -159,6 +121,41 @@ namespace GiftNotation.Migrations
                     b.HasIndex("EventId");
 
                     b.ToTable("GiftEvents");
+                });
+
+            modelBuilder.Entity("GiftNotation.Models.Gifts", b =>
+                {
+                    b.Property<int>("GiftId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GiftName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GiftPic")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
+
+                    b.Property<int>("StatusId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("GiftId");
+
+                    b.HasIndex("StatusId");
+
+                    b.ToTable("Gifts");
                 });
 
             modelBuilder.Entity("GiftNotation.Models.RelpType", b =>
@@ -230,17 +227,6 @@ namespace GiftNotation.Migrations
                     b.Navigation("Event");
                 });
 
-            modelBuilder.Entity("GiftNotation.Models.Gift", b =>
-                {
-                    b.HasOne("GiftNotation.Models.Status", "Status")
-                        .WithMany("Gifts")
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Status");
-                });
-
             modelBuilder.Entity("GiftNotation.Models.GiftContact", b =>
                 {
                     b.HasOne("GiftNotation.Models.Contact", "Contact")
@@ -249,7 +235,7 @@ namespace GiftNotation.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GiftNotation.Models.Gift", "Gift")
+                    b.HasOne("GiftNotation.Models.Gifts", "Gift")
                         .WithMany("GiftContacts")
                         .HasForeignKey("GiftId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -268,7 +254,7 @@ namespace GiftNotation.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GiftNotation.Models.Gift", "Gift")
+                    b.HasOne("GiftNotation.Models.Gifts", "Gift")
                         .WithMany("GiftEvents")
                         .HasForeignKey("GiftId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -277,6 +263,17 @@ namespace GiftNotation.Migrations
                     b.Navigation("Event");
 
                     b.Navigation("Gift");
+                });
+
+            modelBuilder.Entity("GiftNotation.Models.Gifts", b =>
+                {
+                    b.HasOne("GiftNotation.Models.Status", "Status")
+                        .WithMany("Gifts")
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Status");
                 });
 
             modelBuilder.Entity("GiftNotation.Models.Contact", b =>
@@ -298,7 +295,7 @@ namespace GiftNotation.Migrations
                     b.Navigation("Events");
                 });
 
-            modelBuilder.Entity("GiftNotation.Models.Gift", b =>
+            modelBuilder.Entity("GiftNotation.Models.Gifts", b =>
                 {
                     b.Navigation("GiftContacts");
 
