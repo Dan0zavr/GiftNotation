@@ -53,7 +53,7 @@ namespace виш_лист_попытка_33334 {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/GiftNotation;V1.0.0.0;component/views/page3.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/GiftNotation;component/views/page3.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\Page3.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

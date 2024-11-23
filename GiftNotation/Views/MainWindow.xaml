@@ -58,7 +58,7 @@
         </Grid.ColumnDefinitions>
         
         <controls:NavigationBar DataContext="{Binding Navigator}"/>
-
+        
         <ContentControl Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{Binding Navigator.CurrentViewModel}"/>
 
 

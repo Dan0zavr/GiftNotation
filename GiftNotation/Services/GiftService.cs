@@ -19,9 +19,30 @@ namespace GiftNotation.Services
             _context = context;
         }
 
-        public async Task<IEnumerable<Gifts>> GetGiftsAsync()
+        public async Task<List<GiftDisplayModel>> GetGiftsAsync()
         {
-            return await _context.Set<Gifts>().ToListAsync();
+            return await _context.Gifts
+                .Include(g => g.Status)
+                .Include(g => g.GiftContacts)
+                    .ThenInclude(gc => gc.Contact)
+                .Include(g => g.GiftEvents)
+                    .ThenInclude(ge => ge.Event)
+                .Select(g => new GiftDisplayModel
+                {
+                    GiftId = g.GiftId,
+                    GiftName = g.GiftName,
+                    Description = g.Description,
+                    Url = g.Url,
+                    Price = g.Price,
+                    GiftPic = g.GiftPic,
+                    StatusName = g.Status.StatusName,
+                    ContactName = g.GiftContacts.FirstOrDefault().Contact.ContactName,
+                    EventName = g.GiftEvents.FirstOrDefault().Event.EventName
+
+
+                })
+                .ToListAsync(); 
+
         }
     }
 }

@@ -30,9 +30,10 @@
             <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
         </Style>
     </UserControl.Resources>
+    
     <Grid>
         <Label Name="Gifts" Content="Подарок" HorizontalAlignment="Center"  VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Height="25" Width="126" Margin="0,10,0,0" />
-
+    
         <DataGrid x:Name="ddataGrid" CanUserAddRows="True" ItemsSource="{Binding Gifts}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="300" Width="500" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Подарок"  Binding="{Binding GiftName, UpdateSourceTrigger=PropertyChanged}" Width="70" />
@@ -40,14 +41,14 @@
                 <DataGridTemplateColumn Header="Картинка" Width="70">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Picture_of_gift}" Width="25" Height="25"/>
+                            <Image Source="{Binding GiftPic}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
+                    <!--<DataGridTemplateColumn.CellEditingTemplate>
                         <DataTemplate>
-                            <Image Width="25" Height="25" Source="{Binding Picture_of_gift}"/>
+                            <Image Source="{Binding GiftPic}"/>
                         </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>-->
                 </DataGridTemplateColumn>
 
 
@@ -56,9 +57,9 @@
 
                 <DataGridTextColumn Header="Ссылка на маркетплейс" Binding="{Binding Url, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
 
-                <DataGridTextColumn Header="Люди" Binding="{Binding People_, UpdateSourceTrigger=PropertyChanged}" Width="55"/>
+                <DataGridTextColumn Header="Люди" Binding="{Binding ContactName, UpdateSourceTrigger=PropertyChanged}" Width="55"/>
 
-                <DataGridTextColumn Header="Событие" Binding="{Binding Event_, UpdateSourceTrigger=PropertyChanged}" Width="70"/>
+                <DataGridTextColumn Header="Событие" Binding="{Binding EventName, UpdateSourceTrigger=PropertyChanged}" Width="70"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
