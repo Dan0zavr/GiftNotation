@@ -52,15 +52,15 @@ namespace GiftNotation
                     services.AddSingleton(new GiftNotationDbContextFactory(connectionString));
 
                     // Регистрация сервисов как Scoped
-                    services.AddScoped<IMyFriendsService, MyFriendsService>();
-                    services.AddScoped<IContactService, ContactService>();
-                    services.AddScoped<GiftService>();
+                    
+                    services.AddScoped<ContactService>();
+                    services.AddScoped<DisplayGiftService>();
                     services.AddSingleton<UpdateCurrentVMCommand>();
 
                     // Регистрация фабрик
                     services.AddSingleton<IGiftNotationViewModelAbstractFactory, GiftNotationViewModelAbstractFactory>();
                     services.AddSingleton<IGiftNotationViewModelFactory<CalendarViewModel>, HomeViewModelFactory>();
-                    services.AddSingleton<IGiftNotationViewModelFactory<MyFriendsViewModel>, MyFriendsViewModelFactory>();
+                    
 
                     // Регистрация MainWindow
                     services.AddSingleton<MainWindow>();

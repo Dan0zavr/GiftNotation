@@ -12,7 +12,7 @@ namespace GiftNotation.ViewModels
     public class GiftViewModel : ViewModelBase
     {
         private ObservableCollection<GiftDisplayModel> _gifts;
-        private GiftService _giftService;
+        private DisplayGiftService _giftService;
 
         public ObservableCollection<GiftDisplayModel> Gifts
         {
@@ -20,7 +20,7 @@ namespace GiftNotation.ViewModels
             set { SetProperty(ref _gifts, value); }
         }
 
-        public GiftViewModel(GiftService giftService)
+        public GiftViewModel(DisplayGiftService giftService)
         {
             _giftService = giftService;
             // Загрузка данных из базы данных или другого источника
