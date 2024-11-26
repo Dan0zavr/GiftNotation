@@ -13,26 +13,23 @@ namespace GiftNotation.ViewModels.Factories
     public class GiftNotationViewModelAbstractFactory : IGiftNotationViewModelAbstractFactory
     {
         private readonly IGiftNotationViewModelFactory<CalendarViewModel> _calendarViewModelFactory;
-        private readonly IGiftNotationViewModelFactory<MyFriendsViewModel> _myfriendsViewModelFactory;
         private readonly ContactViewModel _contactViewModel;
         private readonly GiftViewModel _giftViewModel;
         private readonly EventViewModel _eventViewModel;
-        private readonly SettingsViewModel _settigsViewModel;
-        private readonly ProfileViewModel _profileViewModel;
-        private readonly GiftService _giftService;
+        private readonly DisplayGiftService _giftService;
+        private readonly ContactService _contactService;
 
-        public GiftNotationViewModelAbstractFactory(IGiftNotationViewModelFactory<CalendarViewModel> calendarViewModelFactory, IGiftNotationViewModelFactory<MyFriendsViewModel> myfriendsViewModelFactory,
+        public GiftNotationViewModelAbstractFactory(IGiftNotationViewModelFactory<CalendarViewModel> calendarViewModelFactory,
             ContactViewModel contactViewModel, GiftViewModel giftViewModel, EventViewModel eventViewModel, SettingsViewModel settigsViewModel, ProfileViewModel profileViewModel,
-            GiftService giftService)
+            DisplayGiftService giftService, ContactService contactService)
         {
             _calendarViewModelFactory = calendarViewModelFactory;
-            _myfriendsViewModelFactory = myfriendsViewModelFactory;
+            
             _contactViewModel = contactViewModel;
             _giftViewModel = giftViewModel;
             _eventViewModel = eventViewModel;
-            _settigsViewModel = settigsViewModel;
-            _profileViewModel = profileViewModel;
             _giftService = giftService;
+            _contactService = contactService;
 
         }
 
@@ -44,15 +41,11 @@ namespace GiftNotation.ViewModels.Factories
                     // Создание новой модели представления для Calendar
                     return _calendarViewModelFactory.CreateViewModel();
                 case ViewType.Contacts:
-                    return new ContactViewModel();
+                    return new ContactViewModel(_contactService);
                 case ViewType.Events:
                     return new EventViewModel();
                 case ViewType.Gifts:
                     return new GiftViewModel(_giftService);
-                case ViewType.Settings:
-                    return new SettingsViewModel();
-                case ViewType.Profile:
-                    return new ProfileViewModel();
                 default:
                     throw new ArgumentException("Takogo net");
             }

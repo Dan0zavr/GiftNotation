@@ -15,8 +15,7 @@ namespace GiftNotation.State.Navigators
         Contacts,
         Events,
         Gifts,
-        Profile,
-        Settings
+        
     }
 
     public interface INavigator
