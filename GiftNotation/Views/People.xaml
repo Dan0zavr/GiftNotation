@@ -63,22 +63,22 @@
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border CornerRadius="5" Background="{TemplateBinding Background}">
-                                <ContentPresenter Width="55" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                <ContentPresenter Width="55" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
-                    <TextBlock  Foreground="#c7c6cb" Text="Добавить"/>
+                    <TextBlock  Foreground="#c7c6cb" Text="Добавить" Height="15" VerticalAlignment="Top"/>
                 </Button>
 
                 <Button Background="#2c2825" Width="100" Height="20" Margin="5,0,5,0" Click="ChangingPeople">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border CornerRadius="5" Background="{TemplateBinding Background}">
-                                <ContentPresenter Width="90" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                <ContentPresenter Width="90" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
-                    <TextBlock Text="Редактировать" Width="90" HorizontalAlignment="Center" Foreground="#c7c6cb"/>
+                    <TextBlock Text="Редактировать" HorizontalAlignment="Center" Foreground="#c7c6cb" FontFamily="Cascadia Mono ExtraLight"/>
                 </Button>
             </StackPanel>
 
@@ -86,14 +86,14 @@
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border CornerRadius="5" Background="{TemplateBinding Background}">
-                            <ContentPresenter Width="46" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <ContentPresenter Width="46" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Button.Template>
                 <TextBlock Text="Удалить" Foreground="#c7c6cb"/>
             </Button>
 
-            <Label Name="MyFriendsLabel" Content="ЛЮДИ" HorizontalAlignment="Center"  VerticalAlignment="Top" FontSize="16" FontWeight="Heavy" FontFamily="Italic" Height="25" Width="126" Margin="0,5,0,0" />
+            <TextBlock Text="ЛЮДИ" FontSize="25" FontWeight="Heavy" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,7,0,0" FontFamily="Britannic Bold" />
 
             <DataGrid Background="#FFDFDBD7" x:Name="DataGrid" Margin="0,40,0,0" CanUserAddRows="True" 
              ItemsSource="{Binding People}" SelectedItem="{Binding SelectPeople}" Height="300" Width="500" 

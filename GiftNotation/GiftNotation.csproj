@@ -10,6 +10,10 @@
 
   <ItemGroup>
     <None Remove="Controls\homeback.png" />
+    <None Remove="Views\Fonts\IBMPlexMono-Thin.ttf" />
+    <None Remove="Views\Fonts\Pacifico-Regular.ttf" />
+    <None Remove="Views\Fonts\Rubik-Medium.ttf" />
+    <None Remove="Views\Fonts\Rubik-Regular.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +42,10 @@
     <Resource Include="Controls\homeback.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Views\Fonts\IBMPlexMono-Thin.ttf" />
+    <Resource Include="Views\Fonts\Pacifico-Regular.ttf" />
+    <Resource Include="Views\Fonts\Rubik-Medium.ttf" />
+    <Resource Include="Views\Fonts\Rubik-Regular.ttf" />
   </ItemGroup>
 
 </Project>

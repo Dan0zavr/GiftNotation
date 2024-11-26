@@ -10,7 +10,9 @@
     <!--Панель навигации, экспортирована в MainWindow-->
     <!--<StackPanel Orientation="Horizontal" Background="{DynamicResource ColorMenu}" Width="130" Grid.ColumnSpan="2" Grid.Column="0" >
         
-        <Button Cursor ="Hand" Margin="-90,2,0,0" HorizontalAlignment="Center" Height="30" Width="30" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Calendar}">
+        <Button Cursor ="Hand" Margin="-90,2,0,0g:\c#\giftnotation\giftnotation\controls\navigationbar.xaml.cs
+g:\c#\giftnotation\giftnotation\controls\navigationbar.xaml
+" HorizontalAlignment="Center" Height="30" Width="30" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Calendar}">
             <Image Source="pack://application:,,,/Controls/homeback.png"/>
         </Button>
 
@@ -25,22 +27,22 @@
 
     </StackPanel>-->
 
-    <Border CornerRadius="20,20,0,0" Background="#364049" Height="35" VerticalAlignment="Top">
+    <Border CornerRadius="20,20,0,0" Background="#2c2b2a" Height="35" VerticalAlignment="Top">
         <StackPanel VerticalAlignment="Top" Width="700" Margin="0,0,0,0" Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Height="35">
 
-            <Button Width="25" Cursor ="Hand" Height="25" Margin="10,0,15,0" Click="Exit">
+            <Button Width="25" Cursor ="Hand" Height="23" Margin="10,0,15,0" Click="Exit">
                 <TextBlock Text="X" FontSize="18" FontWeight="Heavy" />
             </Button>
             
-            <Button Margin="5,0,28,0" Cursor ="Hand" Width="190" HorizontalAlignment="Center" Height="25" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Calendar}">
+            <Button Margin="5,0,28,0" Cursor ="Hand" Width="190" HorizontalAlignment="Center" Height="23" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Calendar}" Click="Button_Click">
                 <TextBlock FontWeight="Medium" Text="КАЛЕНДАРЬ"/>
             </Button>
 
-            <Button Margin="5,0,28,0" Height="25" Width="190" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Gifts}">
+            <Button Margin="5,0,28,0" Height="23" Width="190" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Gifts}">
                 <TextBlock FontWeight="Medium" Text="ПОДАРОК"/>
             </Button>
 
-            <Button Margin="5,0,28,0" Width="190" Height="25" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Contacts}">
+            <Button Margin="5,0,28,0" Width="190" Height="23" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Contacts}">
                 <TextBlock FontWeight="Medium" Text="ЛЮДИ"/>
             </Button>
 

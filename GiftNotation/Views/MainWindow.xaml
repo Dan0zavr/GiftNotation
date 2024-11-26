@@ -35,7 +35,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Background" Value="#FFAC9A81"/>
+            <Setter Property="Background" Value="#FF867C6F"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="Medium" />
             <Setter Property="Foreground" Value="Black" >
@@ -50,7 +50,7 @@
 
         <Grid>
 
-            <Border Background="#787c83"
+        <Border Background="#7e7d7b"
                     CornerRadius="20">
 
                   <Grid>

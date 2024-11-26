@@ -32,58 +32,67 @@
         </Style>
     </UserControl.Resources>
 
-    <Border Background="#787c83" CornerRadius="0,0,20,20">
+    <Border Background="#7e7f7b" CornerRadius="0,0,20,20">
         <Grid>
 
 
             <StackPanel Orientation="Horizontal"  Width="250" Margin="-390,-330,0,0" Height="30">
-                <Button Background="#30333a" Width="100" Height="20" Margin="5,0,5,0" Click="Button_Add">
+                <Button Background="#2c2b2a" Width="100" Height="20" Margin="5,0,5,0" Click="Button_Add">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border CornerRadius="5" Background="{TemplateBinding Background}">
-                                <ContentPresenter Width="55" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                <ContentPresenter Width="58" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
-                    <TextBlock  Foreground="#c7c6cb" Text="Добавить"/>
+                    <TextBlock  Foreground="Gainsboro" Width="70" Text="Добавить"/>
                 </Button>
 
-                <Button Background="#30333a" Width="120" Height="20" Margin="5,0,5,0" Click="Button_Changing">
+                <Button Background="#2c2b2a" Width="120" Height="20" Margin="5,0,5,0" Click="Button_Changing">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border CornerRadius="5" Background="{TemplateBinding Background}">
-                                <ContentPresenter Width="55" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                <ContentPresenter Width="75" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
                             </Border>
                         </ControlTemplate>
                     </Button.Template>
-                    <TextBlock  Foreground="#c7c6cb" Width="120" Text="Редактировать" Margin="-10,0,-55,0"/>
+                    <TextBlock  Foreground="Gainsboro" Text="Редактировать" Margin="-10,0,-55,0"/>
                 </Button>
             </StackPanel>
 
-            <Button Width="90" Height="20" Background="#30333a" Margin="0,-330,-540,0" Click="Button_Delete">
+            <Button Width="90" Height="20" Background="#2c2b2a" Margin="0,-330,-540,0" Click="Button_Delete">
                 <Button.Template>
                     <ControlTemplate TargetType="Button">
                         <Border CornerRadius="5" Background="{TemplateBinding Background}">
-                            <ContentPresenter Width="55" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            <ContentPresenter Width="50" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
                         </Border>
                     </ControlTemplate>
                 </Button.Template>
-                <TextBlock  Foreground="#c7c6cb" Text="Удалить" Margin="10,2,-10,-2"/>
+                <TextBlock  Foreground="Gainsboro" Text="Удалить" />
             </Button>
 
-            <TextBlock Text="ПОДАРКИ" FontSize="18" FontWeight="Heavy" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,13,0,0"/>
+            <TextBlock Text="ПОДАРКИ" FontSize="25" FontWeight="Heavy" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,13,0,0" FontFamily="Britannic Bold"/>
 
-            <DataGrid x:Name="ddataGrid" BorderBrush="#402c1c" Background="#FFDFDBD7" CanUserAddRows="True" ItemsSource="{Binding Gifts}" VerticalAlignment="Bottom" Height="325" Width="630" AutoGenerateColumns="False" Margin="0,0,0,20">
+            <DataGrid x:Name="ddataGrid" BorderBrush="#402c1c" Background="#FFDFDBD7" CanUserAddRows="True" ItemsSource="{Binding Gifts}" VerticalAlignment="Bottom" Height="325" Width="625" AutoGenerateColumns="False" Margin="5,0,0,20">
                 <DataGrid.Resources>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="HorizontalContentAlignment" Value="Center"/>
                         <Setter Property="VerticalContentAlignment" Value="Center"/>
-                        <Setter Property="Background" Value="#51403D"/>
+                        <Setter Property="Background" Value="#cacac8"/>
                         <Setter Property="Height" Value="30"/>
                         <Setter Property="BorderBrush" Value="Black"/>
                         <Setter Property="BorderThickness" Value="0,0,1,0"/>
                         <Setter Property="FontSize" Value="14"/>
-                        <Setter Property="Foreground" Value="#FFD1D1D1"/>
+                        <Setter Property="Foreground" Value="black"/>
+                    </Style>
+
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="BorderBrush" Value="Black" />
+                        <Setter Property="BorderThickness" Value="0,0,0,1" />
+                    </Style>
+
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Background" Value="#cacac8"/>
                     </Style>
                 </DataGrid.Resources>
 

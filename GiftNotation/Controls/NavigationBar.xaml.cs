@@ -31,5 +31,10 @@ namespace GiftNotation.Controls
         {
             Application.Current.Shutdown(); // Завершает работу приложения
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

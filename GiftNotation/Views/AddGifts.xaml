@@ -5,16 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GiftNotation.Views"
         mc:Ignorable="d"
-        Title="Подарок" Height="350" Width="500" WindowStartupLocation="CenterScreen"
+        Title="Подарок" Height="350" Width="500" 
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent">
 
+    <!--WindowStartupLocation=""-->
+    
     <Window.Resources>
         
     </Window.Resources>
 
-    <Border CornerRadius="20" Background="#6c5b5b">
+    <Border CornerRadius="20" Background="#666562">
         <Grid>
 
 
@@ -24,93 +26,90 @@
 
             <UniformGrid Rows="7" Grid.Row="1" Margin="0,40,0,40">
 
-                <Border Height="30" Width="450" Background="#a59094" CornerRadius="5">
+                <Border Height="30" Width="450" Background="#cacac8" CornerRadius="5">
                     <Grid  Margin="10,0,0,0" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="ПОДАРОК:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#a59094" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBlock Text="Подарок:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
+                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
                     </Grid>
                 </Border>
 
 
-                <Border Height="30" Width="450" Background="#a59094" CornerRadius="5">
+                <Border Height="30" Width="450" Background="#cacac8" CornerRadius="5">
                     <Grid Margin="10,0,0,0" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="КАРТИНКА:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox Background="#a59094" FontSize="14" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBlock Text="Картинка:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
+                        <TextBox Background="#cacac8" FontSize="14" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
                     </Grid>
                 </Border>
 
-                <Border Height="30" Width="450" Background="#a59094" CornerRadius="5">
+                <Border Height="30" Width="450" Background="#cacac8" CornerRadius="5">
                     <Grid Margin="10,0,0,0" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="СТОИМОСТЬ:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#a59094" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBlock Text="Стоимость:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
+                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
                     </Grid>
                 </Border>
 
-                <Border Height="30" Width="450" Background="#a59094" CornerRadius="5">
+                <Border Height="30" Width="450" Background="#cacac8" CornerRadius="5">
                     <Grid Margin="10,0,0,0" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="ССЫЛКА НА МАРКЕТПЛЕЙС:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#a59094" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBlock Text="Ссылка на маркетплейс:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
+                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
                     </Grid>
                 </Border>
 
-                <Border Height="30" Width="450" Background="#a59094" CornerRadius="5">
+                <Border Height="30" Width="450" Background="#cacac8" CornerRadius="5">
                     <Grid Margin="10,0,0,0" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="ЛЮДИ:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#a59094" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBlock Text="Люди:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
+                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
                     </Grid>
                 </Border>
 
-                <Border Height="30" Width="450" Background="#a59094" CornerRadius="5">
+                <Border Height="30" Width="450" Background="#cacac8" CornerRadius="5">
                     <Grid Margin="10,0,0,0" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="СОБЫТИЕ:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#a59094" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBlock Text="Событие:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
+                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
                     </Grid>
                 </Border>
 
-                <Border Height="30" Width="450" Background="#a59094" CornerRadius="5">
+                <Border Height="30" Width="450" Background="#cacac8" CornerRadius="5">
                     <Grid Margin="10,0,0,0" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="СТАТУС:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#a59094" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBlock Text="Статус" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
+                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
                     </Grid>
                 </Border>
-                
+
             </UniformGrid>
-
-
-
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom">
 
 
-                <Button Background="#24211e" Width="100" Height="20" Margin="10,0,0,5">
+                <Button Background="#2c2b2a" Width="100" Height="20" Margin="10,0,0,10">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border CornerRadius="5" Background="{TemplateBinding Background}">
@@ -119,12 +118,12 @@
                         </ControlTemplate>
                     </Button.Template>
 
-                    <TextBlock Text="ОТМЕНИТЬ" FontSize="14" FontFamily="Bold" Foreground="#e2ddd9"/>
+                    <TextBlock Text="Отменить" FontSize="14" FontFamily="Bold" Foreground="#e2ddd9"/>
 
                 </Button>
 
 
-                <Button Background="#24211e" Height="20" Width="100" Margin="280,0,0,5" Foreground="#e2ddd9">
+                <Button Background="#2c2b2a" Height="20" Width="100" Margin="280,0,0,10" Foreground="#e2ddd9">
                     <Button.Template>
                         <ControlTemplate TargetType="Button">
                             <Border CornerRadius="5" Background="{TemplateBinding Background}">
@@ -133,9 +132,8 @@
                         </ControlTemplate>
                     </Button.Template>
 
-                    <TextBlock HorizontalAlignment="Center" Text="ИЗМЕНИТЬ" FontSize="14" FontFamily="Bold" Foreground="#e2ddd9"/>
+                    <TextBlock HorizontalAlignment="Center" Text="Готово" FontSize="14" FontFamily="Bold" Foreground="#e2ddd9"/>
                 </Button>
-
 
             </StackPanel>
 

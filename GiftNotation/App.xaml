@@ -41,6 +41,10 @@
                 <views:SettingsView/>
             </DataTemplate>-->
 
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Cambria Math"/>
+            </Style>
+
         </ResourceDictionary>
         
     </Application.Resources>
