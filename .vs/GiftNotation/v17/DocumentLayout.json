@@ -19,16 +19,16 @@
       "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\views\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\controls\\navigationbar.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\controls\\navigationbar.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\views\\profile.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\views\\profile.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\views\\settingsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\views\\settingsview.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|c:\\users\\haier\\source\\repos\\giftnotation\\giftnotation\\controls\\navigationbar.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{986EA1D0-9F44-482C-A7AD-C4D791EDE538}|GiftNotation\\GiftNotation.csproj|solutionrelative:giftnotation\\controls\\navigationbar.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,8 +58,7 @@
               "RelativeToolTip": "GiftNotation\\Views\\People.xaml.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAIAwwB4AAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-20T15:54:19.186Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-20T15:54:19.186Z"
             },
             {
               "$type": "Document",
@@ -87,27 +86,25 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Profile.xaml",
               "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Views\\Profile.xaml",
               "RelativeDocumentMoniker": "GiftNotation\\Views\\Profile.xaml",
               "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Views\\Profile.xaml",
               "RelativeToolTip": "GiftNotation\\Views\\Profile.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-20T15:52:32.129Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-20T15:52:32.129Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "SettingsView.xaml",
               "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Views\\SettingsView.xaml",
               "RelativeDocumentMoniker": "GiftNotation\\Views\\SettingsView.xaml",
               "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Views\\SettingsView.xaml",
               "RelativeToolTip": "GiftNotation\\Views\\SettingsView.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-20T15:52:31.059Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-20T15:52:31.059Z"
             },
             {
               "$type": "Document",
@@ -118,20 +115,18 @@
               "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Views\\MainWindow.xaml",
               "RelativeToolTip": "GiftNotation\\Views\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-20T15:40:15.829Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-20T15:40:15.829Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "NavigationBar.xaml",
               "DocumentMoniker": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Controls\\NavigationBar.xaml",
               "RelativeDocumentMoniker": "GiftNotation\\Controls\\NavigationBar.xaml",
               "ToolTip": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\Controls\\NavigationBar.xaml",
               "RelativeToolTip": "GiftNotation\\Controls\\NavigationBar.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-11-20T15:39:27.339Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-20T15:39:27.339Z"
             }
           ]
         }
