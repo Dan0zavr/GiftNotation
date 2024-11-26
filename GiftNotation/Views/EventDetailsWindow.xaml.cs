@@ -30,8 +30,8 @@ namespace виш_лист_попытка_33334
 
         private void ChangedZhach(object sender, TextChangedEventArgs e)
         {
-            //TextBox textBox = (TextBox)sender;
-            //MessageBox.Show(textBox.Text);
+            TextBox textBox = (TextBox)sender;
+            MessageBox.Show(textBox.Text);
         }
 
         

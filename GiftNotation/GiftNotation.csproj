@@ -30,6 +30,8 @@
     <Folder Include="Commands\GiftCommands\" />
     <Folder Include="Migrations\" />
     <Folder Include="Pictures\" />
+    <Folder Include="Views\Style\" />
+    <Folder Include="Views\Model\" />
   </ItemGroup>
 
   <ItemGroup>

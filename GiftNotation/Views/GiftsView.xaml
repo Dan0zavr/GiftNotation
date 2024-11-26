@@ -5,8 +5,9 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GiftNotation.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="600"
-      Background="AliceBlue" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+      Height="400" Width="700">
+
+    <!--d:DesignHeight="450" d:DesignWidth="600"-->
     <UserControl.Resources>
         <SolidColorBrush x:Key="TextFon" Color="#DFB6B2" />
         <SolidColorBrush x:Key="TextColor" Color="#f3f4ea" />
@@ -30,37 +31,93 @@
             <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
         </Style>
     </UserControl.Resources>
-    <Grid>
-        <Label Name="Gifts" Content="Подарок" HorizontalAlignment="Center"  VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Height="25" Width="126" Margin="0,10,0,0" />
 
-        <DataGrid x:Name="ddataGrid" CanUserAddRows="True" ItemsSource="{Binding Gifts}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="300" Width="500" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Подарок"  Binding="{Binding GiftName, UpdateSourceTrigger=PropertyChanged}" Width="70" />
-
-                <DataGridTemplateColumn Header="Картинка" Width="70">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding Picture_of_gift}" Width="25" Height="25"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <Image Width="25" Height="25" Source="{Binding Picture_of_gift}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
+    <Border Background="#787c83" CornerRadius="0,0,20,20">
+        <Grid>
 
 
-                <!--Нужно создать кнопку для доб.изображения, прописать ее в обработчике-->
-                <DataGridTextColumn Header="Стоимость" Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+            <StackPanel Orientation="Horizontal"  Width="250" Margin="-390,-330,0,0" Height="30">
+                <Button Background="#30333a" Width="100" Height="20" Margin="5,0,5,0" Click="Button_Add">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="5" Background="{TemplateBinding Background}">
+                                <ContentPresenter Width="55" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <TextBlock  Foreground="#c7c6cb" Text="Добавить"/>
+                </Button>
 
-                <DataGridTextColumn Header="Ссылка на маркетплейс" Binding="{Binding Url, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+                <Button Background="#30333a" Width="120" Height="20" Margin="5,0,5,0" Click="Button_Changing">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="5" Background="{TemplateBinding Background}">
+                                <ContentPresenter Width="55" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <TextBlock  Foreground="#c7c6cb" Width="120" Text="Редактировать" Margin="-10,0,-55,0"/>
+                </Button>
+            </StackPanel>
 
-                <DataGridTextColumn Header="Люди" Binding="{Binding People_, UpdateSourceTrigger=PropertyChanged}" Width="55"/>
+            <Button Width="90" Height="20" Background="#30333a" Margin="0,-330,-540,0" Click="Button_Delete">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5" Background="{TemplateBinding Background}">
+                            <ContentPresenter Width="55" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <TextBlock  Foreground="#c7c6cb" Text="Удалить" Margin="10,2,-10,-2"/>
+            </Button>
 
-                <DataGridTextColumn Header="Событие" Binding="{Binding Event_, UpdateSourceTrigger=PropertyChanged}" Width="70"/>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+            <TextBlock Text="ПОДАРКИ" FontSize="18" FontWeight="Heavy" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,13,0,0"/>
+
+            <DataGrid x:Name="ddataGrid" BorderBrush="#402c1c" Background="#FFDFDBD7" CanUserAddRows="True" ItemsSource="{Binding Gifts}" VerticalAlignment="Bottom" Height="325" Width="630" AutoGenerateColumns="False" Margin="0,0,0,20">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Background" Value="#51403D"/>
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="BorderThickness" Value="0,0,1,0"/>
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="Foreground" Value="#FFD1D1D1"/>
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Подарок"  Binding="{Binding GiftName, UpdateSourceTrigger=PropertyChanged}" Width="80" />
+
+                    <DataGridTemplateColumn Header="Картинка" Width="80">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Picture_of_gift}" Width="25" Height="25"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <Image Width="25" Height="25" Source="{Binding Picture_of_gift}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+
+
+                    <!--Нужно создать кнопку для доб.изображения, прописать ее в обработчике-->
+                    <DataGridTextColumn Header="Стоимость" Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged}" Width="90"/>
+
+                    <DataGridTextColumn Header="Ссылка на маркетплейс" Binding="{Binding Url, UpdateSourceTrigger=PropertyChanged}" Width="170"/>
+
+                    <DataGridTextColumn Header="Люди" Binding="{Binding People_, UpdateSourceTrigger=PropertyChanged}" Width="65"/>
+
+                    <DataGridTextColumn Header="Событие" Binding="{Binding Event_, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+
+                    <DataGridTextColumn Header="Статус" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Border>
+
 
 </UserControl>

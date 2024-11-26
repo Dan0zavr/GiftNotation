@@ -67,23 +67,11 @@ namespace GiftNotation.Views
 
         }
 
-        private void Button_ClickVish_List(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
 
         
-        private void Button_Click_MyProfil(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_Setting(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void NavigationBar_Loaded(object sender, RoutedEventArgs e)
+       
+        private void MainFrame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
 
         }
@@ -94,6 +82,7 @@ namespace GiftNotation.Views
 
     }
 
+   
 
 
 

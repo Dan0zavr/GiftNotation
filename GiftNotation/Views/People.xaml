@@ -6,13 +6,16 @@
       xmlns:local="clr-namespace:виш_лист_попытка_33334"
       mc:Ignorable="d" 
       d:DesignHeight="400" d:DesignWidth="650"
-      Background="#FBE4D8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+      HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
 
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="TextFon" Color="#DFB6B2" />
-        <SolidColorBrush x:Key="TextColor" Color="#f3f4ea" />
+        <SolidColorBrush x:Key="ButtonFon" Color="#595670" />
+        <SolidColorBrush x:Key="TextColor" Color="#c7c6cb" />
+
+
+        <!-- Стиль для Label -->
         <Style TargetType="Label">
             <Setter Property="Template">
                 <Setter.Value>
@@ -21,51 +24,150 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"               
                             CornerRadius="3">
-
-                            <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+                            <TextBlock Text="{TemplateBinding Content}" 
+                                   Foreground="{TemplateBinding Foreground}" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>
 
-            <Setter Property="Background" Value="{DynamicResource TextFon}"/>
-            <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
+        <!-- Стиль для Button -->
+        <Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="{DynamicResource ButtonFon}"/>
+
         </Style>
     </UserControl.Resources>
 
-    <Grid>
-        <Label Name="MyFriendsLabel" Content="Люди" HorizontalAlignment="Center"  VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Height="25" Width="126" Margin="0,10,0,0" />
-        <DataGrid x:Name="DataGrid" CanUserAddRows="True" ItemsSource="{Binding People}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="300" Width="500" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Человек" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="100" />
 
-                <DataGridComboBoxColumn Header="Тип отношений" SelectedItemBinding="{Binding Ship, UpdateSourceTrigger=PropertyChanged}" Width="125">
-                    <DataGridComboBoxColumn.ItemsSource>
-                        <x:Array Type="{x:Type sys:String}" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                            <sys:String>Друг</sys:String>
-                            <sys:String>Родственник</sys:String>
-                            <sys:String>Коллега</sys:String>
-                            <sys:String>Знакомый</sys:String>
-                        </x:Array>
-                    </DataGridComboBoxColumn.ItemsSource>
-                </DataGridComboBoxColumn>
+    <Border Background="#786E65" CornerRadius="0,0,20,20">
+        <Grid>
 
-                <DataGridTemplateColumn Header="День рождения" Width="115">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Birthday, StringFormat=d}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <DatePicker SelectedDate="{Binding Birthday, UpdateSourceTrigger=PropertyChanged}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
+            <StackPanel Orientation="Horizontal"  Width="220" Margin="-290,-300,0,0" Height="30">
+                <Button Background="#2c2825" Width="100" Height="20" Margin="5,0,5,0" Click="AddPeople">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="5" Background="{TemplateBinding Background}">
+                                <ContentPresenter Width="55" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <TextBlock  Foreground="#c7c6cb" Text="Добавить"/>
+                </Button>
 
-                <DataGridTextColumn Header="Подарок" Binding="{Binding Gift, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+                <Button Background="#2c2825" Width="100" Height="20" Margin="5,0,5,0" Click="ChangingPeople">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border CornerRadius="5" Background="{TemplateBinding Background}">
+                                <ContentPresenter Width="90" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <TextBlock Text="Редактировать" Width="90" HorizontalAlignment="Center" Foreground="#c7c6cb"/>
+                </Button>
+            </StackPanel>
+
+            <Button Background="#2c2825" Width="100" Height="20" Margin="0,-300,-400,0" Click="DeletePeople">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5" Background="{TemplateBinding Background}">
+                            <ContentPresenter Width="46" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+                <TextBlock Text="Удалить" Foreground="#c7c6cb"/>
+            </Button>
+
+            <Label Name="MyFriendsLabel" Content="ЛЮДИ" HorizontalAlignment="Center"  VerticalAlignment="Top" FontSize="16" FontWeight="Heavy" FontFamily="Italic" Height="25" Width="126" Margin="0,5,0,0" />
+
+            <DataGrid Background="#FFDFDBD7" x:Name="DataGrid" Margin="0,40,0,0" CanUserAddRows="True" 
+             ItemsSource="{Binding People}" SelectedItem="{Binding SelectPeople}" Height="300" Width="500" 
+              AutoGenerateColumns="False" Cursor="Hand" BorderBrush="#402c1c" BorderThickness="1">
+                <DataGrid.Resources>
+                    <!-- Стиль для заголовков столбцов -->
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Background" Value="#977a62"/>
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="BorderThickness" Value="1,0,1,0"/>
+                    </Style>
+
+                    <!-- Стиль для самого DataGrid -->
+                    <!--<Style TargetType="DataGrid">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="DataGrid">
+                                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0,0,20,20">
+                                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                                            <Grid>
+                                                <DataGridColumnHeadersPresenter />
+                                                <DataGridCellsPresenter />
+                                            </Grid>
+                                        </ScrollViewer>
+                                    </Border>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>-->
+
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="BorderThickness" Value="0,0,2,2"/>
+                        <Setter Property="Padding" Value="5"/>
+                    </Style>
+                    
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+
+                    <DataGridComboBoxColumn Header="Тип отношений" SelectedItemBinding="{Binding Ship, UpdateSourceTrigger=PropertyChanged}" Width="150">
+                        <DataGridComboBoxColumn.ItemsSource>
+                            <x:Array Type="{x:Type sys:String}" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                <sys:String>Друг</sys:String>
+                                <sys:String>Родственник</sys:String>
+                                <sys:String>Коллега</sys:String>
+                                <sys:String>Знакомый</sys:String>
+                            </x:Array>
+                        </DataGridComboBoxColumn.ItemsSource>
+                    </DataGridComboBoxColumn>
+
+                    <DataGridTemplateColumn Header="День рождения" Width="115">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Birthday, StringFormat=d}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <DatePicker SelectedDate="{Binding Birthday, UpdateSourceTrigger=PropertyChanged}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTextColumn Header="Подарок" Binding="{Binding Gift, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+
+
+        </Grid>
+    </Border>
+    
 </UserControl>
