@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//Нужен чтобы не писать это в каждой ViewModel
+
 namespace GiftNotation.GlobalFunctions
 {
     public class NotifyObject : INotifyPropertyChanged

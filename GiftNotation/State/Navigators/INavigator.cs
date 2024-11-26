@@ -8,16 +8,20 @@ using GiftNotation.ViewModels;
 
 namespace GiftNotation.State.Navigators
 {
-    enum ViewType
+    //Перечисление страниц
+    public enum ViewType
     {
         Calendar,
-        MyFriends
+        Contacts,
+        Events,
+        Gifts,
+        
     }
 
     public interface INavigator
     {
         ViewModelBase CurrentViewModel { get; set; }
-
+        
         ICommand UpdateCurrentVMCommand { get; }
     }
 }

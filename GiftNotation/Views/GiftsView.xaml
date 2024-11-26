@@ -1,0 +1,67 @@
+﻿<UserControl x:Class="GiftNotation.Views.GiftsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GiftNotation.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="600"
+      Background="AliceBlue" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="TextFon" Color="#DFB6B2" />
+        <SolidColorBrush x:Key="TextColor" Color="#f3f4ea" />
+        <Style TargetType="Label">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Label">
+                        <Border Background="{TemplateBinding Background}" 
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"               
+                                CornerRadius="3">
+
+                            <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Background" Value="{DynamicResource TextFon}"/>
+            <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Label Name="Gifts" Content="Подарок" HorizontalAlignment="Center"  VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Height="25" Width="126" Margin="0,10,0,0" />
+    
+        <DataGrid x:Name="ddataGrid" CanUserAddRows="True" ItemsSource="{Binding Gifts}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="300" Width="500" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Подарок"  Binding="{Binding GiftName, UpdateSourceTrigger=PropertyChanged}" Width="70" />
+
+                <DataGridTemplateColumn Header="Картинка" Width="70">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding GiftPic}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                    <!--<DataGridTemplateColumn.CellEditingTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding GiftPic}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellEditingTemplate>-->
+                </DataGridTemplateColumn>
+
+
+                <!--Нужно создать кнопку для доб.изображения, прописать ее в обработчике-->
+                <DataGridTextColumn Header="Стоимость" Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+
+                <DataGridTextColumn Header="Ссылка на маркетплейс" Binding="{Binding Url, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+
+                <DataGridTextColumn Header="Люди" Binding="{Binding ContactName, UpdateSourceTrigger=PropertyChanged}" Width="55"/>
+
+                <DataGridTextColumn Header="Событие" Binding="{Binding EventName, UpdateSourceTrigger=PropertyChanged}" Width="70"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+
+</UserControl>
