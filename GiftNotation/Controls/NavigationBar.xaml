@@ -7,6 +7,9 @@
              xmlns:navigation="clr-namespace:GiftNotation.State.Navigators"
              mc:Ignorable="d" 
              d:DesignHeight="440" d:DesignWidth="700">
+
+
+    
     <!--Панель навигации, экспортирована в MainWindow-->
     <!--<StackPanel Orientation="Horizontal" Background="{DynamicResource ColorMenu}" Width="130" Grid.ColumnSpan="2" Grid.Column="0" >
         
@@ -30,19 +33,229 @@ g:\c#\giftnotation\giftnotation\controls\navigationbar.xaml
     <Border CornerRadius="20,20,0,0" Background="#2c2b2a" Height="35" VerticalAlignment="Top">
         <StackPanel VerticalAlignment="Top" Width="700" Margin="0,0,0,0" Orientation="Horizontal" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Height="35">
 
-            <Button Width="25" Cursor ="Hand" Height="23" Margin="10,0,15,0" Click="Exit">
+            <Button Width="25" Cursor ="Hand" Height="23" Background="#B6b7ba" Margin="10,0,15,0" Click="Exit">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="Button_Border" CornerRadius="5" BorderBrush="Transparent">
+                                        <Border.Background>
+                                            <SolidColorBrush x:Name="color1" Color="#B6b7ba"/>
+                                        </Border.Background>
+
+                                        <ContentPresenter Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,-2,0,0"/>
+
+                                    </Border>
+
+
+                                    <!--Триггеры-->
+                                    <ControlTemplate.Triggers>
+                                        <EventTrigger RoutedEvent="Border.MouseEnter">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                                                    From="#B6b7ba" To="Gray" Duration="0:0:0.2"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+
+                                        <EventTrigger RoutedEvent="Border.MouseLeave">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                                                    From="Gray" To="#B6b7ba" Duration="0:0:0.3"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="Button_Border" Property="Background" Value="Gray"/>
+                                            <Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>
+                                            <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
+                                        </Trigger>
+
+
+
+                                    </ControlTemplate.Triggers>
+                                            
+                                            
+
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                </Button.Style>
+                
                 <TextBlock Text="X" FontSize="18" FontWeight="Heavy" />
+                    
             </Button>
-            
-            <Button Margin="5,0,28,0" Cursor ="Hand" Width="190" HorizontalAlignment="Center" Height="23" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Calendar}" Click="Button_Click">
+
+            <Button Margin="5,0,28,0" Cursor ="Hand" Background="#B6b7ba" Width="190" HorizontalAlignment="Center" Height="23" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Calendar}" Click="Button_Click">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="Button_Border" CornerRadius="5" BorderBrush="Transparent">
+                                        <Border.Background>
+                                            <SolidColorBrush x:Name="color1" Color="#B6b7ba"/>
+                                        </Border.Background>
+                                        <ContentPresenter Width="75" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+
+                                    <!--Триггеры-->
+                                    <ControlTemplate.Triggers>
+                                        <EventTrigger RoutedEvent="Border.MouseEnter">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                                                    From="#B6b7ba" To="Gray" Duration="0:0:0.2"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+
+                                        <EventTrigger RoutedEvent="Border.MouseLeave">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                                                    From="Gray" To="#B6b7ba" Duration="0:0:0.3"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="Button_Border" Property="Background" Value="Gray"/>
+                                            <Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>
+                                            <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
+                                        </Trigger>
+
+
+
+                                    </ControlTemplate.Triggers>
+
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                </Button.Style>
                 <TextBlock FontWeight="Medium" Text="КАЛЕНДАРЬ"/>
             </Button>
 
-            <Button Margin="5,0,28,0" Height="23" Width="190" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Gifts}">
+            <Button Margin="3,0,28,0" Height="23" Cursor="Hand"
+                    Background="#B6b7ba" Width="190" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Gifts}">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="Button_Border" CornerRadius="5" BorderBrush="Transparent">
+                                        <Border.Background>
+                                            <SolidColorBrush x:Name="color1" Color="#B6b7ba"/>
+                                        </Border.Background>
+                                        
+                                        <ContentPresenter Width="60" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+
+                                    <!--Триггеры-->
+                                    <ControlTemplate.Triggers>
+                                        <EventTrigger RoutedEvent="Border.MouseEnter">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                                                    From="#B6b7ba" To="Gray" Duration="0:0:0.2"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+
+                                        <EventTrigger RoutedEvent="Border.MouseLeave">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                                                    From="Gray" To="#B6b7ba" Duration="0:0:0.3"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="Button_Border" Property="Background" Value="Gray"/>
+                                            <Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>
+                                            <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
+                                        </Trigger>
+
+
+
+                                    </ControlTemplate.Triggers>
+
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                </Button.Style>
                 <TextBlock FontWeight="Medium" Text="ПОДАРОК"/>
             </Button>
 
-            <Button Margin="5,0,28,0" Width="190" Height="23" Command="{Binding UpdateCurrentVMCommand}" CommandParameter="{x:Static navigation:ViewType.Contacts}">
+            <Button Name="peoplebtn"
+                Margin="3,0,28,0" Width="190" Height="23" Cursor="Hand" Command="{Binding UpdateCurrentVMCommand}" 
+                    CommandParameter="{x:Static navigation:ViewType.Contacts}" Background="#B6b7ba">
+
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border Name="Button_Border" CornerRadius="5" >
+                                        <Border.Background>
+                                            <SolidColorBrush x:Name="xz" Color="#B6b7ba" />
+                                            
+                                        </Border.Background>
+                                        <ContentPresenter Width="45" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+
+                                    <!--Триггеры-->
+                                    <ControlTemplate.Triggers>
+                                        
+
+                                        <EventTrigger RoutedEvent="Border.MouseEnter">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="Color" 
+                                                                    Storyboard.TargetName="xz"
+                                                                    From="#B6b7ba" To="Gray" Duration="0:0:0.2" />
+                                                    
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                        <EventTrigger RoutedEvent="Border.MouseLeave">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="Color" 
+                                                                    Storyboard.TargetName="xz"
+                                                                    From="Gray" To="#B6b7ba" Duration="0:0:0.3" />
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="Button_Border" Property="Background" Value="Gray"/>
+                                            <Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>
+                                            <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                </Button.Style>
+
                 <TextBlock FontWeight="Medium" Text="ЛЮДИ"/>
             </Button>
 

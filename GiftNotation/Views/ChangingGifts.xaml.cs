@@ -23,5 +23,18 @@ namespace GiftNotation.Views
         {
             InitializeComponent();
         }
+
+        private void ButtonChanging_CloseGifts(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
     }
 }

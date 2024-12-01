@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,9 +20,29 @@ namespace GiftNotation.Views
     /// </summary>
     public partial class ChangingPeople : Window
     {
+
+
         public ChangingPeople()
         {
             InitializeComponent();
+        }
+
+        private void ButtonChanging_ClosePeople(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void ButtonChanging_DonePeople(object sender, RoutedEventArgs e)
+        {
+            //Тут должна быть привязка к классу Person (MyFriends)
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
         }
     }
 }

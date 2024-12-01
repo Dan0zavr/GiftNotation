@@ -51,7 +51,7 @@
         <Grid>
 
         <Border Background="#7e7d7b"
-                    CornerRadius="20">
+                    CornerRadius="20"  BorderThickness="3" BorderBrush="#b6b7ba">
 
                   <Grid>
 

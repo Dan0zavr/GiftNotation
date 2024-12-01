@@ -36,49 +36,187 @@
         <Grid>
 
 
-            <StackPanel Orientation="Horizontal"  Width="250" Margin="-390,-330,0,0" Height="30">
+            <StackPanel Orientation="Horizontal"  Width="250" Margin="-375,-330,0,0" Height="30">
                 <Button Background="#2c2b2a" Width="100" Height="20" Margin="5,0,5,0" Click="Button_Add">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="5" Background="{TemplateBinding Background}">
-                                <ContentPresenter Width="58" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                    <TextBlock  Foreground="Gainsboro" Width="70" Text="Добавить"/>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
+                                            <Border.Background>
+                                                <SolidColorBrush x:Name="color1" Color="#292a2c"/>
+                                            </Border.Background>
+
+                                            <ContentPresenter Width="60" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,-2,0,0"/>
+
+                                        </Border>
+
+
+                                        <!--Триггеры-->
+                                        <ControlTemplate.Triggers>
+                                            <EventTrigger RoutedEvent="Border.MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                        From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            <EventTrigger RoutedEvent="Border.MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                        From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="Button_Border" Property="Background" Value="Gray"/>
+                                                <Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>
+                                                <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
+                                            </Trigger>
+
+
+
+                                        </ControlTemplate.Triggers>
+
+
+
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+
+                    </Button.Style>
+                    <TextBlock  Foreground="Gainsboro" Margin="0,1,0,0" Width="70" Text="Добавить"/>
                 </Button>
 
                 <Button Background="#2c2b2a" Width="120" Height="20" Margin="5,0,5,0" Click="Button_Changing">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="5" Background="{TemplateBinding Background}">
-                                <ContentPresenter Width="75" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
-                    <TextBlock  Foreground="Gainsboro" Text="Редактировать" Margin="-10,0,-55,0"/>
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
+                                            <Border.Background>
+                                                <SolidColorBrush x:Name="color1" Color="#292a2c"/>
+                                            </Border.Background>
+
+                                            <ContentPresenter Width="85" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,-2,0,0"/>
+
+                                        </Border>
+
+
+                                        <!--Триггеры-->
+                                        <ControlTemplate.Triggers>
+                                            <EventTrigger RoutedEvent="Border.MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                        From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            <EventTrigger RoutedEvent="Border.MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                        From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="Button_Border" Property="Background" Value="Gray"/>
+                                                <Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>
+                                                <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
+                                            </Trigger>
+
+
+
+                                        </ControlTemplate.Triggers>
+
+
+
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+
+                    </Button.Style>
+                    <TextBlock  Foreground="Gainsboro" Text="Редактировать" Width="85" Margin="0,1,0,0"/>
                 </Button>
             </StackPanel>
 
             <Button Width="90" Height="20" Background="#2c2b2a" Margin="0,-330,-540,0" Click="Button_Delete">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="5" Background="{TemplateBinding Background}">
-                            <ContentPresenter Width="50" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-                <TextBlock  Foreground="Gainsboro" Text="Удалить" />
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
+                                        <Border.Background>
+                                            <SolidColorBrush x:Name="color1" Color="#292a2c"/>
+                                        </Border.Background>
+
+                                        <ContentPresenter Width="60" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,-2,0,0"/>
+
+                                    </Border>
+
+
+                                    <!--Триггеры-->
+                                    <ControlTemplate.Triggers>
+                                        <EventTrigger RoutedEvent="Border.MouseEnter">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                        From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+
+                                        <EventTrigger RoutedEvent="Border.MouseLeave">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                        From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="Button_Border" Property="Background" Value="Gray"/>
+                                            <Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>
+                                            <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
+                                        </Trigger>
+
+
+
+                                    </ControlTemplate.Triggers>
+
+
+
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                </Button.Style>
+                <TextBlock  Foreground="Gainsboro" Width="46" Margin="0,1,0,0" Text="Удалить" />
             </Button>
 
             <TextBlock Text="ПОДАРКИ" FontSize="25" FontWeight="Heavy" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,13,0,0" FontFamily="Britannic Bold"/>
 
-            <DataGrid x:Name="ddataGrid" BorderBrush="#402c1c" Background="#FFDFDBD7" CanUserAddRows="True" ItemsSource="{Binding Gifts}" VerticalAlignment="Bottom" Height="325" Width="625" AutoGenerateColumns="False" Margin="5,0,0,20">
+            <DataGrid x:Name="ddataGrid" BorderThickness="3"  BorderBrush="black" Background="#FFDFDBD7" CanUserAddRows="True" ItemsSource="{Binding Gifts}" VerticalAlignment="Bottom" Height="325" Width="625" AutoGenerateColumns="False" Margin="5,0,0,20">
                 <DataGrid.Resources>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="HorizontalContentAlignment" Value="Center"/>
                         <Setter Property="VerticalContentAlignment" Value="Center"/>
-                        <Setter Property="Background" Value="#cacac8"/>
+                        <Setter Property="Background" Value="#786e65"/>
                         <Setter Property="Height" Value="30"/>
                         <Setter Property="BorderBrush" Value="Black"/>
                         <Setter Property="BorderThickness" Value="0,0,1,0"/>

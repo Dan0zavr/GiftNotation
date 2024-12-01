@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="Подарок" Height="350" Width="500" WindowStyle="None"
         AllowsTransparency="True"
-        Background="Transparent">
+        Background="Transparent"  MouseDown="Window_MouseDown">
 
-    <Border CornerRadius="20" Background="#666562">
+    <Border CornerRadius="20" BorderBrush="#afb3b7" BorderThickness="3" Background="#666562">
         <Grid>
             <TextBlock Text="РЕДАКТИРОВАНИЕ" FontSize="18" Height="25" FontWeight="Bold" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,3,0,0" />
 
@@ -78,7 +78,18 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Событие:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <ComboBox Width="360" Grid.Column="1" Background="#cacac8">
+                            <ComboBoxItem Content="День Рождения"/>
+                            <ComboBoxItem Content="23 февраля"/>
+                            <ComboBoxItem Content="Годовщина"/>
+                            <ComboBoxItem Content="Новый год"/>
+                            <ComboBoxItem Content="8 марта"/>
+                            <ComboBoxItem Content="9 мая"/>
+                            <ComboBoxItem Content="Рождество"/>
+                            <ComboBoxItem Content="Свадьба"/>
+                            <ComboBoxItem Content="Просто подарочек"/>
+                            <ComboBoxItem Content="Важное событие"/>
+                        </ComboBox>
                     </Grid>
                 </Border>
 
@@ -89,7 +100,12 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Статус" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <ComboBox Width="380" Grid.Column="1" Background="#cacac8">
+                            <ComboBoxItem Content="В процессе покупки"/>
+                            <ComboBoxItem Content="Куплен"/>
+                            <ComboBoxItem Content="Упакован"/>
+                            <ComboBoxItem Content="Подарен"/>
+                        </ComboBox>
                     </Grid>
                 </Border>
 
@@ -98,28 +114,124 @@
             <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom">
 
 
-                <Button Background="#2c2b2a" Width="100" Height="20" Margin="10,0,0,10">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="5" Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
+                <Button Background="#2c2b2a" Width="100" Height="20" Margin="10,0,0,10" Click="ButtonChanging_CloseGifts">
 
-                    <TextBlock Text="Отменить" FontSize="14" FontFamily="Bold" Foreground="#e2ddd9"/>
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
+                                            <Border.Background>
+                                                <SolidColorBrush x:Name="color1" Color="#292a2c"/>
+                                            </Border.Background>
+
+                                            <ContentPresenter Width="65" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,-2,0,0"/>
+
+                                        </Border>
+
+
+                                        <!--Триггеры-->
+                                        <ControlTemplate.Triggers>
+                                            <EventTrigger RoutedEvent="Border.MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                        From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            <EventTrigger RoutedEvent="Border.MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                        From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="Button_Border" Property="Background" Value="Gray"/>
+                                                <Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>
+                                                <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
+                                            </Trigger>
+
+
+
+                                        </ControlTemplate.Triggers>
+
+
+
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+
+                    </Button.Style>
+
+                    <TextBlock Text="Отменить" Margin="0,1,0,0" Width="65" FontSize="14" FontFamily="Bold" Foreground="#e2ddd9"/>
 
                 </Button>
 
 
                 <Button Background="#2c2b2a" Height="20" Width="100" Margin="280,0,0,10" Foreground="#e2ddd9">
-                    <Button.Template>
-                        <ControlTemplate TargetType="Button">
-                            <Border CornerRadius="5" Background="{TemplateBinding Background}">
-                                <ContentPresenter Width="100" Height="20" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            </Border>
-                        </ControlTemplate>
-                    </Button.Template>
+
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
+                                            <Border.Background>
+                                                <SolidColorBrush x:Name="color1" Color="#292a2c"/>
+                                            </Border.Background>
+
+                                            <ContentPresenter Width="60" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,-2,0,0"/>
+
+                                        </Border>
+
+
+                                        <!--Триггеры-->
+                                        <ControlTemplate.Triggers>
+                                            <EventTrigger RoutedEvent="Border.MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                        From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            <EventTrigger RoutedEvent="Border.MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                        From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="Button_Border" Property="Background" Value="Gray"/>
+                                                <Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>
+                                                <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
+                                            </Trigger>
+
+
+
+                                        </ControlTemplate.Triggers>
+
+
+
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+
+                    </Button.Style>
 
                     <TextBlock HorizontalAlignment="Center" Text="Готово" FontSize="14" FontFamily="Bold" Foreground="#e2ddd9"/>
                 </Button>
