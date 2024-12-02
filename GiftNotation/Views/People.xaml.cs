@@ -14,6 +14,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Security.Cryptography.X509Certificates;
+using виш_лист_попытка_33334;
+using System.Data;
+using System.Windows.Automation;
 
 namespace GiftNotation.Views
 {
@@ -30,6 +33,34 @@ namespace GiftNotation.Views
 
             //People = new ObservableCollection<Person>();
             //DataContext = this;
+        }
+
+        public Person SelectPeople { get; set; }
+
+        private void AddPeople(object sender, RoutedEventArgs e)
+        {
+            AddPeoples addPeople = new AddPeoples();
+            addPeople.Show();
+        }
+
+        private void ChangingPeople(object sender, RoutedEventArgs e)
+        {
+            ChangingPeople changingPeople = new ChangingPeople();
+            changingPeople.Show();
+        }
+
+        private void DeletePeople(object sender, RoutedEventArgs e)
+        {
+            if (SelectPeople != null)
+            {
+                SelectPeople.Name = string.Empty;
+                SelectPeople.Ship = null;
+
+                SelectPeople.Birthday = DateTime.MinValue;  // Используется DateTime.MinValue, чтобы очистить значение Birthday !!!!!!!не получается перевести DataTime к удалению
+                SelectPeople.Gift = string.Empty;
+
+                DataGrid.Items.Refresh();
+            }
         }
 
         //public void AddPeople(string name, string ship, DateTime birthday, string gift)
@@ -51,6 +82,8 @@ namespace GiftNotation.Views
         //    }
         //}
 
-        
+
+
+
     }
 }

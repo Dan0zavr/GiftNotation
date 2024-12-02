@@ -1,8 +1,6 @@
 ﻿using GiftNotation.Models;
-using GiftNotation.Services;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,25 +9,35 @@ namespace GiftNotation.ViewModels
 {
     public class ContactViewModel : ViewModelBase
     {
-        private ObservableCollection<ContactDisplayModel> _contacts;
-        private ContactService _contactService;
+        private string _name;
+        private DateTime _bday;
 
-        public ObservableCollection<ContactDisplayModel> Contact
+        
+
+        public string ContactName
         {
-            get { return _contacts; }
-            set { SetProperty(ref _contacts, value); }
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                OnPropertyChanged(nameof(ContactName));
+            }
         }
 
-        public ContactViewModel(ContactService contactService) {
-            _contactService = contactService;
-
-            LoadContacts();
-        }
-
-        private async void LoadContacts()
+        public DateTime Bday
         {
-            var contacts = await _contactService.GetDisplayContactsAsync();
-            Contact = new ObservableCollection<ContactDisplayModel>(contacts);
+            get
+            {
+                return _bday;
+            }
+            set
+            {
+                _bday = value;
+                OnPropertyChanged(nameof(Bday));
+            }
         }
 
         

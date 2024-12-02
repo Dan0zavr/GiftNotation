@@ -35,35 +35,37 @@ namespace GiftNotation
                 {
                     c.AddJsonFile("appsettings.json");
                 })
-                .ConfigureServices((context, services) => {
+                .ConfigureServices((context, services) =>
+                {
+                    string connectionString = context.Configuration.GetConnectionString("default");
+
+                    // Регистрация DbContext
+                    services.AddDbContext<GiftNotationDbContext>(options =>
+                        options.UseSqlite(connectionString));
 
                     // Регистрация ViewModels
-                    services.AddSingleton<MainViewModel>();
-                    services.AddSingleton<INavigator, Navigator>();
                     services.AddScoped<ContactViewModel>();
                     services.AddScoped<EventViewModel>();
                     services.AddScoped<GiftViewModel>();
                     services.AddScoped<SettingsViewModel>();
-                    services.AddScoped <ProfileViewModel>();
+                    services.AddScoped<ProfileViewModel>();
+                    services.AddScoped<MainViewModel>(); // MainViewModel должен использовать только Singleton зависимости
 
-                    // Регистрация DbContext и других сервисов
-                    string connectionString = context.Configuration.GetConnectionString("default");
-                    services.AddDbContext<GiftNotationDbContext>(o => o.UseSqlite(connectionString));
-                    services.AddSingleton(new GiftNotationDbContextFactory(connectionString));
+                    // Регистрация Navigator
+                    services.AddScoped<INavigator, Navigator>();
 
-                    // Регистрация сервисов как Scoped
-                    
-                    services.AddScoped<ContactService>();
-                    services.AddScoped<DisplayGiftService>();
-                    services.AddSingleton<UpdateCurrentVMCommand>();
+                    // Регистрация сервисов
+                    services.AddScoped<GiftService>();
 
-                    // Регистрация фабрик
-                    services.AddSingleton<IGiftNotationViewModelAbstractFactory, GiftNotationViewModelAbstractFactory>();
-                    services.AddSingleton<IGiftNotationViewModelFactory<CalendarViewModel>, HomeViewModelFactory>();
-                    
+                    // Регистрация фабрик как Scoped
+                    services.AddScoped<IGiftNotationViewModelAbstractFactory, GiftNotationViewModelAbstractFactory>();
+                    services.AddScoped<IGiftNotationViewModelFactory<CalendarViewModel>, HomeViewModelFactory>();
 
                     // Регистрация MainWindow
                     services.AddSingleton<MainWindow>();
+
+                    // Регистрация команды
+                    services.AddScoped<UpdateCurrentVMCommand>();
                 });
         }
 
@@ -71,16 +73,17 @@ namespace GiftNotation
         {
             _host.Start();
 
-            GiftNotationDbContextFactory contextFactory = _host.Services.GetRequiredService<GiftNotationDbContextFactory>();
-
-            using(GiftNotationDbContext context = contextFactory.CreateDbContext())
+            // Применение миграций
+            using (var scope = _host.Services.CreateScope())
             {
+                var context = scope.ServiceProvider.GetRequiredService<GiftNotationDbContext>();
                 context.Database.Migrate();
             }
 
-            var window = _host.Services.GetRequiredService<MainWindow>();
-            window.DataContext = _host.Services.GetRequiredService<MainViewModel>();
-            window.Show();
+            // Запуск главного окна
+            var mainWindow = _host.Services.GetRequiredService<MainWindow>();
+            mainWindow.DataContext = _host.Services.GetRequiredService<MainViewModel>();
+            mainWindow.Show();
 
             base.OnStartup(e);
         }
@@ -93,5 +96,7 @@ namespace GiftNotation
             base.OnExit(e);
         }
     }
+
+
 
 }

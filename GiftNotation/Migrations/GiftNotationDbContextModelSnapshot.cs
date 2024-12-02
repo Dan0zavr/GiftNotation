@@ -27,10 +27,9 @@ namespace GiftNotation.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ContactName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("RelpTypeId")
+                    b.Property<int?>("RelpTypeId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ContactId");
@@ -46,11 +45,10 @@ namespace GiftNotation.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("EventDate")
+                    b.Property<DateTime?>("EventDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("EventName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("EventTypeId")
@@ -130,25 +128,21 @@ namespace GiftNotation.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("GiftName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("GiftPic")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<double>("Price")
+                    b.Property<double?>("Price")
                         .HasColumnType("REAL");
 
-                    b.Property<int>("StatusId")
+                    b.Property<int?>("StatusId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Url")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("GiftId");
@@ -192,9 +186,7 @@ namespace GiftNotation.Migrations
                 {
                     b.HasOne("GiftNotation.Models.RelpType", "RelpType")
                         .WithMany("Contacts")
-                        .HasForeignKey("RelpTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RelpTypeId");
 
                     b.Navigation("RelpType");
                 });
@@ -269,9 +261,7 @@ namespace GiftNotation.Migrations
                 {
                     b.HasOne("GiftNotation.Models.Status", "Status")
                         .WithMany("Gifts")
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StatusId");
 
                     b.Navigation("Status");
                 });

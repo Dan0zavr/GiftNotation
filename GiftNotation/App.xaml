@@ -41,6 +41,41 @@
                 <views:SettingsView/>
             </DataTemplate>-->
 
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Global User Interface"/>
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Grid>
+                                <Rectangle x:Name="LeftIdentif" Width="2" Fill="Transparent" HorizontalAlignment="Left" />
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="LeftIdentif" Property="Fill" Value="#4b4744" />
+                                    <Setter Property="Background" Value="#4b4744" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
+
+            <Style TargetType="ComboBox">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="Black"/>
+            </Style>
+
         </ResourceDictionary>
         
     </Application.Resources>

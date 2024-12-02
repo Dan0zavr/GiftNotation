@@ -11,16 +11,16 @@ namespace GiftNotation.ViewModels
 {
     public class GiftViewModel : ViewModelBase
     {
-        private ObservableCollection<GiftDisplayModel> _gifts;
-        private DisplayGiftService _giftService;
+        private ObservableCollection<Gifts> _gifts;
+        private GiftService _giftService;
 
-        public ObservableCollection<GiftDisplayModel> Gifts
+        public ObservableCollection<Gifts> Gifts
         {
             get { return _gifts; }
             set { SetProperty(ref _gifts, value); }
         }
 
-        public GiftViewModel(DisplayGiftService giftService)
+        public GiftViewModel(GiftService giftService)
         {
             _giftService = giftService;
             // Загрузка данных из базы данных или другого источника
@@ -30,8 +30,8 @@ namespace GiftNotation.ViewModels
         private async void LoadGifts()
         {
             // Здесь вы можете подключиться к базе данных через сервис или репозиторий
-            var gifts = await _giftService.GetGiftsAsync();
-            Gifts = new ObservableCollection<GiftDisplayModel>(gifts);
+            var gifts = await _giftService.GetGiftsAsync(); // Это пример, ваш метод получения данных
+            Gifts = new ObservableCollection<Gifts>(gifts);
         }
 
     }

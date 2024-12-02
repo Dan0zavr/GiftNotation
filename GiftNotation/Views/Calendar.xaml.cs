@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using виш_лист_попытка_33334;
 
 namespace GiftNotation.Views
 {
@@ -23,6 +24,18 @@ namespace GiftNotation.Views
         public Calendar()
         {
             InitializeComponent();
+        }
+
+        private void DateEnterNewEvent(object sender, SelectionChangedEventArgs e)
+        {
+            if (eventCalendar.SelectedDate.HasValue)
+            {
+                DateTime selectedDate = eventCalendar.SelectedDate.Value;
+
+                EventDetailsWindow newWindow = new EventDetailsWindow(selectedDate);
+                newWindow.Show();
+
+            }
         }
     }
 }

@@ -7,8 +7,8 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
 
-    <Viewbox HorizontalAlignment="Stretch" Stretch="Uniform" StretchDirection="UpOnly"  Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
-        <Calendar Name="eventCalendar"/>
+    <Viewbox Stretch="Uniform" StretchDirection="UpOnly" Margin="0,0,0,0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
+        <Calendar Name="eventCalendar" SelectedDatesChanged="DateEnterNewEvent"/>
     </Viewbox>
 
 </UserControl>

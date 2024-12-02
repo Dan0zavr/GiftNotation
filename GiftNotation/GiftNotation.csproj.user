@@ -7,18 +7,42 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="AddPeoples.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Controls\NavigationBar.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AddGifts.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ChangingGifts.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ChangingPeople.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="AddPeoples.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Controls\NavigationBar.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Styles\General.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\AddGifts.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Calendar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ChangingGifts.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ChangingPeople.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MainWindow.xaml">

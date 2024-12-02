@@ -9,7 +9,26 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Commands\GiftCommands\**" />
+    <Compile Remove="Views\Model\**" />
+    <Compile Remove="Views\Style\**" />
+    <EmbeddedResource Remove="Commands\GiftCommands\**" />
+    <EmbeddedResource Remove="Views\Model\**" />
+    <EmbeddedResource Remove="Views\Style\**" />
+    <None Remove="Commands\GiftCommands\**" />
+    <None Remove="Views\Model\**" />
+    <None Remove="Views\Style\**" />
+    <Page Remove="Commands\GiftCommands\**" />
+    <Page Remove="Views\Model\**" />
+    <Page Remove="Views\Style\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Controls\homeback.png" />
+    <None Remove="Views\Fonts\IBMPlexMono-Thin.ttf" />
+    <None Remove="Views\Fonts\Pacifico-Regular.ttf" />
+    <None Remove="Views\Fonts\Rubik-Medium.ttf" />
+    <None Remove="Views\Fonts\Rubik-Regular.ttf" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,8 +46,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\GiftCommands\" />
-    <Folder Include="Migrations\" />
+    <Folder Include="Commands\ContactCommands\" />
     <Folder Include="Pictures\" />
   </ItemGroup>
 
@@ -36,6 +54,10 @@
     <Resource Include="Controls\homeback.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Views\Fonts\IBMPlexMono-Thin.ttf" />
+    <Resource Include="Views\Fonts\Pacifico-Regular.ttf" />
+    <Resource Include="Views\Fonts\Rubik-Medium.ttf" />
+    <Resource Include="Views\Fonts\Rubik-Regular.ttf" />
   </ItemGroup>
 
 </Project>
