@@ -15,7 +15,7 @@ public class Gifts
     public double? Price { get; set; }
     public string? GiftPic { get; set; }
     public int? StatusId { get; set; }
-    public Status Status { get; set; }
+    public Status? Status { get; set; }
 
     public ICollection<GiftContact> GiftContacts { get; set; }
     public ICollection<GiftEvent> GiftEvents { get; set; }

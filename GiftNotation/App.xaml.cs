@@ -12,6 +12,7 @@ using GiftNotation.State.Navigators;
 using Microsoft.Extensions.Hosting;
 using GiftNotation.ViewModels.Factories;
 using Microsoft.Extensions.Configuration;
+using GiftNotation.Commands.GiftCommands;
 
 
 namespace GiftNotation
@@ -45,6 +46,7 @@ namespace GiftNotation
 
                     // Регистрация ViewModels
                     services.AddScoped<ContactViewModel>();
+                    services.AddScoped<AddGiftViewModel>();
                     services.AddScoped<EventViewModel>();
                     services.AddScoped<GiftViewModel>();
                     services.AddScoped<SettingsViewModel>();
@@ -56,6 +58,11 @@ namespace GiftNotation
 
                     // Регистрация сервисов
                     services.AddScoped<GiftService>();
+                    services.AddScoped<ContactService>();
+                    services.AddScoped<StatusService>();
+                    services.AddScoped<EventService>();
+
+                    services.AddScoped<AddGiftCommand>();
 
                     // Регистрация фабрик как Scoped
                     services.AddScoped<IGiftNotationViewModelAbstractFactory, GiftNotationViewModelAbstractFactory>();

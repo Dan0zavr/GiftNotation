@@ -74,6 +74,10 @@ public partial class GiftNotationDbContext : DbContext
             .HasForeignKey(ge => ge.EventId)
             .OnDelete(DeleteBehavior.Cascade);
 
+        modelBuilder.Entity<Status>().HasIndex(x => x.StatusName).IsUnique();
+        modelBuilder.Entity<EventType>().HasIndex(x => x.EventTypeName).IsUnique();
+        modelBuilder.Entity<RelpType>().HasIndex(x => x.RelpTypeName).IsUnique();
+
         base.OnModelCreating(modelBuilder);
     }
 }

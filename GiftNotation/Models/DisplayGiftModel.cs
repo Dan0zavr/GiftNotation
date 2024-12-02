@@ -8,15 +8,15 @@ namespace GiftNotation.Models
 {
     public class DisplayGiftModel
     {
-        public int GiftId { get; set; } 
-        public string? GiftName { get; set; }    
-        public string? Description { get; set; }
-        public double? Price { get; set; }
-        public string? GiftPic {  get; set; }
-        public string? Url { get; set; }
-        public string? ContactName { get; set; }
-        public string? EventName { get; set; }
-        public string? StatusName { get; set; }
+        public int GiftId { get; set; }
+        public string? GiftName { get; set; } = string.Empty; 
+        public string? Description { get; set; } = string.Empty;
+        public double? Price { get; set; }  = 0.0;
+        public string? GiftPic { get; set; } = string.Empty;
+        public string? Url { get; set; } = string.Empty;
+        public string? ContactName { get; set; } = string.Empty;
+        public string? EventName { get; set; } = string.Empty;
+        public string? StatusName { get; set; } = string.Empty;
 
     }
 }

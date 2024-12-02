@@ -4,6 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GiftNotation.Views"
+        xmlns:commands="clr-namespace:GiftNotation.Commands.GiftCommands"
+        xmlns:viewmodel="clr-namespace:GiftNotation.ViewModels"
         mc:Ignorable="d"
         Title="Подарок" Height="350" Width="500" 
         WindowStyle="None"
@@ -33,7 +35,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Подарок:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding GiftName}"/>
                     </Grid>
                 </Border>
 
@@ -45,7 +47,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Картинка:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox Background="#cacac8" FontSize="14" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBox Background="#cacac8" FontSize="14" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding GiftPic}"/>
                     </Grid>
                 </Border>
 
@@ -56,7 +58,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Стоимость:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding Price}"/>
                     </Grid>
                 </Border>
 
@@ -67,7 +69,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Ссылка на маркетплейс:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding Url}"/>
                     </Grid>
                 </Border>
 
@@ -78,7 +80,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Люди:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding ContactName}"/>
                     </Grid>
                 </Border>
 
@@ -89,8 +91,8 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Событие:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <ComboBox Width="360" Grid.Column="1" Background="#cacac8">
-                            <ComboBoxItem Content="День Рождения"/>
+                        <ComboBox Width="360" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Contacts}" DisplayMemberPath="ContactName" SelectedItem="{Binding SelectedContact}" >
+                            <!--<ComboBoxItem Content="День Рождения"/>
                             <ComboBoxItem Content="23 февраля"/>
                             <ComboBoxItem Content="Годовщина"/>
                             <ComboBoxItem Content="Новый год"/>
@@ -99,7 +101,7 @@
                             <ComboBoxItem Content="Рождество"/>
                             <ComboBoxItem Content="Свадьба"/>
                             <ComboBoxItem Content="Просто подарочек"/>
-                            <ComboBoxItem Content="Важное событие"/>
+                            <ComboBoxItem Content="Важное событие"/>-->
                         </ComboBox>
                     </Grid>
                 </Border>
@@ -111,11 +113,14 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Статус" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <ComboBox Width="380" Grid.Column="1" Background="#cacac8">
-                            <ComboBoxItem Content="В процессе покупки"/>
+                        <ComboBox Width="380" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Statuses}" 
+    DisplayMemberPath="StatusName" 
+    SelectedItem="{Binding SelectedStatus}" 
+    IsEditable="True">
+                            <!--<ComboBoxItem Content="В процессе покупки"/>
                             <ComboBoxItem Content="Куплен"/>
                             <ComboBoxItem Content="Упакован"/>
-                            <ComboBoxItem Content="Подарен"/>
+                            <ComboBoxItem Content="Подарен"/>-->
                         </ComboBox>
                     </Grid>
                 </Border>
@@ -186,7 +191,7 @@
                 </Button>
 
 
-                <Button Background="#2c2b2a" Height="20" Width="100" Margin="275,0,0,10" Foreground="#e2ddd9">
+                <Button Background="#2c2b2a" Height="20" Width="100" Margin="275,0,0,10" Foreground="#e2ddd9" Command="{Binding AddGiftCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" >
 
 
                     <Button.Style>

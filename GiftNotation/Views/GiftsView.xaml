@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GiftNotation.Views"
+      xmlns:commands="clr-namespace:GiftNotation.Commands"
       mc:Ignorable="d" 
       Height="400" Width="700">
 
@@ -37,7 +38,7 @@
 
 
             <StackPanel Orientation="Horizontal"  Width="250" Margin="-375,-330,0,0" Height="30">
-                <Button Background="#2c2b2a" Width="100" Height="20" Margin="5,0,5,0" Click="Button_Add">
+                <Button Background="#2c2b2a" Width="100" Height="20" Margin="5,0,5,0" Command="{Binding OpenAddGiftCommand}">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Template">
@@ -243,11 +244,6 @@
                                 <Image Source="{Binding GiftPic}" Width="25" Height="25"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
-                        <DataGridTemplateColumn.CellEditingTemplate>
-                            <DataTemplate>
-                                <Image Width="25" Height="25" Source="{Binding GiftPic}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellEditingTemplate>
                     </DataGridTemplateColumn>
 
 

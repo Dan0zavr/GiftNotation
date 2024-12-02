@@ -88,6 +88,9 @@ namespace GiftNotation.Migrations
 
                     b.HasKey("EventTypeId");
 
+                    b.HasIndex("EventTypeName")
+                        .IsUnique();
+
                     b.ToTable("EventTypes");
                 });
 
@@ -164,6 +167,9 @@ namespace GiftNotation.Migrations
 
                     b.HasKey("RelpTypeId");
 
+                    b.HasIndex("RelpTypeName")
+                        .IsUnique();
+
                     b.ToTable("RelpTypes");
                 });
 
@@ -178,6 +184,9 @@ namespace GiftNotation.Migrations
                         .HasColumnType("TEXT");
 
                     b.HasKey("StatusId");
+
+                    b.HasIndex("StatusName")
+                        .IsUnique();
 
                     b.ToTable("Statuses");
                 });
