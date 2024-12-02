@@ -385,3 +385,4 @@ C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\A
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\AddGifts.baml
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\ChangingGifts.baml
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\ChangingPeople.baml
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\GiftNotation.sourcelink.json

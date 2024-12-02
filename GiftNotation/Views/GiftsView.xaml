@@ -240,12 +240,12 @@
                     <DataGridTemplateColumn Header="Картинка" Width="80">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding Picture_of_gift}" Width="25" Height="25"/>
+                                <Image Source="{Binding GiftPic}" Width="25" Height="25"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                         <DataGridTemplateColumn.CellEditingTemplate>
                             <DataTemplate>
-                                <Image Width="25" Height="25" Source="{Binding Picture_of_gift}"/>
+                                <Image Width="25" Height="25" Source="{Binding GiftPic}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellEditingTemplate>
                     </DataGridTemplateColumn>
@@ -256,11 +256,11 @@
 
                     <DataGridTextColumn Header="Ссылка на маркетплейс" Binding="{Binding Url, UpdateSourceTrigger=PropertyChanged}" Width="170"/>
 
-                    <DataGridTextColumn Header="Люди" Binding="{Binding People_, UpdateSourceTrigger=PropertyChanged}" Width="65"/>
+                    <DataGridTextColumn Header="Люди" Binding="{Binding ContactName, UpdateSourceTrigger=PropertyChanged}" Width="65"/>
 
-                    <DataGridTextColumn Header="Событие" Binding="{Binding Event_, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+                    <DataGridTextColumn Header="Событие" Binding="{Binding EventName, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
 
-                    <DataGridTextColumn Header="Статус" Width="*"/>
+                    <DataGridTextColumn Header="Статус" Width="*" Binding="{Binding StatusName, UpdateSourceTrigger=PropertyChanged}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
