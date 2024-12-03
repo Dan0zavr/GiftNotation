@@ -18,10 +18,11 @@ namespace GiftNotation.Commands.GiftCommands
         private readonly StatusService _statusService;
         private readonly ContactService _contactService;
 
-        public OpenAddGiftCommand(GiftViewModel viewModel, GiftService giftService)
+        public OpenAddGiftCommand(GiftViewModel viewModel, GiftService giftService, StatusService statusService)
         {
             _viewModel = viewModel;
             _giftService = giftService;
+            _statusService = statusService;
         }
 
         public event EventHandler? CanExecuteChanged;
@@ -30,7 +31,7 @@ namespace GiftNotation.Commands.GiftCommands
 
         public void Execute(object? parameter)
         {
-            var addGiftViewModel = new AddGiftViewModel(_giftService, _viewModel);
+            var addGiftViewModel = new AddGiftViewModel(_giftService, _viewModel, _statusService);
             var addGiftWindow = new AddGifts
             {
                 DataContext = addGiftViewModel

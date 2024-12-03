@@ -20,7 +20,6 @@ namespace GiftNotation.ViewModels
         private string _giftPic;
         private string _contactName;
         private string _eventName;
-        private string _statusName;
 
         private Status? _selectedStatus;
         private Contact? _selectedContact;
@@ -77,11 +76,6 @@ namespace GiftNotation.ViewModels
             set => SetProperty(ref _eventName, value);
         }
 
-        public string StatusName
-        {
-            get => _statusName; 
-            set => SetProperty(ref _statusName, value);
-        }
 
         public Status? SelectedStatus
         {
@@ -107,35 +101,21 @@ namespace GiftNotation.ViewModels
 
         public ICommand AddGiftCommand { get; }
 
-        public AddGiftViewModel(
-            GiftService giftService,
-        GiftViewModel giftViewModel)
+        public AddGiftViewModel(GiftService giftService,GiftViewModel giftViewModel, StatusService statusService)
         {
             
             AddGiftCommand = new AddGiftCommand(giftService, this, giftViewModel);
+            _statusService = statusService;
+            LoadStatuses();
 
         }
 
-        private async void LoadDataAsync()
+       private async void LoadStatuses()
         {
-            try
+            var statuses = await _statusService.GetAllStatuses();
+            foreach (var status in statuses)
             {
-                var statuses = await _statusService.GetAllStatuses();
-                Statuses = new ObservableCollection<Status>(statuses);
-
-                var contacts = await _contactService.GetAllContacts();
-                Contacts = new ObservableCollection<Contact>(contacts);
-
-                var events = await _eventService.GetAllEvents();
-                Events = new ObservableCollection<Event>(events);
-
-                OnPropertyChanged(nameof(Statuses));
-                OnPropertyChanged(nameof(Contacts));
-                OnPropertyChanged(nameof(Events));
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка загрузки данных: {ex.Message}");
+                Statuses.Add(status);
             }
         }
     }

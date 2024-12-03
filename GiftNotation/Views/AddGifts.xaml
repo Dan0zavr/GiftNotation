@@ -91,17 +91,8 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Событие:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <ComboBox Width="360" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Contacts}" DisplayMemberPath="ContactName" SelectedItem="{Binding SelectedContact}" >
-                            <!--<ComboBoxItem Content="День Рождения"/>
-                            <ComboBoxItem Content="23 февраля"/>
-                            <ComboBoxItem Content="Годовщина"/>
-                            <ComboBoxItem Content="Новый год"/>
-                            <ComboBoxItem Content="8 марта"/>
-                            <ComboBoxItem Content="9 мая"/>
-                            <ComboBoxItem Content="Рождество"/>
-                            <ComboBoxItem Content="Свадьба"/>
-                            <ComboBoxItem Content="Просто подарочек"/>
-                            <ComboBoxItem Content="Важное событие"/>-->
+                        <ComboBox Width="360" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Events}" DisplayMemberPath="ContactName" SelectedItem="{Binding SelectedEvent}" >
+                            
                         </ComboBox>
                     </Grid>
                 </Border>
@@ -114,13 +105,9 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Статус" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
                         <ComboBox Width="380" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Statuses}" 
-    DisplayMemberPath="StatusName" 
-    SelectedItem="{Binding SelectedStatus}" 
-    IsEditable="True">
-                            <!--<ComboBoxItem Content="В процессе покупки"/>
-                            <ComboBoxItem Content="Куплен"/>
-                            <ComboBoxItem Content="Упакован"/>
-                            <ComboBoxItem Content="Подарен"/>-->
+                            DisplayMemberPath="StatusName" 
+                            SelectedItem="{Binding SelectedStatus}" 
+                            IsEditable="False">
                         </ComboBox>
                     </Grid>
                 </Border>

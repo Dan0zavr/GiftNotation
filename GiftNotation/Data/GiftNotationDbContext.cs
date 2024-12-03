@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata;
+using System.Windows.Controls;
 using GiftNotation.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -77,6 +79,26 @@ public partial class GiftNotationDbContext : DbContext
         modelBuilder.Entity<Status>().HasIndex(x => x.StatusName).IsUnique();
         modelBuilder.Entity<EventType>().HasIndex(x => x.EventTypeName).IsUnique();
         modelBuilder.Entity<RelpType>().HasIndex(x => x.RelpTypeName).IsUnique();
+
+        modelBuilder.Entity<Status>().HasData(
+            new Status { StatusId = 1, StatusName = "В процессе покупки" },
+            new Status { StatusId = 2, StatusName = "Куплен" },
+            new Status { StatusId = 3, StatusName = "Упакован" },
+            new Status { StatusId = 4, StatusName = "Подарен" }
+        );
+
+        modelBuilder.Entity<EventType>().HasData(
+            new EventType { EventTypeId = 1, EventTypeName = "День Рождения" },
+            new EventType { EventTypeId = 2, EventTypeName = "23 февраля" },
+            new EventType { EventTypeId = 3, EventTypeName = "Годовщина" },
+            new EventType { EventTypeId = 4, EventTypeName = "Новый год" },
+            new EventType { EventTypeId = 5, EventTypeName = "8 марта" },
+            new EventType { EventTypeId = 6, EventTypeName = "9 мая" },
+            new EventType { EventTypeId = 7, EventTypeName = "Рождество" },
+            new EventType { EventTypeId = 8, EventTypeName = "Свадьба" },
+            new EventType { EventTypeId = 9, EventTypeName = "Просто подарочек" },
+            new EventType { EventTypeId = 10, EventTypeName = "Важное событие" }
+            );
 
         base.OnModelCreating(modelBuilder);
     }
