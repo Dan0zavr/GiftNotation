@@ -153,7 +153,7 @@
                 </Button>
             </StackPanel>
 
-            <Button Width="90" Height="20" Background="#2c2b2a" Margin="0,-330,-540,0" Click="Button_Delete">
+            <Button Width="90" Height="20" Background="#2c2b2a" Margin="0,-330,-540,0" Command="{Binding DeleteGiftCommand}">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Template">
@@ -212,7 +212,7 @@
 
             <TextBlock Text="ПОДАРКИ" FontSize="25" FontWeight="Heavy" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,13,0,0" FontFamily="Britannic Bold"/>
 
-            <DataGrid x:Name="ddataGrid" BorderThickness="3"  BorderBrush="black" Background="#FFDFDBD7" CanUserAddRows="True" ItemsSource="{Binding Gifts}" VerticalAlignment="Bottom" Height="325" Width="625" AutoGenerateColumns="False" Margin="5,0,0,20">
+            <DataGrid x:Name="ddataGrid" BorderThickness="3"  BorderBrush="black" Background="#FFDFDBD7" CanUserAddRows="False" SelectedItem="{Binding SelectedGift, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Gifts}" VerticalAlignment="Bottom" Height="325" Width="625" AutoGenerateColumns="False" Margin="5,0,0,20">
                 <DataGrid.Resources>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="HorizontalContentAlignment" Value="Center"/>

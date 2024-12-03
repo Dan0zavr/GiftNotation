@@ -116,6 +116,35 @@ namespace GiftNotation.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task DeleteGiftAsync(int giftId)
+        {
+            var gift = await _context.Gifts
+                .Include(g => g.GiftContacts)
+                .Include(g => g.GiftEvents)
+                .FirstOrDefaultAsync(g => g.GiftId == giftId);
+
+            if (gift != null)
+            {
+                // Удаляем связанные контакты и события
+                _context.GiftContacts.RemoveRange(gift.GiftContacts);
+                _context.GiftEvents.RemoveRange(gift.GiftEvents);
+
+                // Удаляем сам подарок
+                _context.Gifts.Remove(gift);
+                await _context.SaveChangesAsync();
+            }
+        }
+
+        public async Task DeleteGiftContact(int giftId)
+        {
+            var gift = await _context.GiftContacts.FindAsync(giftId);
+            if (gift != null)
+            {
+                _context.GiftContacts.Remove(gift);
+                await _context.SaveChangesAsync();
+            }
+        }
+
         private async Task<int?> GetStatusIdByNameAsync(string? statusName)
         {
             return await _context.Statuses
