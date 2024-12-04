@@ -145,6 +145,11 @@ namespace GiftNotation.Services
             }
         }
 
+        public async Task<IEnumerable<Status>> GetAllStatuses()
+        {
+            return await _context.Statuses.ToListAsync();
+        }
+
         private async Task<int?> GetStatusIdByNameAsync(string? statusName)
         {
             return await _context.Statuses

@@ -29,6 +29,10 @@
                 <views:AddGifts/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:ChangeGiftViewModel}">
+                <views:ChangingGifts/>
+            </DataTemplate>
+
             <!--<DataTemplate DataType="{x:Type viewmodels:EventViewModel}">
                 <views:Page3/>
             </DataTemplate>

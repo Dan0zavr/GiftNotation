@@ -28,7 +28,6 @@ namespace GiftNotation.ViewModels
         private readonly GiftService _giftService;
         private readonly ContactService _contactService;
         private readonly EventService _eventService;
-        private readonly StatusService _statusService;
 
         public ObservableCollection<Status> Statuses { get; private set; } = new ObservableCollection<Status>();
         public ObservableCollection<Contact> Contacts { get; private set; } = new ObservableCollection<Contact>();
@@ -101,23 +100,22 @@ namespace GiftNotation.ViewModels
 
         public ICommand AddGiftCommand { get; }
 
-        public AddGiftViewModel(GiftService giftService,GiftViewModel giftViewModel, StatusService statusService)
+        public AddGiftViewModel(GiftService giftService,GiftViewModel giftViewModel)
         {
-            
+            _giftService = giftService;
             AddGiftCommand = new AddGiftCommand(giftService, this, giftViewModel);
-            _statusService = statusService;
             LoadStatuses();
 
         }
 
        private async void LoadStatuses()
-        {
-            var statuses = await _statusService.GetAllStatuses();
+       {
+            var statuses = await _giftService.GetAllStatuses();
             foreach (var status in statuses)
             {
                 Statuses.Add(status);
             }
-        }
+       }
     }
 
 }

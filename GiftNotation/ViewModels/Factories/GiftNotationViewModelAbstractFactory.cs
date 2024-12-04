@@ -19,11 +19,10 @@ namespace GiftNotation.ViewModels.Factories
         private readonly SettingsViewModel _settigsViewModel;
         private readonly ProfileViewModel _profileViewModel;
         private readonly GiftService _giftService;
-        private readonly StatusService _statusService;
 
         public GiftNotationViewModelAbstractFactory(IGiftNotationViewModelFactory<CalendarViewModel> calendarViewModelFactory,
             ContactViewModel contactViewModel, GiftViewModel giftViewModel, EventViewModel eventViewModel, SettingsViewModel settigsViewModel, ProfileViewModel profileViewModel,
-            GiftService giftService, StatusService statusService)
+            GiftService giftService)
         {
             _calendarViewModelFactory = calendarViewModelFactory;
             _contactViewModel = contactViewModel;
@@ -32,7 +31,6 @@ namespace GiftNotation.ViewModels.Factories
             _settigsViewModel = settigsViewModel;
             _profileViewModel = profileViewModel;
             _giftService = giftService;
-            _statusService = statusService;
         }
 
         public ViewModelBase CreateViewModel(ViewType viewType)
@@ -47,7 +45,7 @@ namespace GiftNotation.ViewModels.Factories
                 case ViewType.Events:
                     return new EventViewModel();
                 case ViewType.Gifts:
-                    return new GiftViewModel(_giftService, _statusService);
+                    return new GiftViewModel(_giftService);
                 case ViewType.Settings:
                     return new SettingsViewModel();
                 case ViewType.Profile:

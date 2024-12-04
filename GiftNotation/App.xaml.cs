@@ -47,6 +47,7 @@ namespace GiftNotation
                     // Регистрация ViewModels
                     services.AddScoped<ContactViewModel>();
                     services.AddScoped<AddGiftViewModel>();
+                    services.AddScoped<ChangeGiftViewModel>();
                     services.AddScoped<EventViewModel>();
                     services.AddScoped<GiftViewModel>();
                     services.AddScoped<SettingsViewModel>();
@@ -59,7 +60,6 @@ namespace GiftNotation
                     // Регистрация сервисов
                     services.AddScoped<GiftService>();
                     services.AddScoped<ContactService>();
-                    services.AddScoped<StatusService>();
                     services.AddScoped<EventService>();
 
                     services.AddScoped<AddGiftCommand>();
