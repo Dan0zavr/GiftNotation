@@ -22,7 +22,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Подарок:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding GiftName}"/>
                     </Grid>
                 </Border>
 
@@ -34,7 +34,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Картинка:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox Background="#cacac8" FontSize="14" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBox Background="#cacac8" FontSize="14" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding GiftPic}"/>
                     </Grid>
                 </Border>
 
@@ -45,7 +45,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Стоимость:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding Price}"/>
                     </Grid>
                 </Border>
 
@@ -56,7 +56,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Ссылка на маркетплейс:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding Url}"/>
                     </Grid>
                 </Border>
 
@@ -67,7 +67,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Люди:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding SelectedContact}"/>
                     </Grid>
                 </Border>
 
@@ -77,9 +77,9 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Событие:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
+                        <TextBlock Text="Событие:" FontSize="14" VerticalAlignment="Center" Grid.Column="0"/>
                         <ComboBox Width="360" Grid.Column="1" Background="#cacac8">
-                            <ComboBoxItem Content="День Рождения"/>
+                            <!--<ComboBoxItem Content="День Рождения"/>
                             <ComboBoxItem Content="23 февраля"/>
                             <ComboBoxItem Content="Годовщина"/>
                             <ComboBoxItem Content="Новый год"/>
@@ -88,7 +88,7 @@
                             <ComboBoxItem Content="Рождество"/>
                             <ComboBoxItem Content="Свадьба"/>
                             <ComboBoxItem Content="Просто подарочек"/>
-                            <ComboBoxItem Content="Важное событие"/>
+                            <ComboBoxItem Content="Важное событие"/>-->
                         </ComboBox>
                     </Grid>
                 </Border>
@@ -100,11 +100,10 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Статус" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <ComboBox Width="380" Grid.Column="1" Background="#cacac8">
-                            <ComboBoxItem Content="В процессе покупки"/>
-                            <ComboBoxItem Content="Куплен"/>
-                            <ComboBoxItem Content="Упакован"/>
-                            <ComboBoxItem Content="Подарен"/>
+                        <ComboBox Width="380" Grid.Column="1" Background="#cacac8" Text="{Binding StatusName}" ItemsSource="{Binding Statuses}" 
+                            DisplayMemberPath="StatusName" 
+                            SelectedItem="{Binding SelectedStatus}" 
+                            IsEditable="False">
                         </ComboBox>
                     </Grid>
                 </Border>

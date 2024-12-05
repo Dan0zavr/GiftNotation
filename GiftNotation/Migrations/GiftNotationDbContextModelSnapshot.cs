@@ -191,7 +191,7 @@ namespace GiftNotation.Migrations
                     b.Property<string>("GiftPic")
                         .HasColumnType("TEXT");
 
-                    b.Property<double?>("Price")
+                    b.Property<double>("Price")
                         .HasColumnType("REAL");
 
                     b.Property<int?>("StatusId")

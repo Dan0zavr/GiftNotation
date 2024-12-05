@@ -11,7 +11,7 @@ namespace GiftNotation.Models
         public int GiftId { get; set; }
         public string? GiftName { get; set; } = string.Empty; 
         public string? Description { get; set; } = string.Empty;
-        public double? Price { get; set; }  = 0.0;
+        public double Price { get; set; }  = 0.0;
         public string? GiftPic { get; set; } = string.Empty;
         public string? Url { get; set; } = string.Empty;
         public string? ContactName { get; set; } = string.Empty;

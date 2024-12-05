@@ -12,7 +12,7 @@ public class Gifts
     public string? GiftName { get; set; }
     public string? Description { get; set; }
     public string? Url { get; set; }
-    public double? Price { get; set; }
+    public double Price { get; set; }
     public string? GiftPic { get; set; }
     public int? StatusId { get; set; }
     public Status? Status { get; set; }

@@ -2,6 +2,7 @@
 using GiftNotation.Models;
 using GiftNotation.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -145,10 +146,35 @@ namespace GiftNotation.Services
             }
         }
 
+        public async Task<IEnumerable<DisplayGiftModel>> GetDisplayGiftModel(int giftId)
+        {
+            return await _context.Gifts
+                 .Include(g => g.Status)
+                 .Include(g => g.GiftContacts)
+                     .ThenInclude(gc => gc.Contact)
+                 .Include(g => g.GiftEvents)
+                     .ThenInclude(ge => ge.Event)
+                 .Where(g => g.GiftId == giftId)
+                 .Select(g => new DisplayGiftModel
+                 {
+                     GiftId = g.GiftId,
+                     GiftName = g.GiftName ?? string.Empty,
+                     Description = g.Description ?? string.Empty,
+                     Price = g.Price,
+                     GiftPic = g.GiftPic ?? string.Empty,
+                     Url = g.Url ?? string.Empty,
+                     StatusName = g.Status.StatusName ?? string.Empty,
+                     ContactName = g.GiftContacts.FirstOrDefault().Contact.ContactName ?? string.Empty,
+                     EventName = g.GiftEvents.FirstOrDefault().Event.EventName ?? string.Empty
+                 })
+                 .ToListAsync();
+        }
+
         public async Task<IEnumerable<Status>> GetAllStatuses()
         {
             return await _context.Statuses.ToListAsync();
         }
+
 
         private async Task<int?> GetStatusIdByNameAsync(string? statusName)
         {

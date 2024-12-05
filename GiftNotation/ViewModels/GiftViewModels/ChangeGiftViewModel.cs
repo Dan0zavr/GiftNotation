@@ -26,7 +26,9 @@ namespace GiftNotation.ViewModels
         private string _giftPic;
         private string _contactName;
         private string _eventName;
+        private string _statusName;
 
+        private DisplayGiftModel _selectedGift;
         private Status? _selectedStatus;
         private Contact? _selectedContact;
         private Event? _selectedEvent;
@@ -77,6 +79,12 @@ namespace GiftNotation.ViewModels
             set => SetProperty(ref _eventName, value);
         }
 
+        public string StatusName
+        {
+            get => _statusName;
+            set => SetProperty(ref _statusName, value);
+        }
+
 
         public Status? SelectedStatus
         {
@@ -84,7 +92,6 @@ namespace GiftNotation.ViewModels
             set
             {
                 SetProperty(ref _selectedStatus, value);
-
             }
         }
 
@@ -106,6 +113,7 @@ namespace GiftNotation.ViewModels
         {
             _giftViewModel = giftViewModel;
             _giftService = giftService;
+            LoadData();
             LoadStatuses();
         }
 
@@ -120,6 +128,18 @@ namespace GiftNotation.ViewModels
 
         private async void LoadData()
         {
+            var gifts = await _giftService.GetDisplayGiftModel(_giftViewModel.SelectedGift.GiftId);
+            foreach (var gift in gifts) { 
+                _selectedGift = gift;
+            }
+            _giftName = _selectedGift.GiftName;
+            _giftDescription = _selectedGift.Description;
+            _url = _selectedGift.Url;
+            _price = _selectedGift.Price;
+            _giftPic = _selectedGift.GiftPic;
+            _contactName = _selectedGift.ContactName;
+            _eventName = _selectedGift.EventName;
+            _statusName = _selectedGift.StatusName;
 
         }
 
