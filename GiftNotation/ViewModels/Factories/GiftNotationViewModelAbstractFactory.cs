@@ -16,21 +16,19 @@ namespace GiftNotation.ViewModels.Factories
         private readonly ContactViewModel _contactViewModel;
         private readonly GiftViewModel _giftViewModel;
         private readonly EventViewModel _eventViewModel;
-        private readonly SettingsViewModel _settigsViewModel;
-        private readonly ProfileViewModel _profileViewModel;
         private readonly GiftService _giftService;
+        private readonly ContactService _contactService;
 
         public GiftNotationViewModelAbstractFactory(IGiftNotationViewModelFactory<CalendarViewModel> calendarViewModelFactory,
-            ContactViewModel contactViewModel, GiftViewModel giftViewModel, EventViewModel eventViewModel, SettingsViewModel settigsViewModel, ProfileViewModel profileViewModel,
-            GiftService giftService)
+            ContactViewModel contactViewModel, GiftViewModel giftViewModel, EventViewModel eventViewModel,
+            GiftService giftService, ContactService contactService)
         {
             _calendarViewModelFactory = calendarViewModelFactory;
             _contactViewModel = contactViewModel;
             _giftViewModel = giftViewModel;
             _eventViewModel = eventViewModel;
-            _settigsViewModel = settigsViewModel;
-            _profileViewModel = profileViewModel;
             _giftService = giftService;
+            _contactService = contactService;
         }
 
         public ViewModelBase CreateViewModel(ViewType viewType)
@@ -41,15 +39,11 @@ namespace GiftNotation.ViewModels.Factories
                     // Создание новой модели представления для Calendar
                     return _calendarViewModelFactory.CreateViewModel();
                 case ViewType.Contacts:
-                    return new ContactViewModel();
+                    return new ContactViewModel(_contactService);
                 case ViewType.Events:
                     return new EventViewModel();
                 case ViewType.Gifts:
                     return new GiftViewModel(_giftService);
-                case ViewType.Settings:
-                    return new SettingsViewModel();
-                case ViewType.Profile:
-                    return new ProfileViewModel();
                 default:
                     throw new ArgumentException("Takogo net");
             }

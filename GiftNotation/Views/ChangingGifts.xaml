@@ -100,9 +100,10 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Статус" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <ComboBox Width="380" Grid.Column="1" Background="#cacac8" Text="{Binding StatusName}" ItemsSource="{Binding Statuses}" 
+                        <ComboBox Width="380" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Statuses}" 
                             DisplayMemberPath="StatusName" 
                             SelectedItem="{Binding SelectedStatus}" 
+                            SelectedValuePath="StatusName"
                             IsEditable="False">
                         </ComboBox>
                     </Grid>

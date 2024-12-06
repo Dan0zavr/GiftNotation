@@ -170,11 +170,87 @@ namespace GiftNotation.Services
                  .ToListAsync();
         }
 
+
+
         public async Task<IEnumerable<Status>> GetAllStatuses()
         {
             return await _context.Statuses.ToListAsync();
         }
 
+        public async Task<bool> UpdateGiftAsync(DisplayGiftModel giftModel)
+        {
+            try
+            {
+                // Находим существующий подарок
+                var existingGift = await _context.Gifts
+                    .Include(g => g.Status)
+                    .Include(g => g.GiftContacts)
+                    .Include(g => g.GiftEvents)
+                    .FirstOrDefaultAsync(g => g.GiftId == giftModel.GiftId);
+
+                if (existingGift == null)
+                {
+                    Console.WriteLine("Подарок не найден.");
+                    return false;
+                }
+
+                // Убеждаемся, что статус существует, или добавляем его
+                var statusId = await EnsureStatusAsync(giftModel.StatusName);
+
+                // Обновляем свойства подарка
+                existingGift.GiftName = giftModel.GiftName ?? string.Empty;
+                existingGift.Description = giftModel.Description ?? string.Empty;
+                existingGift.Price = giftModel.Price;
+                existingGift.GiftPic = giftModel.GiftPic ?? string.Empty;
+                existingGift.Url = giftModel.Url ?? string.Empty;
+                existingGift.StatusId = statusId;
+
+                // Обновляем связанные контакты
+                if (!string.IsNullOrEmpty(giftModel.ContactName))
+                {
+                    var contact = await _context.Contacts
+                        .FirstOrDefaultAsync(c => c.ContactName == giftModel.ContactName);
+
+                    if (contact == null)
+                    {
+                        contact = new Contact { ContactName = giftModel.ContactName };
+                        _context.Contacts.Add(contact);
+                        await _context.SaveChangesAsync();
+                    }
+
+                    // Удаляем старые связи и добавляем новую
+                    existingGift.GiftContacts.Clear();
+                    existingGift.GiftContacts.Add(new GiftContact { GiftId = giftModel.GiftId, ContactId = contact.ContactId });
+                }
+
+                // Обновляем связанные события
+                if (!string.IsNullOrEmpty(giftModel.EventName))
+                {
+                    var eventEntity = await _context.Events
+                        .FirstOrDefaultAsync(e => e.EventName == giftModel.EventName);
+
+                    if (eventEntity == null)
+                    {
+                        eventEntity = new Event { EventName = giftModel.EventName };
+                        _context.Events.Add(eventEntity);
+                        await _context.SaveChangesAsync();
+                    }
+
+                    // Удаляем старые связи и добавляем новую
+                    existingGift.GiftEvents.Clear();
+                    existingGift.GiftEvents.Add(new GiftEvent { GiftId = giftModel.GiftId, EventId = eventEntity.EventId });
+                }
+
+                // Сохраняем изменения
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Ошибка в UpdateGiftAsync: {ex.Message}");
+                throw;
+            }
+        }
 
         private async Task<int?> GetStatusIdByNameAsync(string? statusName)
         {

@@ -42,7 +42,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\ContactCommands\" />
     <Folder Include="Pictures\" />
   </ItemGroup>
 

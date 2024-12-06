@@ -50,9 +50,7 @@ namespace GiftNotation
                     services.AddScoped<ChangeGiftViewModel>();
                     services.AddScoped<EventViewModel>();
                     services.AddScoped<GiftViewModel>();
-                    services.AddScoped<SettingsViewModel>();
-                    services.AddScoped<ProfileViewModel>();
-                    services.AddScoped<MainViewModel>(); // MainViewModel должен использовать только Singleton зависимости
+                    services.AddScoped<MainViewModel>();
 
                     // Регистрация Navigator
                     services.AddScoped<INavigator, Navigator>();

@@ -241,7 +241,7 @@
             <TextBlock Text="ЛЮДИ" FontSize="25" FontWeight="Heavy" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,7,0,0" FontFamily="Britannic Bold" />
 
             <DataGrid Background="#FFDFDBD7" x:Name="DataGrid" Margin="0,40,0,0" CanUserAddRows="True" 
-             ItemsSource="{Binding People}" SelectedItem="{Binding SelectPeople}" Height="300" Width="500" 
+             ItemsSource="{Binding Contacts}" SelectedItem="{Binding SelectedContact}" Height="300" Width="500" 
               AutoGenerateColumns="False" Cursor="Hand" BorderBrush="#402c1c" BorderThickness="1">
                 <DataGrid.Resources>
                     <!-- Стиль для заголовков столбцов -->
@@ -281,7 +281,7 @@
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Имя" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding ContactName, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
 
                     <DataGridComboBoxColumn Header="Тип отношений" SelectedItemBinding="{Binding Ship, UpdateSourceTrigger=PropertyChanged}" Width="150">
                         <DataGridComboBoxColumn.ItemsSource>
