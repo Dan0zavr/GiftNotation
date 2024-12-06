@@ -103,6 +103,7 @@
                         <ComboBox Width="380" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Statuses}" 
                             DisplayMemberPath="StatusName" 
                             SelectedItem="{Binding SelectedStatus}" 
+                            SelectedValue="{Binding StatusName}"
                             SelectedValuePath="StatusName"
                             IsEditable="False">
                         </ComboBox>
@@ -176,7 +177,7 @@
                 </Button>
 
 
-                <Button Background="#2c2b2a" Height="20" Width="100" Margin="280,0,0,10" Foreground="#e2ddd9">
+                <Button Background="#2c2b2a" Height="20" Width="100" Margin="280,0,0,10" Foreground="#e2ddd9" Command="{Binding ChangeGiftCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
 
 
                     <Button.Style>

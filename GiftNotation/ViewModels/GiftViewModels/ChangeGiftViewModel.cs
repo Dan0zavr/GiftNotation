@@ -1,5 +1,6 @@
 ﻿using GiftNotation.Models;
 using GiftNotation.Services;
+using GiftNotation.Commands.GiftCommands;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,7 +19,7 @@ namespace GiftNotation.ViewModels
         private readonly ContactService _contactService;
         private readonly EventService _eventService;
 
-
+        private int _giftId;
         private string _giftName;
         private string _giftDescription;
         private string _url;
@@ -28,7 +29,7 @@ namespace GiftNotation.ViewModels
         private string _eventName;
         private string _statusName;
 
-        private DisplayGiftModel _selectedGift;
+        internal DisplayGiftModel _selectedGift;
         private Status? _selectedStatus;
         private Contact? _selectedContact;
         private Event? _selectedEvent;
@@ -36,6 +37,8 @@ namespace GiftNotation.ViewModels
         public ObservableCollection<Status> Statuses { get; private set; } = new ObservableCollection<Status>();
         public ObservableCollection<Contact> Contacts { get; private set; } = new ObservableCollection<Contact>();
         public ObservableCollection<Event> Events { get; private set; } = new ObservableCollection<Event>();
+
+        public int GiftId { get => _giftId; }
 
         public string GiftName
         {
@@ -107,7 +110,7 @@ namespace GiftNotation.ViewModels
             set => SetProperty(ref _selectedEvent, value);
         }
 
-        ICommand ChangeGiftCommand;
+        public ICommand ChangeGiftCommand { get; }
 
         public ChangeGiftViewModel(GiftViewModel giftViewModel, GiftService giftService)
         {
@@ -115,6 +118,7 @@ namespace GiftNotation.ViewModels
             _giftService = giftService;
             LoadData();
             LoadStatuses();
+            ChangeGiftCommand = new ChangeGiftCommand(giftService, giftViewModel, this);
         }
 
         private async void LoadStatuses()
@@ -128,10 +132,11 @@ namespace GiftNotation.ViewModels
 
         private async void LoadData()
         {
-            var gifts = await _giftService.GetDisplayGiftModel(_giftViewModel.SelectedGift.GiftId);
+            var gifts = await _giftService.GetDisplayGiftModelByID(_giftViewModel.SelectedGift.GiftId);
             foreach (var gift in gifts) { 
                 _selectedGift = gift;
             }
+            _giftId = _selectedGift.GiftId;
             _giftName = _selectedGift.GiftName;
             _giftDescription = _selectedGift.Description;
             _url = _selectedGift.Url;

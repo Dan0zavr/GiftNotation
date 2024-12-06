@@ -7,12 +7,13 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GiftNotation.Services
 {
-    public class GiftService
+    public class GiftService 
     {
         private readonly GiftNotationDbContext _context;
         public event Action StateChanged;
@@ -146,12 +147,22 @@ namespace GiftNotation.Services
             }
         }
 
-        public async Task<IEnumerable<DisplayGiftModel>> GetDisplayGiftModel(int giftId)
+        public async Task<IEnumerable<DisplayGiftModel>> GetDisplayGiftModelByID(int giftId)
         {
+                var gift = await _context.Gifts
+            .Include(g => g.Status)
+            .Include(g => g.GiftContacts)
+                .ThenInclude(gc => gc.Contact)
+            .Include(g => g.GiftEvents)
+                .ThenInclude(ge => ge.Event)
+            .Where(g => g.GiftId == giftId)
+            .FirstOrDefaultAsync();
+
             return await _context.Gifts
                  .Include(g => g.Status)
                  .Include(g => g.GiftContacts)
                      .ThenInclude(gc => gc.Contact)
+                 .Where(g => g.GiftId == giftId)
                  .Include(g => g.GiftEvents)
                      .ThenInclude(ge => ge.Event)
                  .Where(g => g.GiftId == giftId)
@@ -164,8 +175,14 @@ namespace GiftNotation.Services
                      GiftPic = g.GiftPic ?? string.Empty,
                      Url = g.Url ?? string.Empty,
                      StatusName = g.Status.StatusName ?? string.Empty,
-                     ContactName = g.GiftContacts.FirstOrDefault().Contact.ContactName ?? string.Empty,
-                     EventName = g.GiftEvents.FirstOrDefault().Event.EventName ?? string.Empty
+                     ContactName = g.GiftContacts
+                     .Where(gc => gc.GiftId == gift.GiftId)
+                     .Select(gc => gc.Contact.ContactName)
+                     .FirstOrDefault() ?? string.Empty,
+                     EventName = g.GiftEvents
+                     .Where(ge => ge.GiftId == gift.GiftId)
+                     .Select(ge => ge.Event.EventName)
+                     .FirstOrDefault() ?? string.Empty
                  })
                  .ToListAsync();
         }
@@ -177,79 +194,31 @@ namespace GiftNotation.Services
             return await _context.Statuses.ToListAsync();
         }
 
-        public async Task<bool> UpdateGiftAsync(DisplayGiftModel giftModel)
+        public async Task UpdateGiftAsync(DisplayGiftModel _gift)
         {
-            try
-            {
-                // Находим существующий подарок
-                var existingGift = await _context.Gifts
-                    .Include(g => g.Status)
-                    .Include(g => g.GiftContacts)
-                    .Include(g => g.GiftEvents)
-                    .FirstOrDefaultAsync(g => g.GiftId == giftModel.GiftId);
+            
 
-                if (existingGift == null)
-                {
-                    Console.WriteLine("Подарок не найден.");
-                    return false;
-                }
+            var giftChange = await _context.Gifts.FindAsync(_gift.GiftId);
+            //var giftEventChange = await _context.GiftEvents.FindAsync(_gift.GiftId) ?? null;
+            //var giftContactChange = await _context.GiftContacts.FindAsync(_gift.GiftId) ?? null;
+            
+            giftChange.GiftName = _gift.GiftName ?? string.Empty;
+            giftChange.Description = _gift.Description ?? string.Empty;
+            giftChange.Url = _gift.Url ?? string.Empty;
+            giftChange.Price = _gift.Price;
+            giftChange.GiftPic = _gift.GiftPic ?? string.Empty;
+            giftChange.StatusId = await EnsureStatusAsync(_gift.StatusName);
 
-                // Убеждаемся, что статус существует, или добавляем его
-                var statusId = await EnsureStatusAsync(giftModel.StatusName);
+            //нужно добавить обновление контактов и событий
 
-                // Обновляем свойства подарка
-                existingGift.GiftName = giftModel.GiftName ?? string.Empty;
-                existingGift.Description = giftModel.Description ?? string.Empty;
-                existingGift.Price = giftModel.Price;
-                existingGift.GiftPic = giftModel.GiftPic ?? string.Empty;
-                existingGift.Url = giftModel.Url ?? string.Empty;
-                existingGift.StatusId = statusId;
+            //giftContactChange.ContactId = gift
+            //         .Where(gc => gc.GiftId == gift.GiftId);
+            //giftEChange.EventName = g.GiftEvents
+            //         .Where(ge => ge.GiftId == gift.GiftId)
+            //         .Select(ge => ge.Event.EventName)
+            //         .FirstOrDefault() ?? string.Empty
 
-                // Обновляем связанные контакты
-                if (!string.IsNullOrEmpty(giftModel.ContactName))
-                {
-                    var contact = await _context.Contacts
-                        .FirstOrDefaultAsync(c => c.ContactName == giftModel.ContactName);
-
-                    if (contact == null)
-                    {
-                        contact = new Contact { ContactName = giftModel.ContactName };
-                        _context.Contacts.Add(contact);
-                        await _context.SaveChangesAsync();
-                    }
-
-                    // Удаляем старые связи и добавляем новую
-                    existingGift.GiftContacts.Clear();
-                    existingGift.GiftContacts.Add(new GiftContact { GiftId = giftModel.GiftId, ContactId = contact.ContactId });
-                }
-
-                // Обновляем связанные события
-                if (!string.IsNullOrEmpty(giftModel.EventName))
-                {
-                    var eventEntity = await _context.Events
-                        .FirstOrDefaultAsync(e => e.EventName == giftModel.EventName);
-
-                    if (eventEntity == null)
-                    {
-                        eventEntity = new Event { EventName = giftModel.EventName };
-                        _context.Events.Add(eventEntity);
-                        await _context.SaveChangesAsync();
-                    }
-
-                    // Удаляем старые связи и добавляем новую
-                    existingGift.GiftEvents.Clear();
-                    existingGift.GiftEvents.Add(new GiftEvent { GiftId = giftModel.GiftId, EventId = eventEntity.EventId });
-                }
-
-                // Сохраняем изменения
-                await _context.SaveChangesAsync();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка в UpdateGiftAsync: {ex.Message}");
-                throw;
-            }
+            await _context.SaveChangesAsync();
         }
 
         private async Task<int?> GetStatusIdByNameAsync(string? statusName)
