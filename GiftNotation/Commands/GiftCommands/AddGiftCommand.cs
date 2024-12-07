@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
+using Microsoft.EntityFrameworkCore;
 
 namespace GiftNotation.Commands.GiftCommands
 {
@@ -41,7 +42,9 @@ namespace GiftNotation.Commands.GiftCommands
                 Url = _addGiftViewModel.Url ?? string.Empty,
                 Price = _addGiftViewModel.Price ,
                 GiftPic = _addGiftViewModel.GiftPic ?? string.Empty,
+                SelectedEventId = _addGiftViewModel.SelectedEvent?.EventId ?? null,
                 EventName = _addGiftViewModel.SelectedEvent?.EventName,
+                SelectedContactId = _addGiftViewModel.SelectedContact?.ContactId ?? null,
                 ContactName = _addGiftViewModel.SelectedContact?.ContactName,
                 StatusName = _addGiftViewModel.SelectedStatus?.StatusName
 

@@ -49,36 +49,48 @@ namespace GiftNotation.Services
                 })
                 .ToListAsync();
         }
-        
 
-        public async Task<int> AddGiftAsync(DisplayGiftModel giftModel)
+
+        public async Task AddGiftAsync(DisplayGiftModel giftModel)
         {
-            try
+
+            // Убеждаемся, что статус существует, или добавляем его
+            var statusId = await EnsureStatusAsync(giftModel.StatusName);
+
+            var gift = new Gifts
             {
-                // Убеждаемся, что статус существует, или добавляем его
-                var statusId = await EnsureStatusAsync(giftModel.StatusName);
+                GiftName = giftModel.GiftName ?? string.Empty,
+                Description = giftModel.Description ?? string.Empty,
+                Price = giftModel.Price,
+                GiftPic = giftModel.GiftPic ?? string.Empty,
+                Url = giftModel.Url ?? string.Empty,
+                StatusId = statusId // Может быть null
+            };
 
-                var gift = new Gifts
-                {
-                    GiftName = giftModel.GiftName ?? string.Empty,
-                    Description = giftModel.Description ?? string.Empty,
-                    Price = giftModel.Price,
-                    GiftPic = giftModel.GiftPic ?? string.Empty,
-                    Url = giftModel.Url ?? string.Empty,
-                    StatusId = statusId // Может быть null
-                };
+            _context.Gifts.Add(gift);
+            await _context.SaveChangesAsync();
 
-                _context.Gifts.Add(gift);
-                await _context.SaveChangesAsync();
+            var addedGift = await _context.Gifts
+        .OrderByDescending(e => e.GiftId) // Упорядочиваем по убыванию идентификатора
+        .FirstOrDefaultAsync();
 
-                return gift.GiftId;
-            }
-            catch (Exception ex)
+            var newGiftEvent = new GiftEvent()
             {
-                Console.WriteLine($"Ошибка в AddGiftAsync: {ex.Message}");
-                throw;
-            }
+                EventId = giftModel.SelectedEventId ?? 0,
+                GiftId = addedGift.GiftId
+            };
+            _context.GiftEvents.Add(newGiftEvent);
+            
+            var newGiftContact = new GiftContact()
+            {
+                ContactId = giftModel.SelectedContactId ?? 0,
+                GiftId = addedGift.GiftId
+            };
+            _context.GiftContacts.Add(newGiftContact);
+
+            await _context.SaveChangesAsync();
         }
+        
 
         public async Task AddGiftContactAsync(int giftId, int contactId)
         {

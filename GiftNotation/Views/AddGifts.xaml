@@ -80,7 +80,12 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Люди:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding ContactName}"/>
+                        <ComboBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" ItemsSource="{Binding Contacts}"
+                        DisplayMemberPath="ContactName"
+                        SelectedItem="{Binding SelectedContact}" 
+                        SelectedValue="{Binding ContactName}"
+                        SelectedValuePath="ContactName"
+                        IsEditable="False"/>
                     </Grid>
                 </Border>
 
@@ -91,7 +96,12 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Событие:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <ComboBox Width="360" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Events}" DisplayMemberPath="ContactName" SelectedItem="{Binding SelectedEvent}" >
+                        <ComboBox Width="360" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Events}"
+                        DisplayMemberPath="EventName"
+                        SelectedItem="{Binding SelectedEvent}" 
+                        SelectedValue="{Binding EventName}"
+                        SelectedValuePath="EventName"
+                        IsEditable="False">
                             
                         </ComboBox>
                     </Grid>

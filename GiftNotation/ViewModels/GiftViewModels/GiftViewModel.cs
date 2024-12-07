@@ -50,7 +50,7 @@ namespace GiftNotation.ViewModels
 
             // Загрузка данных из базы данных или другого источника
             LoadGifts();
-            OpenAddGiftCommand = new OpenAddGiftCommand(this, _giftService);
+            OpenAddGiftCommand = new OpenAddGiftCommand(this, _giftService, _eventService, contactService);
             DeleteGiftCommand = new DeleteGiftCommand(this, _giftService);
             OpenChangeGiftCommand = new OpenChangeGiftCommand(this, _giftService, _contactService, _eventService);
         }
