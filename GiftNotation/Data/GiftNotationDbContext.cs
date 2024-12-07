@@ -98,7 +98,14 @@ public partial class GiftNotationDbContext : DbContext
             new EventType { EventTypeId = 8, EventTypeName = "Свадьба" },
             new EventType { EventTypeId = 9, EventTypeName = "Просто подарочек" },
             new EventType { EventTypeId = 10, EventTypeName = "Важное событие" }
-            );
+        );
+
+        modelBuilder.Entity<RelpType>().HasData(
+             new RelpType { RelpTypeId = 1, RelpTypeName = "Друг" },
+             new RelpType { RelpTypeId = 2, RelpTypeName = "Родственник" }, 
+             new RelpType { RelpTypeId = 3, RelpTypeName = "Коллега" },
+             new RelpType { RelpTypeId = 4, RelpTypeName = "Знакомый" }
+        );
 
         base.OnModelCreating(modelBuilder);
     }

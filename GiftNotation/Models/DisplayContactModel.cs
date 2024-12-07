@@ -10,9 +10,12 @@ namespace GiftNotation.Models
     public class DisplayContactModel
     {
         public int ContactId { get; set; }
-        public string? ContactName { get; set; } = String.Empty;
+        public string? ContactName { get; set; } = string.Empty;
         public DateTime? Bday { get; set; } = null;
-        public string? RelpType { get; set; } = String.Empty;
-        public ObservableCollection<Gifts> ContactGifts { get; set; }
+        public string? RelpTypeName { get; set; } = string.Empty;
+        public int? GiftId { get; set; } = null;
+        public string? GiftName { get; set; } = string.Empty;
+
+
     }
 }

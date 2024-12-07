@@ -283,16 +283,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Имя" Binding="{Binding ContactName, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
 
-                    <DataGridComboBoxColumn Header="Тип отношений" SelectedItemBinding="{Binding RelpTypeName, UpdateSourceTrigger=PropertyChanged}" Width="150">
-                        <!--<DataGridComboBoxColumn.ItemsSource>-->
-                            <!--<x:Array Type="{x:Type sys:String}" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                                <sys:String>Друг</sys:String>
-                                <sys:String>Родственник</sys:String>
-                                <sys:String>Коллега</sys:String>
-                                <sys:String>Знакомый</sys:String>
-                            </x:Array>
-                        </DataGridComboBoxColumn.ItemsSource>-->
-                    </DataGridComboBoxColumn>
+                    <DataGridTextColumn Header="Тип отношений" Binding="{Binding RelpTypeName, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
 
                     <DataGridTemplateColumn Header="День рождения" Width="115">
                         <DataGridTemplateColumn.CellTemplate>

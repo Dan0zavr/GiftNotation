@@ -3,6 +3,7 @@ using System;
 using GiftNotation.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GiftNotation.Migrations
 {
     [DbContext(typeof(GiftNotationDbContext))]
-    partial class GiftNotationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241207205721_addRelpTypeData")]
+    partial class addRelpTypeData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");

@@ -43,16 +43,16 @@ namespace GiftNotation.ViewModels
             OpenAddContactCommand = new OpenAddContactCommand(this, _contactService);
 
             // Загрузка данных из базы данных или другого источника
-            //LoadGifts();
+            LoadContacts();
             //DeleteContactCommand = new DeleteGiftCommand(this, _contactService);
             //OpenChangeContactCommand = new OpenChangeGiftCommand(this, _contactService);
         }
 
-        //public async void LoadGifts()
-        //{
-        //    // Здесь вы можете подключиться к базе данных через сервис или репозиторий
-        //    var gifts = await _contactService.GetContactAsync(); // Это пример, ваш метод получения данных
-        //    Contacts = new ObservableCollection<DisplayGiftModel>(gifts);
-        //}
+        public async void LoadContacts()
+        {
+            // Здесь вы можете подключиться к базе данных через сервис или репозиторий
+            var contacts = await _contactService.GetAllContactsAsync(); // Это пример, ваш метод получения данных
+            Contacts = new ObservableCollection<DisplayContactModel>(contacts);
+        }
     }
 }
