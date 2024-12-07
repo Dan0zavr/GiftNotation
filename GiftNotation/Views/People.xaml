@@ -60,7 +60,7 @@
 
             <StackPanel Orientation="Horizontal"  Width="220" Margin="-290,-300,0,0" Height="30">
                 
-                <Button Background="#2c2825" Width="100" Height="20" Margin="5,0,5,0" Click="AddPeople">
+                <Button Background="#2c2825" Width="100" Height="20" Margin="5,0,5,0" Command="{Binding OpenAddContactCommand}">
 
 
                     <Button.Style>

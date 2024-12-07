@@ -18,10 +18,11 @@ namespace GiftNotation.ViewModels.Factories
         private readonly EventViewModel _eventViewModel;
         private readonly GiftService _giftService;
         private readonly ContactService _contactService;
+        private readonly EventService _eventService;
 
         public GiftNotationViewModelAbstractFactory(IGiftNotationViewModelFactory<CalendarViewModel> calendarViewModelFactory,
             ContactViewModel contactViewModel, GiftViewModel giftViewModel, EventViewModel eventViewModel,
-            GiftService giftService, ContactService contactService)
+            GiftService giftService, ContactService contactService, EventService eventService)
         {
             _calendarViewModelFactory = calendarViewModelFactory;
             _contactViewModel = contactViewModel;
@@ -29,6 +30,7 @@ namespace GiftNotation.ViewModels.Factories
             _eventViewModel = eventViewModel;
             _giftService = giftService;
             _contactService = contactService;
+            _eventService = eventService;
         }
 
         public ViewModelBase CreateViewModel(ViewType viewType)
@@ -43,7 +45,7 @@ namespace GiftNotation.ViewModels.Factories
                 case ViewType.Events:
                     return new EventViewModel();
                 case ViewType.Gifts:
-                    return new GiftViewModel(_giftService);
+                    return new GiftViewModel(_giftService, _contactService, _eventService);
                 default:
                     throw new ArgumentException("Takogo net");
             }

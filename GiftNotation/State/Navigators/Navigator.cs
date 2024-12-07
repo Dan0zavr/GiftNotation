@@ -1,5 +1,4 @@
 ﻿using GiftNotation.Commands;
-using GiftNotation.GlobalFunctions;
 using GiftNotation.Services;
 using GiftNotation.ViewModels;
 using GiftNotation.ViewModels.Factories;
@@ -15,7 +14,7 @@ namespace GiftNotation.State.Navigators
 {
 
 
-    public class Navigator : NotifyObject, INavigator
+    public class Navigator : ViewModelBase, INavigator
     {
         //Создание экзкмпляра класса ViewModelBase
         private ViewModelBase _currentViewModel;

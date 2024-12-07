@@ -1,4 +1,4 @@
-﻿using GiftNotation.Commands.GiftCommands;
+﻿using GiftNotation.Commands.ContactCommands;
 using GiftNotation.Models;
 using GiftNotation.Services;
 using System;
@@ -40,9 +40,10 @@ namespace GiftNotation.ViewModels
         {
             _contactService = contactService;
 
+            OpenAddContactCommand = new OpenAddContactCommand(this, _contactService);
+
             // Загрузка данных из базы данных или другого источника
             //LoadGifts();
-            //OpenAddContactCommand = new OpenAddGiftCommand(this, _contactService);
             //DeleteContactCommand = new DeleteGiftCommand(this, _contactService);
             //OpenChangeContactCommand = new OpenChangeGiftCommand(this, _contactService);
         }

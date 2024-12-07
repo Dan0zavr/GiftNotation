@@ -41,8 +41,12 @@ namespace GiftNotation.Commands.GiftCommands
                 Url = _changeGiftViewModel.Url ?? string.Empty,
                 Price = _changeGiftViewModel.Price,
                 GiftPic = _changeGiftViewModel.GiftPic ?? string.Empty,
-                EventName = _changeGiftViewModel.SelectedEvent?.EventName,
-                ContactName = _changeGiftViewModel.SelectedContact?.ContactName,
+                SelectedEventId = _changeGiftViewModel.SelectedEvent?.EventId ?? null,
+                EventId = _changeGiftViewModel.EventId,
+                EventName = _changeGiftViewModel.SelectedEvent?.EventName ?? string.Empty,
+                SelectedContactId = _changeGiftViewModel.SelectedContact?.ContactId ?? null,
+                ContactId = _changeGiftViewModel.ContactId,
+                ContactName = _changeGiftViewModel.SelectedContact?.ContactName ?? string.Empty,
                 StatusName = _changeGiftViewModel.SelectedStatus?.StatusName
 
             };

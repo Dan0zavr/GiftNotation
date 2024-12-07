@@ -7,7 +7,7 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="AddPeoples.xaml.cs">
+    <Compile Update="Views\AddPeoples.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Controls\NavigationBar.xaml.cs">
@@ -24,7 +24,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="AddPeoples.xaml">
+    <Page Update="Views\AddPeoples.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Controls\NavigationBar.xaml">
@@ -46,9 +46,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MainWindow.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\MyFriends.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

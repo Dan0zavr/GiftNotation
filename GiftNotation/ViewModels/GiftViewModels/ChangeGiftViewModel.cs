@@ -25,7 +25,11 @@ namespace GiftNotation.ViewModels
         private string _url;
         private double _price;
         private string _giftPic;
+        private int? _selectedContactId;
+        private int? _contactId;
         private string _contactName;
+        private int? _selectedEventId;
+        private int? _eventId;
         private string _eventName;
         private string _statusName;
 
@@ -70,13 +74,36 @@ namespace GiftNotation.ViewModels
             set => SetProperty(ref _giftPic, value);
         }
 
+        public int? SelectedContactId
+        {
+            get => _selectedContactId = SelectedContact?.ContactId;
+            set => SetProperty(ref _selectedContactId, value);
+        }
+
+        public int? ContactId
+        {
+            get => _contactId;
+            set => SetProperty(ref _contactId, value);
+        }
+
         public string ContactName
         {
             get => _contactName;
             set => SetProperty(ref _contactName, value);
         }
+        public int? SelectedEventId
+        {
+            get => _selectedEventId = SelectedEvent?.EventId;
+            set => SetProperty(ref _selectedEventId, value);
+        }
 
-        public string EventNmae
+        public int? EventId
+        {
+            get => _eventId;
+            set => SetProperty(ref _eventId, value);
+        }
+
+        public string EventName
         {
             get => _eventName;
             set => SetProperty(ref _eventName, value);
@@ -112,11 +139,15 @@ namespace GiftNotation.ViewModels
 
         public ICommand ChangeGiftCommand { get; }
 
-        public ChangeGiftViewModel(GiftViewModel giftViewModel, GiftService giftService)
+        public ChangeGiftViewModel(GiftViewModel giftViewModel, GiftService giftService, ContactService contactService, EventService eventService)
         {
             _giftViewModel = giftViewModel;
             _giftService = giftService;
+            _eventService = eventService;
+            _contactService = contactService;
             LoadData();
+            LoadContacts();
+            LoadEvents();
             LoadStatuses();
             ChangeGiftCommand = new ChangeGiftCommand(giftService, giftViewModel, this);
         }
@@ -127,6 +158,23 @@ namespace GiftNotation.ViewModels
             foreach (var status in statuses)
             {
                 Statuses.Add(status);
+            }
+        }
+
+        private async void LoadContacts()
+        {
+            var contacts = await _contactService.GetAllContacts();
+            foreach (var contact in contacts)
+            {
+                Contacts.Add(contact);
+            }
+        }
+        private async void LoadEvents()
+        {
+            var events = await _eventService.GetAllEvents();
+            foreach (var event_ in events)
+            {
+                Events.Add(event_);
             }
         }
 
@@ -142,7 +190,9 @@ namespace GiftNotation.ViewModels
             _url = _selectedGift.Url;
             _price = _selectedGift.Price;
             _giftPic = _selectedGift.GiftPic;
+            _contactId = _selectedGift.ContactId;
             _contactName = _selectedGift.ContactName;
+            _eventId = _selectedGift.EventId;
             _eventName = _selectedGift.EventName;
             _statusName = _selectedGift.StatusName;
 

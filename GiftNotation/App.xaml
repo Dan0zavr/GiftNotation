@@ -21,6 +21,10 @@
                 <views:People/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:AddContactViewModel}">
+                <views:AddPeoples/>
+            </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewmodels:GiftViewModel}">
                 <views:GiftsView/>
             </DataTemplate>

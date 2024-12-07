@@ -65,8 +65,6 @@ C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\S
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\App.baml
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\Calendar.g.cs
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\Calendar.baml
-C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\MyFriends.g.cs
-C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\MyFriends.baml
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\bin\Debug\net8.0-windows\Humanizer.dll
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\bin\Debug\net8.0-windows\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\bin\Debug\net8.0-windows\Microsoft.CodeAnalysis.dll
@@ -377,12 +375,12 @@ G:\C#\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\AddGifts.g.cs
 G:\C#\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\ChangingGifts.g.cs
 G:\C#\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\AddGifts.baml
 G:\C#\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\ChangingGifts.baml
-C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\AddPeoples.g.cs
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\AddGifts.g.cs
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\ChangingGifts.g.cs
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\ChangingPeople.g.cs
-C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\AddPeoples.baml
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\AddGifts.baml
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\ChangingGifts.baml
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\ChangingPeople.baml
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\GiftNotation.sourcelink.json
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\AddPeoples.g.cs
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\AddPeoples.baml

@@ -40,32 +40,16 @@ namespace GiftNotation.Services
                     GiftPic = g.GiftPic ?? string.Empty,
                     Url = g.Url ?? string.Empty,
                     StatusName = g.Status.StatusName ?? string.Empty,
-                    ContactName = g.GiftContacts.FirstOrDefault().Contact.ContactName ?? string.Empty,
-                    EventName = g.GiftEvents.FirstOrDefault().Event.EventName ?? string.Empty   
+
+                    ContactId = g.GiftContacts.Select(gc => gc.ContactId).First(),
+                    ContactName = g.GiftContacts.Select(gc => gc.Contact.ContactName ?? string.Empty).FirstOrDefault(),
+
+                    EventId = g.GiftEvents.Select(ge => ge.EventId).First(),
+                    EventName = g.GiftEvents.Select(ge => ge.Event.EventName ?? string.Empty).FirstOrDefault()
                 })
                 .ToListAsync();
         }
-        public async Task<int?> EnsureStatusAsync(string? statusName)
-        {
-            if (string.IsNullOrEmpty(statusName))
-                return null; // Возвращаем null, если статус не указан
-
-            // Проверяем, существует ли статус
-            var existingStatusId = await _context.Statuses
-                .Where(s => s.StatusName == statusName)
-                .Select(s => s.StatusId)
-                .FirstOrDefaultAsync();
-
-            if (existingStatusId != 0)
-                return existingStatusId;
-
-            // Если статус не найден, создаем новый
-            var newStatus = new Status { StatusName = statusName };
-            _context.Statuses.Add(newStatus);
-            await _context.SaveChangesAsync();
-
-            return newStatus.StatusId;
-        }
+        
 
         public async Task<int> AddGiftAsync(DisplayGiftModel giftModel)
         {
@@ -175,10 +159,18 @@ namespace GiftNotation.Services
                      GiftPic = g.GiftPic ?? string.Empty,
                      Url = g.Url ?? string.Empty,
                      StatusName = g.Status.StatusName ?? string.Empty,
+                     ContactId = g.GiftContacts
+                     .Where(gc => gc.GiftId == gift.GiftId)
+                     .Select(gc => gc.ContactId)
+                     .First(),
                      ContactName = g.GiftContacts
                      .Where(gc => gc.GiftId == gift.GiftId)
                      .Select(gc => gc.Contact.ContactName)
                      .FirstOrDefault() ?? string.Empty,
+                     EventId = g.GiftEvents
+                     .Where(gc => gc.GiftId == gift.GiftId)
+                     .Select(gc => gc.EventId)
+                     .First(),
                      EventName = g.GiftEvents
                      .Where(ge => ge.GiftId == gift.GiftId)
                      .Select(ge => ge.Event.EventName)
@@ -199,15 +191,63 @@ namespace GiftNotation.Services
             
 
             var giftChange = await _context.Gifts.FindAsync(_gift.GiftId);
-            //var giftEventChange = await _context.GiftEvents.FindAsync(_gift.GiftId) ?? null;
-            //var giftContactChange = await _context.GiftContacts.FindAsync(_gift.GiftId) ?? null;
-            
+            var giftEventChange = await _context.GiftEvents.FindAsync(_gift.GiftId, _gift.EventId);
+            var giftContactChange = await _context.GiftContacts.FindAsync(_gift.GiftId, _gift.ContactId);
+
             giftChange.GiftName = _gift.GiftName ?? string.Empty;
             giftChange.Description = _gift.Description ?? string.Empty;
             giftChange.Url = _gift.Url ?? string.Empty;
             giftChange.Price = _gift.Price;
             giftChange.GiftPic = _gift.GiftPic ?? string.Empty;
             giftChange.StatusId = await EnsureStatusAsync(_gift.StatusName);
+
+            if(giftEventChange != null)
+            {
+                _context.GiftEvents.Remove(giftEventChange);
+                var newGiftEvent = new GiftEvent()
+                {
+                    EventId = _gift.SelectedEventId ?? 0,
+                    GiftId = _gift.GiftId
+                };
+                _context.GiftEvents.Add(newGiftEvent);
+            }
+            else
+            {
+                if (_gift.SelectedEventId != null)
+                {
+                    var newGiftEvent = new GiftEvent()
+                    {
+                        EventId = _gift.SelectedEventId ?? 0,
+                        GiftId = _gift.GiftId
+                    };
+                    
+                    _context.GiftEvents.Add(newGiftEvent);
+                }
+            }
+
+            if (giftContactChange != null)
+            {
+                _context.GiftContacts.Remove(giftContactChange);
+                var newGiftContact = new GiftContact()
+                {
+                    ContactId = _gift.SelectedContactId ?? 0,
+                    GiftId = _gift.GiftId
+                };
+                _context.GiftContacts.Add(newGiftContact);
+            }
+            else
+            {
+                if (_gift.SelectedContactId != null)
+                {
+                    var newGiftContact = new GiftContact()
+                    {
+                        ContactId = _gift.SelectedContactId ?? 0,
+                        GiftId = _gift.GiftId
+                    };
+
+                    _context.GiftContacts.Add(newGiftContact);
+                }
+            }
 
             //нужно добавить обновление контактов и событий
 
@@ -219,6 +259,28 @@ namespace GiftNotation.Services
             //         .FirstOrDefault() ?? string.Empty
 
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<int?> EnsureStatusAsync(string? statusName)
+        {
+            if (string.IsNullOrEmpty(statusName))
+                return null; // Возвращаем null, если статус не указан
+
+            // Проверяем, существует ли статус
+            var existingStatusId = await _context.Statuses
+                .Where(s => s.StatusName == statusName)
+                .Select(s => s.StatusId)
+                .FirstOrDefaultAsync();
+
+            if (existingStatusId != 0)
+                return existingStatusId;
+
+            // Если статус не найден, создаем новый
+            var newStatus = new Status { StatusName = statusName };
+            _context.Statuses.Add(newStatus);
+            await _context.SaveChangesAsync();
+
+            return newStatus.StatusId;
         }
 
         private async Task<int?> GetStatusIdByNameAsync(string? statusName)

@@ -67,7 +67,13 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Люди:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding SelectedContact}"/>
+                        <ComboBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" ItemsSource="{Binding Contacts}"
+                        DisplayMemberPath="ContactName"
+                        SelectedItem="{Binding SelectedContact}" 
+                        SelectedValue="{Binding ContactName}"
+                        SelectedValuePath="ContactName"
+                        IsEditable="False"/>
+
                     </Grid>
                 </Border>
 
@@ -78,7 +84,14 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Событие:" FontSize="14" VerticalAlignment="Center" Grid.Column="0"/>
-                        <ComboBox Width="360" Grid.Column="1" Background="#cacac8">
+                        <ComboBox Width="360" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Events}"
+                        DisplayMemberPath="EventName"
+                        SelectedItem="{Binding SelectedEvent}" 
+                        SelectedValue="{Binding EventName}"
+                        SelectedValuePath="EventName"
+                        IsEditable="False">
+                            
+                            
                             <!--<ComboBoxItem Content="День Рождения"/>
                             <ComboBoxItem Content="23 февраля"/>
                             <ComboBoxItem Content="Годовщина"/>

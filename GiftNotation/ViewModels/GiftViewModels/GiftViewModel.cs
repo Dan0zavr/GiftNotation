@@ -15,6 +15,8 @@ namespace GiftNotation.ViewModels
     {
         private ObservableCollection<DisplayGiftModel> _gifts;
         private GiftService _giftService;
+        private EventService _eventService;
+        private ContactService _contactService;
 
         public DisplayGiftModel selectedGift;
 
@@ -40,15 +42,17 @@ namespace GiftNotation.ViewModels
         public ICommand OpenChangeGiftCommand { get; set; }
 
 
-        public GiftViewModel(GiftService giftService)
+        public GiftViewModel(GiftService giftService, ContactService contactService, EventService eventService)
         {
             _giftService = giftService;
+            _contactService = contactService;
+            _eventService = eventService;
 
             // Загрузка данных из базы данных или другого источника
             LoadGifts();
             OpenAddGiftCommand = new OpenAddGiftCommand(this, _giftService);
             DeleteGiftCommand = new DeleteGiftCommand(this, _giftService);
-            OpenChangeGiftCommand = new OpenChangeGiftCommand(this, _giftService);
+            OpenChangeGiftCommand = new OpenChangeGiftCommand(this, _giftService, _contactService, _eventService);
         }
 
         public async void LoadGifts()
