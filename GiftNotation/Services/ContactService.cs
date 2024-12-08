@@ -56,27 +56,44 @@ namespace GiftNotation.Services
                 .ToListAsync();
         }
 
-            public async Task<IEnumerable<DisplayContactModel>> GetAllContactsAsync()
+        public async Task<IEnumerable<DisplayContactModel>> GetAllContactsAsync()
         {
-            return await _context.Contacts
-                .Include(c => c.RelpType) // Загружаем тип отношений
-                .Include(c => c.GiftContacts)
-                    .ThenInclude(gc => gc.Gift) // Загружаем связанные подарки
-                .Select(c => new DisplayContactModel
-                {
-                    ContactId = c.ContactId,
-                    ContactName = c.ContactName ?? string.Empty,
-                    Bday = c.Bday,
-                    RelpTypeName = c.RelpType.RelpTypeName ?? string.Empty,
-                    GiftId = c.GiftContacts.Select(gc => gc.GiftId).FirstOrDefault(), // Берём ID первого подарка
-                    GiftName = c.GiftContacts
-                        .Select(gc => gc.Gift.GiftName ?? string.Empty)
-                        .FirstOrDefault() ?? string.Empty // Берём имя первого подарка
-                })
-                .ToListAsync();
+        return await _context.Contacts
+            .Include(c => c.RelpType) // Загружаем тип отношений
+            .Include(c => c.GiftContacts)
+                .ThenInclude(gc => gc.Gift) // Загружаем связанные подарки
+            .Select(c => new DisplayContactModel
+            {
+                ContactId = c.ContactId,
+                ContactName = c.ContactName ?? string.Empty,
+                Bday = c.Bday,
+                RelpTypeName = c.RelpType.RelpTypeName ?? string.Empty,
+                GiftId = c.GiftContacts.Select(gc => gc.GiftId).FirstOrDefault(), // Берём ID первого подарка
+                GiftName = c.GiftContacts
+                    .Select(gc => gc.Gift.GiftName ?? string.Empty)
+                    .FirstOrDefault() ?? string.Empty // Берём имя первого подарка
+            })
+            .ToListAsync();
         }
 
+        public async Task DeleteContactAsync(int contactId)
+        {
+            var contact = await _context.Contacts
+                .Include(g => g.GiftContacts)
+                .Include(g => g.EventContacts)
+                .FirstOrDefaultAsync(g => g.ContactId == contactId);
 
+            if (contact != null)
+            {
+                // Удаляем связанные контакты и события
+                _context.GiftContacts.RemoveRange(contact.GiftContacts);
+                _context.EventContacts.RemoveRange(contact.EventContacts);
+
+                // Удаляем сам подарок
+                _context.Contacts.Remove(contact);
+                await _context.SaveChangesAsync();
+            }
+        }
     }
 }
 

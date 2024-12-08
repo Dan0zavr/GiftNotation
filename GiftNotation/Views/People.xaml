@@ -181,7 +181,7 @@
                 
             </StackPanel>
 
-            <Button Background="#2c2825" Width="100" Height="20" Margin="0,-300,-400,0" Click="DeletePeople">
+            <Button Background="#2c2825" Width="100" Height="20" Margin="0,-300,-400,0" Command="{Binding DeleteContactCommand}">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Template">
