@@ -14,11 +14,13 @@ namespace GiftNotation.Commands.ContactCommands
     {
         private readonly ContactViewModel _viewModel;
         private readonly ContactService _contactService;
+        private readonly GiftService _giftService;
 
-        public OpenAddContactCommand(ContactViewModel viewModel, ContactService contactService)
+        public OpenAddContactCommand(ContactViewModel viewModel, ContactService contactService, GiftService giftService)
         {
             _viewModel = viewModel;
             _contactService = contactService;
+            _giftService = giftService;
         }
 
         public event EventHandler? CanExecuteChanged;
@@ -30,7 +32,7 @@ namespace GiftNotation.Commands.ContactCommands
 
         public void Execute(object? parameter)
         {
-            var addContactViewModel = new AddContactViewModel(_viewModel, _contactService);
+            var addContactViewModel = new AddContactViewModel(_contactService, _giftService, _viewModel);
             var addContactWindow = new AddPeoples
             {
                 DataContext = addContactViewModel

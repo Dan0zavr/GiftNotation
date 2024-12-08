@@ -29,7 +29,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Введите имя:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding ContactName}"/>
                     </Grid>
                 </Border>
 
@@ -40,13 +40,10 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Тип отношений:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <ComboBox Width="320" Grid.Column="1" Background="#cacac8">
-                            <ComboBoxItem Content="Друг"/>
-                            <ComboBoxItem Content="Член семьи"/>
-                            <ComboBoxItem Content="Знакомый"/>
-                            <ComboBoxItem Content="Коллега"/>
-                            <ComboBoxItem Content="Левый чел"/>
-                        </ComboBox>
+                        <ComboBox Width="320" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding RelpTypes}"
+                        DisplayMemberPath="RelpTypeName"
+                        SelectedItem="{Binding SelectedRelpType}"
+                        IsEditable="False"/>
                     </Grid>
                 </Border>
 
@@ -57,7 +54,7 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Введите Дату Рождения:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding Bday}"/>
                     </Grid>
                 </Border>
                 
@@ -68,7 +65,10 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Подарок:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" />
+                        <ComboBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" ItemsSource="{Binding Gifts}"
+                        DisplayMemberPath="GiftName"
+                        SelectedItem="{Binding SelectedGift}"
+                        IsEditable="False"/>
                     </Grid>
                 </Border>
             </UniformGrid>
@@ -134,7 +134,7 @@
                     <TextBlock Text="Отменить" Width="65" Foreground="#FFF0F0F0" FontSize="14" FontFamily="Bold"/>
                 </Button>
 
-                <Button Width="100" Height="20" Margin="280,0,0,10" Background="#292a2c">
+                <Button Width="100" Height="20" Margin="280,0,0,10" Background="#292a2c" Command="{Binding AddContactCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
 
 
                     <Button.Style>

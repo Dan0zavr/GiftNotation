@@ -22,15 +22,7 @@ namespace GiftNotation.ViewModels
         private string _url;
         private double _price;
         private string _giftPic;
-        private int? _selectedContactId;
-        private int? _contactId;
-        private string _contactName;
-        private int? _selectedEventId;
-        private int? _eventId;
-        private string _eventName;
-        private string _statusName;
-
-        internal DisplayGiftModel _selectedGift;
+        
         private Status? _selectedStatus;
         private Contact? _selectedContact;
         private Event? _selectedEvent;
@@ -70,55 +62,11 @@ namespace GiftNotation.ViewModels
             set => SetProperty(ref _giftPic, value);
         }
 
-        public int? SelectedContactId
-        {
-            get => _selectedContactId = SelectedContact?.ContactId;
-            set => SetProperty(ref _selectedContactId, value);
-        }
-
-        public int? ContactId
-        {
-            get => _contactId;
-            set => SetProperty(ref _contactId, value);
-        }
-
-        public string ContactName
-        {
-            get => _contactName;
-            set => SetProperty(ref _contactName, value);
-        }
-        public int? SelectedEventId
-        {
-            get => _selectedEventId = SelectedEvent?.EventId;
-            set => SetProperty(ref _selectedEventId, value);
-        }
-
-        public int? EventId
-        {
-            get => _eventId;
-            set => SetProperty(ref _eventId, value);
-        }
-
-        public string EventName
-        {
-            get => _eventName;
-            set => SetProperty(ref _eventName, value);
-        }
-
-        public string StatusName
-        {
-            get => _statusName;
-            set => SetProperty(ref _statusName, value);
-        }
-
-
         public Status? SelectedStatus
         {
             get => _selectedStatus;
-            set
-            {
-                SetProperty(ref _selectedStatus, value);
-            }
+            set => SetProperty(ref _selectedStatus, value);
+            
         }
 
         public Contact? SelectedContact

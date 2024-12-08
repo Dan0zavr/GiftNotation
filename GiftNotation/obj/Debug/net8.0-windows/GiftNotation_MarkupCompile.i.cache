@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\App.xaml
 111450275077
 
-75139406459
+76-252863761
 237-1422726270
 Controls\NavigationBar.xaml;Styles\General.xaml;Views\AddGifts.xaml;Views\AddPeoples.xaml;Views\Calendar.xaml;Views\ChangingGifts.xaml;Views\ChangingPeople.xaml;Views\EventDetailsWindow.xaml;Views\GiftsView.xaml;Views\MainWindow.xaml;Views\People.xaml;
 
-False
+True
 

@@ -1,5 +1,6 @@
 ﻿using GiftNotation.Data;
 using GiftNotation.Models;
+using GiftNotation.Commands.ContactCommands;
 using GiftNotation.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
@@ -70,48 +71,31 @@ namespace GiftNotation.Services
             _context.Gifts.Add(gift);
             await _context.SaveChangesAsync();
 
+
             var addedGift = await _context.Gifts
         .OrderByDescending(e => e.GiftId) // Упорядочиваем по убыванию идентификатора
         .FirstOrDefaultAsync();
 
-            var newGiftEvent = new GiftEvent()
+            if (giftModel.SelectedEventId != null)
             {
-                EventId = giftModel.SelectedEventId ?? 0,
-                GiftId = addedGift.GiftId
-            };
-            _context.GiftEvents.Add(newGiftEvent);
-            
-            var newGiftContact = new GiftContact()
+                var newGiftEvent = new GiftEvent()
+                {
+                    EventId = giftModel.SelectedEventId ?? 0,
+                    GiftId = addedGift.GiftId
+                };
+                _context.GiftEvents.Add(newGiftEvent);
+            }
+            if (giftModel.SelectedEventId != null)
             {
-                ContactId = giftModel.SelectedContactId ?? 0,
-                GiftId = addedGift.GiftId
-            };
-            _context.GiftContacts.Add(newGiftContact);
+                var newGiftContact = new GiftContact()
+                {
+                    ContactId = giftModel.SelectedContactId ?? 0,
+                    GiftId = addedGift.GiftId
+                };
+                _context.GiftContacts.Add(newGiftContact);
 
-            await _context.SaveChangesAsync();
-        }
-        
-
-        public async Task AddGiftContactAsync(int giftId, int contactId)
-        {
-            var giftContact = new GiftContact
-            {
-                GiftId = giftId,
-                ContactId = contactId
-            };
-            _context.GiftContacts.Add(giftContact);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task AddGiftEventAsync(int giftId, int eventId)
-        {
-            var giftEvent = new GiftEvent
-            {
-                GiftId = giftId,
-                EventId = eventId
-            };
-            _context.GiftEvents.Add(giftEvent);
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task DeleteGiftAsync(int giftId)
@@ -129,16 +113,6 @@ namespace GiftNotation.Services
 
                 // Удаляем сам подарок
                 _context.Gifts.Remove(gift);
-                await _context.SaveChangesAsync();
-            }
-        }
-
-        public async Task DeleteGiftContact(int giftId)
-        {
-            var gift = await _context.GiftContacts.FindAsync(giftId);
-            if (gift != null)
-            {
-                _context.GiftContacts.Remove(gift);
                 await _context.SaveChangesAsync();
             }
         }
@@ -261,15 +235,6 @@ namespace GiftNotation.Services
                 }
             }
 
-            //нужно добавить обновление контактов и событий
-
-            //giftContactChange.ContactId = gift
-            //         .Where(gc => gc.GiftId == gift.GiftId);
-            //giftEChange.EventName = g.GiftEvents
-            //         .Where(ge => ge.GiftId == gift.GiftId)
-            //         .Select(ge => ge.Event.EventName)
-            //         .FirstOrDefault() ?? string.Empty
-
             await _context.SaveChangesAsync();
         }
 
@@ -287,22 +252,13 @@ namespace GiftNotation.Services
             if (existingStatusId != 0)
                 return existingStatusId;
 
-            // Если статус не найден, создаем новый
-            var newStatus = new Status { StatusName = statusName };
-            _context.Statuses.Add(newStatus);
-            await _context.SaveChangesAsync();
-
-            return newStatus.StatusId;
+            return null;
         }
 
-        private async Task<int?> GetStatusIdByNameAsync(string? statusName)
+        public async Task<IEnumerable<Gifts>> GetAllGifts()
         {
-            return await _context.Statuses
-                .Where(s => s.StatusName == statusName)
-                .Select(s => s.StatusId)
-                .FirstOrDefaultAsync();
+            return await _context.Gifts.ToListAsync();
         }
-
 
     }
 }

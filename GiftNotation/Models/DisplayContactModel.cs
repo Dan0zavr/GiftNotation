@@ -14,6 +14,7 @@ namespace GiftNotation.Models
         public DateTime? Bday { get; set; } = null;
         public string? RelpTypeName { get; set; } = string.Empty;
         public int? GiftId { get; set; } = null;
+        public int? SelectedGiftId { get; set; }
         public string? GiftName { get; set; } = string.Empty;
 
 

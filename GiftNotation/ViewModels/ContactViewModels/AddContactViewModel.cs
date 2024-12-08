@@ -1,21 +1,82 @@
 ﻿using GiftNotation.Services;
+using GiftNotation.Models;
+using GiftNotation.Commands.ContactCommands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace GiftNotation.ViewModels
 {
     public class AddContactViewModel : ViewModelBase
     {
-        private readonly ContactViewModel _viewModel;
-        private readonly ContactService _contactService;
+        private string _contactName;
+        private DateTime _bday;
 
-        public AddContactViewModel(ContactViewModel viewModel, ContactService contactService)
+        private Gifts? _selectedGift;
+        private RelpType _selectedRelpType;
+
+        private readonly ContactService _contactService;
+        private readonly GiftService _giftService;
+
+        public ObservableCollection<Gifts> Gifts { get; private set; } = new ObservableCollection<Gifts>();
+        public ObservableCollection<RelpType> RelpTypes { get; private set; } = new ObservableCollection<RelpType>();
+
+        public string ContactName
         {
-            _viewModel = viewModel;
-            _contactService = contactService;
+            get => _contactName;
+            set => SetProperty(ref _contactName, value);
         }
+
+        public DateTime Bday
+        {
+            get => _bday;
+            set => SetProperty(ref _bday, value);
+        }
+
+        public Gifts? SelectedGift
+        {
+            get => _selectedGift;
+            set => SetProperty(ref _selectedGift, value);
+        }
+
+        public RelpType? SelectedRelpType
+        {
+            get => _selectedRelpType;
+            set => SetProperty(ref _selectedRelpType, value);
+        }
+
+        public ICommand AddContactCommand { get; }
+
+        public AddContactViewModel(ContactService contactService, GiftService giftService, ContactViewModel contactViewModel)
+        {
+            _contactService = contactService;
+            _giftService = giftService;
+            LoadGifts();
+            LoadRelpTypes();
+            AddContactCommand = new AddContactCommand(contactService, contactViewModel, this);
+        }
+
+        public async void LoadGifts()
+        {
+            var gifts = await _giftService.GetAllGifts();
+            foreach (var gift in gifts)
+            {
+                Gifts.Add(gift);
+            }
+        }
+
+        public async void LoadRelpTypes()
+        {
+            var relpTypes = await _contactService.GetAllRelpTypes();
+            foreach (var relpType in relpTypes)
+            {
+                RelpTypes.Add(relpType);
+            }
+        }
+
     }
 }
