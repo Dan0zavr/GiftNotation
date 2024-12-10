@@ -35,33 +35,33 @@ namespace GiftNotation.Views
             //DataContext = this;
         }
 
-        public Person SelectPeople { get; set; }
+        //public Person SelectPeople { get; set; }
 
-        private void AddPeople(object sender, RoutedEventArgs e)
-        {
-            AddPeoples addPeople = new AddPeoples();
-            addPeople.Show();
-        }
+        //private void AddPeople(object sender, RoutedEventArgs e)
+        //{
+        //    AddPeoples addPeople = new AddPeoples();
+        //    addPeople.Show();
+        //}
 
-        private void ChangingPeople(object sender, RoutedEventArgs e)
-        {
-            ChangingPeople changingPeople = new ChangingPeople();
-            changingPeople.Show();
-        }
+        //private void ChangingPeople(object sender, RoutedEventArgs e)
+        //{
+        //    ChangingPeople changingPeople = new ChangingPeople();
+        //    changingPeople.Show();
+        //}
 
-        private void DeletePeople(object sender, RoutedEventArgs e)
-        {
-            if (SelectPeople != null)
-            {
-                SelectPeople.Name = string.Empty;
-                SelectPeople.Ship = null;
+        //private void DeletePeople(object sender, RoutedEventArgs e)
+        //{
+        //    if (SelectPeople != null)
+        //    {
+        //        SelectPeople.Name = string.Empty;
+        //        SelectPeople.Ship = null;
 
-                SelectPeople.Birthday = DateTime.MinValue;  // Используется DateTime.MinValue, чтобы очистить значение Birthday !!!!!!!не получается перевести DataTime к удалению
-                SelectPeople.Gift = string.Empty;
+        //        SelectPeople.Birthday = DateTime.MinValue;  // Используется DateTime.MinValue, чтобы очистить значение Birthday !!!!!!!не получается перевести DataTime к удалению
+        //        SelectPeople.Gift = string.Empty;
 
-                DataGrid.Items.Refresh();
-            }
-        }
+        //        DataGrid.Items.Refresh();
+        //    }
+        //}
 
         //public void AddPeople(string name, string ship, DateTime birthday, string gift)
         //{

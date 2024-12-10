@@ -51,6 +51,7 @@ namespace GiftNotation
                     services.AddScoped<EventViewModel>();
                     services.AddScoped<GiftViewModel>();
                     services.AddScoped<MainViewModel>();
+                    services.AddScoped<CalendarViewModel>();
 
                     // Регистрация Navigator
                     services.AddScoped<INavigator, Navigator>();

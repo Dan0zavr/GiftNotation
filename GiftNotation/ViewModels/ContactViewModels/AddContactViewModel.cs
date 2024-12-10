@@ -16,14 +16,15 @@ namespace GiftNotation.ViewModels
         private string _contactName;
         private DateTime _bday;
 
-        private Gifts? _selectedGift;
-        private RelpType _selectedRelpType;
-
         private readonly ContactService _contactService;
         private readonly GiftService _giftService;
+        private RelpType _selectedRelpType;
 
         public ObservableCollection<Gifts> Gifts { get; private set; } = new ObservableCollection<Gifts>();
         public ObservableCollection<RelpType> RelpTypes { get; private set; } = new ObservableCollection<RelpType>();
+
+        // Для хранения выбранных подарков
+        public ObservableCollection<Gifts> SelectedGifts { get; private set; } = new ObservableCollection<Gifts>();
 
         public string ContactName
         {
@@ -35,12 +36,6 @@ namespace GiftNotation.ViewModels
         {
             get => _bday;
             set => SetProperty(ref _bday, value);
-        }
-
-        public Gifts? SelectedGift
-        {
-            get => _selectedGift;
-            set => SetProperty(ref _selectedGift, value);
         }
 
         public RelpType? SelectedRelpType
@@ -78,5 +73,18 @@ namespace GiftNotation.ViewModels
             }
         }
 
+        // Метод для обработки выбора подарков (опционально)
+        public void ToggleGiftSelection(Gifts gift)
+        {
+            if (SelectedGifts.Contains(gift))
+            {
+                SelectedGifts.Remove(gift);
+            }
+            else
+            {
+                SelectedGifts.Add(gift);
+            }
+        }
     }
+
 }

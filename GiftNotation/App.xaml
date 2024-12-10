@@ -37,6 +37,14 @@
                 <views:ChangingGifts/>
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewmodels:ChangeContactViewModel}">
+                <views:ChangingPeople/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodels:EventViewModel}">
+                <views:EventsView/>
+            </DataTemplate>
+
             <!--<DataTemplate DataType="{x:Type viewmodels:EventViewModel}">
                 <views:Page3/>
             </DataTemplate>

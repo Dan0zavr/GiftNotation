@@ -174,8 +174,6 @@ namespace GiftNotation.Services
 
         public async Task UpdateGiftAsync(DisplayGiftModel _gift)
         {
-            
-
             var giftChange = await _context.Gifts.FindAsync(_gift.GiftId);
             var giftEventChange = await _context.GiftEvents.FindAsync(_gift.GiftId, _gift.EventId);
             var giftContactChange = await _context.GiftContacts.FindAsync(_gift.GiftId, _gift.ContactId);

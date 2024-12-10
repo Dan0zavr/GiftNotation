@@ -45,10 +45,11 @@ namespace GiftNotation.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("EventDate")
+                    b.Property<DateTime>("EventDate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("EventName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int?>("EventTypeId")

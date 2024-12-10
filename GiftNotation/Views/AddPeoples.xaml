@@ -69,6 +69,7 @@
                         DisplayMemberPath="GiftName"
                         SelectedItem="{Binding SelectedGift}"
                         IsEditable="False"/>
+
                     </Grid>
                 </Border>
             </UniformGrid>

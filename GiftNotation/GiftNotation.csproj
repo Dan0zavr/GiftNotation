@@ -42,7 +42,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="GlobalFunctions\" />
     <Folder Include="Pictures\" />
   </ItemGroup>
 

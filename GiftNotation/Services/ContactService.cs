@@ -54,9 +54,9 @@ namespace GiftNotation.Services
                     ContactId = c.ContactId,
                     ContactName = c.ContactName ?? string.Empty,
                     RelpTypeName = c.RelpType.RelpTypeName ?? string.Empty,
-                    GiftName = c.GiftContacts
-                        .Select(gc => gc.Gift.GiftName ?? string.Empty)
-                        .FirstOrDefault() ?? string.Empty,
+                    //GiftName = c.GiftContacts
+                    //    .Select(gc => gc.Gift.GiftName ?? string.Empty)
+                    //    .FirstOrDefault() ?? string.Empty,
                 })
                 .ToListAsync();
         }
@@ -73,10 +73,10 @@ namespace GiftNotation.Services
                 ContactName = c.ContactName ?? string.Empty,
                 Bday = c.Bday,
                 RelpTypeName = c.RelpType.RelpTypeName ?? string.Empty,
-                GiftId = c.GiftContacts.Select(gc => gc.GiftId).FirstOrDefault(), // Берём ID первого подарка
-                GiftName = c.GiftContacts
-                    .Select(gc => gc.Gift.GiftName ?? string.Empty)
-                    .FirstOrDefault() ?? string.Empty // Берём имя первого подарка
+                //GiftId = c.GiftContacts.Select(gc => gc.GiftId).FirstOrDefault(), // Берём ID первого подарка
+                //GiftName = c.GiftContacts
+                //    .Select(gc => gc.Gift.GiftName ?? string.Empty)
+                //    .FirstOrDefault() ?? string.Empty // Берём имя первого подарка
             })
             .ToListAsync();
         }
@@ -98,7 +98,28 @@ namespace GiftNotation.Services
             return null;
         }
 
-        public async Task AddGiftAsync(DisplayContactModel contactModel)
+        public async Task AddEventAsync(Event newEvent)
+        {
+            _context.Events.Add(newEvent);
+            await _context.SaveChangesAsync();
+
+            var addedContact = await _context.Contacts
+                .OrderByDescending(e => e.ContactId) // Упорядочиваем по убыванию идентификатора
+                .FirstAsync();
+            var addedEvent = await _context.Events
+                .OrderByDescending(e => e.EventId)
+                .FirstAsync();
+            var eventContact = new EventContact
+            {
+                EventId = addedEvent.EventId,
+                ContactId = addedContact.ContactId,
+            };
+
+            _context.EventContacts.Add(eventContact);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddContactAsync(DisplayContactModel contactModel)
         {
 
             // Убеждаемся, что статус существует, или добавляем его
@@ -114,23 +135,23 @@ namespace GiftNotation.Services
             _context.Contacts.Add(contact);
             await _context.SaveChangesAsync();
 
-            if (contactModel.GiftId != null)
-            {
+            //if (contactModel.GiftId != null)
+            //{
 
-                var addedContact = await _context.Contacts
-                .OrderByDescending(e => e.ContactId) // Упорядочиваем по убыванию идентификатора
-                .FirstAsync();
+            //    var addedContact = await _context.Contacts
+            //    .OrderByDescending(e => e.ContactId) // Упорядочиваем по убыванию идентификатора
+            //    .FirstAsync();
 
             
-                var newGiftContact = new GiftContact()
-                {
-                    ContactId = addedContact.ContactId,
-                    GiftId = contactModel.GiftId ?? 0
-                };
-                _context.GiftContacts.Add(newGiftContact);
+            //    var newGiftContact = new GiftContact()
+            //    {
+            //        ContactId = addedContact.ContactId,
+            //        GiftId = contactModel.GiftId ?? 0
+            //    };
+            //    _context.GiftContacts.Add(newGiftContact);
 
-                await _context.SaveChangesAsync();
-            }
+            //    await _context.SaveChangesAsync();
+            //}
         }
 
         public async Task DeleteContactAsync(int contactId)
@@ -146,8 +167,12 @@ namespace GiftNotation.Services
                 _context.GiftContacts.RemoveRange(contact.GiftContacts);
                 _context.EventContacts.RemoveRange(contact.EventContacts);
 
+                var birthDay = _context.Events.Where(e => e.EventDate == contact.Bday).First();
+
+                _context.Events.Remove(birthDay);
                 // Удаляем сам подарок
                 _context.Contacts.Remove(contact);
+
                 await _context.SaveChangesAsync();
             }
         }

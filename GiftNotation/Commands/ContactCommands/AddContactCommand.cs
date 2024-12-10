@@ -14,6 +14,7 @@ namespace GiftNotation.Commands.ContactCommands
     public class AddContactCommand : ICommand
     {
         private readonly ContactService _contactService;
+        private readonly EventService _eventService;
         private readonly ContactViewModel _contactViewModel;
         private readonly AddContactViewModel _addContactViewModel;
 
@@ -37,11 +38,21 @@ namespace GiftNotation.Commands.ContactCommands
             {
                 ContactName = _addContactViewModel.ContactName ?? string.Empty,
                 Bday = _addContactViewModel?.Bday,
-                RelpTypeName = _addContactViewModel.SelectedRelpType.RelpTypeName ?? string.Empty,
-                GiftId = _addContactViewModel.SelectedGift?.GiftId,
+                RelpTypeName = _addContactViewModel.SelectedRelpType?.RelpTypeName ?? string.Empty,
             };
 
-            await _contactService.AddGiftAsync(newContact);
+            await _contactService.AddContactAsync(newContact);
+
+            if (_addContactViewModel?.Bday != null)
+            {
+                var birthDay = new Event
+                {
+                    EventName = "День рождения: " + _addContactViewModel.ContactName,
+                    EventDate = _addContactViewModel.Bday,
+                    EventTypeId = 1,
+                };
+                await _contactService.AddEventAsync(birthDay);
+            }
 
             // Обновляем список подарков после добавления
             _contactViewModel.LoadContacts();

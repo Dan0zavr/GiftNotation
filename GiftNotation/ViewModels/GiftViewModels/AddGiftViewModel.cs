@@ -83,6 +83,7 @@ namespace GiftNotation.ViewModels
         
 
         public ICommand AddGiftCommand { get; }
+        public ICommand OpenFileDialogForPicture {  get; }
 
         public AddGiftViewModel(GiftService giftService, GiftViewModel giftViewModel, ContactService contactService, EventService eventService)
         {
@@ -91,6 +92,7 @@ namespace GiftNotation.ViewModels
             _eventService = eventService;
 
             AddGiftCommand = new AddGiftCommand(giftService, this, giftViewModel);
+            OpenFileDialogForPicture = new OpenFileDialogForPictureCommand(this);
             LoadContacts();
             LoadEvents();
             LoadStatuses();

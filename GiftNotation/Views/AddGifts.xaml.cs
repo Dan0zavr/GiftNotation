@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Globalization;
 
 namespace GiftNotation.Views
 {
@@ -36,5 +37,25 @@ namespace GiftNotation.Views
                 this.DragMove();
             }
         }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (textBox != null && string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = string.Empty;
+            }
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var textBox=sender as TextBox;
+            if (textBox!=null && string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = string.Empty;
+            }
+        }
+        
     }
+   
 }

@@ -384,3 +384,5 @@ C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\V
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\GiftNotation.sourcelink.json
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\AddPeoples.g.cs
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\AddPeoples.baml
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\EventsView.g.cs
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\EventsView.baml

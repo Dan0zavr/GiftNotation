@@ -120,7 +120,7 @@
                     <TextBlock  Foreground="#c7c6cb" Margin="0,1,0,0" Text="Добавить" Height="15" VerticalAlignment="Top"/>
                 </Button>
 
-                <Button Background="#2c2825" Width="100" Height="20" Margin="5,0,5,0" Click="ChangingPeople">
+                <Button Background="#2c2825" Width="100" Height="20" Margin="5,0,5,0" >
 
                     <Button.Style>
                         <Style TargetType="Button">
@@ -298,7 +298,17 @@
                         </DataGridTemplateColumn.CellEditingTemplate>-->
                     </DataGridTemplateColumn>
 
-                    <DataGridTextColumn Header="Подарок" Binding="{Binding GiftName, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                    <DataGridTemplateColumn Header="Подарок" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ListBox ItemsSource="{Binding ListItems}" 
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Stretch">
+                                    
+                                </ListBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
 
