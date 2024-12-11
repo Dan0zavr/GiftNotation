@@ -61,7 +61,6 @@ C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\C
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\MainWindow.g.cs
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\MainWindow.baml
-C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Styles\General.baml
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\App.baml
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\Calendar.g.cs
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\Calendar.baml
@@ -386,3 +385,7 @@ C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\V
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\AddPeoples.baml
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\EventsView.g.cs
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\EventsView.baml
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\AddEvent.g.cs
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\AddEvent.baml
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\ChangeEvent.g.cs
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\Views\ChangeEvent.baml

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -12,12 +13,13 @@ namespace GiftNotation.Views
     {
         public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
         {
-            if (values[0] is not DateTime date || values[1] is not HashSet<DateTime> dates)
+            if (values == null || values.Length < 2 || values[0] == null || values[1] == null)
                 return false;
 
-            bool contains = dates.Contains(date.Date); // Убедитесь, что сравниваются только даты
-            Console.WriteLine($"Date: {date}, Contains: {contains}");
-            return contains;
+            var date = (DateTime)values[0];
+            var dates = values[1] as ObservableCollection<DateTime>;
+
+            return dates != null && dates.Contains(date);
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

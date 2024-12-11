@@ -17,14 +17,25 @@ namespace GiftNotation.ViewModels
 {
     public class CalendarViewModel : ViewModelBase
     {
+
         private readonly EventService _eventService;
 
-        private ObservableCollection<Event> events;
-        public ObservableCollection<Event> Events 
+        private ObservableCollection<DateTime> events = new ObservableCollection<DateTime>();
+        public ObservableCollection<DateTime> Events 
         { 
             get => events;
             set => SetProperty(ref events, value);
         }
+
+
+        // Реализация INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         public CalendarViewModel(EventService eventService)
         {
             _eventService = eventService;
@@ -33,8 +44,8 @@ namespace GiftNotation.ViewModels
 
         private async void LoadEvents()
         {
-            var events = await _eventService.GetAllEvents();
-            Events = new ObservableCollection<Event>(events);
+            var events = await _eventService.GetAllEventDates();
+            Events = new ObservableCollection<DateTime>(events);
         }
 
     }

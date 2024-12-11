@@ -49,6 +49,7 @@ namespace GiftNotation
                     services.AddScoped<AddGiftViewModel>();
                     services.AddScoped<ChangeGiftViewModel>();
                     services.AddScoped<EventViewModel>();
+                    services.AddScoped<AddEventViewModel>();
                     services.AddScoped<GiftViewModel>();
                     services.AddScoped<MainViewModel>();
                     services.AddScoped<CalendarViewModel>();

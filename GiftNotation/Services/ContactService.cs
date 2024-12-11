@@ -1,11 +1,13 @@
 ﻿using GiftNotation.Data;
 using GiftNotation.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GiftNotation.ViewModels;
 
 namespace GiftNotation.Services
 {
@@ -73,6 +75,9 @@ namespace GiftNotation.Services
                 ContactName = c.ContactName ?? string.Empty,
                 Bday = c.Bday,
                 RelpTypeName = c.RelpType.RelpTypeName ?? string.Empty,
+                MyGifts = new ObservableCollection<Gifts?> (
+                    c.GiftContacts.Select(gc=>gc.Gift)
+                    )
                 //GiftId = c.GiftContacts.Select(gc => gc.GiftId).FirstOrDefault(), // Берём ID первого подарка
                 //GiftName = c.GiftContacts
                 //    .Select(gc => gc.Gift.GiftName ?? string.Empty)
@@ -100,23 +105,7 @@ namespace GiftNotation.Services
 
         public async Task AddEventAsync(Event newEvent)
         {
-            _context.Events.Add(newEvent);
-            await _context.SaveChangesAsync();
-
-            var addedContact = await _context.Contacts
-                .OrderByDescending(e => e.ContactId) // Упорядочиваем по убыванию идентификатора
-                .FirstAsync();
-            var addedEvent = await _context.Events
-                .OrderByDescending(e => e.EventId)
-                .FirstAsync();
-            var eventContact = new EventContact
-            {
-                EventId = addedEvent.EventId,
-                ContactId = addedContact.ContactId,
-            };
-
-            _context.EventContacts.Add(eventContact);
-            await _context.SaveChangesAsync();
+            
         }
 
         public async Task AddContactAsync(DisplayContactModel contactModel)
@@ -128,30 +117,41 @@ namespace GiftNotation.Services
             var contact = new Contact
             {
                 ContactName = contactModel.ContactName ?? string.Empty,
-                Bday = contactModel.Bday ?? null,
+                Bday = contactModel.Bday,
                 RelpTypeId = relpTypeId // Может быть null
             };
 
             _context.Contacts.Add(contact);
             await _context.SaveChangesAsync();
 
-            //if (contactModel.GiftId != null)
+            //if(contact.Bday != DateTime.MinValue)
             //{
+            //    var birthDay = new Event
+            //    {
+            //        EventName = "День рождения: " + contact.ContactName,
+            //        EventDate = contact.Bday,
+            //        EventTypeId = 1,
+            //    };
+
+            //    _context.Events.Add(birthDay);
+            //    await _context.SaveChangesAsync();
 
             //    var addedContact = await _context.Contacts
-            //    .OrderByDescending(e => e.ContactId) // Упорядочиваем по убыванию идентификатора
-            //    .FirstAsync();
-
-            
-            //    var newGiftContact = new GiftContact()
+            //        .OrderByDescending(e => e.ContactId) // Упорядочиваем по убыванию идентификатора
+            //        .FirstAsync();
+            //    var addedEvent = await _context.Events
+            //        .OrderByDescending(e => e.EventId)
+            //        .FirstAsync();
+            //    var eventContact = new EventContact
             //    {
+            //        EventId = addedEvent.EventId,
             //        ContactId = addedContact.ContactId,
-            //        GiftId = contactModel.GiftId ?? 0
             //    };
-            //    _context.GiftContacts.Add(newGiftContact);
 
+            //    _context.EventContacts.Add(eventContact);
             //    await _context.SaveChangesAsync();
             //}
+
         }
 
         public async Task DeleteContactAsync(int contactId)
@@ -166,11 +166,14 @@ namespace GiftNotation.Services
                 // Удаляем связанные контакты и события
                 _context.GiftContacts.RemoveRange(contact.GiftContacts);
                 _context.EventContacts.RemoveRange(contact.EventContacts);
+                await _context.SaveChangesAsync();
 
-                var birthDay = _context.Events.Where(e => e.EventDate == contact.Bday).First();
 
-                _context.Events.Remove(birthDay);
-                // Удаляем сам подарок
+                var birthDay = _context.Events.Where(e => e.EventDate == contact.Bday).FirstOrDefault();
+                if (birthDay != null)
+                {
+                    _context.Events.Remove(birthDay);
+                }
                 _context.Contacts.Remove(contact);
 
                 await _context.SaveChangesAsync();

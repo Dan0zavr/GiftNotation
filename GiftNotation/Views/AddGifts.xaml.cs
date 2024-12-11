@@ -55,7 +55,11 @@ namespace GiftNotation.Views
                 textBox.Text = string.Empty;
             }
         }
-        
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
    
 }

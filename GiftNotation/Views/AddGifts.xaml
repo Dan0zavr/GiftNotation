@@ -24,144 +24,156 @@
             <Grid Margin="0,40,0,40">
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="85"/>
-                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="*"/>
                     <RowDefinition Height="45"/>
                     <RowDefinition Height="45"/>
                     <RowDefinition Height="45"/>
                 </Grid.RowDefinitions>
+                <StackPanel>
+                    <Border Grid.Row="0" Height="130" Width="450" Background="#cacac8" CornerRadius="5">
+                        <Grid  Margin="10,0,0,0" VerticalAlignment="Center">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="auto"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
+                                <Border Cursor="Arrow" CornerRadius="2" Height="25" BorderBrush="#707976" BorderThickness="2" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="0,0,0,0">
 
-                <Border Grid.Row="0" Height="70" Width="450" Background="#cacac8" CornerRadius="5">
-                    <Grid  Margin="10,0,0,0" VerticalAlignment="Center">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
+                                    <AdornerDecorator>
+                                        <Grid>
 
-                        </Grid.ColumnDefinitions>
-
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <Border Cursor="Arrow" CornerRadius="2" Height="25" BorderBrush="#707976" BorderThickness="2" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="0,0,0,0">
-
-                            <AdornerDecorator>
-                                <Grid>
-
-                                    <TextBox x:Name="TextVisibilityForNameGift" 
+                                            <TextBox x:Name="TextVisibilityForNameGift" 
                                          FontSize="12" Padding="2" Width="250" Background="#dbd8d4"
                                          GotFocus="TextBox_GotFocus"
-                                         LostFocus="TextBox_LostFocus" />
+                                         LostFocus="TextBox_LostFocus" Text="{Binding GiftName}"/>
 
-                                    <TextBlock Text="Наименование подарка..." 
+                                            <TextBlock Text="Наименование подарка..." 
                                            Visibility="{Binding Text, ElementName=TextVisibilityForNameGift, Converter={StaticResource StringToVisibilityConverter}}" 
                                            Opacity="0.5" Foreground="Gray" VerticalAlignment="Center" Padding="5" 
                                            IsHitTestVisible="False"/>
 
-                                </Grid>
+                                        </Grid>
 
 
-                            </AdornerDecorator>
+                                    </AdornerDecorator>
 
-                        </Border>
+                                </Border>
 
-                        <Border Grid.Row="0" Grid.RowSpan="3" Grid.Column="2" BorderBrush="Gray" Width="100" BorderThickness="2" CornerRadius="8" 
-        Background="#c5c2c2" Margin="0,0,5,0" AllowDrop="True" HorizontalAlignment="Right">
-                            <Button Command="{Binding OpenFileDialogForPicture}">
-                                
-                                <Grid>
-                                    
-                                        <!-- Само изображение -->
-                                    <Image Source="{Binding GiftPic}" 
-                                           Stretch="Uniform" 
-                                           VerticalAlignment="Stretch" 
-                                           HorizontalAlignment="Stretch" />     
+                                <Border CornerRadius="2" Height="25" BorderBrush="#707976" BorderThickness="2" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="0,5,0,0">
+                                    <AdornerDecorator>
+                                        <Grid>
 
-                                    <!-- Значок заглушка -->
-                                    <Image x:Name="Picture_of_picture" Source="/Views/picture.jpg" 
-                   Opacity="0.1" Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center" 
-                   Height="30" Width="30" Margin="5,-5,0,0" Visibility="{Binding GiftPic}" />
-                                </Grid>
-                                <Button.Style>
-                                    <Style TargetType="Button">
-                                        <Setter Property="Template">
-                                            <Setter.Value>
-                                                <ControlTemplate TargetType="Button">
-                                                    <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
-                                                        <Border.Background>
-                                                            <SolidColorBrush x:Name="color1" Color="#292a2c"/>
-                                                        </Border.Background>
-                                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                                    </Border>
-                                                    <!-- Триггеры -->
-                                                    <ControlTemplate.Triggers>
-                                                        <EventTrigger RoutedEvent="Border.MouseEnter">
-                                                            <BeginStoryboard>
-                                                                <Storyboard>
-                                                                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
-                                                            From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
-                                                                </Storyboard>
-                                                            </BeginStoryboard>
-                                                        </EventTrigger>
-                                                        <EventTrigger RoutedEvent="Border.MouseLeave">
-                                                            <BeginStoryboard>
-                                                                <Storyboard>
-                                                                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
-                                                            From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
-                                                                </Storyboard>
-                                                            </BeginStoryboard>
-                                                        </EventTrigger>
-                                                        <Trigger Property="IsPressed" Value="True">
-                                                            <Setter TargetName="Button_Border" Property="Background" Value="Gray"/>
-                                                            <Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>
-                                                            <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
-                                                        </Trigger>
-                                                    </ControlTemplate.Triggers>
-                                                </ControlTemplate>
-                                            </Setter.Value>
-                                        </Setter>
-                                    </Style>
-                                </Button.Style>
-                            </Button>
-                        </Border>
-
-                        <Border CornerRadius="2" Height="25" BorderBrush="#707976" BorderThickness="2" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="0,5,0,0">
-                            <AdornerDecorator>
-                                <Grid>
-
-                                    <TextBox x:Name="TextVisibilityForSsylkaGift" 
+                                            <TextBox x:Name="TextVisibilityForSsylkaGift" 
                                          FontSize="12" Padding="2" Width="250" Background="#dbd8d4"
-                                         GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
+                                         GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" Text="{Binding Url}"/>
 
-                                    <TextBlock Text="Ссылка на маркетплейс..." 
+                                            <TextBlock Text="Ссылка на маркетплейс..." 
                                            Visibility="{Binding Text, ElementName=TextVisibilityForSsylkaGift, Converter={StaticResource StringToVisibilityConverter}}" 
                                            Opacity="0.5" Foreground="Gray" VerticalAlignment="Center" Padding="5" 
                                            IsHitTestVisible="False"/>
+                                                                                        
 
-                                </Grid>
+                                        </Grid>
 
 
-                            </AdornerDecorator>
-                        </Border>
+                                    </AdornerDecorator>
+                                </Border>
+                                <Border CornerRadius="2" Height="55" BorderBrush="#707976" BorderThickness="2" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="0,5,0,0">
+                                    <AdornerDecorator>
+                                        <Grid>
 
-                    </Grid>
-                </Border>
+                                            <TextBox x:Name="TextVisibilityForDescription" 
+                                                     FontSize="12" Padding="2" Width="250" Background="#dbd8d4"
+                                                     GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" Text="{Binding Description}"/>
+
+                                            <TextBlock Text="Описание..." 
+                                                       Visibility="{Binding Text, ElementName=TextVisibilityForDescription, Converter={StaticResource StringToVisibilityConverter}}" 
+                                                       Opacity="0.5" Foreground="Gray" Padding="5" 
+                                                       IsHitTestVisible="False" VerticalAlignment="Top"/>
+
+
+                                        </Grid>
+
+
+                                    </AdornerDecorator>
+                                </Border>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical">
+                                <Border BorderBrush="Gray" Width="160" Height="90" BorderThickness="2" CornerRadius="8" 
+        Background="#c5c2c2" Margin="0,0,5,0" AllowDrop="True" HorizontalAlignment="Right">
+                                    <Button Command="{Binding OpenFileDialogForPicture}">
+                                        <!-- Само изображение -->
+                                        <Image Source="{Binding GiftPic}" 
+                                           VerticalAlignment="Stretch" 
+                                           HorizontalAlignment="Stretch" 
+                                           Width="auto"
+                                           Height="50"/>
+
+                                        <Button.Style>
+                                            <Style TargetType="Button">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
+                                                                <Border.Background>
+                                                                    <SolidColorBrush x:Name="color1" Color="Transparent"/>
+                                                                </Border.Background>
+                                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                            </Border>
+                                                            <!-- Триггеры -->
+                                                            <ControlTemplate.Triggers>
+                                                                <EventTrigger RoutedEvent="Border.MouseEnter">
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                                            From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </EventTrigger>
+                                                                <EventTrigger RoutedEvent="Border.MouseLeave">
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                                            From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </EventTrigger>
+                                                                <Trigger Property="IsPressed" Value="True">
+                                                                    <Setter TargetName="Button_Border" Property="Background" Value="Transparent"/>
+                                                                    <Setter TargetName="Button_Border" Property="BorderBrush" Value="Transparent"/>
+                                                                    <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
+                                                                </Trigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </Button.Style>
+                                    </Button>
+                                </Border>
+
+
+                                <Border Height="30" Width="160" Grid.Row="1" Background="#cacac8" CornerRadius="5" HorizontalAlignment="Left">
+                                    <Grid Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="Цена:" FontSize="14" VerticalAlignment="Center" Grid.Column="0"/>
+                                        <TextBox FontSize="12" Padding="2" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Width="100" Margin="5,0,0,0" Text="{Binding Price}"/>
+                                    </Grid>
+                                </Border>
+
+                            </StackPanel>
+
+
+                        </Grid>
+                    </Border>
+                </StackPanel>
+
 
                 <Border Height="30" Grid.Row="1" Width="450" Background="#cacac8" CornerRadius="5">
-                    <Grid Margin="10,0,0,0" VerticalAlignment="Center">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Стоимость:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="12" Padding="2" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Width="360" Margin="0,0,0,0" Text="{Binding Price}"/>
-                    </Grid>
-                </Border>
-
-
-
-                <Border Height="30" Grid.Row="2" Width="450" Background="#cacac8" CornerRadius="5">
                     <Grid Margin="10,0,0,0" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -177,7 +189,7 @@
                     </Grid>
                 </Border>
 
-                <Border Height="30" Grid.Row="3" Width="450" Background="#cacac8" CornerRadius="5">
+                <Border Height="30" Grid.Row="2" Width="450" Background="#cacac8" CornerRadius="5">
                     <Grid Margin="10,0,0,0" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
@@ -274,7 +286,7 @@
                 </Button>
 
 
-                <Button Background="#2c2b2a" Height="20" Width="100" Margin="275,0,0,10" Foreground="#e2ddd9">
+                <Button Background="#2c2b2a" Height="20" Width="100" Margin="275,0,0,10" Foreground="#e2ddd9" Command="{Binding AddGiftCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
 
 
                     <Button.Style>

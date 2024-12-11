@@ -64,11 +64,50 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Подарок:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <ComboBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" ItemsSource="{Binding Gifts}"
-                        DisplayMemberPath="GiftName"
-                        SelectedItem="{Binding SelectedGift}"
-                        IsEditable="False"/>
+                        <TextBlock Text="Подарок:  " FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
+                        <ComboBox ItemsSource="{Binding Gifts}" Grid.Column="1" HorizontalAlignment="Left"
+                                  IsEditable="False"
+                                  IsTextSearchEnabled="False"
+                                  StaysOpenOnEdit="True"
+                                  Width="365">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox Content="{Binding GiftName}" 
+                      IsChecked="{Binding IsSelected, Mode=TwoWay}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                            <ComboBox.Style>
+                                <Style TargetType="ComboBox">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ComboBox">
+                                                <Grid>
+                                                    <!-- Область отображения текста -->
+                                                    <ToggleButton Name="ToggleButton" 
+                                                                  Content="{TemplateBinding Text}"
+                                                                  IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}}" 
+                                                                  DockPanel.Dock="Top" />
+                                                    <!-- Скрытый выпадающий список -->
+                                                    <Popup Name="Popup" 
+                                                           Placement="Bottom"
+                                                           IsOpen="{TemplateBinding IsDropDownOpen}"
+                                                           AllowsTransparency="True"
+                                                           Focusable="False">
+                                                        <Border BorderThickness="1" 
+                                        Background="White">
+                                                            <ScrollViewer>
+                                                                <ItemsPresenter />
+                                                            </ScrollViewer>
+                                                        </Border>
+                                                    </Popup>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ComboBox.Style>
+                        </ComboBox>
+
 
                     </Grid>
                 </Border>

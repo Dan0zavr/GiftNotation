@@ -37,22 +37,11 @@ namespace GiftNotation.Commands.ContactCommands
             var newContact = new DisplayContactModel
             {
                 ContactName = _addContactViewModel.ContactName ?? string.Empty,
-                Bday = _addContactViewModel?.Bday,
+                Bday = _addContactViewModel.Bday,
                 RelpTypeName = _addContactViewModel.SelectedRelpType?.RelpTypeName ?? string.Empty,
             };
 
             await _contactService.AddContactAsync(newContact);
-
-            if (_addContactViewModel?.Bday != null)
-            {
-                var birthDay = new Event
-                {
-                    EventName = "День рождения: " + _addContactViewModel.ContactName,
-                    EventDate = _addContactViewModel.Bday,
-                    EventTypeId = 1,
-                };
-                await _contactService.AddEventAsync(birthDay);
-            }
 
             // Обновляем список подарков после добавления
             _contactViewModel.LoadContacts();

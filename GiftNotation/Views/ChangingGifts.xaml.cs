@@ -24,7 +24,7 @@ namespace GiftNotation.Views
             InitializeComponent();
         }
 
-        private void ButtonChanging_CloseGifts(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -34,6 +34,24 @@ namespace GiftNotation.Views
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.DragMove();
+            }
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (textBox != null && string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = string.Empty;
+            }
+        }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (textBox != null && string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = string.Empty;
             }
         }
     }

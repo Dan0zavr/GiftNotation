@@ -11,9 +11,9 @@ namespace GiftNotation.Models
     {
         public int ContactId { get; set; }
         public string? ContactName { get; set; } = string.Empty;
-        public DateTime? Bday { get; set; } = null;
+        public DateTime Bday { get; set; } = DateTime.MinValue;
         public string? RelpTypeName { get; set; } = string.Empty;
-        public ObservableCollection<Gifts?> SelectedGifts { get; set; } = null!;
+        public ObservableCollection<Gifts?> MyGifts { get; set; } = null!;
 
 
     }

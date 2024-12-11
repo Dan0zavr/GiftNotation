@@ -7,10 +7,26 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
 
+
+    <UserControl.Resources>
+        <local:LookupConverter x:Key="LookupConverter"/>
+        <Style x:Key="CalendarDayButtonStyle" TargetType="CalendarDayButton">
+            <Style.Triggers>
+                <DataTrigger Value="True">
+                    <DataTrigger.Binding>
+                        <MultiBinding Converter="{StaticResource LookupConverter}">
+                            <Binding />
+                            <Binding Path="DataContext.Events" RelativeSource="{RelativeSource AncestorType=Calendar}" />
+                        </MultiBinding>
+                    </DataTrigger.Binding>
+                    <Setter Property="Background" Value="LightBlue" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
     <Viewbox Stretch="Uniform" StretchDirection="UpOnly" Margin="0,0,0,0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="2">
-        <Calendar Name="eventCalendar" SelectedDatesChanged="DateEnterNewEvent">
-            
-        </Calendar>
+        <Calendar Name="eventCalendar" SelectedDatesChanged="DateEnterNewEvent" CalendarDayButtonStyle="{DynamicResource CalendarDayButtonStyle}"/>
     </Viewbox>
 
 </UserControl>

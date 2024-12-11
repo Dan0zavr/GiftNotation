@@ -27,7 +27,7 @@ namespace GiftNotation.Commands.ContactCommands
 
         public bool CanExecute(object? parameter)
         {
-            return true;
+            return _viewModel.SelectedContact != null;
         }
 
         public void Execute(object? parameter)
@@ -39,6 +39,11 @@ namespace GiftNotation.Commands.ContactCommands
             };
 
             changeContactWindow.ShowDialog();
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

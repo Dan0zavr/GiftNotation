@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GiftNotation.Views"
-      xmlns:commands="clr-namespace:GiftNotation.Commands"
+      xmlns:commands="clr-namespace:GiftNotation.Commands.EventCommands"
       mc:Ignorable="d" 
       Height="400" Width="700">
 
@@ -242,8 +242,30 @@
 
                     <DataGridTextColumn Header="Тип" Binding="{Binding EventTypeName, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
 
-                    <DataGridTextColumn Header="Люди" Binding="{Binding ContactsOnEvent, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-
+                    <DataGridTemplateColumn Header="Люди" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ListBox ItemsSource="{Binding ContactsOnEvent}" 
+                     HorizontalAlignment="Stretch" 
+                     VerticalAlignment="Stretch"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" />
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <!-- Центрируем текст -->
+                                            <TextBlock Text="{Binding ContactName}" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center" />
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

@@ -23,7 +23,7 @@ namespace GiftNotation.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("Bday")
+                    b.Property<DateTime>("Bday")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ContactName")

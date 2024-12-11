@@ -24,7 +24,7 @@ namespace GiftNotation.ViewModels
         public ObservableCollection<RelpType> RelpTypes { get; private set; } = new ObservableCollection<RelpType>();
 
         // Для хранения выбранных подарков
-        public ObservableCollection<Gifts> SelectedGifts { get; private set; } = new ObservableCollection<Gifts>();
+        public ObservableCollection<Gifts> _selectedGifts = new ObservableCollection<Gifts>();
 
         public string ContactName
         {
@@ -42,6 +42,12 @@ namespace GiftNotation.ViewModels
         {
             get => _selectedRelpType;
             set => SetProperty(ref _selectedRelpType, value);
+        }
+
+        public ObservableCollection<Gifts> SelectedGifts
+        {
+            get => _selectedGifts;
+            set => SetProperty(ref _selectedGifts, value);
         }
 
         public ICommand AddContactCommand { get; }
@@ -71,20 +77,7 @@ namespace GiftNotation.ViewModels
             {
                 RelpTypes.Add(relpType);
             }
-        }
-
-        // Метод для обработки выбора подарков (опционально)
-        public void ToggleGiftSelection(Gifts gift)
-        {
-            if (SelectedGifts.Contains(gift))
-            {
-                SelectedGifts.Remove(gift);
-            }
-            else
-            {
-                SelectedGifts.Add(gift);
-            }
-        }
+        }   
     }
 
 }

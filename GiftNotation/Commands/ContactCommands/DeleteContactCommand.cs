@@ -31,19 +31,14 @@ namespace GiftNotation.Commands.ContactCommands
         {
             if (_viewModel.SelectedContact == null) return;
 
-            try
-            {
                 // Удаление подарка
                 await _contactService.DeleteContactAsync(_viewModel.SelectedContact.ContactId);
 
                 // Удаление из коллекции и сброс выделения
                 _viewModel.Contacts.Remove(_viewModel.SelectedContact);
                 _viewModel.SelectedContact = null;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Ошибка при удалении подарка: {ex.Message}");
-            }
+            
+            
         }
         public void RaiseCanExecuteChanged()
         {
