@@ -158,6 +158,11 @@ namespace GiftNotation.Services
             await _context.SaveChangesAsync();
         }
 
+        public async Task<IEnumerable<EventType>> GetEventTypesAsync()
+        {
+            return await _context.EventTypes.ToListAsync();
+        }
+
     }
 }
 

@@ -50,21 +50,9 @@
                 <views:ChangeEvent/>
             </DataTemplate>
 
-            <!--<DataTemplate DataType="{x:Type viewmodels:EventViewModel}">
-                <views:Page3/>
+            <DataTemplate DataType="{x:Type viewmodels:FiltersViewModel}">
+                <views:Filters/>
             </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewmodels:ContactViewModel}">
-                <views:People/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewmodels:ProfileViewModel}">
-                <views:Profile/>
-            </DataTemplate>
-
-            <DataTemplate DataType="{x:Type viewmodels:SettingsViewModel}">
-                <views:SettingsView/>
-            </DataTemplate>-->
 
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Global User Interface"/>

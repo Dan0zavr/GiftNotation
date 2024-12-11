@@ -53,6 +53,7 @@ namespace GiftNotation
                     services.AddScoped<GiftViewModel>();
                     services.AddScoped<MainViewModel>();
                     services.AddScoped<CalendarViewModel>();
+                    services.AddScoped<FiltersViewModel>();
 
                     // Регистрация Navigator
                     services.AddScoped<INavigator, Navigator>();
