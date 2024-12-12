@@ -20,7 +20,6 @@ namespace GiftNotation.State.Navigators
     public interface INavigator
     {
         ViewModelBase CurrentViewModel { get; set; }
-        
         ICommand UpdateCurrentVMCommand { get; }
     }
 }

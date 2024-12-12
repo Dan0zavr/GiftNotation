@@ -29,7 +29,7 @@ namespace GiftNotation.Commands.EventCommands
 
         public async void Execute(object? parameter)
         {
-            if (_eventViewModel.selectedEvent == null) return;
+            if (_eventViewModel.SelectedEvent == null) return;
 
             try
             {

@@ -9,8 +9,14 @@
              WindowStyle="None"
              Topmost="True"
              ResizeMode="NoResize"
+             Visibility="{Binding IsFiltersWindowVisible}"
              WindowStartupLocation="Manual"
              Left="100" Top="100">
+
+    <Window.Resources>
+        <local:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    </Window.Resources>
+
     <StackPanel Background="#2c2b2a" >
         <Grid Margin="0, 10, 0, 0">
             <Grid.ColumnDefinitions>

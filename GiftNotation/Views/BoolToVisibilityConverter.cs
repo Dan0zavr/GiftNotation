@@ -1,32 +1,33 @@
-﻿using GiftNotation.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows;
 
 namespace GiftNotation.Views
 {
-    public class ButtonToFiltersParameterConverter : IValueConverter
+    [ValueConversion(typeof(bool), typeof(Visibility))]
+    public class BoolToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is Button button && button.DataContext is FiltersViewModel viewModel)
+            if (value is bool boolValue)
             {
-                return viewModel; // Возвращаем FiltersViewModel
+                return boolValue ? Visibility.Visible : Visibility.Collapsed;
             }
-
-            return DependencyProperty.UnsetValue;
+            return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotImplementedException();
+            if (value is Visibility visibility)
+            {
+                return visibility == Visibility.Visible;
+            }
+            return false;
         }
     }
-
 }

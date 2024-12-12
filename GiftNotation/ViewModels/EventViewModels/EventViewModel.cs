@@ -2,6 +2,8 @@
 using GiftNotation.Commands.EventCommands;
 using GiftNotation.Models;
 using GiftNotation.Services;
+using GiftNotation.Views;
+using GiftNotation.State.Navigators;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,29 +12,34 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.ComponentModel;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace GiftNotation.ViewModels
 {
+    using System;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.Runtime.CompilerServices;
+    using System.Windows;
+    using System.Windows.Input;
+
     public class EventViewModel : ViewModelBase
     {
         private ObservableCollection<DisplayEventModel> _events;
         private readonly EventService _eventService;
         private readonly ContactService _contactService;
         private readonly FiltersViewModel _filtersViewModel;
+        private Window? _filtersWindow;
 
-        public DisplayEventModel selectedEvent;
+        private bool _isFiltersWindowVisible;
 
-
-        public DisplayEventModel SelectedEvent 
-        { 
-            get => selectedEvent;
-            set
-            {
-                SetProperty(ref selectedEvent, value);
-                ((DeleteEventCommand)DeleteEventCommand).RaiseCanExecuteChanged();
-                ((OpenChangeEventCommand)OpenChangeEventCommand).RaiseCanExecuteChanged();
-            }
+        public bool IsFiltersWindowVisible
+        {
+            get => _isFiltersWindowVisible;
+            set => SetProperty(ref _isFiltersWindowVisible, value);
         }
+
+        public DisplayEventModel SelectedEvent { get; set; }
 
         public ObservableCollection<DisplayEventModel> Events
         {
@@ -50,20 +57,48 @@ namespace GiftNotation.ViewModels
             _eventService = eventService;
             _contactService = contactService;
             _filtersViewModel = filtersViewModel;
+
             DeleteEventCommand = new DeleteEventCommand(this, _eventService);
             OpenAddEventCommand = new OpenAddEventCommand(eventService, this, _contactService);
             OpenChangeEventCommand = new OpenChangeEventCommand(this, _eventService, _contactService);
-            OpenCloseFilterCommand = new OpenCloseFilterCommand(_filtersViewModel);
+            OpenCloseFilterCommand = new OpenCloseFilterCommand(this);
+
             LoadEvents();
+        }
+
+        public event EventHandler? ViewModelChanging;
+
+        public void ToggleFiltersWindow()
+        {
+            if (_filtersWindow == null || !_filtersWindow.IsVisible)
+            {
+                // Создаем и отображаем окно
+                _filtersWindow = new Filters
+                {
+                    DataContext = _filtersViewModel,
+                    Owner = Application.Current.MainWindow,
+                    Topmost = true // Окно всегда поверх других
+                };
+                _filtersWindow.Closed += (s, e) => _filtersWindow = null; // Сбрасываем переменную при закрытии окна
+                _filtersWindow.Show();
+            }
+            else
+            {
+                // Закрываем окно
+                _filtersWindow.Close();
+            }
+        }
+
+        public void OnViewModelChanging()
+        {
+            ViewModelChanging?.Invoke(this, EventArgs.Empty);
         }
 
         public async void LoadEvents()
         {
-            // Здесь вы можете подключиться к базе данных через сервис или репозиторий
-            var events = await _eventService.GetEventsAsync(); // Это пример, ваш метод получения данных
+            var events = await _eventService.GetEventsAsync();
             Events = new ObservableCollection<DisplayEventModel>(events);
         }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
     }
+
 }

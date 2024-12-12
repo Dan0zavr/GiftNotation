@@ -29,7 +29,7 @@ namespace GiftNotation.ViewModels
 
         private Contact _selectedContact;
 
-        public ObservableCollection<EventType> Events { get; private set; } = new ObservableCollection<EventType>();
+        public ObservableCollection<EventType> EventTypes { get; private set; } = new ObservableCollection<EventType>();
         public ObservableCollection<Contact> Contacts { get; private set; } = new ObservableCollection<Contact>();
         public ObservableCollection<Contact> ContactsOnEvent { get; private set; } = new ObservableCollection<Contact>();
 
@@ -70,8 +70,15 @@ namespace GiftNotation.ViewModels
 
         public string EventName
         {
-            get { return _eventName; }
-            set => SetProperty(ref _eventName, value);
+            get => _eventName;
+            set
+            {
+                if (SetProperty(ref _eventName, value))
+                {
+                    // Пример правильного вызова RaiseCanExecuteChanged для конкретной команды
+                    ChangeEventCommand.RaiseCanExecuteChanged();
+                }
+            }
         }
         public DateTime EventDate
         {
@@ -88,7 +95,7 @@ namespace GiftNotation.ViewModels
             set => SetProperty(ref _selectedEventType, value);
         }
 
-        public ICommand ChangeEventCommand { get; }
+        public ChangeEventCommand ChangeEventCommand { get; set; }
 
         public ChangeEventViewModel(EventService eventService, EventViewModel eventViewModel, ContactService contactService)
         {
@@ -101,7 +108,7 @@ namespace GiftNotation.ViewModels
             LoadData();
             LoadContactsOnEvent();
             LoadContacts();
-            
+            LoadEventTypes();
         }
 
         private async void LoadData()
@@ -128,6 +135,12 @@ namespace GiftNotation.ViewModels
         {
             var contacts = await _contactService.GetAllContactsOnEvent(_selectedEvent.EventId);
             ContactsOnEvent = new ObservableCollection<Contact>(contacts);
+        }
+
+        private async void LoadEventTypes()
+        {
+            var eventTypes = await _eventService.GetEventTypesAsync();
+            EventTypes = new ObservableCollection<EventType>(eventTypes);
         }
     }
 }

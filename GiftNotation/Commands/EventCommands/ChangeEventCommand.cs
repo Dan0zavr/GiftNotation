@@ -28,7 +28,7 @@ namespace GiftNotation.Commands.EventCommands
 
         public bool CanExecute(object? parameter)
         {
-            return true;
+            return !string.IsNullOrWhiteSpace(_changeViewModel.EventName);
         }
 
         public async void Execute(object? parameter)
@@ -48,6 +48,11 @@ namespace GiftNotation.Commands.EventCommands
             {
                 window.Close();
             }
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }
