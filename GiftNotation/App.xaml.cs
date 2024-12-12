@@ -77,15 +77,37 @@ namespace GiftNotation
                 });
         }
 
-        protected override void OnStartup(StartupEventArgs e)
+        private NotificationService _notificationService;
+
+
+        private async Task CheckEventsOnStartup()
         {
+            // Получаем все предстоящие события
+            var upcomingEvents = await _notificationService.GetAllUpcomingEventsAsync();
+
+            // Проверяем, если есть события, которые нужно напомнить
+            _notificationService.CheckNextEvents(upcomingEvents);
+        }
+
+        protected override async void OnStartup(StartupEventArgs e)
+        {
+            // Запускаем хост
             _host.Start();
 
-            // Применение миграций
+            // Создаем scope для работы с сервисами
             using (var scope = _host.Services.CreateScope())
             {
+                // Получаем DbContext
                 var context = scope.ServiceProvider.GetRequiredService<GiftNotationDbContext>();
+
+                // Применяем миграции
                 context.Database.Migrate();
+
+                // Создаем экземпляр NotificationService
+                _notificationService = new NotificationService(context);
+
+                // Проверяем праздники при запуске приложения
+                await CheckEventsOnStartup();
             }
 
             // Запуск главного окна
@@ -95,6 +117,7 @@ namespace GiftNotation
 
             base.OnStartup(e);
         }
+
 
         protected override async void OnExit(ExitEventArgs e)
         {
