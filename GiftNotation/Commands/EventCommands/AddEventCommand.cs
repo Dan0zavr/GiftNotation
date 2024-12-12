@@ -13,7 +13,6 @@ namespace GiftNotation.Commands.EventCommands
 {
     public class AddEventCommand : ICommand
     {
-        
         private readonly EventService _eventService;
         private readonly AddEventViewModel _addViewModel;
         private readonly EventViewModel _eventViewModel;
@@ -29,7 +28,7 @@ namespace GiftNotation.Commands.EventCommands
 
         public bool CanExecute(object? parameter)
         {
-            return true;
+            return !string.IsNullOrWhiteSpace(_addViewModel.EventName);  // Исправлено условие
         }
 
         public async void Execute(object? parameter)
@@ -42,15 +41,18 @@ namespace GiftNotation.Commands.EventCommands
             };
 
             await _eventService.AddEventAsync(newContact, _addViewModel);
-
-            // Обновляем список подарков после добавления
             _eventViewModel.LoadEvents();
-
 
             if (parameter is Window window)
             {
                 window.Close();
             }
         }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+        }
     }
+
 }

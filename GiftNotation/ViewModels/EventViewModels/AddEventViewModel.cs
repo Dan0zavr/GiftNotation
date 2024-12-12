@@ -25,7 +25,7 @@ namespace GiftNotation.ViewModels
         private Contact _selectedContact;
         private AddContactOnEventOnAddCommand _addContactOnEventCommand;
 
-        public ObservableCollection<EventType> Events { get; private set; } = new ObservableCollection<EventType>();
+        public ObservableCollection<EventType> EventTypes { get; private set; } = new ObservableCollection<EventType>();
         public ObservableCollection<Contact> Contacts { get; set; } = new ObservableCollection<Contact>();
         public ObservableCollection<Contact> ContactsOnEvent { get; set; } = new ObservableCollection<Contact>();
 
@@ -44,7 +44,7 @@ namespace GiftNotation.ViewModels
         }
 
         public DeleteContactFromEventOnAddCommand DeleteContactFromEventCommand { get; }
-
+        public AddEventCommand AddEventCommand { get; }
         public AddContactOnEventOnAddCommand AddContactOnEventCommand => _addContactOnEventCommand; // Команда доступна в ViewModel
 
         public Contact SelectedContact
@@ -60,12 +60,20 @@ namespace GiftNotation.ViewModels
             }
         }
 
-        
+
         public string EventName
         {
-            get { return _eventName; }
-            set => SetProperty(ref _eventName, value);
+            get => _eventName;
+            set
+            {
+                if (SetProperty(ref _eventName, value))
+                {
+                    // Пример правильного вызова RaiseCanExecuteChanged для конкретной команды
+                    AddEventCommand.RaiseCanExecuteChanged();
+                }
+            }
         }
+
 
         public DateTime EventDate
         {
@@ -79,7 +87,7 @@ namespace GiftNotation.ViewModels
             set => SetProperty(ref _eventType, value);
         }
 
-        public ICommand AddEventCommand { get; }
+       
 
         public AddEventViewModel(EventService eventService, EventViewModel eventViewModel, ContactService contactService)
         {
@@ -90,12 +98,19 @@ namespace GiftNotation.ViewModels
             _addContactOnEventCommand = new AddContactOnEventOnAddCommand(this);
             DeleteContactFromEventCommand = new DeleteContactFromEventOnAddCommand(this, _contactService);
             LoadContacts();
+            LoadEventTypes();
         }
 
         private async void LoadContacts()
         {
             var contacts = await _contactService.GetAllContacts();
             Contacts = new ObservableCollection<Contact>(contacts);
+        }
+
+        private async void LoadEventTypes()
+        {
+            var eventTypes = await _eventService.GetEventTypesAsync();
+            EventTypes = new ObservableCollection<EventType>(eventTypes);
         }
 
     }

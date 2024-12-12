@@ -55,8 +55,8 @@ namespace GiftNotation
                     services.AddScoped<CalendarViewModel>();
                     services.AddScoped<FiltersViewModel>();
 
-                    // Регистрация Navigator
-                    services.AddScoped<INavigator, Navigator>();
+                    // Регистрация Navigator как Singleton
+                    services.AddSingleton<INavigator, Navigator>();
 
                     // Регистрация сервисов
                     services.AddScoped<GiftService>();
@@ -74,6 +74,9 @@ namespace GiftNotation
 
                     // Регистрация команды
                     services.AddScoped<UpdateCurrentVMCommand>();
+
+                    // Регистрация команды OpenCloseFilterCommand
+                    services.AddScoped<OpenCloseFilterCommand>();
                 });
         }
 
