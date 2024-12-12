@@ -14,11 +14,13 @@ namespace GiftNotation.Commands.EventCommands
     {
         
         private readonly EventService _eventService;
+        private readonly ContactService _contactService;
         private readonly EventViewModel _viewModel;
 
-        public OpenAddEventCommand(EventService eventService, EventViewModel eventViewModel)
+        public OpenAddEventCommand(EventService eventService, EventViewModel eventViewModel, ContactService contactService)
         {
             _eventService = eventService;
+            _contactService = contactService;
             _viewModel = eventViewModel;
         }
 
@@ -28,7 +30,7 @@ namespace GiftNotation.Commands.EventCommands
 
         public void Execute(object? parameter)
         {
-            var addEventViewModel = new AddEventViewModel(_eventService, _viewModel);
+            var addEventViewModel = new AddEventViewModel(_eventService, _viewModel, _contactService);
             var addEventWindow = new AddEvent
             {
                 DataContext = addEventViewModel

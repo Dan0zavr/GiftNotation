@@ -31,6 +31,47 @@ namespace GiftNotation.Services
             return await _context.RelpTypes.ToListAsync();
         }
 
+        public async Task<IEnumerable<Contact>> GetAllContactsOnEvent(int eventId)
+        {
+            // Используем запрос, чтобы получить все контакты, связанные с данным событием
+            var contacts = await _context.EventContacts
+                .Where(ec => ec.EventId == eventId)
+                .Include(ec => ec.Contact) // Включаем информацию о контакте
+                .Select(ec => ec.Contact) // Получаем только контакты
+                .ToListAsync();
+
+            return contacts;
+        }
+
+        public async Task<EventContact?> GetEventContactAsync(int eventId, int contactId)
+        {
+            return await _context.EventContacts
+                .FirstOrDefaultAsync(ec => ec.EventId == eventId && ec.ContactId == contactId);
+        }
+
+        // Удаление связи между событием и контактом
+        public void DeleteEventContact(EventContact eventContact)
+        {
+            _context.EventContacts.Remove(eventContact);
+        }
+
+        // Сохранение изменений в базе данных
+        public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Contact>> GetAllContactsNotOnEvent(int eventId)
+        {
+            // Получаем все контакты, которые не привязаны к событию
+            var contacts = await _context.Contacts
+                .Where(c => !_context.EventContacts
+                    .Any(ec => ec.ContactId == c.ContactId && ec.EventId == eventId))
+                .ToListAsync();
+
+            return contacts;
+        }
+
         public async Task<IEnumerable<DisplayContactModel>> GetContactDisplayModelByIdAsync(int contactId)
         {
             // Убедимся, что контакт с заданным ID существует

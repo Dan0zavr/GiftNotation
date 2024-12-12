@@ -78,7 +78,7 @@ namespace GiftNotation.Views {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/GiftNotation;component/views/changinggifts.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/GiftNotation;V1.0.0.0;component/views/changinggifts.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\ChangingGifts.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

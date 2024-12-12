@@ -38,10 +38,9 @@ namespace GiftNotation.Commands.EventCommands
                 EventId = _changeViewModel.EventId,
                 EventName = _changeViewModel.EventName,
                 EventDate = _changeViewModel.EventDate,
-                EventTypeName = _changeViewModel.SelectedEventType?.EventTypeName,
-                ContactsOnEvent = _changeViewModel.ContactOnEvent ?? null
+                EventTypeName = _changeViewModel.SelectedEventType?.EventTypeName
             };
-            await _eventService.UpdateEventAsync(changeEvent);
+            await _eventService.UpdateEventAsync(changeEvent, _changeViewModel);
 
             _eventViewModel.LoadEvents();
 

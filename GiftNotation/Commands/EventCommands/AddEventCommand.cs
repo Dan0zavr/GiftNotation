@@ -41,7 +41,7 @@ namespace GiftNotation.Commands.EventCommands
                 EventTypeName = _addViewModel.EventType?.EventTypeName ?? string.Empty,
             };
 
-            await _eventService.AddEventAsync(newContact);
+            await _eventService.AddEventAsync(newContact, _addViewModel);
 
             // Обновляем список подарков после добавления
             _eventViewModel.LoadEvents();

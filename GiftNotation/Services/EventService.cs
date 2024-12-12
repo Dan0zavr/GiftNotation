@@ -1,5 +1,6 @@
 ﻿using GiftNotation.Data;
 using GiftNotation.Models;
+using GiftNotation.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -49,7 +50,7 @@ namespace GiftNotation.Services
             return await _context.Events.Select(d => d.EventDate).ToListAsync();
         }
 
-        public async Task AddEventAsync(DisplayEventModel eventModel)
+        public async Task AddEventAsync(DisplayEventModel eventModel, AddEventViewModel addEventViewModel)
         {
             var typeId = await EnsureTypeAsync(eventModel.EventTypeName);
 
@@ -62,6 +63,30 @@ namespace GiftNotation.Services
 
             _context.Events.Add(event_);
             await _context.SaveChangesAsync();
+
+            var addedEvent = await _context.Events
+            .OrderByDescending(e => e.EventId) // Упорядочиваем по убыванию ID
+            .FirstOrDefaultAsync();
+
+            if (addedEvent != null)
+            {
+                // 5. Создаем связи между событием и контактами
+                foreach (var contact in addEventViewModel.ContactsOnEvent)
+                {
+                    var eventContact = new EventContact
+                    {
+                        EventId = addedEvent.EventId,
+                        ContactId = contact.ContactId
+                    };
+
+                    // Добавляем связь в контекст
+                    _context.EventContacts.Add(eventContact);
+                }
+
+                // 6. Сохраняем изменения
+                await _context.SaveChangesAsync();
+            }
+
         }
 
         public async Task<int?> EnsureTypeAsync(string? typeName)
@@ -123,38 +148,43 @@ namespace GiftNotation.Services
                 .ToListAsync();
 
         }
-        public async Task UpdateEventAsync(DisplayEventModel _event)
+        public async Task UpdateEventAsync(DisplayEventModel eventModel, ChangeEventViewModel addEventViewModel)
         {
-            var eventChange = await _context.Events.FindAsync(_event.EventId);
-            var eventContactChange = await _context.EventContacts.FindAsync(_event.EventId, _event.ContactsOnEvent);
+            // 1. Получаем событие по ID (предполагается, что eventModel содержит EventId)
+            var existingEvent = await _context.Events
+                .FirstOrDefaultAsync(e => e.EventId == eventModel.EventId);
 
-            eventChange.EventName = _event.EventName;
-            eventChange.EventDate = _event.EventDate;
-            eventChange.EventTypeId = await EnsureTypeAsync(_event.EventTypeName);
+            if (existingEvent == null)
+            {
+                // Если событие не найдено, можно выбросить исключение или обработать ошибку
+                throw new Exception("Событие не найдено");
+            }
 
-            //if (eventContactChange != null)
-            //{
-            //    _context.GiftEvents.Remove(eventContactChange);
-            //    var newGiftEvent = new GiftEvent()
-            //    {
-            //        ContactId = _event.ContactsOnEvent.EventId ?? 0,
-            //        EventId = _event.EventId
-            //    };
-            //    _context.GiftEvents.Add(newGiftEvent);
-            //}
-            //else
-            //{
-            //    if (_gift.SelectedEventId != null)
-            //    {
-            //        var newGiftEvent = new GiftEvent()
-            //        {
-            //            EventId = _gift.SelectedEventId ?? 0,
-            //            GiftId = _gift.GiftId
-            //        };
+            // 2. Обновляем информацию о событии
+            existingEvent.EventName = eventModel.EventName;
+            existingEvent.EventDate = eventModel.EventDate;
+            existingEvent.EventTypeId = await EnsureTypeAsync(eventModel.EventTypeName);
 
-            //        _context.GiftEvents.Add(newGiftEvent);
-            //    }
-            //}
+            // 3. Удаляем старые связи между событием и контактами
+            var eventContactsToRemove = _context.EventContacts
+                .Where(ec => ec.EventId == eventModel.EventId);
+
+            _context.EventContacts.RemoveRange(eventContactsToRemove);
+
+            // 4. Создаем новые связи между событием и контактами
+            foreach (var contact in addEventViewModel.ContactsOnEvent)
+            {
+                var eventContact = new EventContact
+                {
+                    EventId = eventModel.EventId,
+                    ContactId = contact.ContactId
+                };
+
+                // Добавляем связь в контекст
+                _context.EventContacts.Add(eventContact);
+            }
+
+            // 5. Сохраняем изменения
             await _context.SaveChangesAsync();
         }
 

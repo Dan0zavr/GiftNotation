@@ -45,7 +45,7 @@ namespace GiftNotation.ViewModels.Factories
                 case ViewType.Contacts:
                     return new ContactViewModel(_contactService, _giftService);
                 case ViewType.Events:
-                    return new EventViewModel(_eventService, _filtersViewModel);
+                    return new EventViewModel(_eventService, _filtersViewModel, _contactService);
                 case ViewType.Gifts:
                     return new GiftViewModel(_giftService, _contactService, _eventService);
                 default:

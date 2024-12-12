@@ -9,8 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using System;
-using System.Windows.Input;
 using System.ComponentModel;
 
 namespace GiftNotation.ViewModels
@@ -19,6 +17,7 @@ namespace GiftNotation.ViewModels
     {
         private ObservableCollection<DisplayEventModel> _events;
         private readonly EventService _eventService;
+        private readonly ContactService _contactService;
         private readonly FiltersViewModel _filtersViewModel;
 
         public DisplayEventModel selectedEvent;
@@ -46,13 +45,14 @@ namespace GiftNotation.ViewModels
         public ICommand OpenChangeEventCommand { get; set; }
         public ICommand OpenCloseFilterCommand { get; set; }
 
-        public EventViewModel(EventService eventService, FiltersViewModel filtersViewModel)
+        public EventViewModel(EventService eventService, FiltersViewModel filtersViewModel, ContactService contactService)
         {
             _eventService = eventService;
+            _contactService = contactService;
             _filtersViewModel = filtersViewModel;
             DeleteEventCommand = new DeleteEventCommand(this, _eventService);
-            OpenAddEventCommand = new OpenAddEventCommand(eventService, this);
-            OpenChangeEventCommand = new OpenChangeEventCommand(this, _eventService);
+            OpenAddEventCommand = new OpenAddEventCommand(eventService, this, _contactService);
+            OpenChangeEventCommand = new OpenChangeEventCommand(this, _eventService, _contactService);
             OpenCloseFilterCommand = new OpenCloseFilterCommand(_filtersViewModel);
             LoadEvents();
         }

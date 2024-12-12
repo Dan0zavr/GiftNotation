@@ -20,13 +20,48 @@ namespace GiftNotation.ViewModels
         private string _eventType;
 
         private readonly EventService _eventService;
+        private readonly ContactService _contactService;
         private readonly EventViewModel _eventViewModel;
         private DisplayEventModel _selectedEvent;
         private EventType _selectedEventType;
 
-        public ObservableCollection<Contact?> _selectedContact;
+        private AddContactOnEventOnChangeCommand _addContactOnEventCommand;
+
+        private Contact _selectedContact;
+
         public ObservableCollection<EventType> Events { get; private set; } = new ObservableCollection<EventType>();
         public ObservableCollection<Contact> Contacts { get; private set; } = new ObservableCollection<Contact>();
+        public ObservableCollection<Contact> ContactsOnEvent { get; private set; } = new ObservableCollection<Contact>();
+
+        private Contact _selectedContactOnEvent;
+        public Contact SelectedContactOnEvent
+        {
+            get => _selectedContactOnEvent;
+            set
+            {
+                if (SetProperty(ref _selectedContactOnEvent, value))
+                {
+                    // Обновляем состояние кнопки удаления
+                    DeleteContactFromEventOnChangeCommand.RaiseCanExecuteChanged();
+                }
+            }
+        }
+
+        public Contact SelectedContact
+        {
+            get => _selectedContact;
+            set
+            {
+                if (SetProperty(ref _selectedContact, value))
+                {
+                    // Уведомляем команду, что условие для CanExecute могло измениться
+                    AddContactOnEventOnChangeCommand.RaiseCanExecuteChanged();
+                }
+            }
+        }
+
+        public DeleteContactFromEventOnChangeCommand DeleteContactFromEventOnChangeCommand { get; }
+        public AddContactOnEventOnChangeCommand AddContactOnEventOnChangeCommand => _addContactOnEventCommand;
 
         public int EventId
         {
@@ -47,11 +82,6 @@ namespace GiftNotation.ViewModels
             }
         }
 
-        public ObservableCollection<Contact?> ContactOnEvent
-        {
-            get { return _selectedContact; }
-            set => SetProperty(ref _selectedContact, value);
-        }
         public EventType? SelectedEventType
         {
             get { return _selectedEventType; }
@@ -60,13 +90,18 @@ namespace GiftNotation.ViewModels
 
         public ICommand ChangeEventCommand { get; }
 
-        public ChangeEventViewModel(EventService eventService, EventViewModel eventViewModel)
+        public ChangeEventViewModel(EventService eventService, EventViewModel eventViewModel, ContactService contactService)
         {
-
+            _contactService = contactService;
             _eventService = eventService;
             _eventViewModel = eventViewModel;
             ChangeEventCommand = new ChangeEventCommand(eventService, this, _eventViewModel);
+            DeleteContactFromEventOnChangeCommand = new DeleteContactFromEventOnChangeCommand(this, _contactService);
+            _addContactOnEventCommand = new AddContactOnEventOnChangeCommand(this);
             LoadData();
+            LoadContactsOnEvent();
+            LoadContacts();
+            
         }
 
         private async void LoadData()
@@ -81,6 +116,18 @@ namespace GiftNotation.ViewModels
             _date = _selectedEvent.EventDate;
             _eventType = _selectedEvent.EventTypeName;
 
+        }
+
+        private async void LoadContacts()
+        {
+            var contacts = await _contactService.GetAllContactsNotOnEvent(_selectedEvent.EventId);
+            Contacts = new ObservableCollection<Contact>(contacts);
+        }
+
+        private async void LoadContactsOnEvent()
+        {
+            var contacts = await _contactService.GetAllContactsOnEvent(_selectedEvent.EventId);
+            ContactsOnEvent = new ObservableCollection<Contact>(contacts);
         }
     }
 }

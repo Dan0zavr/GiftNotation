@@ -14,11 +14,13 @@ namespace GiftNotation.Commands.EventCommands
     {
         private readonly EventViewModel _viewModel;
         private readonly EventService _eventService;
+        private readonly ContactService _contactService;
 
-        public OpenChangeEventCommand(EventViewModel viewModel, EventService eventService)
+        public OpenChangeEventCommand(EventViewModel viewModel, EventService eventService, ContactService contactService)
         {
             _viewModel = viewModel;
             _eventService = eventService;
+            _contactService = contactService;
         }
 
         public event EventHandler? CanExecuteChanged;
@@ -30,7 +32,7 @@ namespace GiftNotation.Commands.EventCommands
 
         public void Execute(object? parameter)
         {
-            var changeContactViewModel = new ChangeEventViewModel(_eventService, _viewModel);
+            var changeContactViewModel = new ChangeEventViewModel(_eventService, _viewModel, _contactService);
             var changeContactWindow = new ChangeEvent
             {
                 DataContext = changeContactViewModel

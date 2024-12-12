@@ -25,14 +25,9 @@ namespace GiftNotation.Views
         }
 
 
-        private void ButtonChanging_ClosePeople(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void ButtonChanging_DonePeople(object sender, RoutedEventArgs e)
-        {
-            //Тут должна быть привязка к классу Person (MyFriends)
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
@@ -40,6 +35,25 @@ namespace GiftNotation.Views
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 this.DragMove();
+            }
+        }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (textBox != null && string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = string.Empty;
+            }
+        }
+
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (textBox != null && string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = string.Empty;
             }
         }
     }
