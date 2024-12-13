@@ -31,7 +31,19 @@ namespace GiftNotation.State.Navigators
                 //Устанавливаем текущую модель представления и сообщаем об изменении
                 _currentViewModel = value;
                 OnPropertyChanged(nameof(CurrentViewModel));
+                if (_currentViewModel is EventViewModel eventViewModel)
+                {
+                    // Уведомляем о смене модели представления
+                    eventViewModel.OnViewModelChanging();
+                }
             }
+        }
+
+        public event Action? CurrentViewModelChanged;
+
+        private void OnCurrentViewModelChanged()
+        {
+            CurrentViewModelChanged?.Invoke();
         }
 
         //Команда выполняющаяся при нажатии на кнопку

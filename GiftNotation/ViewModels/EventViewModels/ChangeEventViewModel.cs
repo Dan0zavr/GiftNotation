@@ -17,7 +17,7 @@ namespace GiftNotation.ViewModels
         private int _eventId;
         private string _eventName;
         private DateTime _date;
-        private string _eventType;
+        private string _selectedEventTypeName;
 
         private readonly EventService _eventService;
         private readonly ContactService _contactService;
@@ -55,13 +55,13 @@ namespace GiftNotation.ViewModels
                 if (SetProperty(ref _selectedContact, value))
                 {
                     // Уведомляем команду, что условие для CanExecute могло измениться
-                    AddContactOnEventOnChangeCommand.RaiseCanExecuteChanged();
+                    ((AddContactOnEventOnChangeCommand)AddContactOnEventOnChangeCommand).RaiseCanExecuteChanged();
                 }
             }
         }
 
         public DeleteContactFromEventOnChangeCommand DeleteContactFromEventOnChangeCommand { get; }
-        public AddContactOnEventOnChangeCommand AddContactOnEventOnChangeCommand => _addContactOnEventCommand;
+        public ICommand AddContactOnEventOnChangeCommand => _addContactOnEventCommand;
 
         public int EventId
         {
@@ -95,6 +95,12 @@ namespace GiftNotation.ViewModels
             set => SetProperty(ref _selectedEventType, value);
         }
 
+        public string SelectedEventTypeName
+        {
+            get => _selectedEventTypeName;
+            set => SetProperty(ref _selectedEventTypeName, value);
+        }
+
         public ChangeEventCommand ChangeEventCommand { get; set; }
 
         public ChangeEventViewModel(EventService eventService, EventViewModel eventViewModel, ContactService contactService)
@@ -121,7 +127,7 @@ namespace GiftNotation.ViewModels
             _eventId = _selectedEvent.EventId;
             _eventName = _selectedEvent.EventName;
             _date = _selectedEvent.EventDate;
-            _eventType = _selectedEvent.EventTypeName;
+            _selectedEventTypeName = _selectedEvent.EventTypeName;
 
         }
 

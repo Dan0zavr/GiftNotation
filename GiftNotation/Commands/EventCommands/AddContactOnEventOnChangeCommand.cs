@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace GiftNotation.Commands.EventCommands
 {
-    public class AddContactOnEventOnChangeCommand
+    public class AddContactOnEventOnChangeCommand : ICommand
     {
         private readonly ChangeEventViewModel _viewModel;
 
@@ -39,10 +40,11 @@ namespace GiftNotation.Commands.EventCommands
             }
         }
 
-        // Уведомляем привязку, что состояние команды могло измениться
         public void RaiseCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
     }
+
 }
+

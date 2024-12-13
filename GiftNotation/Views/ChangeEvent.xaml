@@ -50,11 +50,13 @@ Background="Transparent" MouseDown="Window_MouseDown">
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Введите тип праздника:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
                         <ComboBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" ItemsSource="{Binding EventTypes}"
-                  DisplayMemberPath="EventTypeName"
-                  SelectedItem="{Binding EventType}"
-                  SelectedValuePath="EventTypeName"
-                  SelectedValue="{Binding SelectedEventType}"
-                  IsEditable="False"/>
+          DisplayMemberPath="EventTypeName"
+          SelectedItem="{Binding SelectedEventType}"
+          SelectedValue="{Binding SelectedEventTypeName}"
+          SelectedValuePath="EventTypeName"
+          IsEditable="False">
+                            
+                        </ComboBox>
                     </Grid>
                 </Border>
 
@@ -76,7 +78,7 @@ Background="Transparent" MouseDown="Window_MouseDown">
                         </StackPanel>
 
                         <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                            <Button Content="Добавить&gt;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#292a2c" FontSize="12" FontFamily="Bold" Height="18" Margin="3" Command="{Binding DeleteContactFromEventOnChangeCommand}">
+                            <Button Content="Добавить&gt;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#292a2c" FontSize="12" FontFamily="Bold" Height="18" Margin="3" Command="{Binding AddContactOnEventOnChangeCommand}">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Template">

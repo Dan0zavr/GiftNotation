@@ -29,6 +29,8 @@ namespace GiftNotation.ViewModels
         private readonly EventService _eventService;
         private readonly ContactService _contactService;
         private readonly FiltersViewModel _filtersViewModel;
+
+        public DisplayEventModel selectedEvent;
         private Window? _filtersWindow;
 
         private bool _isFiltersWindowVisible;
@@ -39,7 +41,16 @@ namespace GiftNotation.ViewModels
             set => SetProperty(ref _isFiltersWindowVisible, value);
         }
 
-        public DisplayEventModel SelectedEvent { get; set; }
+        public DisplayEventModel SelectedEvent
+        {
+            get => selectedEvent;
+            set
+            {
+                SetProperty(ref selectedEvent, value);
+                ((DeleteEventCommand)DeleteEventCommand).RaiseCanExecuteChanged();
+                ((OpenChangeEventCommand)OpenChangeEventCommand).RaiseCanExecuteChanged();
+            }
+        }
 
         public ObservableCollection<DisplayEventModel> Events
         {
