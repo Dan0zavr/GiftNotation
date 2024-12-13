@@ -181,7 +181,8 @@
                         <ComboBox FontSize="12" Padding="2" Width="390" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="0,0,0,0"  ItemsSource="{Binding Contacts}"
                         DisplayMemberPath="ContactName"
                         SelectedItem="{Binding SelectedContact}" 
-                        
+                        SelectedValue="{Binding ContactName}"
+                        SelectedValuePath="ContactName"
                         IsEditable="False"/>
 
                     </Grid>
@@ -195,10 +196,10 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Событие:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
                         <ComboBox Width="360" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Events}"
-                        DisplayMemberPath="EventName"
-                        SelectedItem="{Binding SelectedEvent}" 
-                        
-                        IsEditable="False"/>
+          DisplayMemberPath="EventName"
+          SelectedItem="{Binding SelectedEvent}"
+          SelectedValue="{Binding EventName}"
+          SelectedValuePath="EventName"/>
                     </Grid>
                 </Border>
 
@@ -212,7 +213,8 @@
                         <ComboBox Width="380" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Statuses}" 
                             DisplayMemberPath="StatusName" 
                             SelectedItem="{Binding SelectedStatus}" 
-                            
+                            SelectedValue="{Binding StatusName}"
+                            SelectedValuePath="StatusName"
                             IsEditable="False"/>
 
                     </Grid>

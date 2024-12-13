@@ -196,8 +196,10 @@ namespace GiftNotation.Services
         public async Task UpdateGiftAsync(DisplayGiftModel _gift)
         {
             var giftChange = await _context.Gifts.FindAsync(_gift.GiftId);
-            var giftEventChange = await _context.GiftEvents.FindAsync(_gift.GiftId, _gift.EventId);
-            var giftContactChange = await _context.GiftContacts.FindAsync(_gift.GiftId, _gift.ContactId);
+            if (giftChange == null)
+            {
+                throw new InvalidOperationException("Gift not found.");
+            }
 
             giftChange.GiftName = _gift.GiftName ?? string.Empty;
             giftChange.Description = _gift.Description ?? string.Empty;
@@ -206,52 +208,49 @@ namespace GiftNotation.Services
             giftChange.GiftPic = _gift.GiftPic ?? string.Empty;
             giftChange.StatusId = await EnsureStatusAsync(_gift.StatusName);
 
-            if(giftEventChange != null)
+            // Обновляем GiftEvent
+            if (_gift.SelectedEventId != null && _gift.SelectedEventId > 0)
             {
-                _context.GiftEvents.Remove(giftEventChange);
-                var newGiftEvent = new GiftEvent()
+                var relatedEvent = await _context.Events.FindAsync(_gift.SelectedEventId);
+                if (relatedEvent == null)
                 {
-                    EventId = _gift.SelectedEventId ?? 0,
+                    throw new InvalidOperationException("The specified event does not exist.");
+                }
+
+                var giftEventChange = await _context.GiftEvents
+                    .FirstOrDefaultAsync(ge => ge.GiftId == _gift.GiftId);
+
+                if (giftEventChange != null)
+                {
+                    _context.GiftEvents.Remove(giftEventChange);
+                }
+
+                var newGiftEvent = new GiftEvent
+                {
+                    EventId = _gift.SelectedEventId.Value,
+                    Event = relatedEvent,  // Указываем связанную сущность
                     GiftId = _gift.GiftId
                 };
                 _context.GiftEvents.Add(newGiftEvent);
             }
-            else
-            {
-                if (_gift.SelectedEventId != null)
-                {
-                    var newGiftEvent = new GiftEvent()
-                    {
-                        EventId = _gift.SelectedEventId ?? 0,
-                        GiftId = _gift.GiftId
-                    };
-                    
-                    _context.GiftEvents.Add(newGiftEvent);
-                }
-            }
 
-            if (giftContactChange != null)
+            // Обновляем GiftContact
+            if (_gift.SelectedContactId != null && _gift.SelectedContactId > 0)
             {
-                _context.GiftContacts.Remove(giftContactChange);
-                var newGiftContact = new GiftContact()
+                var giftContactChange = await _context.GiftContacts
+                    .FirstOrDefaultAsync(gc => gc.GiftId == _gift.GiftId);
+
+                if (giftContactChange != null)
                 {
-                    ContactId = _gift.SelectedContactId ?? 0,
+                    _context.GiftContacts.Remove(giftContactChange);
+                }
+
+                var newGiftContact = new GiftContact
+                {
+                    ContactId = _gift.SelectedContactId.Value,
                     GiftId = _gift.GiftId
                 };
                 _context.GiftContacts.Add(newGiftContact);
-            }
-            else
-            {
-                if (_gift.SelectedContactId != null)
-                {
-                    var newGiftContact = new GiftContact()
-                    {
-                        ContactId = _gift.SelectedContactId ?? 0,
-                        GiftId = _gift.GiftId
-                    };
-
-                    _context.GiftContacts.Add(newGiftContact);
-                }
             }
 
             await _context.SaveChangesAsync();
