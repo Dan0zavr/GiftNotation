@@ -72,16 +72,16 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0" >
                             <TextBlock Text="Подарки:" FontSize="14" FontFamily="Bold" VerticalAlignment="Top" />
-                            <ListBox Height="119" Width="180" ItemsSource="{Binding Contacts}" 
-                             DisplayMemberPath="ContactName"
-                             SelectedItem="{Binding SelectedContact}">
+                            <ListBox Height="119" Width="180" ItemsSource="{Binding Gifts}" 
+                             DisplayMemberPath="GiftName"
+                             SelectedItem="{Binding SelectedGift}">
 
                             </ListBox>
 
                         </StackPanel>
 
                         <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                            <Button Content="Добавить&gt;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#292a2c" FontSize="12" FontFamily="Bold" Height="18" Margin="3" Command="{Binding AddContactOnEventCommand}">
+                            <Button Content="Добавить&gt;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#292a2c" FontSize="12" FontFamily="Bold" Height="18" Margin="3" Command="{Binding AddGiftForContactOnAddCommand}">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Template">
@@ -137,7 +137,7 @@ From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
                                 </Button.Style>
                             </Button>
 
-                            <Button Content="&lt;Удалить" VerticalAlignment="Center" HorizontalAlignment="Center" Background="#FFF0F0F0" Margin="3" Height="18" FontSize="12" FontFamily="Bold" Command="{Binding DeleteContactFromEventCommand}">
+                            <Button Content="&lt;Удалить" VerticalAlignment="Center" HorizontalAlignment="Center" Background="#FFF0F0F0" Margin="3" Height="18" FontSize="12" FontFamily="Bold" Command="{Binding DeleteGiftForContactCommand}">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Template">
@@ -196,9 +196,9 @@ From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
 
                         <StackPanel Grid.Column="2">
                             <TextBlock Text="Для человека:" FontSize="14" FontFamily="Bold" VerticalAlignment="Top" />
-                            <ListBox Height="119" Width="180" ItemsSource="{Binding ContactsOnEvent}"
-                                     DisplayMemberPath="ContactName" 
-                                     SelectedItem="{Binding SelectedContactOnEvent}">
+                            <ListBox Height="119" Width="180" ItemsSource="{Binding GiftsForContact}"
+                                     DisplayMemberPath="GiftName" 
+                                     SelectedItem="{Binding SelectedGiftForContact}">
                             </ListBox>
                         </StackPanel>
 

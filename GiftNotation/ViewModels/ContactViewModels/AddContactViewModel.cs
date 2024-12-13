@@ -13,14 +13,18 @@ namespace GiftNotation.ViewModels
 {
     public class AddContactViewModel : ViewModelBase
     {
-        private string _contactName;
-        private DateTime _bday;
-
         private readonly ContactService _contactService;
         private readonly GiftService _giftService;
-        private RelpType _selectedRelpType;
 
-        public ObservableCollection<Gifts> Gifts { get; private set; } = new ObservableCollection<Gifts>();
+        private string _contactName;
+        private DateTime _bday;
+        private RelpType _selectedRelpType;
+        private Gifts _selectedGift;
+        private Gifts _selectedGiftForContact;
+        private AddGiftForContactOnAddCommand _addGiftForContactOnAddCommand;
+
+        public ObservableCollection<Gifts> Gifts { get; set; } = new ObservableCollection<Gifts>();
+        public ObservableCollection<Gifts> GiftsForContact { get; set; } = new ObservableCollection<Gifts>();
         public ObservableCollection<RelpType> RelpTypes { get; private set; } = new ObservableCollection<RelpType>();
 
         // Для хранения выбранных подарков
@@ -44,13 +48,35 @@ namespace GiftNotation.ViewModels
             set => SetProperty(ref _selectedRelpType, value);
         }
 
-        public ObservableCollection<Gifts> SelectedGifts
+        public Gifts SelectedGift
         {
-            get => _selectedGifts;
-            set => SetProperty(ref _selectedGifts, value);
+            get => _selectedGift;
+            set
+            {
+                if (SetProperty(ref _selectedGift, value))
+                {
+                    AddGiftForContactOnAddCommand.RaiseCanExecuteChanged();
+                }
+            }
         }
 
-        public ICommand AddContactCommand { get; }
+        public Gifts SelectedGiftForContact
+        {
+            get => _selectedGiftForContact;
+            set
+            {
+                if (SetProperty(ref _selectedGiftForContact, value))
+                {
+                    // Уведомляем команду, что условие для выполнения изменилось
+                    DeleteGiftForContactCommand.RaiseCanExecuteChanged();
+                }
+            }
+        }
+
+        public AddContactCommand AddContactCommand { get; }
+        public AddGiftForContactOnAddCommand AddGiftForContactOnAddCommand => _addGiftForContactOnAddCommand;
+
+        public DeleteGiftForContactOnAddCommand DeleteGiftForContactCommand { get; }
 
         public AddContactViewModel(ContactService contactService, GiftService giftService, ContactViewModel contactViewModel)
         {
@@ -59,15 +85,14 @@ namespace GiftNotation.ViewModels
             LoadGifts();
             LoadRelpTypes();
             AddContactCommand = new AddContactCommand(contactService, contactViewModel, this);
+            _addGiftForContactOnAddCommand = new AddGiftForContactOnAddCommand(this);
+            DeleteGiftForContactCommand = new DeleteGiftForContactOnAddCommand(this);
         }
 
         public async void LoadGifts()
         {
             var gifts = await _giftService.GetAllGifts();
-            foreach (var gift in gifts)
-            {
-                Gifts.Add(gift);
-            }
+            Gifts = new ObservableCollection<Gifts>(gifts);
         }
 
         public async void LoadRelpTypes()

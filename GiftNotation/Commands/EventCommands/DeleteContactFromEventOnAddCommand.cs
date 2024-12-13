@@ -12,12 +12,10 @@ namespace GiftNotation.Commands.EventCommands
     public class DeleteContactFromEventOnAddCommand : ICommand
     {
         private readonly AddEventViewModel _viewModel;
-        private readonly ContactService _contactService;
 
-        public DeleteContactFromEventOnAddCommand(AddEventViewModel viewModel, ContactService contactService)
+        public DeleteContactFromEventOnAddCommand(AddEventViewModel viewModel)
         {
             _viewModel = viewModel;
-            _contactService = contactService;
         }
 
         public event EventHandler? CanExecuteChanged;
@@ -38,16 +36,9 @@ namespace GiftNotation.Commands.EventCommands
             var contact = _viewModel.SelectedContactOnEvent;
             if (contact != null)
             {
-                // Удаляем контакт из связи с событием
-                //var eventContact = await _contactService.GetEventContactAsync(_viewModel.EventId, contact.ContactId);
-                //if (eventContact != null)
-                //{
-                //    _contactService.DeleteEventContact(eventContact); // Удаление из связи
-                //    await _contactService.SaveChangesAsync();
-
                     // Обновляем списки
-                    _viewModel.ContactsOnEvent.Remove(contact);  // Удаление из списка контактов на событии
-                    _viewModel.Contacts.Add(contact); // Добавление обратно в общий список контактов
+                _viewModel.ContactsOnEvent.Remove(contact);  // Удаление из списка контактов на событии
+                _viewModel.Contacts.Add(contact); // Добавление обратно в общий список контактов
                 
             }
         }

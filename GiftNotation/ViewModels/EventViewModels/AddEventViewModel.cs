@@ -14,13 +14,13 @@ namespace GiftNotation.ViewModels
 {
     public class AddEventViewModel : ViewModelBase
     {
-        private int _eventId;
-        private string _eventName;
-        private DateTime _date;
-
         private readonly EventService _eventService;
         private readonly ContactService _contactService;
         private readonly EventViewModel _eventViewModel;
+
+        private int _eventId;
+        private string _eventName;
+        private DateTime _date;
         private EventType _eventType;
         private Contact _selectedContact;
         private AddContactOnEventOnAddCommand _addContactOnEventCommand;
@@ -43,10 +43,6 @@ namespace GiftNotation.ViewModels
             }
         }
 
-        public DeleteContactFromEventOnAddCommand DeleteContactFromEventCommand { get; }
-        public AddEventCommand AddEventCommand { get; }
-        public AddContactOnEventOnAddCommand AddContactOnEventCommand => _addContactOnEventCommand; // Команда доступна в ViewModel
-
         public Contact SelectedContact
         {
             get => _selectedContact;
@@ -59,7 +55,6 @@ namespace GiftNotation.ViewModels
                 }
             }
         }
-
 
         public string EventName
         {
@@ -74,7 +69,6 @@ namespace GiftNotation.ViewModels
             }
         }
 
-
         public DateTime EventDate
         {
             get { return _date; }
@@ -87,7 +81,10 @@ namespace GiftNotation.ViewModels
             set => SetProperty(ref _eventType, value);
         }
 
-       
+        public DeleteContactFromEventOnAddCommand DeleteContactFromEventCommand { get; }
+        public AddEventCommand AddEventCommand { get; }
+        public AddContactOnEventOnAddCommand AddContactOnEventCommand => _addContactOnEventCommand; // Команда доступна в ViewModel
+
 
         public AddEventViewModel(EventService eventService, EventViewModel eventViewModel, ContactService contactService)
         {
@@ -96,7 +93,7 @@ namespace GiftNotation.ViewModels
             _eventViewModel = eventViewModel;
             AddEventCommand = new AddEventCommand(eventService, this, _eventViewModel);
             _addContactOnEventCommand = new AddContactOnEventOnAddCommand(this);
-            DeleteContactFromEventCommand = new DeleteContactFromEventOnAddCommand(this, _contactService);
+            DeleteContactFromEventCommand = new DeleteContactFromEventOnAddCommand(this);
             LoadContacts();
             LoadEventTypes();
         }
