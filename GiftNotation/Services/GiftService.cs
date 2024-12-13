@@ -51,6 +51,27 @@ namespace GiftNotation.Services
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Gifts>> GetAllGiftsForContact(int contactId)
+        {
+            var gifts = await _context.GiftContacts
+                .Where(ec => ec.ContactId == contactId)
+                .Include(ec => ec.Gift) // Включаем информацию о контакте
+                .Select(ec => ec.Gift) // Получаем только контакты
+                .ToListAsync();
+
+            return gifts;
+        }
+
+        public async Task<IEnumerable<Gifts>> GetAllGiftNotForContact(int contactId)
+        {
+            // Получаем все контакты, которые не привязаны к событию
+            var gifts = await _context.Gifts
+                .Where(c => !_context.GiftContacts
+                    .Any(ec => ec.GiftId == c.GiftId && ec.ContactId == contactId))
+                .ToListAsync();
+
+            return gifts;
+        }
 
         public async Task AddGiftAsync(DisplayGiftModel giftModel)
         {

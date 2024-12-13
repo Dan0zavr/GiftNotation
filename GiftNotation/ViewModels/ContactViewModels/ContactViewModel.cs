@@ -26,6 +26,7 @@ namespace GiftNotation.ViewModels
             {
                 SetProperty(ref selectedContact, value);
                 ((DeleteContactCommand)DeleteContactCommand).RaiseCanExecuteChanged();
+                ((OpenChangeContactCommand)OpenChangeContactCommand).RaiseCanExecuteChanged();
             }
         }
         public ObservableCollection<DisplayContactModel> Contacts
@@ -45,6 +46,7 @@ namespace GiftNotation.ViewModels
 
             OpenAddContactCommand = new OpenAddContactCommand(this, _contactService, _giftService);
             DeleteContactCommand = new DeleteContactCommand(this, _contactService);
+            OpenChangeContactCommand = new OpenChangeContactCommand(this, _contactService, _giftService);
 
             // Загрузка данных из базы данных или другого источника
             LoadContacts();
