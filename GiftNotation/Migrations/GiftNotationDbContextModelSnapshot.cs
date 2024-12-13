@@ -23,14 +23,13 @@ namespace GiftNotation.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime?>("Bday")
+                    b.Property<DateTime>("Bday")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ContactName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("RelpTypeId")
+                    b.Property<int?>("RelpTypeId")
                         .HasColumnType("INTEGER");
 
                     b.HasKey("ContactId");
@@ -90,7 +89,62 @@ namespace GiftNotation.Migrations
 
                     b.HasKey("EventTypeId");
 
+                    b.HasIndex("EventTypeName")
+                        .IsUnique();
+
                     b.ToTable("EventTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            EventTypeId = 1,
+                            EventTypeName = "День Рождения"
+                        },
+                        new
+                        {
+                            EventTypeId = 2,
+                            EventTypeName = "23 февраля"
+                        },
+                        new
+                        {
+                            EventTypeId = 3,
+                            EventTypeName = "Годовщина"
+                        },
+                        new
+                        {
+                            EventTypeId = 4,
+                            EventTypeName = "Новый год"
+                        },
+                        new
+                        {
+                            EventTypeId = 5,
+                            EventTypeName = "8 марта"
+                        },
+                        new
+                        {
+                            EventTypeId = 6,
+                            EventTypeName = "9 мая"
+                        },
+                        new
+                        {
+                            EventTypeId = 7,
+                            EventTypeName = "Рождество"
+                        },
+                        new
+                        {
+                            EventTypeId = 8,
+                            EventTypeName = "Свадьба"
+                        },
+                        new
+                        {
+                            EventTypeId = 9,
+                            EventTypeName = "Просто подарочек"
+                        },
+                        new
+                        {
+                            EventTypeId = 10,
+                            EventTypeName = "Важное событие"
+                        });
                 });
 
             modelBuilder.Entity("GiftNotation.Models.GiftContact", b =>
@@ -130,25 +184,21 @@ namespace GiftNotation.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("GiftName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("GiftPic")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<double>("Price")
                         .HasColumnType("REAL");
 
-                    b.Property<int>("StatusId")
+                    b.Property<int?>("StatusId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Url")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("GiftId");
@@ -170,7 +220,32 @@ namespace GiftNotation.Migrations
 
                     b.HasKey("RelpTypeId");
 
+                    b.HasIndex("RelpTypeName")
+                        .IsUnique();
+
                     b.ToTable("RelpTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            RelpTypeId = 1,
+                            RelpTypeName = "Друг"
+                        },
+                        new
+                        {
+                            RelpTypeId = 2,
+                            RelpTypeName = "Родственник"
+                        },
+                        new
+                        {
+                            RelpTypeId = 3,
+                            RelpTypeName = "Коллега"
+                        },
+                        new
+                        {
+                            RelpTypeId = 4,
+                            RelpTypeName = "Знакомый"
+                        });
                 });
 
             modelBuilder.Entity("GiftNotation.Models.Status", b =>
@@ -185,16 +260,39 @@ namespace GiftNotation.Migrations
 
                     b.HasKey("StatusId");
 
+                    b.HasIndex("StatusName")
+                        .IsUnique();
+
                     b.ToTable("Statuses");
+
+                    b.HasData(
+                        new
+                        {
+                            StatusId = 1,
+                            StatusName = "В процессе покупки"
+                        },
+                        new
+                        {
+                            StatusId = 2,
+                            StatusName = "Куплен"
+                        },
+                        new
+                        {
+                            StatusId = 3,
+                            StatusName = "Упакован"
+                        },
+                        new
+                        {
+                            StatusId = 4,
+                            StatusName = "Подарен"
+                        });
                 });
 
             modelBuilder.Entity("GiftNotation.Models.Contact", b =>
                 {
                     b.HasOne("GiftNotation.Models.RelpType", "RelpType")
                         .WithMany("Contacts")
-                        .HasForeignKey("RelpTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RelpTypeId");
 
                     b.Navigation("RelpType");
                 });
@@ -269,9 +367,7 @@ namespace GiftNotation.Migrations
                 {
                     b.HasOne("GiftNotation.Models.Status", "Status")
                         .WithMany("Gifts")
-                        .HasForeignKey("StatusId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("StatusId");
 
                     b.Navigation("Status");
                 });

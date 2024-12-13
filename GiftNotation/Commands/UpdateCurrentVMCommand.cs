@@ -27,6 +27,7 @@ namespace GiftNotation.Commands
             
         }
 
+
         // Команда доступна для выполнения всегда
         public bool CanExecute(object? parameter) => true;
 
@@ -41,5 +42,7 @@ namespace GiftNotation.Commands
                 
             }
         }
+
+        
     }
 }

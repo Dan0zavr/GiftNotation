@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\App.xaml
-91749129692
+1456790065
 
-54291145903
-237235741769
-Controls\NavigationBar.xaml;Styles\General.xaml;Views\Calendar.xaml;Views\EventDetailsWindow.xaml;Views\GiftsView.xaml;Views\MainWindow.xaml;Views\MyFriends.xaml;Views\Page3.xaml;Views\People.xaml;
+1061927903250
+239-101143121
+Controls\NavigationBar.xaml;Views\AddEvent.xaml;Views\AddGifts.xaml;Views\AddPeoples.xaml;Views\Calendar.xaml;Views\ChangeEvent.xaml;Views\ChangingGifts.xaml;Views\ChangingPeople.xaml;Views\EventDetailsWindow.xaml;Views\EventsView.xaml;Views\Filters.xaml;Views\GiftsView.xaml;Views\MainWindow.xaml;Views\People.xaml;
 
-False
+True
 

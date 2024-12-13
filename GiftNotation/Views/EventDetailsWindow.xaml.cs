@@ -30,8 +30,8 @@ namespace виш_лист_попытка_33334
 
         private void ChangedZhach(object sender, TextChangedEventArgs e)
         {
-            //TextBox textBox = (TextBox)sender;
-            //MessageBox.Show(textBox.Text);
+            TextBox textBox = (TextBox)sender;
+            MessageBox.Show(textBox.Text);
         }
 
         
@@ -66,6 +66,19 @@ namespace виш_лист_попытка_33334
         private void Button_PlusGifts_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
         }
     }
 }

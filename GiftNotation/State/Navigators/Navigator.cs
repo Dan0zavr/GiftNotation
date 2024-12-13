@@ -1,5 +1,4 @@
 ﻿using GiftNotation.Commands;
-using GiftNotation.GlobalFunctions;
 using GiftNotation.Services;
 using GiftNotation.ViewModels;
 using GiftNotation.ViewModels.Factories;
@@ -15,7 +14,7 @@ namespace GiftNotation.State.Navigators
 {
 
 
-    public class Navigator : NotifyObject, INavigator
+    public class Navigator : ViewModelBase, INavigator
     {
         //Создание экзкмпляра класса ViewModelBase
         private ViewModelBase _currentViewModel;
@@ -32,7 +31,19 @@ namespace GiftNotation.State.Navigators
                 //Устанавливаем текущую модель представления и сообщаем об изменении
                 _currentViewModel = value;
                 OnPropertyChanged(nameof(CurrentViewModel));
+                if (_currentViewModel is EventViewModel eventViewModel)
+                {
+                    // Уведомляем о смене модели представления
+                    eventViewModel.OnViewModelChanging();
+                }
             }
+        }
+
+        public event Action? CurrentViewModelChanged;
+
+        private void OnCurrentViewModelChanged()
+        {
+            CurrentViewModelChanged?.Invoke();
         }
 
         //Команда выполняющаяся при нажатии на кнопку

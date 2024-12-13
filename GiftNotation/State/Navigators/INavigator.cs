@@ -14,14 +14,12 @@ namespace GiftNotation.State.Navigators
         Calendar,
         Contacts,
         Events,
-        Gifts,
-        
+        Gifts
     }
 
     public interface INavigator
     {
         ViewModelBase CurrentViewModel { get; set; }
-        
         ICommand UpdateCurrentVMCommand { get; }
     }
 }

@@ -1,7 +1,9 @@
-﻿using System;
+﻿using GiftNotation.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +25,16 @@ namespace GiftNotation.Controls
         public NavigationBar()
         {
             InitializeComponent();
+        }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown(); // Завершает работу приложения
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -16,21 +16,23 @@ namespace GiftNotation.ViewModels.Factories
         private readonly ContactViewModel _contactViewModel;
         private readonly GiftViewModel _giftViewModel;
         private readonly EventViewModel _eventViewModel;
-        private readonly DisplayGiftService _giftService;
+        private readonly GiftService _giftService;
         private readonly ContactService _contactService;
+        private readonly EventService _eventService;
+        private readonly FiltersViewModel _filtersViewModel;
 
         public GiftNotationViewModelAbstractFactory(IGiftNotationViewModelFactory<CalendarViewModel> calendarViewModelFactory,
-            ContactViewModel contactViewModel, GiftViewModel giftViewModel, EventViewModel eventViewModel, SettingsViewModel settigsViewModel, ProfileViewModel profileViewModel,
-            DisplayGiftService giftService, ContactService contactService)
+            ContactViewModel contactViewModel, GiftViewModel giftViewModel, EventViewModel eventViewModel,
+            GiftService giftService, ContactService contactService, EventService eventService, FiltersViewModel filtersViewModel)
         {
             _calendarViewModelFactory = calendarViewModelFactory;
-            
             _contactViewModel = contactViewModel;
             _giftViewModel = giftViewModel;
             _eventViewModel = eventViewModel;
             _giftService = giftService;
             _contactService = contactService;
-
+            _eventService = eventService;
+            _filtersViewModel = filtersViewModel;
         }
 
         public ViewModelBase CreateViewModel(ViewType viewType)
@@ -41,11 +43,11 @@ namespace GiftNotation.ViewModels.Factories
                     // Создание новой модели представления для Calendar
                     return _calendarViewModelFactory.CreateViewModel();
                 case ViewType.Contacts:
-                    return new ContactViewModel(_contactService);
+                    return new ContactViewModel(_contactService, _giftService);
                 case ViewType.Events:
-                    return new EventViewModel();
+                    return new EventViewModel(_eventService, _filtersViewModel, _contactService);
                 case ViewType.Gifts:
-                    return new GiftViewModel(_giftService);
+                    return new GiftViewModel(_giftService, _contactService, _eventService);
                 default:
                     throw new ArgumentException("Takogo net");
             }

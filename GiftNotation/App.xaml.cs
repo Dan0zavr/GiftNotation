@@ -12,6 +12,7 @@ using GiftNotation.State.Navigators;
 using Microsoft.Extensions.Hosting;
 using GiftNotation.ViewModels.Factories;
 using Microsoft.Extensions.Configuration;
+using GiftNotation.Commands.GiftCommands;
 
 
 namespace GiftNotation
@@ -35,55 +36,91 @@ namespace GiftNotation
                 {
                     c.AddJsonFile("appsettings.json");
                 })
-                .ConfigureServices((context, services) => {
+                .ConfigureServices((context, services) =>
+                {
+                    string connectionString = context.Configuration.GetConnectionString("default");
+
+                    // Регистрация DbContext
+                    services.AddDbContext<GiftNotationDbContext>(options =>
+                        options.UseSqlite(connectionString));
 
                     // Регистрация ViewModels
-                    services.AddSingleton<MainViewModel>();
-                    services.AddSingleton<INavigator, Navigator>();
                     services.AddScoped<ContactViewModel>();
+                    services.AddScoped<AddGiftViewModel>();
+                    services.AddScoped<ChangeGiftViewModel>();
                     services.AddScoped<EventViewModel>();
+                    services.AddScoped<AddEventViewModel>();
                     services.AddScoped<GiftViewModel>();
-                    services.AddScoped<SettingsViewModel>();
-                    services.AddScoped <ProfileViewModel>();
+                    services.AddScoped<MainViewModel>();
+                    services.AddScoped<CalendarViewModel>();
+                    services.AddScoped<FiltersViewModel>();
 
-                    // Регистрация DbContext и других сервисов
-                    string connectionString = context.Configuration.GetConnectionString("default");
-                    services.AddDbContext<GiftNotationDbContext>(o => o.UseSqlite(connectionString));
-                    services.AddSingleton(new GiftNotationDbContextFactory(connectionString));
+                    // Регистрация Navigator как Singleton
+                    services.AddSingleton<INavigator, Navigator>();
 
-                    // Регистрация сервисов как Scoped
-                    
+                    // Регистрация сервисов
+                    services.AddScoped<GiftService>();
                     services.AddScoped<ContactService>();
-                    services.AddScoped<DisplayGiftService>();
-                    services.AddSingleton<UpdateCurrentVMCommand>();
+                    services.AddScoped<EventService>();
 
-                    // Регистрация фабрик
-                    services.AddSingleton<IGiftNotationViewModelAbstractFactory, GiftNotationViewModelAbstractFactory>();
-                    services.AddSingleton<IGiftNotationViewModelFactory<CalendarViewModel>, HomeViewModelFactory>();
-                    
+                    services.AddScoped<AddGiftCommand>();
+
+                    // Регистрация фабрик как Scoped
+                    services.AddScoped<IGiftNotationViewModelAbstractFactory, GiftNotationViewModelAbstractFactory>();
+                    services.AddScoped<IGiftNotationViewModelFactory<CalendarViewModel>, HomeViewModelFactory>();
 
                     // Регистрация MainWindow
                     services.AddSingleton<MainWindow>();
+
+                    // Регистрация команды
+                    services.AddScoped<UpdateCurrentVMCommand>();
+
+                    // Регистрация команды OpenCloseFilterCommand
+                    services.AddScoped<OpenCloseFilterCommand>();
                 });
         }
 
-        protected override void OnStartup(StartupEventArgs e)
+        private NotificationService _notificationService;
+
+
+        private async Task CheckEventsOnStartup()
         {
+            // Получаем все предстоящие события
+            var upcomingEvents = await _notificationService.GetAllUpcomingEventsAsync();
+
+            // Проверяем, если есть события, которые нужно напомнить
+            _notificationService.CheckNextEvents(upcomingEvents);
+        }
+
+        protected override async void OnStartup(StartupEventArgs e)
+        {
+            // Запускаем хост
             _host.Start();
 
-            GiftNotationDbContextFactory contextFactory = _host.Services.GetRequiredService<GiftNotationDbContextFactory>();
-
-            using(GiftNotationDbContext context = contextFactory.CreateDbContext())
+            // Создаем scope для работы с сервисами
+            using (var scope = _host.Services.CreateScope())
             {
+                // Получаем DbContext
+                var context = scope.ServiceProvider.GetRequiredService<GiftNotationDbContext>();
+
+                // Применяем миграции
                 context.Database.Migrate();
+
+                // Создаем экземпляр NotificationService
+                _notificationService = new NotificationService(context);
+
+                // Проверяем праздники при запуске приложения
+                await CheckEventsOnStartup();
             }
 
-            var window = _host.Services.GetRequiredService<MainWindow>();
-            window.DataContext = _host.Services.GetRequiredService<MainViewModel>();
-            window.Show();
+            // Запуск главного окна
+            var mainWindow = _host.Services.GetRequiredService<MainWindow>();
+            mainWindow.DataContext = _host.Services.GetRequiredService<MainViewModel>();
+            mainWindow.Show();
 
             base.OnStartup(e);
         }
+
 
         protected override async void OnExit(ExitEventArgs e)
         {
@@ -93,5 +130,7 @@ namespace GiftNotation
             base.OnExit(e);
         }
     }
+
+
 
 }
