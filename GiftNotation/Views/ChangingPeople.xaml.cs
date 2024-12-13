@@ -27,14 +27,9 @@ namespace GiftNotation.Views
             InitializeComponent();
         }
 
-        private void ButtonChanging_ClosePeople(object sender, RoutedEventArgs e)
+        private void ButtonAdd_ClosePeople(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void ButtonChanging_DonePeople(object sender, RoutedEventArgs e)
-        {
-            //Тут должна быть привязка к классу Person (MyFriends)
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)

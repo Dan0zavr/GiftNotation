@@ -148,6 +148,7 @@ namespace GiftNotation.ViewModels
             var eventTypes = await _eventService.GetEventTypesAsync();
             EventTypes = new ObservableCollection<EventType>(eventTypes);
         }
+
     }
 }
 

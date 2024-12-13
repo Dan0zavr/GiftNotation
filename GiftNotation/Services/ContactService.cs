@@ -43,24 +43,6 @@ namespace GiftNotation.Services
             return contacts;
         }
 
-        public async Task<EventContact?> GetEventContactAsync(int eventId, int contactId)
-        {
-            return await _context.EventContacts
-                .FirstOrDefaultAsync(ec => ec.EventId == eventId && ec.ContactId == contactId);
-        }
-
-        // Удаление связи между событием и контактом
-        public void DeleteEventContact(EventContact eventContact)
-        {
-            _context.EventContacts.Remove(eventContact);
-        }
-
-        // Сохранение изменений в базе данных
-        public async Task SaveChangesAsync()
-        {
-            await _context.SaveChangesAsync();
-        }
-
         public async Task<IEnumerable<Contact>> GetAllContactsNotOnEvent(int eventId)
         {
             // Получаем все контакты, которые не привязаны к событию
@@ -144,11 +126,6 @@ namespace GiftNotation.Services
             return null;
         }
 
-        public async Task AddEventAsync(Event newEvent)
-        {
-            
-        }
-
         public async Task AddContactAsync(DisplayContactModel contactModel)
         {
 
@@ -219,6 +196,39 @@ namespace GiftNotation.Services
 
                 await _context.SaveChangesAsync();
             }
+        }
+
+        public async Task UpdateContactAsync(DisplayContactModel contactModel, ChangeContactViewModel viewModel)
+        {
+            var existingContact = await _context.Contacts
+                .FirstOrDefaultAsync(e => e.ContactId == contactModel.ContactId);
+
+            existingContact.ContactName = contactModel.ContactName;
+            existingContact.Bday = contactModel.Bday;
+            existingContact.RelpTypeId = await EnsureRelpTypeAsync(contactModel.RelpTypeName);
+
+            // 3. Удаляем старые связи между подарками и контактом
+            var giftContactsToRemove = _context.GiftContacts
+                .Where(ec => ec.ContactId == contactModel.ContactId);
+
+            _context.GiftContacts.RemoveRange(giftContactsToRemove);
+
+            // 4. Создаем новые связи между подарками и контактом
+            foreach (var gift in viewModel.GiftsForContact)
+            {
+                var eventContact = new GiftContact
+                {
+                    GiftId = gift.GiftId,
+                    ContactId = contactModel.ContactId
+                };
+
+                // Добавляем связь в контекст
+                _context.GiftContacts.Add(eventContact);
+            }
+
+            // 5. Сохраняем изменения
+            await _context.SaveChangesAsync();
+
         }
     }
 }
