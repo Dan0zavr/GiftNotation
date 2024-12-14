@@ -45,7 +45,7 @@ namespace GiftNotation.ViewModels
         private async void LoadEvents()
         {
             var events = await _eventService.GetAllEventDates();
-            Events = new ObservableCollection<DateTime>(events);
+            Events = new ObservableCollection<DateTime>(events.Where(d => d.Date >= DateTime.Now.Date));
         }
 
     }
