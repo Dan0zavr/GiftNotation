@@ -44,9 +44,11 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Тип отношений:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                                <ComboBox Width="320" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding RelpTypes}"
-                        DisplayMemberPath="RelpTypeName"
-                        SelectedItem="{Binding SelectedRelpType}"
+                            <ComboBox Width="320" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding RelpTypes}"
+          DisplayMemberPath="RelpTypeName"
+          SelectedItem="{Binding SelectedRelpType}"
+          SelectedValue="{Binding SelectedRelpTypeName}"
+          SelectedValuePath="RelpTypeName"
                         IsEditable="False"/>
                             </Grid>
                         </Border>
@@ -75,8 +77,9 @@
                                 <Border Height="130" CornerRadius="5" BorderThickness="2" Background="Gray">
                                     <Grid>
                                         <TextBlock Text="Подарки" FontSize="14" FontFamily="Bold" Margin="5,5,0,0"  VerticalAlignment="Top" />
-                                        <ListBox Height="90" Width="165" ItemsSource="{Binding Contacts}" 
-                                             SelectedItem="{Binding SelectedContact}" Background="#cacac8" Margin="0,10,0,0"/>
+                                    <ListBox Height="90" Width="165" ItemsSource="{Binding Gifts}" 
+                             DisplayMemberPath="GiftName"
+                             SelectedItem="{Binding SelectedGift}" Background="#cacac8" Margin="0,10,0,0"/>
                                     </Grid>
 
                                 </Border>
@@ -85,7 +88,7 @@
                             </StackPanel>
 
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <Button Content="Добавить&gt;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#292a2c" FontSize="12" FontFamily="Bold" Height="18" Margin="3" Command="{Binding AddGiftForContactOnAddCommand}">
+                            <Button Content="Добавить&gt;" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#292a2c" FontSize="12" FontFamily="Bold" Height="18" Margin="3"  Command="{Binding AddGiftForContactOnChangeCommand}">
                                     <Button.Style>
                                         <Style TargetType="Button">
                                             <Setter Property="Template">
@@ -139,7 +142,7 @@
                                     </Button.Style>
                                 </Button>
 
-                                <Button Content="&lt;Удалить" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#292a2c" Margin="3" Height="18" FontSize="12" FontFamily="Bold" Command="{Binding DeleteGiftForContactCommand}">
+                            <Button Content="&lt;Удалить" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#292a2c" Margin="3" Height="18" FontSize="12" FontFamily="Bold" Command="{Binding DeleteGiftForContactCommand}">
                                     <Button.Style>
                                         <Style TargetType="Button">
                                             <Setter Property="Template">
@@ -199,8 +202,9 @@
                                 <Border Height="130" CornerRadius="5" BorderThickness="2" Background="Gray">
                                     <Grid>
                                         <TextBlock Text="Для " Margin="5,5,0,0" FontSize="14" FontFamily="Bold" VerticalAlignment="Top" />
-                                        <ListBox Height="90" Width="165" ItemsSource="{Binding Contacts}" 
-                                             SelectedItem="{Binding SelectedContact}" Background="#cacac8" Margin="0,10,0,0"/>
+                                    <ListBox Height="90" Width="165" ItemsSource="{Binding GiftsForContact}"
+                                     DisplayMemberPath="GiftName" 
+                                     SelectedItem="{Binding SelectedGiftForContact}" Background="#cacac8" Margin="0,10,0,0"/>
                                     </Grid>
 
                                 </Border>
@@ -271,7 +275,7 @@
                         <TextBlock Text="Отменить" Width="65" Foreground="#FFF0F0F0" FontSize="14" FontFamily="Bold"/>
                     </Button>
 
-                    <Button Width="100" Height="20" Margin="275,0,0,10" Background="#292a2c" Command="{Binding AddContactCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                    <Button Width="100" Height="20" Margin="275,0,0,10" Background="#292a2c" Command="{Binding ChangeContactCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
 
 
                         <Button.Style>

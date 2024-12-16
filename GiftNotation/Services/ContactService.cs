@@ -128,7 +128,6 @@ namespace GiftNotation.Services
 
         public async Task AddContactAsync(DisplayContactModel contactModel)
         {
-
             // Убеждаемся, что статус существует, или добавляем его
             var relpTypeId = await EnsureRelpTypeAsync(contactModel.RelpTypeName);
 
@@ -139,37 +138,24 @@ namespace GiftNotation.Services
                 RelpTypeId = relpTypeId // Может быть null
             };
 
+            // Добавляем новый контакт
             _context.Contacts.Add(contact);
             await _context.SaveChangesAsync();
 
-            //if(contact.Bday != DateTime.MinValue)
-            //{
-            //    var birthDay = new Event
-            //    {
-            //        EventName = "День рождения: " + contact.ContactName,
-            //        EventDate = contact.Bday,
-            //        EventTypeId = 1,
-            //    };
+            // Теперь contact.ContactId содержит сгенерированное значение
+            foreach (var gift in contactModel.MyGifts)
+            {
+                var eventContact = new GiftContact
+                {
+                    GiftId = gift.GiftId,
+                    ContactId = contact.ContactId // Используем сгенерированный ContactId
+                };
 
-            //    _context.Events.Add(birthDay);
-            //    await _context.SaveChangesAsync();
+                // Добавляем связь в контекст
+                _context.GiftContacts.Add(eventContact);
+            }
 
-            //    var addedContact = await _context.Contacts
-            //        .OrderByDescending(e => e.ContactId) // Упорядочиваем по убыванию идентификатора
-            //        .FirstAsync();
-            //    var addedEvent = await _context.Events
-            //        .OrderByDescending(e => e.EventId)
-            //        .FirstAsync();
-            //    var eventContact = new EventContact
-            //    {
-            //        EventId = addedEvent.EventId,
-            //        ContactId = addedContact.ContactId,
-            //    };
-
-            //    _context.EventContacts.Add(eventContact);
-            //    await _context.SaveChangesAsync();
-            //}
-
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteContactAsync(int contactId)

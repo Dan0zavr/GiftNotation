@@ -175,11 +175,12 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Люди:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <ComboBox FontSize="12" Padding="2" Width="390" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="0,0,0,0"  ItemsSource="{Binding Contacts}"
-                        DisplayMemberPath="ContactName"
-                        SelectedItem="{Binding SelectedContact}" 
-                        
-                        IsEditable="False"/>
+                        <ComboBox FontSize="12" Padding="2" Width="390" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="0,0,0,0" ItemsSource="{Binding Contacts}" 
+          DisplayMemberPath="ContactName" 
+          SelectedItem="{Binding SelectedContact}" 
+          SelectedValue="{Binding SelectedContactName}" 
+          SelectedValuePath="ContactName"
+          IsEditable="False"/>
 
                     </Grid>
                 </Border>
@@ -191,11 +192,12 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Событие:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <ComboBox Width="360" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Events}"
-                        DisplayMemberPath="EventName"
-                        SelectedItem="{Binding SelectedEvent}" 
-                        
-                        IsEditable="False"/>
+                        <ComboBox Width="360" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Events}" 
+          DisplayMemberPath="EventName" 
+          SelectedItem="{Binding SelectedEvent}" 
+          SelectedValue="{Binding SelectedEventName}" 
+          SelectedValuePath="EventName"
+          IsEditable="False"/>
                     </Grid>
                 </Border>
 
@@ -207,10 +209,11 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Статус" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
                         <ComboBox Width="380" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Statuses}" 
-                            DisplayMemberPath="StatusName" 
-                            SelectedItem="{Binding SelectedStatus}" 
-                            
-                            IsEditable="False"/>
+          DisplayMemberPath="StatusName" 
+          SelectedItem="{Binding SelectedStatus}" 
+          SelectedValue="{Binding SelectedStatusName}" 
+          SelectedValuePath="StatusName"
+          IsEditable="False"/>
 
                     </Grid>
                 </Border>
