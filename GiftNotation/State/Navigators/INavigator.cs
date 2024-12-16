@@ -21,5 +21,7 @@ namespace GiftNotation.State.Navigators
     {
         ViewModelBase CurrentViewModel { get; set; }
         ICommand UpdateCurrentVMCommand { get; }
+
+        event Action CurrentViewModelChanged;
     }
 }

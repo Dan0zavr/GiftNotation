@@ -62,6 +62,7 @@ namespace GiftNotation
                     services.AddScoped<GiftService>();
                     services.AddScoped<ContactService>();
                     services.AddScoped<EventService>();
+                    services.AddScoped<FilterWindowService>();
 
                     services.AddScoped<AddGiftCommand>();
 
@@ -76,7 +77,9 @@ namespace GiftNotation
                     services.AddScoped<UpdateCurrentVMCommand>();
 
                     // Регистрация команды OpenCloseFilterCommand
-                    services.AddScoped<OpenCloseFilterCommand>();
+                    services.AddSingleton<OpenCloseFilterCommand>();
+
+
                 });
         }
 

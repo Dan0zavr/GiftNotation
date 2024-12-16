@@ -29,6 +29,7 @@ namespace GiftNotation.ViewModels
         private readonly EventService _eventService;
         private readonly ContactService _contactService;
         private readonly FiltersViewModel _filtersViewModel;
+        private readonly FilterWindowService _filterWindowService;
 
         public DisplayEventModel selectedEvent;
         private Window? _filtersWindow;
@@ -63,46 +64,18 @@ namespace GiftNotation.ViewModels
         public ICommand OpenChangeEventCommand { get; set; }
         public ICommand OpenCloseFilterCommand { get; set; }
 
-        public EventViewModel(EventService eventService, FiltersViewModel filtersViewModel, ContactService contactService)
+        public EventViewModel(EventService eventService, FiltersViewModel filtersViewModel, ContactService contactService, FilterWindowService filterWindowService)
         {
             _eventService = eventService;
             _contactService = contactService;
             _filtersViewModel = filtersViewModel;
-
+            _filterWindowService = filterWindowService;
             DeleteEventCommand = new DeleteEventCommand(this, _eventService);
             OpenAddEventCommand = new OpenAddEventCommand(eventService, this, _contactService);
             OpenChangeEventCommand = new OpenChangeEventCommand(this, _eventService, _contactService);
-            OpenCloseFilterCommand = new OpenCloseFilterCommand(this);
+            OpenCloseFilterCommand = new OpenCloseFilterCommand(_filterWindowService);
 
             LoadEvents();
-        }
-
-        public event EventHandler? ViewModelChanging;
-
-        public void ToggleFiltersWindow()
-        {
-            if (_filtersWindow == null || !_filtersWindow.IsVisible)
-            {
-                // Создаем и отображаем окно
-                _filtersWindow = new Filters
-                {
-                    DataContext = _filtersViewModel,
-                    Owner = Application.Current.MainWindow,
-                    Topmost = true // Окно всегда поверх других
-                };
-                _filtersWindow.Closed += (s, e) => _filtersWindow = null; // Сбрасываем переменную при закрытии окна
-                _filtersWindow.Show();
-            }
-            else
-            {
-                // Закрываем окно
-                _filtersWindow.Close();
-            }
-        }
-
-        public void OnViewModelChanging()
-        {
-            ViewModelChanging?.Invoke(this, EventArgs.Empty);
         }
 
         public async void LoadEvents()

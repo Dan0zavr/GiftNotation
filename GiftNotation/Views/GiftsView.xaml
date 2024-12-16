@@ -236,9 +236,9 @@
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Подарок"  Binding="{Binding GiftName, UpdateSourceTrigger=PropertyChanged}" Width="80" />
+                    <DataGridTextColumn Header="Подарок"  Binding="{Binding GiftName, UpdateSourceTrigger=PropertyChanged}" Width="120" />
 
-                    <DataGridTemplateColumn Header="Картинка" Width="80">
+                    <DataGridTemplateColumn Header="Картинка" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Image Source="{Binding GiftPic}" Width="25" Height="25"/>
@@ -252,14 +252,11 @@
                     </DataGridTemplateColumn>
 
 
-                    <!--Нужно создать кнопку для доб.изображения, прописать ее в обработчике-->
-                    <DataGridTextColumn Header="Стоимость" Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged}" Width="90"/>
+                    <DataGridTextColumn Header="Стоимость" Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
 
-                    <DataGridTextColumn Header="Ссылка на маркетплейс" Binding="{Binding Url, UpdateSourceTrigger=PropertyChanged}" Width="170"/>
+                    <DataGridTextColumn Header="Люди" Binding="{Binding ContactName, UpdateSourceTrigger=PropertyChanged}" Width="90"/>
 
-                    <DataGridTextColumn Header="Люди" Binding="{Binding ContactName, UpdateSourceTrigger=PropertyChanged}" Width="65"/>
-
-                    <DataGridTextColumn Header="Событие" Binding="{Binding EventName, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+                    <DataGridTextColumn Header="Событие" Binding="{Binding EventName, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
 
                     <DataGridTextColumn Header="Статус" Width="*" Binding="{Binding StatusName, UpdateSourceTrigger=PropertyChanged}"/>
                 </DataGrid.Columns>

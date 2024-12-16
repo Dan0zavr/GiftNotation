@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using GiftNotation.Services;
 using GiftNotation.State.Navigators;
 using GiftNotation.ViewModels;
 using GiftNotation.ViewModels.Factories;
+using GiftNotation.Views;
 
 namespace GiftNotation.Commands
 {
@@ -17,32 +19,26 @@ namespace GiftNotation.Commands
 
         private readonly INavigator _navigator;
         private readonly IGiftNotationViewModelAbstractFactory _viewModelFactory;
-        
+        private readonly FilterWindowService _filterWindowService;
 
-        // Конструктор команды, принимающий INavigator и IMyFriendsService через DI
-        public UpdateCurrentVMCommand(INavigator navigator, IGiftNotationViewModelAbstractFactory viewModelFactory)
+        public UpdateCurrentVMCommand(INavigator navigator, IGiftNotationViewModelAbstractFactory viewModelFactory, FilterWindowService filterWindowService)
         {
             _navigator = navigator;
             _viewModelFactory = viewModelFactory;
-            
+            _filterWindowService = filterWindowService;
         }
 
-
-        // Команда доступна для выполнения всегда
         public bool CanExecute(object? parameter) => true;
 
-        // Выполняется при нажатии на кнопку в панели управления
         public void Execute(object? parameter)
         {
-            if (parameter is ViewType)
-            {
-                ViewType viewType = (ViewType)parameter;
+            _filterWindowService.CloseFilterWindow();
 
+            if (parameter is ViewType viewType)
+            {
                 _navigator.CurrentViewModel = _viewModelFactory.CreateViewModel(viewType);
-                
             }
         }
-
-        
     }
+
 }

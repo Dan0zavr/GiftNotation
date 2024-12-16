@@ -9,50 +9,54 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using GiftNotation.Views;
 
 namespace GiftNotation.State.Navigators
 {
 
 
-    public class Navigator : ViewModelBase, INavigator
+    public class Navigator : INavigator, INotifyPropertyChanged
     {
-        //Создание экзкмпляра класса ViewModelBase
         private ViewModelBase _currentViewModel;
-        private readonly IGiftNotationViewModelAbstractFactory _viewModelfactory;
+        private FilterWindowService _filterWindowService;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public ViewModelBase CurrentViewModel
         {
-            get
+            get => _currentViewModel;
+            set
             {
-                //Получаем текущую модель представления
-                return _currentViewModel;
-            }
-            set {
-                //Устанавливаем текущую модель представления и сообщаем об изменении
-                _currentViewModel = value;
-                OnPropertyChanged(nameof(CurrentViewModel));
-                if (_currentViewModel is EventViewModel eventViewModel)
+                if (_currentViewModel != value)
                 {
-                    // Уведомляем о смене модели представления
-                    eventViewModel.OnViewModelChanging();
+                    _currentViewModel = value;
+                    OnPropertyChanged(nameof(CurrentViewModel));
+                    OnCurrentViewModelChanged();
                 }
             }
         }
 
-        public event Action? CurrentViewModelChanged;
+        public ICommand UpdateCurrentVMCommand { get; set; }
 
-        private void OnCurrentViewModelChanged()
+        public event Action CurrentViewModelChanged;
+
+        public Navigator(IGiftNotationViewModelAbstractFactory viewModelFactory, FilterWindowService filterWindowService)
+        {
+            _filterWindowService = filterWindowService;
+            UpdateCurrentVMCommand = new UpdateCurrentVMCommand(this, viewModelFactory, _filterWindowService);
+
+        }
+
+        protected virtual void OnCurrentViewModelChanged()
         {
             CurrentViewModelChanged?.Invoke();
         }
 
-        //Команда выполняющаяся при нажатии на кнопку
-        public ICommand UpdateCurrentVMCommand { get; set; }
-
-        public Navigator(IGiftNotationViewModelAbstractFactory viewModelFactory) {
-
-            UpdateCurrentVMCommand = new UpdateCurrentVMCommand(this, viewModelFactory);
-
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
+        
+

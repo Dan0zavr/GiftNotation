@@ -24,5 +24,18 @@ namespace GiftNotation.Views
         {
             InitializeComponent();
         }
+
+        private void ButtonAdd_CloseFilter(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void W_MouseDown(object sender, MouseEventArgs e)
+        {
+            if(e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
     }
 }

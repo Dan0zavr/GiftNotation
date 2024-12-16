@@ -101,7 +101,7 @@
 
                             <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical">
                                 <Border BorderBrush="Gray" Width="160" Height="90" BorderThickness="2" CornerRadius="8" 
-        Background="#c5c2c2" Margin="0,0,5,0" AllowDrop="True" HorizontalAlignment="Right">
+                                        Background="#c5c2c2" Margin="0,0,5,0" AllowDrop="True" HorizontalAlignment="Right">
                                     <Button Command="{Binding OpenFileDialogForPicture}">
                                         <!-- Само изображение -->
                                         <Image Source="{Binding GiftPic}" 
@@ -127,7 +127,7 @@
                                                                     <BeginStoryboard>
                                                                         <Storyboard>
                                                                             <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
-                                                            From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
+                                                                                            From="#292a2c" To="#97999f" Duration="0:0:0.2"/>
                                                                         </Storyboard>
                                                                     </BeginStoryboard>
                                                                 </EventTrigger>
@@ -135,12 +135,12 @@
                                                                     <BeginStoryboard>
                                                                         <Storyboard>
                                                                             <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
-                                                            From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
+                                                                                            From="#97999f" To="#292a2c" Duration="0:0:0.3"/>
                                                                         </Storyboard>
                                                                     </BeginStoryboard>
                                                                 </EventTrigger>
                                                                 <Trigger Property="IsPressed" Value="True">
-                                                                    <Setter TargetName="Button_Border" Property="Background" Value="Transparent"/>
+                                                                    <Setter TargetName="Button_Border" Property="Background" Value="#666562"/>
                                                                     <Setter TargetName="Button_Border" Property="BorderBrush" Value="Transparent"/>
                                                                     <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
                                                                 </Trigger>
