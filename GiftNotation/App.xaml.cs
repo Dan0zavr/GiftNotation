@@ -63,8 +63,11 @@ namespace GiftNotation
                     services.AddScoped<ContactService>();
                     services.AddScoped<EventService>();
                     services.AddScoped<FilterWindowService>();
+                    services.AddScoped<FilterService>();
 
                     services.AddScoped<AddGiftCommand>();
+
+                    services.AddSingleton<OpenCloseFilterCommand>();
 
                     // Регистрация фабрик как Scoped
                     services.AddScoped<IGiftNotationViewModelAbstractFactory, GiftNotationViewModelAbstractFactory>();
