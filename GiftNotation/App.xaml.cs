@@ -74,7 +74,6 @@ namespace GiftNotation
                     services.AddScoped<ContactService>();
                     services.AddScoped<EventService>();
                     services.AddScoped<FilterWindowService>();
-                    services.AddScoped<FilterService>();
 
                     services.AddScoped<AddGiftCommand>();
 
@@ -128,7 +127,12 @@ namespace GiftNotation
 
                 // Проверяем праздники при запуске приложения
                 await CheckEventsOnStartup();
+
+                var eventService = scope.ServiceProvider.GetRequiredService<EventService>();
+                await eventService.AddContactBday();
             }
+
+            
 
             // Запуск главного окна
             var mainWindow = _host.Services.GetRequiredService<MainWindow>();

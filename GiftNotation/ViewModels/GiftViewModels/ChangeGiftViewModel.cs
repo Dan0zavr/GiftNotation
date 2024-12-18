@@ -9,10 +9,11 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using GiftNotation.ViewModels.GiftViewModels;
 
 namespace GiftNotation.ViewModels
 {
-    public class ChangeGiftViewModel : ViewModelBase
+    public class ChangeGiftViewModel : ViewModelBase, IAddOrEditGiftViewModel
     {
         private readonly GiftViewModel _giftViewModel;
         private readonly GiftService _giftService;
@@ -123,6 +124,7 @@ namespace GiftNotation.ViewModels
         }
 
         public ICommand ChangeGiftCommand { get; }
+        public ICommand OpenFileDialogForPicture { get; }
 
         public ChangeGiftViewModel(GiftViewModel giftViewModel, GiftService giftService, ContactService contactService, EventService eventService)
         {
@@ -137,6 +139,7 @@ namespace GiftNotation.ViewModels
 
             LoadData();
             ChangeGiftCommand = new ChangeGiftCommand(giftService, giftViewModel, this);
+            OpenFileDialogForPicture = new OpenFileDialogForPictureCommand(this);
         }
 
         private async void LoadStatuses()

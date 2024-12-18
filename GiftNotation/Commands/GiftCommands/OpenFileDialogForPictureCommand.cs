@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.IO;
 using GiftNotation.ViewModels;
+using GiftNotation.ViewModels.GiftViewModels;
 
 
 namespace GiftNotation.Commands.GiftCommands
 {
     public class OpenFileDialogForPictureCommand : ICommand
     {
-        private AddGiftViewModel _addGiftViewModel;
-        private ChangeGiftViewModel _changeGiftViewModel;
+        private IAddOrEditGiftViewModel _giftViewModel;
 
-        public OpenFileDialogForPictureCommand(AddGiftViewModel addGiftViewModel)
+        public OpenFileDialogForPictureCommand(IAddOrEditGiftViewModel giftViewModel)
         {
-            _addGiftViewModel = addGiftViewModel;
+            _giftViewModel = giftViewModel;
         }
 
         public event EventHandler? CanExecuteChanged;
@@ -39,7 +39,7 @@ namespace GiftNotation.Commands.GiftCommands
 
             if (dialog.ShowDialog() == true)
             {
-                _addGiftViewModel.GiftPic = dialog.FileName;
+                _giftViewModel.GiftPic = dialog.FileName;
             }
         }
         
