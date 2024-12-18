@@ -5,6 +5,7 @@ using GiftNotation.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -72,7 +73,8 @@ namespace GiftNotation.ViewModels
 
         public void SetFilterAction(Action onFiltersApplied)
         {
-            _onFiltersApplied = onFiltersApplied;
+            // Присваиваем делегат только если он не null
+            _onFiltersApplied = onFiltersApplied ?? throw new ArgumentNullException(nameof(onFiltersApplied), "Delegate cannot be null");
         }
 
         public void ApplyFilters()
@@ -116,6 +118,13 @@ namespace GiftNotation.ViewModels
             {
                 EventTypes.Add(eventType);
             }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

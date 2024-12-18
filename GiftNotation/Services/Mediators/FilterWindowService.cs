@@ -15,12 +15,15 @@ namespace GiftNotation.Services
         private readonly EventService _eventService;
         private readonly FilterService _filterService;
 
+        private readonly FiltersViewModel _filtersViewModel;
 
-        public FilterWindowService(ContactService contactService, EventService eventService, FilterService filterService)
+
+        public FilterWindowService(ContactService contactService, EventService eventService, FilterService filterService, FiltersViewModel filtersViewModel)
         {
             _contactService = contactService;
             _eventService = eventService;
             _filterService = filterService;
+            _filtersViewModel = filtersViewModel;
         }
 
         public Filters? CurrentFiltersWindow { get; private set; }
@@ -29,10 +32,10 @@ namespace GiftNotation.Services
         {
             if (CurrentFiltersWindow == null || !CurrentFiltersWindow.IsVisible)
             {
-                var filtersViewModel = new FiltersViewModel(_contactService, _eventService, _filterService);
+                
                 CurrentFiltersWindow = new Filters
                 {
-                    DataContext = filtersViewModel
+                    DataContext = _filtersViewModel
                 };
 
                 CurrentFiltersWindow.Show();

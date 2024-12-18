@@ -48,12 +48,23 @@ namespace GiftNotation
                     services.AddScoped<ContactViewModel>();
                     services.AddScoped<AddGiftViewModel>();
                     services.AddScoped<ChangeGiftViewModel>();
-                    services.AddScoped<EventViewModel>();
                     services.AddScoped<AddEventViewModel>();
                     services.AddScoped<GiftViewModel>();
                     services.AddScoped<MainViewModel>();
                     services.AddScoped<CalendarViewModel>();
+
                     services.AddScoped<FiltersViewModel>();
+                    services.AddScoped<EventViewModel>(provider =>
+                    {
+                        var eventService = provider.GetRequiredService<EventService>();
+                        var filtersViewModel = provider.GetRequiredService<FiltersViewModel>();
+                        var contactService = provider.GetRequiredService<ContactService>();
+                        var filterWindowService = provider.GetRequiredService<FilterWindowService>();
+
+                        var eventViewModel = new EventViewModel(eventService, contactService, filterWindowService, filtersViewModel);
+                        return eventViewModel;
+                    });
+
 
                     // Регистрация Navigator как Singleton
                     services.AddSingleton<INavigator, Navigator>();
