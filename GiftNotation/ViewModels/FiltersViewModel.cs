@@ -17,7 +17,6 @@ namespace GiftNotation.ViewModels
     {
         private readonly ContactService _contactService;
         private readonly EventService _eventService;
-        private readonly FilterService _filterService;
 
         private string? _selectedMonth;
         private EventType? _selectedEventType;
@@ -53,11 +52,10 @@ namespace GiftNotation.ViewModels
 
         private Action _onFiltersApplied;
 
-        public FiltersViewModel(ContactService contactService, EventService eventService, FilterService filterService)
+        public FiltersViewModel(ContactService contactService, EventService eventService)
         {
             _contactService = contactService;
             _eventService = eventService;
-            _filterService = filterService;
 
             // Загрузка типов событий и отношений
             LoadRelpTypes();

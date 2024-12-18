@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GiftNotation.Services.Mediators
+namespace GiftNotation.ViewModels.GiftViewModels
 {
-    internal class EventFilterService
+    public interface IAddOrEditGiftViewModel
     {
+        string? GiftPic { get; set; }
     }
 }

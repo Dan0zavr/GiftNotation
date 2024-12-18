@@ -8,10 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using GiftNotation.ViewModels.GiftViewModels;
 
 namespace GiftNotation.ViewModels
 {
-    public class AddGiftViewModel : ViewModelBase
+    public class AddGiftViewModel : ViewModelBase, IAddOrEditGiftViewModel
     {
         private readonly GiftService _giftService;
         private readonly EventService _eventService;

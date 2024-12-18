@@ -14,7 +14,6 @@ namespace GiftNotation.Commands.ContactCommands
     public class AddContactCommand : ICommand
     {
         private readonly ContactService _contactService;
-        private readonly EventService _eventService;
         private readonly ContactViewModel _contactViewModel;
         private readonly AddContactViewModel _addContactViewModel;
 

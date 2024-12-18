@@ -16,11 +16,13 @@ namespace GiftNotation.Services
     public class EventService
     {
         private readonly GiftNotationDbContext _context;
+        private readonly ContactService _contactService;
         public event Action StateChanged;
 
-        public EventService(GiftNotationDbContext context)
+        public EventService(GiftNotationDbContext context, ContactService contactService)
         {
             _context = context;
+            _contactService = contactService;
         }
 
         public async Task<IEnumerable<DisplayEventModel>> GetEventsAsync()
@@ -202,13 +204,14 @@ namespace GiftNotation.Services
             .Include(e => e.EventContacts) // Подгружаем связи событие-контакты
                 .ThenInclude(ec => ec.Contact);
 
-            if(month != "Без фильтра" && month != null){
+            if (month != "Без фильтра" && month != null)
+            {
 
                 int monthNumber = GetMonthNumber(month);
                 query = query.Where(e => e.EventDate.Month == monthNumber);
             }
 
-            if(eventType != "Без фильтра" && month != null)
+            if (eventType != "Без фильтра" && month != null)
             {
                 query = query.Where(e => e.EventType.EventTypeName == eventType);
             }
@@ -249,6 +252,83 @@ namespace GiftNotation.Services
                 "Декабрь" => 12
             };
 
+        }
+
+        public async Task AddContactBday()
+        {
+            var currentYear = DateTime.Now.Year;
+            var contacts = await _contactService.GetAllContacts();
+
+            var eventsToAdd = new List<Event>();
+            var eventContactsToAdd = new List<EventContact>();
+
+            foreach (var contact in contacts)
+            {
+                var currentBdayMonth = contact.Bday.Month;
+                var currentBdayDay = contact.Bday.Day;
+                var todayBday = new DateTime(currentYear, currentBdayMonth, currentBdayDay);
+
+                // Если день рождения в этом году уже прошел, то сдвигаем на следующий год
+                if (todayBday < DateTime.Now)
+                {
+                    todayBday = todayBday.AddYears(1);
+                }
+
+                // Проверяем, существует ли событие на эту дату для этого контакта
+                var existingEvent = await _context.Events
+                    .Where(e => e.EventDate == todayBday && e.EventName == "День рождения: " + contact.ContactName)
+                    .FirstOrDefaultAsync();
+
+                if (existingEvent == null)
+                {
+                    // Создаем новое событие для данного контакта, если его нет
+                    var bdayEvent = new Event
+                    {
+                        EventName = "День рождения: " + contact.ContactName,
+                        EventDate = todayBday,
+                        EventTypeId = 1
+                    };
+                    eventsToAdd.Add(bdayEvent);
+
+                    // Добавляем связь между контактом и событием
+                    eventContactsToAdd.Add(new EventContact
+                    {
+                        Event = bdayEvent, // связь с только что добавленным событием
+                        ContactId = contact.ContactId,
+                    });
+                }
+                else
+                {
+                    // Если событие существует, добавляем только связь
+                    var existingEventContact = await _context.EventContacts
+                        .Where(ec => ec.EventId == existingEvent.EventId && ec.ContactId == contact.ContactId)
+                        .FirstOrDefaultAsync();
+
+                    if (existingEventContact == null)
+                    {
+                        // Если такой связи нет, добавляем её
+                        eventContactsToAdd.Add(new EventContact
+                        {
+                            EventId = existingEvent.EventId,
+                            ContactId = contact.ContactId,
+                        });
+                    }
+                }
+            }
+
+            // Добавляем все новые события за один раз
+            if (eventsToAdd.Any())
+            {
+                _context.Events.AddRange(eventsToAdd);
+                await _context.SaveChangesAsync();
+            }
+
+            // После сохранения событий, добавляем связи между событиями и контактами
+            if (eventContactsToAdd.Any())
+            {
+                _context.EventContacts.AddRange(eventContactsToAdd);
+                await _context.SaveChangesAsync();
+            }
         }
 
     }

@@ -11,18 +11,10 @@ namespace GiftNotation.Services
 {
     public class FilterWindowService
     {
-        private readonly ContactService _contactService;
-        private readonly EventService _eventService;
-        private readonly FilterService _filterService;
-
         private readonly FiltersViewModel _filtersViewModel;
 
-
-        public FilterWindowService(ContactService contactService, EventService eventService, FilterService filterService, FiltersViewModel filtersViewModel)
+        public FilterWindowService(FiltersViewModel filtersViewModel)
         {
-            _contactService = contactService;
-            _eventService = eventService;
-            _filterService = filterService;
             _filtersViewModel = filtersViewModel;
         }
 
