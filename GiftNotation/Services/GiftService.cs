@@ -97,16 +97,16 @@ namespace GiftNotation.Services
         .OrderByDescending(e => e.GiftId) // Упорядочиваем по убыванию идентификатора
         .FirstOrDefaultAsync();
 
-            if (giftModel.SelectedEventId != null)
+            if (giftModel.EventId != null)
             {
                 var newGiftEvent = new GiftEvent()
                 {
-                    EventId = giftModel.SelectedEventId ?? 0,
+                    EventId = giftModel.EventId ?? 0,
                     GiftId = addedGift.GiftId
                 };
                 _context.GiftEvents.Add(newGiftEvent);
             }
-            if (giftModel.SelectedEventId != null)
+            if (giftModel.EventId != null)
             {
                 var newGiftContact = new GiftContact()
                 {
@@ -196,8 +196,10 @@ namespace GiftNotation.Services
         public async Task UpdateGiftAsync(DisplayGiftModel _gift)
         {
             var giftChange = await _context.Gifts.FindAsync(_gift.GiftId);
-            var giftEventChange = await _context.GiftEvents.FindAsync(_gift.GiftId, _gift.EventId);
-            var giftContactChange = await _context.GiftContacts.FindAsync(_gift.GiftId, _gift.ContactId);
+            if (giftChange == null)
+            {
+                throw new InvalidOperationException("Gift not found.");
+            }
 
             giftChange.GiftName = _gift.GiftName ?? string.Empty;
             giftChange.Description = _gift.Description ?? string.Empty;
@@ -206,50 +208,70 @@ namespace GiftNotation.Services
             giftChange.GiftPic = _gift.GiftPic ?? string.Empty;
             giftChange.StatusId = await EnsureStatusAsync(_gift.StatusName);
 
-            if(giftEventChange != null)
+            // Обновляем GiftEvent
+            if (_gift.EventId != null && _gift.EventId > 0)
             {
-                _context.GiftEvents.Remove(giftEventChange);
-                var newGiftEvent = new GiftEvent()
+                var giftEventChange = await _context.GiftEvents
+                    .FirstOrDefaultAsync(ge => ge.GiftId == _gift.GiftId);
+
+                if (giftEventChange != null)
                 {
-                    EventId = _gift.SelectedEventId ?? 0,
-                    GiftId = _gift.GiftId
-                };
-                _context.GiftEvents.Add(newGiftEvent);
-            }
-            else
-            {
-                if (_gift.SelectedEventId != null)
-                {
-                    var newGiftEvent = new GiftEvent()
+                    if (giftEventChange.EventId != _gift.EventId.Value)
                     {
-                        EventId = _gift.SelectedEventId ?? 0,
+                        // Удаляем текущую связь, если ID события изменился
+                        _context.GiftEvents.Remove(giftEventChange);
+
+                        // Добавляем новое событие
+                        var newGiftEvent = new GiftEvent
+                        {
+                            EventId = _gift.EventId.Value,
+                            GiftId = _gift.GiftId
+                        };
+                        _context.GiftEvents.Add(newGiftEvent);
+                    }
+                }
+                else
+                {
+                    // Если связь отсутствует, создаем её
+                    var newGiftEvent = new GiftEvent
+                    {
+                        EventId = _gift.EventId.Value,
                         GiftId = _gift.GiftId
                     };
-                    
                     _context.GiftEvents.Add(newGiftEvent);
                 }
             }
 
-            if (giftContactChange != null)
+            // Обновляем GiftContact
+            if (_gift.ContactId != null && _gift.ContactId > 0)
             {
-                _context.GiftContacts.Remove(giftContactChange);
-                var newGiftContact = new GiftContact()
+                var giftContactChange = await _context.GiftContacts
+                    .FirstOrDefaultAsync(gc => gc.GiftId == _gift.GiftId);
+
+                if (giftContactChange != null)
                 {
-                    ContactId = _gift.SelectedContactId ?? 0,
-                    GiftId = _gift.GiftId
-                };
-                _context.GiftContacts.Add(newGiftContact);
-            }
-            else
-            {
-                if (_gift.SelectedContactId != null)
-                {
-                    var newGiftContact = new GiftContact()
+                    if (giftContactChange.ContactId != _gift.ContactId.Value)
                     {
-                        ContactId = _gift.SelectedContactId ?? 0,
+                        // Удаляем текущую связь, если ID контакта изменился
+                        _context.GiftContacts.Remove(giftContactChange);
+
+                        // Добавляем новый контакт
+                        var newGiftContact = new GiftContact
+                        {
+                            ContactId = _gift.ContactId.Value,
+                            GiftId = _gift.GiftId
+                        };
+                        _context.GiftContacts.Add(newGiftContact);
+                    }
+                }
+                else
+                {
+                    // Если связь отсутствует, создаем её
+                    var newGiftContact = new GiftContact
+                    {
+                        ContactId = _gift.ContactId.Value,
                         GiftId = _gift.GiftId
                     };
-
                     _context.GiftContacts.Add(newGiftContact);
                 }
             }

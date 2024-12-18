@@ -5,9 +5,11 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace GiftNotation.Services
 {
@@ -191,6 +193,62 @@ namespace GiftNotation.Services
         public async Task<IEnumerable<EventType>> GetEventTypesAsync()
         {
             return await _context.EventTypes.ToListAsync();
+        }
+
+        public async Task<IEnumerable<DisplayEventModel>> FilterEvents(string month, string eventType, string relpType)
+        {
+            IQueryable<Event> query = _context.Events
+            .Include(e => e.EventType) // Подгружаем тип события
+            .Include(e => e.EventContacts) // Подгружаем связи событие-контакты
+                .ThenInclude(ec => ec.Contact);
+
+            if(month != "Без фильтра" && month != null){
+
+                int monthNumber = GetMonthNumber(month);
+                query = query.Where(e => e.EventDate.Month == monthNumber);
+            }
+
+            if(eventType != "Без фильтра" && month != null)
+            {
+                query = query.Where(e => e.EventType.EventTypeName == eventType);
+            }
+
+            if (relpType != "Без фильтра" && month != null)
+            {
+                query = query.Where(e => e.EventContacts.Any(ec => ec.Contact.RelpType.RelpTypeName == relpType));
+            }
+
+            var result = await query.Select(e => new DisplayEventModel
+            {
+                EventId = e.EventId,
+                EventName = e.EventName,
+                EventDate = e.EventDate,
+                EventTypeName = e.EventType.EventTypeName,
+                ContactsOnEvent = new ObservableCollection<Contact?>(
+                        e.EventContacts.Select(ec => ec.Contact))
+            }).ToListAsync();
+
+            return result;
+        }
+
+        private int GetMonthNumber(string month)
+        {
+            return month switch
+            {
+                "Январь" => 1,
+                "Февраль" => 2,
+                "Март" => 3,
+                "Апрель" => 4,
+                "Май" => 5,
+                "Июнь" => 6,
+                "Июль" => 7,
+                "Август" => 8,
+                "Сентябрь" => 9,
+                "Октябрь" => 10,
+                "Ноябрь" => 11,
+                "Декабрь" => 12
+            };
+
         }
 
     }

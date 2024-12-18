@@ -20,10 +20,11 @@ namespace GiftNotation.ViewModels.Factories
         private readonly ContactService _contactService;
         private readonly EventService _eventService;
         private readonly FiltersViewModel _filtersViewModel;
+        private readonly FilterWindowService _filterWindowService;
 
         public GiftNotationViewModelAbstractFactory(IGiftNotationViewModelFactory<CalendarViewModel> calendarViewModelFactory,
             ContactViewModel contactViewModel, GiftViewModel giftViewModel, EventViewModel eventViewModel,
-            GiftService giftService, ContactService contactService, EventService eventService, FiltersViewModel filtersViewModel)
+            GiftService giftService, ContactService contactService, EventService eventService, FiltersViewModel filtersViewModel, FilterWindowService filterWindowService)
         {
             _calendarViewModelFactory = calendarViewModelFactory;
             _contactViewModel = contactViewModel;
@@ -33,6 +34,7 @@ namespace GiftNotation.ViewModels.Factories
             _contactService = contactService;
             _eventService = eventService;
             _filtersViewModel = filtersViewModel;
+            _filterWindowService = filterWindowService;
         }
 
         public ViewModelBase CreateViewModel(ViewType viewType)
@@ -45,7 +47,7 @@ namespace GiftNotation.ViewModels.Factories
                 case ViewType.Contacts:
                     return new ContactViewModel(_contactService, _giftService);
                 case ViewType.Events:
-                    return new EventViewModel(_eventService, _filtersViewModel, _contactService);
+                    return new EventViewModel(_eventService, _contactService, _filterWindowService, _filtersViewModel);
                 case ViewType.Gifts:
                     return new GiftViewModel(_giftService, _contactService, _eventService);
                 default:

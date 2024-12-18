@@ -48,12 +48,23 @@ namespace GiftNotation
                     services.AddScoped<ContactViewModel>();
                     services.AddScoped<AddGiftViewModel>();
                     services.AddScoped<ChangeGiftViewModel>();
-                    services.AddScoped<EventViewModel>();
                     services.AddScoped<AddEventViewModel>();
                     services.AddScoped<GiftViewModel>();
                     services.AddScoped<MainViewModel>();
                     services.AddScoped<CalendarViewModel>();
+
                     services.AddScoped<FiltersViewModel>();
+                    services.AddScoped<EventViewModel>(provider =>
+                    {
+                        var eventService = provider.GetRequiredService<EventService>();
+                        var filtersViewModel = provider.GetRequiredService<FiltersViewModel>();
+                        var contactService = provider.GetRequiredService<ContactService>();
+                        var filterWindowService = provider.GetRequiredService<FilterWindowService>();
+
+                        var eventViewModel = new EventViewModel(eventService, contactService, filterWindowService, filtersViewModel);
+                        return eventViewModel;
+                    });
+
 
                     // Регистрация Navigator как Singleton
                     services.AddSingleton<INavigator, Navigator>();
@@ -62,8 +73,12 @@ namespace GiftNotation
                     services.AddScoped<GiftService>();
                     services.AddScoped<ContactService>();
                     services.AddScoped<EventService>();
+                    services.AddScoped<FilterWindowService>();
+                    services.AddScoped<FilterService>();
 
                     services.AddScoped<AddGiftCommand>();
+
+                    services.AddSingleton<OpenCloseFilterCommand>();
 
                     // Регистрация фабрик как Scoped
                     services.AddScoped<IGiftNotationViewModelAbstractFactory, GiftNotationViewModelAbstractFactory>();
@@ -76,7 +91,9 @@ namespace GiftNotation
                     services.AddScoped<UpdateCurrentVMCommand>();
 
                     // Регистрация команды OpenCloseFilterCommand
-                    services.AddScoped<OpenCloseFilterCommand>();
+                    services.AddSingleton<OpenCloseFilterCommand>();
+
+
                 });
         }
 

@@ -1,4 +1,5 @@
-﻿using GiftNotation.State.Navigators;
+﻿using GiftNotation.Services;
+using GiftNotation.State.Navigators;
 using GiftNotation.ViewModels;
 using GiftNotation.Views;
 using System;
@@ -13,24 +14,34 @@ using System.Windows.Input;
 namespace GiftNotation.Commands
 {
     public class OpenCloseFilterCommand : ICommand
+{
+    private readonly FilterWindowService _filterWindowService;
+
+    public OpenCloseFilterCommand(FilterWindowService filterWindowService)
     {
-        private readonly EventViewModel _eventViewModel;
+        _filterWindowService = filterWindowService;
+    }
 
-        public OpenCloseFilterCommand(EventViewModel eventViewModel)
+    public event EventHandler? CanExecuteChanged;
+
+    public bool CanExecute(object? parameter) => true;
+
+    public void Execute(object? parameter)
+    {
+        // Если окно фильтров уже открыто, закрываем его. Иначе - открываем.
+        if (_filterWindowService.CurrentFiltersWindow?.IsVisible == true)
         {
-            _eventViewModel = eventViewModel;
+            _filterWindowService.CloseFilterWindow();
         }
-
-        public event EventHandler? CanExecuteChanged;
-
-        public bool CanExecute(object? parameter) => true;
-
-        public void Execute(object? parameter)
+        else
         {
-            // Переключение видимости окна фильтров
-            _eventViewModel.ToggleFiltersWindow();
+            _filterWindowService.OpenFilterWindow();
         }
     }
 
-
+    public void CloseFilters()
+    {
+        _filterWindowService.CloseFilterWindow();
+    }
+}
 }

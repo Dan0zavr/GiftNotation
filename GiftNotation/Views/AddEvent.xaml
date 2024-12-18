@@ -28,18 +28,7 @@ Background="Transparent" MouseDown="Window_MouseDown">
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Введите название:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding EventName}"/>
-                    </Grid>
-                </Border>
-
-                <Border Height="30" Width="450" Background="#cacac8" CornerRadius="5" Margin="10, 0, 10, 10">
-                    <Grid Margin="10,0,0,0" VerticalAlignment="Center">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="Введите дату праздника:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding EventDate}"/>
+                        <TextBox FontSize="14" Width="300" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding EventName}"/>
                     </Grid>
                 </Border>
 
@@ -50,10 +39,21 @@ Background="Transparent" MouseDown="Window_MouseDown">
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Введите тип праздника:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <ComboBox FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" ItemsSource="{Binding EventTypes}"
+                        <ComboBox FontSize="14" Width="267" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" ItemsSource="{Binding EventTypes}"
                                   DisplayMemberPath="EventTypeName"
                                   SelectedItem="{Binding EventType}"
                                   IsEditable="False"/>
+                    </Grid>
+                </Border>
+
+                <Border Height="30" Width="450" Background="#cacac8" CornerRadius="5" Margin="10, 0, 10, 10">
+                    <Grid Margin="10,0,0,0" VerticalAlignment="Center">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="Введите дату и время праздника:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
+                        <TextBox FontSize="14" Width="205" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding EventDate}"/>
                     </Grid>
                 </Border>
 
@@ -64,13 +64,20 @@ Background="Transparent" MouseDown="Window_MouseDown">
                             <ColumnDefinition Width="auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0" >
-                            <TextBlock Text="Люди:" FontSize="14" FontFamily="Bold" VerticalAlignment="Top" />
-                            <ListBox Height="119" Width="180" ItemsSource="{Binding Contacts}" 
-                             DisplayMemberPath="ContactName"
-                             SelectedItem="{Binding SelectedContact}">
 
-                            </ListBox>
+
+                        <StackPanel Grid.Column="0" Height="120">
+                            <Border Height="130" CornerRadius="5" BorderThickness="2" Background="Gray">
+                                <Grid>
+                                    <TextBlock Margin="5,5,0,0" Text="Люди:" FontSize="14" FontFamily="Bold" VerticalAlignment="Top" />
+                                    <ListBox Height="90" Width="165" ItemsSource="{Binding Contacts}" 
+                             DisplayMemberPath="ContactName"
+                             SelectedItem="{Binding SelectedContact}"
+                                             Background="#cacac8" Margin="0,10,0,0"/>
+                                </Grid>
+                                
+                            </Border>
+                           
 
                         </StackPanel>
                         
@@ -83,7 +90,7 @@ Background="Transparent" MouseDown="Window_MouseDown">
                                                 <ControlTemplate TargetType="Button">
                                                     <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
                                                         <Border.Background>
-                                                            <SolidColorBrush x:Name="color1" Color="#FFF0F0F0"/>
+                                                            <SolidColorBrush x:Name="color1" Color="Gray"/>
                                                         </Border.Background>
 
                                                         <ContentPresenter Width="65" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,-2,0,0"/>
@@ -97,7 +104,7 @@ Background="Transparent" MouseDown="Window_MouseDown">
                                                             <BeginStoryboard>
                                                                 <Storyboard>
                                                                     <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
-From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
+                                                                                    From="Gray" To="#5d5b59" Duration="0:0:0.2"/>
                                                                 </Storyboard>
                                                             </BeginStoryboard>
                                                         </EventTrigger>
@@ -106,14 +113,13 @@ From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
                                                             <BeginStoryboard>
                                                                 <Storyboard>
                                                                     <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
-From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
+                                                                                    From="#5d5b59" To="Gray" Duration="0:0:0.3"/>
                                                                 </Storyboard>
                                                             </BeginStoryboard>
                                                         </EventTrigger>
 
                                                         <Trigger Property="IsPressed" Value="True">
-                                                            <Setter TargetName="Button_Border" Property="Background" Value="Gray"/>
-                                                            <Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>
+                                                            <Setter TargetName="Button_Border" Property="Background" Value="#7e7d7b"/>
                                                             <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
                                                         </Trigger>
 
@@ -131,7 +137,7 @@ From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
                                 </Button.Style>
                             </Button>
 
-                            <Button Content="&lt;Удалить" VerticalAlignment="Center" HorizontalAlignment="Center" Background="#FFF0F0F0" Margin="3" Height="18" FontSize="12" FontFamily="Bold" Command="{Binding DeleteContactFromEventCommand}">
+                            <Button Content="&lt;Удалить" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="#292a2c" Margin="3" Height="18" FontSize="12" FontFamily="Bold" Command="{Binding DeleteContactFromEventCommand}">
                                 <Button.Style>
                                     <Style TargetType="Button">
                                         <Setter Property="Template">
@@ -139,43 +145,41 @@ From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
                                                 <ControlTemplate TargetType="Button">
                                                     <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
                                                         <Border.Background>
-                                                            <SolidColorBrush x:Name="color1" Color="#FFF0F0F0"/>
+                                                            <SolidColorBrush x:Name="color1" Color="Gray"/>
                                                         </Border.Background>
 
                                                         <ContentPresenter Width="65" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,-2,0,0"/>
 
                                                     </Border>
 
-
-                                                    <!--Триггеры-->
                                                     <ControlTemplate.Triggers>
-                                                        <EventTrigger RoutedEvent="Border.MouseEnter">
-                                                            <BeginStoryboard>
-                                                                <Storyboard>
-                                                                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
-                 From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
-                                                                </Storyboard>
-                                                            </BeginStoryboard>
-                                                        </EventTrigger>
+                                                        
+                                                        <!--Триггеры-->
+                                                    <EventTrigger RoutedEvent="Border.MouseEnter">
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                                                                From="Gray" To="#5d5b59" Duration="0:0:0.2"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </EventTrigger>
 
-                                                        <EventTrigger RoutedEvent="Border.MouseLeave">
-                                                            <BeginStoryboard>
-                                                                <Storyboard>
-                                                                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
-                 From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
-                                                                </Storyboard>
-                                                            </BeginStoryboard>
-                                                        </EventTrigger>
+                                                    <EventTrigger RoutedEvent="Border.MouseLeave">
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                                                              From="#5d5b59" To="Gray" Duration="0:0:0.3"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </EventTrigger>
 
                                                         <Trigger Property="IsPressed" Value="True">
-                                                            <Setter TargetName="Button_Border" Property="Background" Value="Gray"/>
-                                                            <Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>
+                                                            <Setter TargetName="Button_Border" Property="Background" Value="#7e7d7b"/>
                                                             <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
                                                         </Trigger>
 
-
-
                                                     </ControlTemplate.Triggers>
+
 
 
 
@@ -188,12 +192,19 @@ From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
                             </Button>
                         </StackPanel>
 
-                        <StackPanel Grid.Column="2">
-                            <TextBlock Text="На празднике:" FontSize="14" FontFamily="Bold" VerticalAlignment="Top" />
-                            <ListBox Height="119" Width="180" ItemsSource="{Binding ContactsOnEvent}"
+                        <StackPanel Grid.Column="2" Height="120">
+                            <Border Background="Gray" BorderThickness="2" CornerRadius="5" Height="130">
+                                <Grid>
+                                    <TextBlock Margin="5,5,0,0" Text="На празднике:" FontSize="14" FontFamily="Bold" VerticalAlignment="Top" />
+                                    <ListBox Height="90" Width="165" ItemsSource="{Binding ContactsOnEvent}"
                                      DisplayMemberPath="ContactName" 
-                                     SelectedItem="{Binding SelectedContactOnEvent}">
-                            </ListBox>
+                                     SelectedItem="{Binding SelectedContactOnEvent}" Margin="0,10,0,0" Background="#cacac8">
+         
+                                    </ListBox>
+                                </Grid>
+                                
+                            </Border>                             
+                            
                         </StackPanel>
 
                     </Grid>
@@ -263,7 +274,7 @@ From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
                     <TextBlock Text="Отменить" Width="65" Foreground="#FFF0F0F0" FontSize="14" FontFamily="Bold"/>
                 </Button>
 
-                <Button Width="100" Height="20" Margin="280,0,0,10" Background="#292a2c" Command="{Binding AddEventCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+                <Button Width="100" Height="20" Margin="275,0,0,10" Background="#292a2c" Command="{Binding AddEventCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
 
 
                     <Button.Style>

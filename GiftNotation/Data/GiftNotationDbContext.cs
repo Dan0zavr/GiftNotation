@@ -24,8 +24,14 @@ public partial class GiftNotationDbContext : DbContext
     public DbSet<GiftEvent> GiftEvents { get; set; }
     public DbSet<EventContact> EventContacts { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.EnableSensitiveDataLogging();
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
         modelBuilder.Entity<Gifts>()
             .HasKey(ec => new { ec.GiftId });
         // Конфигурация таблицы-связи `event_contact`

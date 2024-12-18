@@ -58,8 +58,8 @@
     <Border Background="#7e7d7b" CornerRadius="0,0,20,20">
         <Grid>
 
-            <StackPanel Orientation="Horizontal"  Width="220" Margin="-315,-300,0,0" Height="30">
-
+            <StackPanel Orientation="Horizontal"  Width="220" Margin="-290,-300,0,0" Height="30">
+                
                 <Button Background="#2c2825" Width="100" Height="20" Margin="5,0,5,0" Command="{Binding OpenAddContactCommand}">
 
 
@@ -116,7 +116,7 @@
                         </Style>
 
                     </Button.Style>
-
+                    
                     <TextBlock  Foreground="#c7c6cb" Margin="0,1,0,0" Text="Добавить" Height="15" VerticalAlignment="Top"/>
                 </Button>
 
@@ -176,12 +176,12 @@
 
                     </Button.Style>
 
-                    <TextBlock Text="Редактировать" Margin="-1,1,0,0" HorizontalAlignment="Left" Foreground="#c7c6cb"/>
+                    <TextBlock Text="Редактировать" Margin="0,1,0,0" HorizontalAlignment="Center" Foreground="#c7c6cb"/>
                 </Button>
-
+                
             </StackPanel>
 
-            <Button Background="#2c2825" Width="100" Height="20" Margin="30,-300,-400,0" Command="{Binding DeleteContactCommand}">
+            <Button Background="#2c2825" Width="100" Height="20" Margin="0,-300,-400,0" Command="{Binding DeleteContactCommand}">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Template">
@@ -277,7 +277,7 @@
                         <Setter Property="BorderThickness" Value="0,0,2,2"/>
                         <Setter Property="Padding" Value="5"/>
                     </Style>
-
+                    
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
@@ -291,31 +291,31 @@
                                 <TextBlock Text="{Binding Bday, StringFormat=d, UpdateSourceTrigger=PropertyChanged}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                    <DataGridTemplateColumn Header="Подарки" Width="*">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <ListBox ItemsSource="{Binding MyGifts}" 
+                        </DataGridTemplateColumn>
+                     <DataGridTemplateColumn Header="Подарки" Width="*">
+     <DataGridTemplateColumn.CellTemplate>
+         <DataTemplate>
+             <ListBox ItemsSource="{Binding MyGifts}" 
                       HorizontalAlignment="Stretch" 
                       VerticalAlignment="Stretch"
                       ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" />
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                    <ListBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <!-- Центрируем текст -->
-                                            <TextBlock Text="{Binding GiftName}" 
+                 <ListBox.ItemsPanel>
+                     <ItemsPanelTemplate>
+                         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" />
+                     </ItemsPanelTemplate>
+                 </ListBox.ItemsPanel>
+                 <ListBox.ItemTemplate>
+                     <DataTemplate>
+                         <!-- Центрируем текст -->
+                         <TextBlock Text="{Binding GiftName}" 
                                     HorizontalAlignment="Center" 
                                     VerticalAlignment="Center" />
-                                        </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                     </DataTemplate>
+                 </ListBox.ItemTemplate>
+             </ListBox>
+         </DataTemplate>
+     </DataGridTemplateColumn.CellTemplate>
+ </DataGridTemplateColumn>
                     <!--<DataGridTextColumn Header="История подарков" Binding="{Binding Gift, UpdateSourceTrigger=PropertyChanged}" Width="*" />-->
 
                 </DataGrid.Columns>
@@ -324,5 +324,5 @@
 
         </Grid>
     </Border>
-
+    
 </UserControl>

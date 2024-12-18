@@ -19,30 +19,27 @@ namespace GiftNotation.ViewModels
         private readonly ContactService _contactService;
         private readonly EventService _eventService;
 
+        private DisplayGiftModel _selectedGift;
         private int _giftId;
         private string _giftName;
         private string _giftDescription;
         private string _url;
         private double _price;
         private string _giftPic;
-        private int? _selectedContactId;
-        private int? _contactId;
-        private string _contactName;
-        private int? _selectedEventId;
-        private int? _eventId;
-        private string _eventName;
-        private string _statusName;
 
-        internal DisplayGiftModel _selectedGift;
-        private Status? _selectedStatus;
         private Contact? _selectedContact;
         private Event? _selectedEvent;
+        private Status? _selectedStatus;
+
+        private string? _selectedContactName;
+        private string? _selectedEventName;
+        private string? _selectedStatusName;
 
         public ObservableCollection<Status> Statuses { get; private set; } = new ObservableCollection<Status>();
         public ObservableCollection<Contact> Contacts { get; private set; } = new ObservableCollection<Contact>();
         public ObservableCollection<Event> Events { get; private set; } = new ObservableCollection<Event>();
 
-        public int GiftId { get => _giftId; }
+        public int GiftId => _giftId;
 
         public string GiftName
         {
@@ -74,47 +71,39 @@ namespace GiftNotation.ViewModels
             set => SetProperty(ref _giftPic, value);
         }
 
-        public int? SelectedContactId
+        public Contact? SelectedContact
         {
-            get => _selectedContactId = SelectedContact?.ContactId;
-            set => SetProperty(ref _selectedContactId, value);
+            get => _selectedContact;
+            set
+            {
+                SetProperty(ref _selectedContact, value);
+                // Обновляем имя контакта при изменении выбора
+                SelectedContactName = _selectedContact?.ContactName;
+            }
         }
 
-        public int? ContactId
+        public string? SelectedContactName
         {
-            get => _contactId;
-            set => SetProperty(ref _contactId, value);
+            get => _selectedContactName;
+            set => SetProperty(ref _selectedContactName, value);
         }
 
-        public string ContactName
+        public Event? SelectedEvent
         {
-            get => _contactName;
-            set => SetProperty(ref _contactName, value);
-        }
-        public int? SelectedEventId
-        {
-            get => _selectedEventId = SelectedEvent?.EventId;
-            set => SetProperty(ref _selectedEventId, value);
-        }
-
-        public int? EventId
-        {
-            get => _eventId;
-            set => SetProperty(ref _eventId, value);
+            get => _selectedEvent;
+            set
+            {
+                SetProperty(ref _selectedEvent, value);
+                // Обновляем имя события при изменении выбора
+                SelectedEventName = _selectedEvent?.EventName;
+            }
         }
 
-        public string EventName
+        public string? SelectedEventName
         {
-            get => _eventName;
-            set => SetProperty(ref _eventName, value);
+            get => _selectedEventName;
+            set => SetProperty(ref _selectedEventName, value);
         }
-
-        public string StatusName
-        {
-            get => _statusName;
-            set => SetProperty(ref _statusName, value);
-        }
-
 
         public Status? SelectedStatus
         {
@@ -122,19 +111,15 @@ namespace GiftNotation.ViewModels
             set
             {
                 SetProperty(ref _selectedStatus, value);
+                // Обновляем имя статуса при изменении выбора
+                SelectedStatusName = _selectedStatus?.StatusName;
             }
         }
 
-        public Contact? SelectedContact
+        public string? SelectedStatusName
         {
-            get => _selectedContact;
-            set => SetProperty(ref _selectedContact, value);
-        }
-
-        public Event? SelectedEvent
-        {
-            get => _selectedEvent;
-            set => SetProperty(ref _selectedEvent, value);
+            get => _selectedStatusName;
+            set => SetProperty(ref _selectedStatusName, value);
         }
 
         public ICommand ChangeGiftCommand { get; }
@@ -145,10 +130,12 @@ namespace GiftNotation.ViewModels
             _giftService = giftService;
             _eventService = eventService;
             _contactService = contactService;
-            LoadData();
+            
             LoadContacts();
             LoadEvents();
             LoadStatuses();
+
+            LoadData();
             ChangeGiftCommand = new ChangeGiftCommand(giftService, giftViewModel, this);
         }
 
@@ -181,21 +168,25 @@ namespace GiftNotation.ViewModels
         private async void LoadData()
         {
             var gifts = await _giftService.GetDisplayGiftModelByID(_giftViewModel.SelectedGift.GiftId);
-            foreach (var gift in gifts) { 
+            foreach (var gift in gifts)
+            {
                 _selectedGift = gift;
             }
-            _giftId = _selectedGift.GiftId;
-            _giftName = _selectedGift.GiftName;
-            _giftDescription = _selectedGift.Description;
-            _url = _selectedGift.Url;
-            _price = _selectedGift.Price;
-            _giftPic = _selectedGift.GiftPic;
-            _contactId = _selectedGift.ContactId;
-            _contactName = _selectedGift.ContactName;
-            _eventId = _selectedGift.EventId;
-            _eventName = _selectedGift.EventName;
-            _statusName = _selectedGift.StatusName;
 
+            if (_selectedGift != null)
+            {
+                _giftId = _selectedGift.GiftId;
+                GiftName = _selectedGift.GiftName;
+                Description = _selectedGift.Description;
+                Url = _selectedGift.Url;
+                Price = _selectedGift.Price;
+                GiftPic = _selectedGift.GiftPic;
+
+                // Устанавливаем выбранные объекты по ID
+                SelectedContact = Contacts.FirstOrDefault(c => c.ContactId == _selectedGift.ContactId);
+                SelectedEvent = Events.FirstOrDefault(e => e.EventId == _selectedGift.EventId);
+                SelectedStatus = Statuses.FirstOrDefault(s => s.StatusName ==  _selectedGift.StatusName);
+            }
         }
 
     }

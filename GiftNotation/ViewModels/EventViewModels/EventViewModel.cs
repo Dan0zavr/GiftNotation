@@ -11,24 +11,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows;
 using System.ComponentModel;
-using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace GiftNotation.ViewModels
 {
-    using System;
-    using System.Collections.ObjectModel;
-    using System.ComponentModel;
-    using System.Runtime.CompilerServices;
-    using System.Windows;
-    using System.Windows.Input;
-
     public class EventViewModel : ViewModelBase
     {
         private ObservableCollection<DisplayEventModel> _events;
         private readonly EventService _eventService;
         private readonly ContactService _contactService;
-        private readonly FiltersViewModel _filtersViewModel;
+        private FiltersViewModel? _filtersViewModel;
+        private readonly FilterWindowService _filterWindowService;
 
         public DisplayEventModel selectedEvent;
         private Window? _filtersWindow;
@@ -63,52 +57,54 @@ namespace GiftNotation.ViewModels
         public ICommand OpenChangeEventCommand { get; set; }
         public ICommand OpenCloseFilterCommand { get; set; }
 
-        public EventViewModel(EventService eventService, FiltersViewModel filtersViewModel, ContactService contactService)
+        public EventViewModel(EventService eventService, ContactService contactService, FilterWindowService filterWindowService, FiltersViewModel filtersViewModel)
         {
             _eventService = eventService;
             _contactService = contactService;
+            _filterWindowService = filterWindowService;
             _filtersViewModel = filtersViewModel;
+
+            // Передаем делегат фильтрации в FiltersViewModel
+            _filtersViewModel.SetFilterAction(async () =>
+            {
+                await ApplyFilters();
+            });
 
             DeleteEventCommand = new DeleteEventCommand(this, _eventService);
             OpenAddEventCommand = new OpenAddEventCommand(eventService, this, _contactService);
             OpenChangeEventCommand = new OpenChangeEventCommand(this, _eventService, _contactService);
-            OpenCloseFilterCommand = new OpenCloseFilterCommand(this);
+            OpenCloseFilterCommand = new OpenCloseFilterCommand(_filterWindowService);
 
             LoadEvents();
         }
 
-        public event EventHandler? ViewModelChanging;
-
-        public void ToggleFiltersWindow()
-        {
-            if (_filtersWindow == null || !_filtersWindow.IsVisible)
-            {
-                // Создаем и отображаем окно
-                _filtersWindow = new Filters
-                {
-                    DataContext = _filtersViewModel,
-                    Owner = Application.Current.MainWindow,
-                    Topmost = true // Окно всегда поверх других
-                };
-                _filtersWindow.Closed += (s, e) => _filtersWindow = null; // Сбрасываем переменную при закрытии окна
-                _filtersWindow.Show();
-            }
-            else
-            {
-                // Закрываем окно
-                _filtersWindow.Close();
-            }
-        }
-
-        public void OnViewModelChanging()
-        {
-            ViewModelChanging?.Invoke(this, EventArgs.Empty);
-        }
-
         public async void LoadEvents()
         {
-            var events = await _eventService.GetEventsAsync();
-            Events = new ObservableCollection<DisplayEventModel>(events);
+            await ApplyFilters();
+        }
+
+        public async Task ApplyFilters()
+        {
+            if (_filtersViewModel == null)
+                return;
+
+            // Получаем текущие значения фильтров
+            string month = _filtersViewModel.SelectedMonth ?? "Без фильтра";
+            string eventType = _filtersViewModel.SelectedEventType?.EventTypeName ?? "Без фильтра";
+            string relpType = _filtersViewModel.SelectedRelpType?.RelpTypeName ?? "Без фильтра";
+
+            // Вызываем сервис для фильтрации
+            var filteredEvents = await _eventService.FilterEvents(month, eventType, relpType);
+
+            // Обновляем коллекцию
+            Events = new ObservableCollection<DisplayEventModel>(filteredEvents);
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 

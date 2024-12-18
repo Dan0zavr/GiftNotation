@@ -39,6 +39,7 @@ namespace GiftNotation.Commands.ContactCommands
                 ContactName = _addContactViewModel.ContactName ?? string.Empty,
                 Bday = _addContactViewModel.Bday,
                 RelpTypeName = _addContactViewModel.SelectedRelpType?.RelpTypeName ?? string.Empty,
+                MyGifts = _addContactViewModel.GiftsForContact,
             };
 
             await _contactService.AddContactAsync(newContact);

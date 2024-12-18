@@ -14,10 +14,12 @@ namespace GiftNotation.ViewModels
         public INavigator Navigator { get; set; }
         
         public ICommand UpdateCurrentVMCommand { get; }
+        public ICommand OpenCloseFilterCommand { get; }
 
-        public MainViewModel(INavigator navigator, UpdateCurrentVMCommand updateCurrentVMCommand)
+        public MainViewModel(INavigator navigator, UpdateCurrentVMCommand updateCurrentVMCommand, OpenCloseFilterCommand openCloseFilterCommand)
         {
             Navigator = navigator;
+            OpenCloseFilterCommand = openCloseFilterCommand;
             UpdateCurrentVMCommand = navigator.UpdateCurrentVMCommand;
             UpdateCurrentVMCommand.Execute(ViewType.Calendar);
         }
