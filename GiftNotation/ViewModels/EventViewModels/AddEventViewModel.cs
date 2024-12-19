@@ -29,6 +29,7 @@ namespace GiftNotation.ViewModels
         private EventType _eventType;
         private Contact _selectedContact;
         private AddContactOnEventOnAddCommand _addContactOnEventCommand;
+        private Event _selectedEvent;
 
         private Gifts _selectedGift;
 
@@ -120,14 +121,7 @@ namespace GiftNotation.ViewModels
 
             _mediator.DateChanged += OnDateChanged;
 
-            var eventDetails = _mediator.GetEventDetails();
-            if (eventDetails != null)
-            {
-                EventName = eventDetails.EventName;
-                EventDate = eventDetails.EventDate;
-                EventType.EventTypeName = eventDetails.EventTypeName;
-            }
-
+           
             AddEventCommand = new AddEventCommand(eventService, this, _eventViewModel, dateMediator);
             _addContactOnEventCommand = new AddContactOnEventOnAddCommand(this);
             DeleteContactFromEventCommand = new DeleteContactFromEventOnAddCommand(this);
@@ -169,6 +163,8 @@ namespace GiftNotation.ViewModels
                 Gifts = new ObservableCollection<Gifts>(gifts); // Обновляем через свойство, чтобы уведомить интерфейс
             }
         }
+
+        
 
         private void RemoveGiftFromCollection(Gifts gift)
         {

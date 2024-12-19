@@ -25,7 +25,7 @@ namespace GiftNotation.Services
             _contactService = contactService;
         }
 
-        public async Task<IEnumerable<Event>> GetEventsByDate(DateTime date)
+        public async Task<List<Event>> GetEventsByDate(DateTime date)
         {
             // Предположим, что у вас есть модель Event и ее данные хранятся в базе данных
             return await _context.Events
