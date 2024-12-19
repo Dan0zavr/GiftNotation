@@ -13,18 +13,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace виш_лист_попытка_33334
+namespace GiftNotation.Views
 {
     /// <summary>
     /// Логика взаимодействия для EventDetailsWindow.xaml
     /// </summary>
     public partial class EventDetailsWindow : Window
     {
-        public EventDetailsWindow(DateTime selectedDate)
+        public EventDetailsWindow()
         {
             InitializeComponent();
-            EnterDate.Text = selectedDate.ToString("D");
-            Tip_prasdnicaa.ItemsSource = Tip_prasdnikaaaaa;
 
         }
 
@@ -80,5 +78,25 @@ namespace виш_лист_попытка_33334
                 this.DragMove();
             }
         }
+
+        private void LostFocus_Calendar(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (textBox != null && string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = string.Empty;
+            }
+        }
+
+        private void GotFocus_Calendar(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (textBox != null && string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = string.Empty;
+            }
+        }
+
+
     }
 }

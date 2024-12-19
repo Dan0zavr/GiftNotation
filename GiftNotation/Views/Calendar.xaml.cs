@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GiftNotation.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,19 +25,10 @@ namespace GiftNotation.Views
         public Calendar()
         {
             InitializeComponent();
+            
         }
 
-        private void DateEnterNewEvent(object sender, SelectionChangedEventArgs e)
-        {
-            if (eventCalendar.SelectedDate.HasValue)
-            {
-                DateTime selectedDate = eventCalendar.SelectedDate.Value;
-
-                EventDetailsWindow newWindow = new EventDetailsWindow(selectedDate);
-                newWindow.Show();
-
-            }
-        }
+        
 
 
     }

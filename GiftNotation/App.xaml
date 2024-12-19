@@ -50,8 +50,12 @@
                 <views:ChangeEvent/>
             </DataTemplate>
 
-            <DataTemplate DataType="{x:Type viewmodels:FiltersViewModel}">
+            <DataTemplate x:Key="View1Template" DataType="{x:Type viewmodels:FiltersViewModel}">
                 <views:Filters/>
+            </DataTemplate>
+
+            <DataTemplate x:Key="View2Template" DataType="{x:Type viewmodels:AddEventViewModel}">
+              <views:EventDetailsWindow/>
             </DataTemplate>
 
             <Style TargetType="TextBlock">

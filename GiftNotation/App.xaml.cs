@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using GiftNotation.ViewModels.Factories;
 using Microsoft.Extensions.Configuration;
 using GiftNotation.Commands.GiftCommands;
+using GiftNotation.Services.Mediators;
 
 
 namespace GiftNotation
@@ -32,72 +33,85 @@ namespace GiftNotation
         public static IHostBuilder CreateHostBuilder(string[] args = null)
         {
             return Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration(c =>
+                .ConfigureAppConfiguration(config =>
                 {
-                    c.AddJsonFile("appsettings.json");
+                    config.AddJsonFile("appsettings.json");
                 })
                 .ConfigureServices((context, services) =>
                 {
+                    // Получение строки подключения
                     string connectionString = context.Configuration.GetConnectionString("default");
 
                     // Регистрация DbContext
                     services.AddDbContext<GiftNotationDbContext>(options =>
                         options.UseSqlite(connectionString));
 
-                    // Регистрация ViewModels
-                    services.AddScoped<ContactViewModel>();
-                    services.AddScoped<AddGiftViewModel>();
-                    services.AddScoped<ChangeGiftViewModel>();
-                    services.AddScoped<AddEventViewModel>();
-                    services.AddScoped<GiftViewModel>();
-                    services.AddScoped<MainViewModel>();
-                    services.AddScoped<CalendarViewModel>();
+                    // Регистрация ViewModel и фабрик
+                    RegisterViewModels(services);
 
-                    services.AddScoped<FiltersViewModel>();
-                    services.AddScoped<EventViewModel>(provider =>
-                    {
-                        var eventService = provider.GetRequiredService<EventService>();
-                        var filtersViewModel = provider.GetRequiredService<FiltersViewModel>();
-                        var contactService = provider.GetRequiredService<ContactService>();
-                        var filterWindowService = provider.GetRequiredService<FilterWindowService>();
-
-                        var eventViewModel = new EventViewModel(eventService, contactService, filterWindowService, filtersViewModel);
-                        return eventViewModel;
-                    });
-
-
-                    // Регистрация Navigator как Singleton
+                    // Регистрация Navigator
                     services.AddSingleton<INavigator, Navigator>();
 
+                    // Регистрация DateMediator
+                    services.AddSingleton<IDateMediator, DateMediator>();
+
                     // Регистрация сервисов
-                    services.AddScoped<GiftService>();
-                    services.AddScoped<ContactService>();
-                    services.AddScoped<EventService>();
-                    services.AddScoped<FilterWindowService>();
-
-                    services.AddScoped<AddGiftCommand>();
-
-                    services.AddSingleton<OpenCloseFilterCommand>();
-
-                    // Регистрация фабрик как Scoped
-                    services.AddScoped<IGiftNotationViewModelAbstractFactory, GiftNotationViewModelAbstractFactory>();
-                    services.AddScoped<IGiftNotationViewModelFactory<CalendarViewModel>, HomeViewModelFactory>();
+                    RegisterServices(services);
 
                     // Регистрация MainWindow
                     services.AddSingleton<MainWindow>();
 
-                    // Регистрация команды
-                    services.AddScoped<UpdateCurrentVMCommand>();
-
-                    // Регистрация команды OpenCloseFilterCommand
-                    services.AddSingleton<OpenCloseFilterCommand>();
-
-
+                    // Регистрация команд
+                    RegisterCommands(services);
                 });
         }
 
-        private NotificationService _notificationService;
+        private static void RegisterViewModels(IServiceCollection services)
+        {
+            services.AddScoped<ContactViewModel>();
+            services.AddScoped<AddGiftViewModel>();
+            services.AddScoped<ChangeGiftViewModel>();
+            services.AddScoped<AddEventViewModel>();
+            services.AddScoped<GiftViewModel>();
+            services.AddScoped<MainViewModel>();
+            services.AddScoped<CalendarViewModel>();
+            services.AddScoped<FiltersViewModel>();
 
+            // Регистрация EventViewModel с настройкой зависимостей
+            services.AddScoped<EventViewModel>(provider =>
+            {
+                var giftService = provider.GetRequiredService<GiftService>();
+                var eventService = provider.GetRequiredService<EventService>();
+                var filtersViewModel = provider.GetRequiredService<FiltersViewModel>();
+                var contactService = provider.GetRequiredService<ContactService>();
+                var filterWindowService = provider.GetRequiredService<FilterWindowService>();
+                var mediator = provider.GetRequiredService<IDateMediator>();
+
+                return new EventViewModel(eventService, contactService, filterWindowService, filtersViewModel, giftService, mediator);
+            });
+
+            // Регистрация фабрик
+            services.AddScoped<AddEventViewModelFactory>();
+            services.AddScoped<IGiftNotationViewModelAbstractFactory, GiftNotationViewModelAbstractFactory>();
+            services.AddScoped<IGiftNotationViewModelFactory<CalendarViewModel>, HomeViewModelFactory>();
+        }
+
+        private static void RegisterServices(IServiceCollection services)
+        {
+            services.AddScoped<GiftService>();
+            services.AddScoped<ContactService>();
+            services.AddScoped<EventService>();
+            services.AddScoped<FilterWindowService>();
+        }
+
+        private static void RegisterCommands(IServiceCollection services)
+        {
+            services.AddScoped<AddGiftCommand>();
+            services.AddScoped<UpdateCurrentVMCommand>();
+            services.AddSingleton<OpenCloseFilterCommand>();
+        }
+
+        private NotificationService _notificationService;
 
         private async Task CheckEventsOnStartup()
         {
@@ -128,11 +142,10 @@ namespace GiftNotation
                 // Проверяем праздники при запуске приложения
                 await CheckEventsOnStartup();
 
+                // Добавление дней рождения в события
                 var eventService = scope.ServiceProvider.GetRequiredService<EventService>();
                 await eventService.AddContactBday();
             }
-
-            
 
             // Запуск главного окна
             var mainWindow = _host.Services.GetRequiredService<MainWindow>();
@@ -142,7 +155,6 @@ namespace GiftNotation
             base.OnStartup(e);
         }
 
-
         protected override async void OnExit(ExitEventArgs e)
         {
             await _host.StopAsync();
@@ -151,7 +163,5 @@ namespace GiftNotation
             base.OnExit(e);
         }
     }
-
-
 
 }

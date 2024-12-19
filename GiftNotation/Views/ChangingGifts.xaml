@@ -40,15 +40,11 @@
                                     <AdornerDecorator>
                                         <Grid>
 
-                                            <TextBox x:Name="TextVisibilityForNameGift" 
-                                         FontSize="12" Padding="2" Width="250" Background="#dbd8d4"
-                                         GotFocus="TextBox_GotFocus"
-                                         LostFocus="TextBox_LostFocus" Text="{Binding GiftName}"/>
+                                            <Grid Width="250" Height="30" VerticalAlignment="Center" Margin="-2,0,0,0">
+                                                <TextBox x:Name="TextVisibilityForNameGift"   FontSize="12" Padding="5" Background="#dbd8d4" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding GiftName}"/>
+                                            </Grid>
 
-                                            <TextBlock Text="Наименование подарка..." 
-                                           Visibility="{Binding Text, ElementName=TextVisibilityForNameGift, Converter={StaticResource StringToVisibilityConverter}}" 
-                                           Opacity="0.5" Foreground="Gray" VerticalAlignment="Center" Padding="5" 
-                                           IsHitTestVisible="False"/>
+                                            <TextBlock Text="Наименование подарка..."   Visibility="{Binding Text, ElementName=TextVisibilityForNameGift, Converter={StaticResource StringToVisibilityConverter}}"  Opacity="0.5" Foreground="Gray" VerticalAlignment="Center" Padding="5" IsHitTestVisible="False"/>
 
                                         </Grid>
 
@@ -61,11 +57,13 @@
                                     <AdornerDecorator>
                                         <Grid>
 
-                                            <TextBox x:Name="TextVisibilityForSsylkaGift" 
-                                         FontSize="12" Padding="2" Width="250" Background="#dbd8d4"
-                                         GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" Text="{Binding Url}"/>
+                                            <Grid Width="250" Height="30" VerticalAlignment="Center" Margin="-2,0,0,0">
+                                                <TextBox x:Name="TextVisibilityForSsylkaGift"  FontSize="12" Padding="5" Background="#dbd8d4" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding Url}" />
+                                            </Grid>
 
-                                           
+
+
+                                            <TextBlock Text="Ссылка на маркетплейс..."  Visibility="{Binding Text, ElementName=TextVisibilityForSsylkaGift, Converter={StaticResource StringToVisibilityConverter}}" Opacity="0.5" Foreground="Gray" VerticalAlignment="Center" Padding="5" IsHitTestVisible="False"/>
 
 
                                         </Grid>
@@ -77,14 +75,14 @@
                                     <AdornerDecorator>
                                         <Grid>
 
-                                            <TextBox x:Name="TextVisibilityForDescription" 
+                                            <TextBox x:Name="TextVisibilityForDescription" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
                                                      FontSize="12" Padding="2" Width="250" Background="#dbd8d4"
                                                      GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" Text="{Binding Description}"/>
 
                                             <TextBlock Text="Описание..." 
                                                        Visibility="{Binding Text, ElementName=TextVisibilityForDescription, Converter={StaticResource StringToVisibilityConverter}}" 
                                                        Opacity="0.5" Foreground="Gray" Padding="5" 
-                                                       IsHitTestVisible="False" VerticalAlignment="Top"/>
+                                                       IsHitTestVisible="False" VerticalAlignment="Top" Height="50" Width="80" HorizontalAlignment="Left"/>
 
 
                                         </Grid>
@@ -96,14 +94,14 @@
 
                             <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical">
                                 <Border BorderBrush="Gray" Width="160" Height="90" BorderThickness="2" CornerRadius="8" 
-        Background="#c5c2c2" Margin="0,0,5,0" AllowDrop="True" HorizontalAlignment="Right">
+                                        Background="#c5c2c2" Margin="0,0,5,0" AllowDrop="True" HorizontalAlignment="Right">
                                     <Button Command="{Binding OpenFileDialogForPicture}">
                                         <!-- Само изображение -->
-                                        <Image Source="{Binding GiftPic}" 
+                                        <Image Source="picture.jpg" 
                                            VerticalAlignment="Stretch" 
                                            HorizontalAlignment="Stretch" 
                                            Width="auto"
-                                           Height="auto"/>
+                                           Height="50" Opacity="0.1"/>
 
                                         <Button.Style>
                                             <Style TargetType="Button">
@@ -112,7 +110,7 @@
                                                         <ControlTemplate TargetType="Button">
                                                             <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
                                                                 <Border.Background>
-                                                                    <SolidColorBrush x:Name="color1" Color="Transparent"/>
+                                                                    <SolidColorBrush x:Name="color1" Color="#b6b7ba"/>
                                                                 </Border.Background>
                                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
                                                             </Border>
@@ -122,7 +120,7 @@
                                                                     <BeginStoryboard>
                                                                         <Storyboard>
                                                                             <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
-                                                            From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
+                                                                                            From="#b6b7ba" To="#7e8080" Duration="0:0:0.2"/>
                                                                         </Storyboard>
                                                                     </BeginStoryboard>
                                                                 </EventTrigger>
@@ -130,12 +128,12 @@
                                                                     <BeginStoryboard>
                                                                         <Storyboard>
                                                                             <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
-                                                            From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
+                                                                                            From="#7e8080" To="#b6b7ba" Duration="0:0:0.3"/>
                                                                         </Storyboard>
                                                                     </BeginStoryboard>
                                                                 </EventTrigger>
                                                                 <Trigger Property="IsPressed" Value="True">
-                                                                    <Setter TargetName="Button_Border" Property="Background" Value="Transparent"/>
+                                                                    <Setter TargetName="Button_Border" Property="Background" Value="#97999f"/>
                                                                     <Setter TargetName="Button_Border" Property="BorderBrush" Value="Transparent"/>
                                                                     <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
                                                                 </Trigger>
@@ -175,12 +173,11 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Люди:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <ComboBox FontSize="12" Padding="2" Width="390" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="0,0,0,0" ItemsSource="{Binding Contacts}" 
-          DisplayMemberPath="ContactName" 
-          SelectedItem="{Binding SelectedContact}" 
-          SelectedValue="{Binding SelectedContactName}" 
-          SelectedValuePath="ContactName"
-          IsEditable="False"/>
+                        <ComboBox FontSize="12" Padding="2" Width="390" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="0,0,0,0"  ItemsSource="{Binding Contacts}"
+                        DisplayMemberPath="ContactName"
+                        SelectedItem="{Binding SelectedContact}" 
+                        
+                        IsEditable="False"/>
 
                     </Grid>
                 </Border>
@@ -192,12 +189,11 @@
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Событие:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <ComboBox Width="360" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Events}" 
-          DisplayMemberPath="EventName" 
-          SelectedItem="{Binding SelectedEvent}" 
-          SelectedValue="{Binding SelectedEventName}" 
-          SelectedValuePath="EventName"
-          IsEditable="False"/>
+                        <ComboBox Width="360" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Events}"
+                        DisplayMemberPath="EventName"
+                        SelectedItem="{Binding SelectedEvent}" 
+                        
+                        IsEditable="False"/>
                     </Grid>
                 </Border>
 
@@ -209,11 +205,10 @@
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Статус" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
                         <ComboBox Width="380" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Statuses}" 
-          DisplayMemberPath="StatusName" 
-          SelectedItem="{Binding SelectedStatus}" 
-          SelectedValue="{Binding SelectedStatusName}" 
-          SelectedValuePath="StatusName"
-          IsEditable="False"/>
+                            DisplayMemberPath="StatusName" 
+                            SelectedItem="{Binding SelectedStatus}" 
+                            
+                            IsEditable="False"/>
 
                     </Grid>
                 </Border>
