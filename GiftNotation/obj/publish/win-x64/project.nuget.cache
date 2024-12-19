@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "S0c189GEobE=",
+  "dgSpecHash": "18WnP/VSbg4=",
   "success": true,
   "projectFilePath": "C:\\Users\\Haier\\source\\repos\\GiftNotation\\GiftNotation\\GiftNotation.csproj",
   "expectedPackageFiles": [
@@ -85,14 +85,10 @@
     "C:\\Users\\Haier\\.nuget\\packages\\system.text.json\\9.0.0\\system.text.json.9.0.0.nupkg.sha512",
     "C:\\Users\\Haier\\.nuget\\packages\\system.threading.channels\\7.0.0\\system.threading.channels.7.0.0.nupkg.sha512",
     "C:\\Users\\Haier\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
+    "C:\\Users\\Haier\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\8.0.11\\microsoft.netcore.app.runtime.win-x64.8.0.11.nupkg.sha512",
+    "C:\\Users\\Haier\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\8.0.11\\microsoft.windowsdesktop.app.runtime.win-x64.8.0.11.nupkg.sha512",
+    "C:\\Users\\Haier\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\8.0.11\\microsoft.aspnetcore.app.runtime.win-x64.8.0.11.nupkg.sha512",
     "C:\\Users\\Haier\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.17763.54\\microsoft.windows.sdk.net.ref.10.0.17763.54.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1900",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Произошла ошибка при получении данных уязвимости пакета: Не удалось загрузить индекс службы для источника https://api.nuget.org/v3/index.json."
-    }
-  ]
+  "logs": []
 }

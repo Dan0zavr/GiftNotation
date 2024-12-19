@@ -33,7 +33,7 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <TextBlock Text="Имя:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                                <TextBox Width="385" FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding ContactName}"/>
+                            <TextBox Width="385" FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding ContactName, UpdateSourceTrigger=PropertyChanged}"/>
                             </Grid>
                         </Border>
 

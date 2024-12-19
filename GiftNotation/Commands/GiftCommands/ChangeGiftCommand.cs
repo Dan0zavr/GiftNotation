@@ -28,7 +28,7 @@ namespace GiftNotation.Commands.GiftCommands
 
         public bool CanExecute(object? parameter)
         {
-            return true;
+            return !string.IsNullOrWhiteSpace(_changeGiftViewModel.GiftName);
         }
 
         public async void Execute(object? parameter)

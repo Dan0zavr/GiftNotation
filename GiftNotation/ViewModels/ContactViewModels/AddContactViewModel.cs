@@ -34,8 +34,16 @@ namespace GiftNotation.ViewModels
         public string ContactName
         {
             get => _contactName;
-            set => SetProperty(ref _contactName, value);
+            set
+            {
+                if (SetProperty(ref _contactName, value))
+                {
+                    // Пример правильного вызова RaiseCanExecuteChanged для конкретной команды
+                    AddContactCommand.RaiseCanExecuteChanged();
+                }
+            }
         }
+
 
         public DateTime Bday
         {

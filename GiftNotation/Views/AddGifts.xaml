@@ -45,7 +45,7 @@
                                             <Grid Width="252" Height="30" VerticalAlignment="Center" Margin="0,0,0,0" >
                                                 <TextBox x:Name="TextVisibilityForNameGift" 
                                                          FontSize="12" Padding="5" Background="#dbd8d4"
-                                                         TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding GiftName}" 
+                                                         TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding GiftName, UpdateSourceTrigger=PropertyChanged}" 
                                                          GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
                                                 
                                             </Grid>

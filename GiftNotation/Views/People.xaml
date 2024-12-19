@@ -5,17 +5,16 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GiftNotation"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="650"
-      HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="400" Width="700">
 
 
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="ButtonFon" Color="#595670" />
+        <!--SolidColorBrush x:Key="ButtonFon" Color="#595670" />
         <SolidColorBrush x:Key="TextColor" Color="#c7c6cb" />
 
 
-        <!-- Стиль для Label -->
+        --><!-- Стиль для Label --><!--
         <Style TargetType="Label">
             <Setter Property="Template">
                 <Setter.Value>
@@ -32,7 +31,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
+        </Style>-->
 
         <!-- Стиль для Button -->
         <!--<Style TargetType="Button">
@@ -58,9 +57,9 @@
     <Border Background="#7e7d7b" CornerRadius="0,0,20,20">
         <Grid>
 
-            <StackPanel Orientation="Horizontal"  Width="220" Margin="-290,-300,0,0" Height="30">
-                
-                <Button Background="#2c2825" Width="100" Height="20" Margin="5,0,5,0" Command="{Binding OpenAddContactCommand}">
+            <StackPanel Orientation="Horizontal"  Width="245" Margin="-380,-330,0,0" Height="30">
+
+                <Button Background="#2c2b2a" Width="100" Height="20" Margin="5,0,5,0" Command="{Binding OpenAddContactCommand}">
 
 
                     <Button.Style>
@@ -99,7 +98,7 @@
                                             </EventTrigger>
 
                                             <Trigger Property="IsPressed" Value="True">
-                                                <Setter TargetName="Button_Border" Property="Background" Value="#5d5b59"/>
+                                                <Setter TargetName="Button_Border" Property="Background" Value="#545755"/>
                                                 <!--<Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>-->
                                                 <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
                                             </Trigger>
@@ -120,7 +119,7 @@
                     <TextBlock  Foreground="#c7c6cb" Margin="0,1,0,0" Text="Добавить" Height="15" VerticalAlignment="Top"/>
                 </Button>
 
-                <Button Background="#2c2825" Width="100" Height="20" Margin="5,0,5,0" Command="{Binding OpenChangeContactCommand}">
+                <Button Background="#2c2825" Width="120" Height="20" Margin="5,0,5,0" Command="{Binding OpenChangeContactCommand}">
 
                     <Button.Style>
                         <Style TargetType="Button">
@@ -158,7 +157,7 @@
                                             </EventTrigger>
 
                                             <Trigger Property="IsPressed" Value="True">
-                                                <Setter TargetName="Button_Border" Property="Background" Value="#5d5b59"/>
+                                                <Setter TargetName="Button_Border" Property="Background" Value="#545755"/>
                                                 <!--<Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>-->
                                                 <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
                                             </Trigger>
@@ -181,7 +180,7 @@
                 
             </StackPanel>
 
-            <Button Background="#2c2825" Width="100" Height="20" Margin="0,-300,-400,0" Command="{Binding DeleteContactCommand}">
+            <Button Background="#2c2825" Width="90" Height="20"  Margin="530,-330,0,0" Command="{Binding DeleteContactCommand}">
                 <Button.Style>
                     <Style TargetType="Button">
                         <Setter Property="Template">
@@ -218,7 +217,7 @@
                                         </EventTrigger>
 
                                         <Trigger Property="IsPressed" Value="True">
-                                            <Setter TargetName="Button_Border" Property="Background" Value="#5d5b59"/>
+                                            <Setter TargetName="Button_Border" Property="Background" Value="#545755"/>
                                             <!--<Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>-->
                                             <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
                                         </Trigger>
@@ -238,11 +237,10 @@
                 <TextBlock Text="Удалить" Margin="0,1,0,0" Width="45" Foreground="#c7c6cb"/>
             </Button>
 
-            <TextBlock Text="ЛЮДИ" FontSize="25" FontWeight="Heavy" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,7,0,0" FontFamily="Britannic Bold" />
+            <TextBlock Text="ЛЮДИ" FontSize="25" FontWeight="Heavy" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,13,0,0" FontFamily="Britannic Bold"/>
 
-            <DataGrid Background="#FFDFDBD7" x:Name="DataGrid" Margin="0,40,0,0" CanUserAddRows="False" 
-             SelectedItem="{Binding SelectedContact, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Contacts}" Height="300" Width="500" 
-              AutoGenerateColumns="False" Cursor="Hand" BorderThickness="1" BorderBrush="#402c1c" >
+            <DataGrid x:Name="ddataGrid" BorderThickness="3"  BorderBrush="black" Background="#FFDFDBD7" CanUserAddRows="False" SelectedItem="{Binding SelectedContact, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Contacts}" VerticalAlignment="Bottom" Height="325" Width="625" AutoGenerateColumns="False" Margin="5,0,0,20">
+
                 <DataGrid.Resources>
                     <!-- Стиль для заголовков столбцов -->
                     <Style TargetType="DataGridColumnHeader">
@@ -251,7 +249,22 @@
                         <Setter Property="Background" Value="#786e65"/>
                         <Setter Property="Height" Value="30"/>
                         <Setter Property="BorderBrush" Value="Black"/>
-                        <Setter Property="BorderThickness" Value="1,0,1,0"/>
+                        <Setter Property="BorderThickness" Value="0,0,1,0"/>
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="Foreground" Value="black"/>
+                    </Style>
+
+                 
+                        
+
+                    <Style TargetType="DataGridRow">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True">
+                                <Setter Property="Background" Value="#d3d3d3"/>
+                                <Setter Property="BorderBrush" Value="Black" />
+                                <Setter Property="BorderThickness" Value="0,0,0,1" />
+                    </DataTrigger>
+                        </Style.Triggers>
                     </Style>
 
                     <!-- Стиль для самого DataGrid -->
@@ -281,11 +294,11 @@
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Имя" Binding="{Binding ContactName, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding ContactName, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
 
-                    <DataGridTextColumn Header="Тип отношений" Binding="{Binding RelpTypeName, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+                    <DataGridTextColumn Header="Тип отношений" Binding="{Binding RelpTypeName, UpdateSourceTrigger=PropertyChanged}" Width="180"/>
 
-                    <DataGridTemplateColumn Header="День рождения" Width="115">
+                    <DataGridTemplateColumn Header="День рождения" Width="150">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Bday, StringFormat=d, UpdateSourceTrigger=PropertyChanged}" />

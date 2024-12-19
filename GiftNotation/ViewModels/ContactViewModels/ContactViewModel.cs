@@ -46,7 +46,7 @@ namespace GiftNotation.ViewModels
             _giftService = giftService;
             _eventService = eventService;
             OpenAddContactCommand = new OpenAddContactCommand(this, _contactService, _giftService, _eventService);
-            DeleteContactCommand = new DeleteContactCommand(this, _contactService);
+            DeleteContactCommand = new DeleteContactCommand(this, _contactService, _eventService);
             OpenChangeContactCommand = new OpenChangeContactCommand(this, _contactService, _giftService, _eventService);
 
             // Загрузка данных из базы данных или другого источника

@@ -30,7 +30,7 @@ namespace GiftNotation.Commands.ContactCommands
 
         public bool CanExecute(object? parameter)
         {
-            return true;
+            return !string.IsNullOrWhiteSpace(_viewModel.ContactName);
         }
 
         public async void Execute(object? parameter)

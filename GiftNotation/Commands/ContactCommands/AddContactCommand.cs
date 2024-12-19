@@ -30,7 +30,7 @@ namespace GiftNotation.Commands.ContactCommands
 
         public bool CanExecute(object? parameter)
         {
-            return true;
+            return !string.IsNullOrWhiteSpace(_addContactViewModel.ContactName);
         }
 
         public async void Execute(object? parameter)
@@ -54,6 +54,11 @@ namespace GiftNotation.Commands.ContactCommands
             {
                 window.Close();
             }
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

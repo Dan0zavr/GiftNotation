@@ -41,7 +41,7 @@
                                         <Grid>
 
                                             <Grid Width="250" Height="30" VerticalAlignment="Center" Margin="-2,0,0,0">
-                                                <TextBox x:Name="TextVisibilityForNameGift"   FontSize="12" Padding="5" Background="#dbd8d4" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding GiftName}"/>
+                                                <TextBox x:Name="TextVisibilityForNameGift"   FontSize="12" Padding="5" Background="#dbd8d4" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding GiftName, UpdateSourceTrigger=PropertyChanged}"/>
                                             </Grid>
 
                                             <TextBlock Text="Наименование подарка..."   Visibility="{Binding Text, ElementName=TextVisibilityForNameGift, Converter={StaticResource StringToVisibilityConverter}}"  Opacity="0.5" Foreground="Gray" VerticalAlignment="Center" Padding="5" IsHitTestVisible="False"/>
