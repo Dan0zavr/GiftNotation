@@ -33,6 +33,27 @@ namespace GiftNotation.Services
                 .ToListAsync();  // Вернем список событий для этой даты
         }
 
+        public async Task<DisplayEventModel?> GetEventByContactAndTypeAsync(int contactId)
+        {
+            return await _context.Events
+                .Include(e => e.EventType) // Подгружаем тип события
+                .Include(e => e.EventContacts) // Подгружаем связи событие-контакты
+                    .ThenInclude(ec => ec.Contact) // Подгружаем сами контакты
+                .Where(e => e.EventType.EventTypeId == 1 &&
+                            e.EventContacts.Any(ec => ec.ContactId == contactId)) // Фильтр по типу события и контакту
+                .Select(e => new DisplayEventModel
+                {
+                    EventId = e.EventId,
+                    EventName = e.EventName,
+                    EventDate = e.EventDate,
+                    EventTypeName = e.EventType.EventTypeName ?? string.Empty,
+                    ContactsOnEvent = new ObservableCollection<Contact?>(
+                        e.EventContacts.Select(ec => ec.Contact)
+                    )
+                })
+                .FirstOrDefaultAsync(); // Возвращаем первый найденный результат
+        }
+
         public async Task<IEnumerable<DisplayEventModel>> GetEventsAsync()
         {
             return await _context.Events

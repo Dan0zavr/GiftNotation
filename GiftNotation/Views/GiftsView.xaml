@@ -240,7 +240,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <ContentControl>
-                                    <Hyperlink NavigateUri="{Binding MarketplaceLink}" RequestNavigate="Hyperlink_RequestNavigate">
+                                    <Hyperlink NavigateUri="{Binding Url}" RequestNavigate="Hyperlink_RequestNavigate">
                                          <TextBlock Text="{Binding GiftName}"/>
                                     </Hyperlink>
                                 </ContentControl> 

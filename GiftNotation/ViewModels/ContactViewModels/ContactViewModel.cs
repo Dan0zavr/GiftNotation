@@ -16,6 +16,7 @@ namespace GiftNotation.ViewModels
         private ObservableCollection<DisplayContactModel> _сontacts;
         private ContactService _contactService;
         private GiftService _giftService;
+        private readonly EventService _eventService;
 
         public DisplayContactModel selectedContact;
 
@@ -39,17 +40,18 @@ namespace GiftNotation.ViewModels
         public ICommand DeleteContactCommand { get; set; }
         public ICommand OpenChangeContactCommand { get; set; }
 
-        public ContactViewModel(ContactService contactService, GiftService giftService)
+        public ContactViewModel(ContactService contactService, GiftService giftService, EventService eventService)
         {
             _contactService = contactService;
             _giftService = giftService;
-
-            OpenAddContactCommand = new OpenAddContactCommand(this, _contactService, _giftService);
+            _eventService = eventService;
+            OpenAddContactCommand = new OpenAddContactCommand(this, _contactService, _giftService, _eventService);
             DeleteContactCommand = new DeleteContactCommand(this, _contactService);
-            OpenChangeContactCommand = new OpenChangeContactCommand(this, _contactService, _giftService);
+            OpenChangeContactCommand = new OpenChangeContactCommand(this, _contactService, _giftService, _eventService);
 
             // Загрузка данных из базы данных или другого источника
             LoadContacts();
+            
             //OpenChangeContactCommand = new OpenChangeGiftCommand(this, _contactService);
         }
 

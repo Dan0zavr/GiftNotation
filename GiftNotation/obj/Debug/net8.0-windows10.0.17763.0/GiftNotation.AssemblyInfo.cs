@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GiftNotation")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3496f193a31660a4c3fbe06ae1a11e7019bd6774")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d4dc5f6db61f699ae07e58895a98960a40cd55f9")]
 [assembly: System.Reflection.AssemblyProductAttribute("GiftNotation")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GiftNotation")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

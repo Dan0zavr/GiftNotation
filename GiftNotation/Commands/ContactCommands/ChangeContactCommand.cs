@@ -16,12 +16,14 @@ namespace GiftNotation.Commands.ContactCommands
         private readonly ContactService _contactService;
         private readonly ChangeContactViewModel _viewModel;
         private readonly ContactViewModel _contactViewModel;
+        private readonly EventService _eventService;
 
-        public ChangeContactCommand(ContactService contactService, ContactViewModel contactViewModel, ChangeContactViewModel viewModel)
+        public ChangeContactCommand(ContactService contactService, ContactViewModel contactViewModel, ChangeContactViewModel viewModel, EventService eventService)
         {
             _contactService = contactService;
             _viewModel = viewModel;
             _contactViewModel = contactViewModel;
+            _eventService = eventService;
         }
 
         public event EventHandler? CanExecuteChanged;
@@ -40,7 +42,11 @@ namespace GiftNotation.Commands.ContactCommands
                 Bday = _viewModel.Bday,
                 RelpTypeName = _viewModel.SelectedRelpType?.RelpTypeName
             };
+            var birthdayEvent = await _eventService.GetEventByContactAndTypeAsync(changeContact.ContactId);
+            await _eventService.DeleteEventAsync(birthdayEvent.EventId);
             await _contactService.UpdateContactAsync(changeContact, _viewModel);
+            await _eventService.AddContactBday();
+
 
             _contactViewModel.LoadContacts();
 

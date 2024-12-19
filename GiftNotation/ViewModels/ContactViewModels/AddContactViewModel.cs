@@ -15,6 +15,7 @@ namespace GiftNotation.ViewModels
     {
         private readonly ContactService _contactService;
         private readonly GiftService _giftService;
+        private readonly EventService _eventService;
 
         private string _contactName;
         private DateTime _bday;
@@ -78,15 +79,17 @@ namespace GiftNotation.ViewModels
 
         public DeleteGiftForContactOnAddCommand DeleteGiftForContactCommand { get; }
 
-        public AddContactViewModel(ContactService contactService, GiftService giftService, ContactViewModel contactViewModel)
+        public AddContactViewModel(ContactService contactService, GiftService giftService, ContactViewModel contactViewModel, EventService eventService)
         {
             _contactService = contactService;
             _giftService = giftService;
+            _eventService = eventService;
             LoadGifts();
             LoadRelpTypes();
-            AddContactCommand = new AddContactCommand(contactService, contactViewModel, this);
+            AddContactCommand = new AddContactCommand(contactService, contactViewModel, this, _eventService);
             _addGiftForContactOnAddCommand = new AddGiftForContactOnAddCommand(this);
             DeleteGiftForContactCommand = new DeleteGiftForContactOnAddCommand(this);
+            
         }
 
         public async void LoadGifts()
