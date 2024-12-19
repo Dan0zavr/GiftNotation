@@ -10,29 +10,35 @@ namespace GiftNotation.Services.Mediators
     public class DateMediator : IDateMediator
     {
         public event Action<DateTime?> DateChanged;
+        public event Action<Event> EventDetailsChanged; // Добавляем событие для передачи данных о событии
 
-        private DisplayEventModel _currentEventDetails;
+        private Event _currentEventDetails;
 
         public void UpdateDate(DateTime? newDate)
         {
             DateChanged?.Invoke(newDate);
+
+            // Опционально можно здесь вызывать EventDetailsChanged, если нужно обновить данные для выбранной даты
+            EventDetailsChanged?.Invoke(_currentEventDetails);
         }
 
-        public void SetEventDetails(DisplayEventModel eventDetails)
+        public void SetEventDetails(Event eventDetails)
         {
             _currentEventDetails = eventDetails;
-            // Логика для передачи данных о событии в окно добавления (например, через событие или напрямую в ViewModel)
+            // Вызываем событие для передачи данных в ViewModel или окно
+            EventDetailsChanged?.Invoke(_currentEventDetails);
         }
 
         public void ClearEventDetails()
         {
             _currentEventDetails = null;
-            // Очистить данные события в форме
+            EventDetailsChanged?.Invoke(null);  // Очищаем данные в UI
         }
 
-        public DisplayEventModel GetEventDetails()
+        public Event GetEventDetails()
         {
             return _currentEventDetails;
         }
     }
+
 }
