@@ -55,6 +55,16 @@ public partial class GiftsView : UserControl {
 
     }
 
+    private void Button_Click_1(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void Button_Click_2(object sender, RoutedEventArgs e)
+    {
+
+    }
+
 
 
     //public void AddGifts(string name_gift, string picture_of_gift, string cost, string ssylka_na_market, string people_, string event_)
@@ -75,6 +85,12 @@ public partial class GiftsView : UserControl {
     //        }
     //    }
     //}
+
+    private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+    {
+        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+        e.Handled = true;
+    }
 
 
 }

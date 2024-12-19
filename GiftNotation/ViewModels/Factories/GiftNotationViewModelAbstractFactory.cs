@@ -1,4 +1,5 @@
 ﻿using GiftNotation.Services;
+using GiftNotation.Services.Mediators;
 using GiftNotation.State.Navigators;
 using GiftNotation.ViewModels;
 using System;
@@ -21,10 +22,13 @@ namespace GiftNotation.ViewModels.Factories
         private readonly EventService _eventService;
         private readonly FiltersViewModel _filtersViewModel;
         private readonly FilterWindowService _filterWindowService;
+        private readonly CalendarViewModel _calendarViewModel;
+        private readonly IDateMediator _mediator;
 
         public GiftNotationViewModelAbstractFactory(IGiftNotationViewModelFactory<CalendarViewModel> calendarViewModelFactory,
             ContactViewModel contactViewModel, GiftViewModel giftViewModel, EventViewModel eventViewModel,
-            GiftService giftService, ContactService contactService, EventService eventService, FiltersViewModel filtersViewModel, FilterWindowService filterWindowService)
+            GiftService giftService, ContactService contactService, EventService eventService, FiltersViewModel filtersViewModel, 
+            FilterWindowService filterWindowService, CalendarViewModel calendarViewModel, IDateMediator mediator)
         {
             _calendarViewModelFactory = calendarViewModelFactory;
             _contactViewModel = contactViewModel;
@@ -35,6 +39,8 @@ namespace GiftNotation.ViewModels.Factories
             _eventService = eventService;
             _filtersViewModel = filtersViewModel;
             _filterWindowService = filterWindowService;
+            _calendarViewModel = calendarViewModel;
+            _mediator = mediator;
         }
 
         public ViewModelBase CreateViewModel(ViewType viewType)
@@ -47,7 +53,7 @@ namespace GiftNotation.ViewModels.Factories
                 case ViewType.Contacts:
                     return new ContactViewModel(_contactService, _giftService);
                 case ViewType.Events:
-                    return new EventViewModel(_eventService, _contactService, _filterWindowService, _filtersViewModel);
+                    return new EventViewModel(_eventService, _contactService, _filterWindowService, _filtersViewModel, _giftService, _mediator);
                 case ViewType.Gifts:
                     return new GiftViewModel(_giftService, _contactService, _eventService);
                 default:

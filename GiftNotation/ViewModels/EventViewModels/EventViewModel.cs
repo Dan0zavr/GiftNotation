@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using System.ComponentModel;
+using GiftNotation.Services.Mediators;
 
 namespace GiftNotation.ViewModels
 {
@@ -21,8 +22,10 @@ namespace GiftNotation.ViewModels
         private ObservableCollection<DisplayEventModel> _events;
         private readonly EventService _eventService;
         private readonly ContactService _contactService;
+        private readonly GiftService _giftService;
         private FiltersViewModel? _filtersViewModel;
         private readonly FilterWindowService _filterWindowService;
+        private readonly IDateMediator _dateMediator;
 
         public DisplayEventModel selectedEvent;
         private Window? _filtersWindow;
@@ -57,12 +60,14 @@ namespace GiftNotation.ViewModels
         public ICommand OpenChangeEventCommand { get; set; }
         public ICommand OpenCloseFilterCommand { get; set; }
 
-        public EventViewModel(EventService eventService, ContactService contactService, FilterWindowService filterWindowService, FiltersViewModel filtersViewModel)
+        public EventViewModel(EventService eventService, ContactService contactService, FilterWindowService filterWindowService, 
+            FiltersViewModel filtersViewModel, GiftService giftService, IDateMediator dateMediator)
         {
             _eventService = eventService;
             _contactService = contactService;
             _filterWindowService = filterWindowService;
             _filtersViewModel = filtersViewModel;
+            _giftService = giftService;
 
             // Передаем делегат фильтрации в FiltersViewModel
             _filtersViewModel.SetFilterAction(async () =>
@@ -71,11 +76,12 @@ namespace GiftNotation.ViewModels
             });
 
             DeleteEventCommand = new DeleteEventCommand(this, _eventService);
-            OpenAddEventCommand = new OpenAddEventCommand(eventService, this, _contactService);
+            OpenAddEventCommand = new OpenAddEventCommand(eventService, this, _contactService, _giftService, dateMediator);
             OpenChangeEventCommand = new OpenChangeEventCommand(this, _eventService, _contactService);
             OpenCloseFilterCommand = new OpenCloseFilterCommand(_filterWindowService);
 
             LoadEvents();
+            
         }
 
         public async void LoadEvents()

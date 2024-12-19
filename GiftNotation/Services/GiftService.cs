@@ -301,5 +301,16 @@ namespace GiftNotation.Services
             return await _context.Gifts.ToListAsync();
         }
 
+        public async Task<IEnumerable<Gifts>> GetGiftsNotForContact()
+        {
+            // Получаем все подарки, которые не привязаны к контактам
+            var giftsNotForContact = await _context.Gifts
+                .Where(g => !_context.GiftContacts
+                    .Any(gc => gc.GiftId == g.GiftId))
+                .ToListAsync();
+
+            return giftsNotForContact;
+        }
+
     }
 }

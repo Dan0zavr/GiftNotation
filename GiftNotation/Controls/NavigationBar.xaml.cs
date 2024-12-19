@@ -32,9 +32,18 @@ namespace GiftNotation.Controls
             Application.Current.Shutdown(); // Завершает работу приложения
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+
+        private void Button_minim(object sender, RoutedEventArgs e)
         {
 
+            var rodWindows = Window.GetWindow(this);
+            if(rodWindows != null)
+            {
+                rodWindows.WindowState = WindowState.Minimized;
+
+            }
         }
+
+
     }
 }
