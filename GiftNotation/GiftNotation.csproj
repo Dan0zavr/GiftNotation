@@ -7,6 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
     <ApplicationManifest>app.manifest</ApplicationManifest>
+    <StartupObject>GiftNotation.App</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -56,6 +57,12 @@
     <Resource Include="Views\Fonts\Pacifico-Regular.ttf" />
     <Resource Include="Views\Fonts\Rubik-Medium.ttf" />
     <Resource Include="Views\Fonts\Rubik-Regular.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 

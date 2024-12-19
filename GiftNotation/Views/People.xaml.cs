@@ -37,11 +37,7 @@ public partial class People : UserControl
         
     }
 
-    private void ChangingPeople(object sender, RoutedEventArgs e)
-    {
-        ChangingPeople ChangingPeople = new ChangingPeople();
-        ChangingPeople.Show();
-    }
+    
 
  
 

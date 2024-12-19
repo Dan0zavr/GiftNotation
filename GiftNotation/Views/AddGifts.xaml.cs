@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Globalization;
+using GiftNotation.ViewModels;
 
 namespace GiftNotation.Views
 {
@@ -43,20 +44,36 @@ namespace GiftNotation.Views
             var textBox = sender as RichTextBox;
             if (textBox != null)
             {
-                //string text = textBox.Selection.Text;
-                //if (Uri.IsWellFormedUriString * text, UriKind.Absolute))
+                //string text = textBox.selection.text;
+                //if (Url.iswellformeduristring * text, urikind.absolute))
                 //{
-                //    //Преобразование текста в ссылку
-                //    var hyperlink = new Hyperlink(new Run(text))
+                //    //преобразование текста в ссылку
+                //    var hyperlink = new hyperlink(new run(text))
                 //    {
-                //        NavigateUri = new Uri(text);
+                //        navigateuri = new uri(text);
                 //    };
 
-                //    textBox.Document.Blocks.Clear();
-                //    textBox.Document.Blocks.Add(new Paragraph(hyperlink));
+                //    textBox.document.blocks.clear();
+                //    textBox.document.blocks.add(new paragraph(hyperlink));
                 //}
 
 
+            }
+        }
+
+        private void RichTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (sender is RichTextBox richTextBox)
+            {
+                TextRange textRange = new TextRange(richTextBox.Document.ContentStart, richTextBox.Document.ContentEnd);
+                string text = textRange.Text.Trim();
+
+                // Обновляем привязанное свойство Uri
+                var viewModel = DataContext as AddGiftViewModel;
+                if (viewModel != null)
+                {
+                    viewModel.Url = text;
+                }
             }
         }
 

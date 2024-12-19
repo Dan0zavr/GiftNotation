@@ -201,3 +201,4 @@ C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows10
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows10.0.17763.0\GiftNotation.pdb
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows10.0.17763.0\GiftNotation.genruntimeconfig.cache
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows10.0.17763.0\ref\GiftNotation.dll
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\bin\Debug\net8.0-windows10.0.17763.0\appsettings.json

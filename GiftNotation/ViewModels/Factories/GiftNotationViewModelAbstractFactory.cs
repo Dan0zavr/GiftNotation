@@ -51,7 +51,7 @@ namespace GiftNotation.ViewModels.Factories
                     // Создание новой модели представления для Calendar
                     return _calendarViewModelFactory.CreateViewModel();
                 case ViewType.Contacts:
-                    return new ContactViewModel(_contactService, _giftService);
+                    return new ContactViewModel(_contactService, _giftService, _eventService);
                 case ViewType.Events:
                     return new EventViewModel(_eventService, _contactService, _filterWindowService, _filtersViewModel, _giftService, _mediator);
                 case ViewType.Gifts:

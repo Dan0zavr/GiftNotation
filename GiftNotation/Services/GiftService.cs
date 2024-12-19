@@ -97,16 +97,16 @@ namespace GiftNotation.Services
         .OrderByDescending(e => e.GiftId) // Упорядочиваем по убыванию идентификатора
         .FirstOrDefaultAsync();
 
-            if (giftModel.EventId != null)
+            if (giftModel.SelectedEventId != null)
             {
                 var newGiftEvent = new GiftEvent()
                 {
-                    EventId = giftModel.EventId ?? 0,
+                    EventId = giftModel.SelectedEventId ?? 0,
                     GiftId = addedGift.GiftId
                 };
                 _context.GiftEvents.Add(newGiftEvent);
             }
-            if (giftModel.EventId != null)
+            if (giftModel.SelectedContactId != null)
             {
                 var newGiftContact = new GiftContact()
                 {

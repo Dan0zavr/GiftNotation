@@ -36,8 +36,17 @@ namespace GiftNotation.ViewModels
         public string GiftName
         {
             get => _giftName;
-            set => SetProperty(ref _giftName, value);
+            set
+            {
+                if (_giftName != value)
+                {
+                    _giftName = value;
+                    OnPropertyChanged(nameof(_giftName)); // Уведомляем об изменении свойства
+                    AddGiftCommand.RaiseCanExecuteChanged(); // Обновляем доступность команды
+                }
+            }
         }
+
 
         public string Description
         {
@@ -81,9 +90,9 @@ namespace GiftNotation.ViewModels
             get => _selectedEvent;
             set => SetProperty(ref _selectedEvent, value);
         }
-        
 
-        public ICommand AddGiftCommand { get; }
+
+        public AddGiftCommand AddGiftCommand { get; }
         public ICommand OpenFileDialogForPicture {  get; }
 
         public AddGiftViewModel(GiftService giftService, GiftViewModel giftViewModel, ContactService contactService, EventService eventService)

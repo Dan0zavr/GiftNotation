@@ -95,7 +95,7 @@
                     <TextBlock  Foreground="Gainsboro" Margin="0,1,0,0" Width="70" Text="Добавить"/>
                 </Button>
 
-                <Button Background="#2c2b2a" Width="120" Height="20" Margin="5,0,5,0" Command="{Binding OpenChangeGiftCommand}" Click="Button_Click_1">
+                <Button Background="#2c2b2a" Width="120" Height="20" Margin="5,0,5,0" Command="{Binding OpenChangeGiftCommand}">
                     <Button.Style>
                         <Style TargetType="Button">
                             <Setter Property="Template">
@@ -240,7 +240,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <ContentControl>
-                                    <Hyperlink NavigateUri="{Binding MarketplaceLink}" RequestNavigate="Hyperlink_RequestNavigate">
+                                    <Hyperlink NavigateUri="{Binding Url}" RequestNavigate="Hyperlink_RequestNavigate">
                                          <TextBlock Text="{Binding GiftName}"/>
                                     </Hyperlink>
                                 </ContentControl> 

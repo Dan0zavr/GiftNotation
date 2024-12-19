@@ -27,7 +27,7 @@ Background="Transparent" MouseDown="Window_MouseDown">
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Название события:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox Width="290" FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding EventName}"/>
+                        <TextBox Width="290" FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding EventName, UpdateSourceTrigger=PropertyChanged}"/>
                     </Grid>
                 </Border>
 

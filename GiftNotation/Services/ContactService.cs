@@ -78,6 +78,7 @@ namespace GiftNotation.Services
                 {
                     ContactId = c.ContactId,
                     ContactName = c.ContactName ?? string.Empty,
+                    Bday = c.Bday,
                     RelpTypeName = c.RelpType.RelpTypeName ?? string.Empty,
                     //GiftName = c.GiftContacts
                     //    .Select(gc => gc.Gift.GiftName ?? string.Empty)
