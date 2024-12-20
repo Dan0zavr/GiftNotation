@@ -38,7 +38,7 @@ Background="Transparent" MouseDown="Window_MouseDown">
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Дата праздника:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox Width="310" FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding EventDate}"/>
+                        <TextBox Width="310" FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding EventDate, StringFormat={}{0:dd.MM.yyyy}}"/>
                     </Grid>
                 </Border>
 
