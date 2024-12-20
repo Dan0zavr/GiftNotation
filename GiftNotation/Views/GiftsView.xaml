@@ -252,12 +252,12 @@
                     <DataGridTemplateColumn Header="Картинка" Width="100">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding GiftPic}" Width="25" Height="25"/>
+                                <Image Source="{Binding GiftPic}" Width="auto" Height="auto"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                         <DataGridTemplateColumn.CellEditingTemplate>
                             <DataTemplate>
-                                <Image Width="25" Height="25" Source="{Binding GiftPic}"/>
+                                <Image Width="auto" Height="auto" Source="{Binding GiftPic}"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellEditingTemplate>
                     </DataGridTemplateColumn>

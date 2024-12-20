@@ -271,7 +271,8 @@ From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
             </StackPanel>
             <TextBlock Text="СОБЫТИЯ" FontSize="25" FontWeight="Heavy" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,13,0,0" FontFamily="Britannic Bold"/>
 
-            <DataGrid x:Name="ddataGrid" BorderThickness="3"  BorderBrush="black" Background="#FFDFDBD7" CanUserAddRows="False" SelectedItem="{Binding SelectedEvent, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Events}" VerticalAlignment="Bottom" Height="325" Width="625" AutoGenerateColumns="False" Margin="5,0,0,20">
+            <DataGrid x:Name="ddataGrid" BorderThickness="3"  BorderBrush="black" Background="#FFDFDBD7" CanUserAddRows="False" SelectedItem="{Binding SelectedEvent, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding Events}" VerticalAlignment="Bottom" Height="325" Width="625" AutoGenerateColumns="False" Margin="5,0,0,20" IsReadOnly="True">
                 <DataGrid.Resources>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -297,7 +298,14 @@ From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Название"  Binding="{Binding EventName, UpdateSourceTrigger=PropertyChanged}" Width="*" />
 
-                    <DataGridTextColumn Header="Дата" Binding="{Binding EventDate, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                    <DataGridTextColumn Header="Дата" Binding="{Binding EventDate, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd.MM.yyyy}}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
                     <DataGridTextColumn Header="Тип" Binding="{Binding EventTypeName, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
 

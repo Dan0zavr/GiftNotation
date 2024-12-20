@@ -31,11 +31,17 @@ namespace GiftNotation.Commands.EventCommands
 
         public bool CanExecute(object? parameter)
         {
-            return !string.IsNullOrWhiteSpace(_addViewModel.EventName);  // Исправлено условие
+            return true;
         }
 
         public async void Execute(object? parameter)
         {
+            if (!ValidateFields())
+            {
+                // Подсветить текстбоксы с ошибками
+                return;
+            }
+
             var newContact = new DisplayEventModel
             {
                 EventName = _addViewModel.EventName,
@@ -52,6 +58,12 @@ namespace GiftNotation.Commands.EventCommands
             {
                 window.Close();
             }
+        }
+
+        public bool ValidateFields()
+        {
+            _addViewModel.IsEventNameValid = !string.IsNullOrWhiteSpace(_addViewModel.EventName);
+            return _addViewModel.IsEventNameValid;
         }
 
         public void RaiseCanExecuteChanged()

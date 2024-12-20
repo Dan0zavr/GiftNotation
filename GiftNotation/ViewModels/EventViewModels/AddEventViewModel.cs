@@ -55,6 +55,21 @@ namespace GiftNotation.ViewModels
             }
         }
 
+        private bool _isEventNameValid = true; // По умолчанию валидно
+        public bool IsEventNameValid
+        {
+            get => _isEventNameValid;
+            set
+            {
+                if (_isEventNameValid != value)
+                {
+                    _isEventNameValid = value;
+                    OnPropertyChanged(nameof(IsEventNameValid));
+                    
+                }
+            }
+        }
+
         public Contact SelectedContact
         {
             get => _selectedContact;
@@ -73,10 +88,11 @@ namespace GiftNotation.ViewModels
             get => _eventName;
             set
             {
-                if (SetProperty(ref _eventName, value))
+                if (_eventName != value)
                 {
-                    // Пример правильного вызова RaiseCanExecuteChanged для конкретной команды
-                    AddEventCommand.RaiseCanExecuteChanged();
+                    _eventName = value;
+                    OnPropertyChanged(nameof(EventName));
+                    IsEventNameValid = !string.IsNullOrWhiteSpace(_eventName); // Обновляем состояние валидации
                 }
             }
         }
@@ -120,8 +136,8 @@ namespace GiftNotation.ViewModels
             _mediator = dateMediator;
 
             _mediator.DateChanged += OnDateChanged;
+            EventDate = DateTime.Now;
 
-           
             AddEventCommand = new AddEventCommand(eventService, this, _eventViewModel, dateMediator);
             _addContactOnEventCommand = new AddContactOnEventOnAddCommand(this);
             DeleteContactFromEventCommand = new DeleteContactFromEventOnAddCommand(this);

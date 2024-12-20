@@ -11,6 +11,11 @@
         AllowsTransparency="True"
         WindowStyle="None"
 Background="Transparent" MouseDown="Window_MouseDown">
+    
+    
+ 
+
+
     <Border CornerRadius="20" BorderBrush="#afb3b7" BorderThickness="3" Background="#7e8080" >
         <Grid>
 
@@ -28,7 +33,24 @@ Background="Transparent" MouseDown="Window_MouseDown">
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Введите название:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Width="300" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding EventName, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox x:Name="eventName" FontSize="14" Width="300" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" 
+                                 Margin="10,0,0,0" Text="{Binding EventName, UpdateSourceTrigger=PropertyChanged}" ToolTip="Поле обязательно для заполнения">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsEventNameValid}" Value="False">
+                                            <Setter Property="BorderBrush" Value="Red" />
+                                            <Setter Property="BorderThickness" Value="1" />
+                                        </DataTrigger>
+                                        <!-- Если поле валидно -->
+                                        <DataTrigger Binding="{Binding IsEventNameValid}" Value="True">
+                                            <Setter Property="BorderBrush" Value="Gray" />
+                                            <Setter Property="BorderThickness" Value="1" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
                     </Grid>
                 </Border>
 
@@ -52,8 +74,8 @@ Background="Transparent" MouseDown="Window_MouseDown">
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Text="Введите дату и время праздника:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox FontSize="14" Width="205" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding EventDate}"/>
+                        <TextBlock Text="Введите дату праздника:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
+                        <TextBox FontSize="14" Width="205" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding EventDate, StringFormat={}{0:dd.MM.yyyy}}"/>
                     </Grid>
                 </Border>
 
