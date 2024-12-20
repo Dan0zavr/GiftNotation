@@ -1,11 +1,5 @@
-﻿using GiftNotation.Services;
-using GiftNotation.ViewModels;
+﻿using GiftNotation.ViewModels;
 using GiftNotation.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GiftNotation.Services
 {
@@ -24,7 +18,7 @@ namespace GiftNotation.Services
         {
             if (CurrentFiltersWindow == null || !CurrentFiltersWindow.IsVisible)
             {
-                
+
                 CurrentFiltersWindow = new Filters
                 {
                     DataContext = _filtersViewModel

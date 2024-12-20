@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace GiftNotation.ViewModels.GiftViewModels
+﻿namespace GiftNotation.ViewModels.GiftViewModels
 {
     public interface IAddOrEditGiftViewModel
     {

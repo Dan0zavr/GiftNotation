@@ -1,19 +1,17 @@
-﻿using System.Configuration;
-using System;
-using System.Windows;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using GiftNotation.ViewModels;
-using GiftNotation.Services;
-using GiftNotation.Data;
-using GiftNotation.Views;
-using GiftNotation.Commands;
-using GiftNotation.State.Navigators;
-using Microsoft.Extensions.Hosting;
-using GiftNotation.ViewModels.Factories;
-using Microsoft.Extensions.Configuration;
+﻿using GiftNotation.Commands;
 using GiftNotation.Commands.GiftCommands;
+using GiftNotation.Data;
+using GiftNotation.Services;
 using GiftNotation.Services.Mediators;
+using GiftNotation.State.Navigators;
+using GiftNotation.ViewModels;
+using GiftNotation.ViewModels.Factories;
+using GiftNotation.Views;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using System.Windows;
 
 
 namespace GiftNotation

@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GiftNotation.Models;
-using System.Windows.Input;
-using System.Windows.Navigation;
-using System.Runtime.CompilerServices;
-using System.ComponentModel;
-using System.Collections.ObjectModel;
-using Microsoft.EntityFrameworkCore.Metadata;
-using GiftNotation.State.Navigators;
-using GiftNotation.Services;
-using GiftNotation.Views;
+﻿using GiftNotation.Services;
 using GiftNotation.Services.Mediators;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+using GiftNotation.Views;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows.Input;
 
 namespace GiftNotation.ViewModels
 {
@@ -32,8 +21,8 @@ namespace GiftNotation.ViewModels
 
 
         private ObservableCollection<DateTime> events = new ObservableCollection<DateTime>();
-        public ObservableCollection<DateTime> Events 
-        { 
+        public ObservableCollection<DateTime> Events
+        {
             get => events;
             set => SetProperty(ref events, value);
         }
@@ -104,4 +93,4 @@ namespace GiftNotation.ViewModels
 
     }
 }
-    
+

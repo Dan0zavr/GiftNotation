@@ -1,20 +1,10 @@
 ﻿using GiftNotation.Data;
 using GiftNotation.Models;
-using GiftNotation.Commands.ContactCommands;
-using GiftNotation.ViewModels;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GiftNotation.Services
 {
-    public class GiftService 
+    public class GiftService
     {
         private readonly GiftNotationDbContext _context;
         public event Action StateChanged;
@@ -140,14 +130,14 @@ namespace GiftNotation.Services
 
         public async Task<IEnumerable<DisplayGiftModel>> GetDisplayGiftModelByID(int giftId)
         {
-                var gift = await _context.Gifts
-            .Include(g => g.Status)
-            .Include(g => g.GiftContacts)
-                .ThenInclude(gc => gc.Contact)
-            .Include(g => g.GiftEvents)
-                .ThenInclude(ge => ge.Event)
-            .Where(g => g.GiftId == giftId)
-            .FirstOrDefaultAsync();
+            var gift = await _context.Gifts
+        .Include(g => g.Status)
+        .Include(g => g.GiftContacts)
+            .ThenInclude(gc => gc.Contact)
+        .Include(g => g.GiftEvents)
+            .ThenInclude(ge => ge.Event)
+        .Where(g => g.GiftId == giftId)
+        .FirstOrDefaultAsync();
 
             return await _context.Gifts
                  .Include(g => g.Status)

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reflection.Metadata;
-using System.Windows.Controls;
-using GiftNotation.Models;
+﻿using GiftNotation.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GiftNotation.Data;
@@ -108,7 +104,7 @@ public partial class GiftNotationDbContext : DbContext
 
         modelBuilder.Entity<RelpType>().HasData(
              new RelpType { RelpTypeId = 1, RelpTypeName = "Друг" },
-             new RelpType { RelpTypeId = 2, RelpTypeName = "Родственник" }, 
+             new RelpType { RelpTypeId = 2, RelpTypeName = "Родственник" },
              new RelpType { RelpTypeId = 3, RelpTypeName = "Коллега" },
              new RelpType { RelpTypeId = 4, RelpTypeName = "Знакомый" }
         );

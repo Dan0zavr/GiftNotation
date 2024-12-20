@@ -1,12 +1,7 @@
 ﻿using GiftNotation.Commands.ContactCommands;
 using GiftNotation.Models;
 using GiftNotation.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace GiftNotation.ViewModels
@@ -51,7 +46,7 @@ namespace GiftNotation.ViewModels
 
             // Загрузка данных из базы данных или другого источника
             LoadContacts();
-            
+
             //OpenChangeContactCommand = new OpenChangeGiftCommand(this, _contactService);
         }
 

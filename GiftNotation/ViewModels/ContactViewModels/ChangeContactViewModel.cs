@@ -1,13 +1,7 @@
 ﻿using GiftNotation.Commands.ContactCommands;
 using GiftNotation.Models;
 using GiftNotation.Services;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GiftNotation.ViewModels
 {
@@ -25,7 +19,7 @@ namespace GiftNotation.ViewModels
         private string _selectedRelpTypeName;
         private Gifts _selectedGift;
         private Gifts _selectedGiftForContact;
-        
+
         private DisplayContactModel _selectedContact;
         private AddGiftForContactOnChangeCommand _addGiftForContactOnChangeCommand;
 

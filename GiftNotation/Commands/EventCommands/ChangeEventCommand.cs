@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using GiftNotation.Models;
+﻿using GiftNotation.Models;
 using GiftNotation.Services;
 using GiftNotation.ViewModels;
+using System.Windows;
+using System.Windows.Input;
 
 namespace GiftNotation.Commands.EventCommands
 {

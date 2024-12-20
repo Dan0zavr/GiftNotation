@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GiftNotation.Data;
 using Microsoft.EntityFrameworkCore;
-using GiftNotation.Data;
 
 namespace GiftNotation.Services.UniversalService
 {

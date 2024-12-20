@@ -1,12 +1,6 @@
 ﻿using GiftNotation.Services;
 using GiftNotation.Services.Mediators;
 using GiftNotation.State.Navigators;
-using GiftNotation.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace GiftNotation.ViewModels.Factories
@@ -27,7 +21,7 @@ namespace GiftNotation.ViewModels.Factories
 
         public GiftNotationViewModelAbstractFactory(IGiftNotationViewModelFactory<CalendarViewModel> calendarViewModelFactory,
             ContactViewModel contactViewModel, GiftViewModel giftViewModel, EventViewModel eventViewModel,
-            GiftService giftService, ContactService contactService, EventService eventService, FiltersViewModel filtersViewModel, 
+            GiftService giftService, ContactService contactService, EventService eventService, FiltersViewModel filtersViewModel,
             FilterWindowService filterWindowService, CalendarViewModel calendarViewModel, IDateMediator mediator)
         {
             _calendarViewModelFactory = calendarViewModelFactory;

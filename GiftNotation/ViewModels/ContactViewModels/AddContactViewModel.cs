@@ -1,13 +1,7 @@
-﻿using GiftNotation.Services;
+﻿using GiftNotation.Commands.ContactCommands;
 using GiftNotation.Models;
-using GiftNotation.Commands.ContactCommands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GiftNotation.Services;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace GiftNotation.ViewModels
 {
@@ -97,7 +91,7 @@ namespace GiftNotation.ViewModels
             AddContactCommand = new AddContactCommand(contactService, contactViewModel, this, _eventService);
             _addGiftForContactOnAddCommand = new AddGiftForContactOnAddCommand(this);
             DeleteGiftForContactCommand = new DeleteGiftForContactOnAddCommand(this);
-            
+
         }
 
         public async void LoadGifts()
@@ -113,7 +107,7 @@ namespace GiftNotation.ViewModels
             {
                 RelpTypes.Add(relpType);
             }
-        }   
+        }
     }
 
 }

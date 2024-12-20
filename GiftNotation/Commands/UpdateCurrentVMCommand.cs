@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using GiftNotation.Services;
+﻿using GiftNotation.Services;
 using GiftNotation.State.Navigators;
-using GiftNotation.ViewModels;
 using GiftNotation.ViewModels.Factories;
-using GiftNotation.Views;
+using System.Windows.Input;
 
 namespace GiftNotation.Commands
 {

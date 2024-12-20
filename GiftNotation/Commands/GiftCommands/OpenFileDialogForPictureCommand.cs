@@ -1,13 +1,5 @@
-﻿using Microsoft.Win32;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GiftNotation.ViewModels.GiftViewModels;
 using System.Windows.Input;
-using System.IO;
-using GiftNotation.ViewModels;
-using GiftNotation.ViewModels.GiftViewModels;
 
 
 namespace GiftNotation.Commands.GiftCommands
@@ -42,7 +34,7 @@ namespace GiftNotation.Commands.GiftCommands
                 _giftViewModel.GiftPic = dialog.FileName;
             }
         }
-        
+
     }
-    
+
 }

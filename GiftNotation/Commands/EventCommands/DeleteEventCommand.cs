@@ -1,10 +1,5 @@
 ﻿using GiftNotation.Services;
 using GiftNotation.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace GiftNotation.Commands.EventCommands
@@ -38,7 +33,7 @@ namespace GiftNotation.Commands.EventCommands
                 _eventViewModel.Events.Remove(_eventViewModel.SelectedEvent);
                 _eventViewModel.SelectedEvent = null;
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 Console.WriteLine($"Ошибка при удалении события: {ex.Message}");
             }
