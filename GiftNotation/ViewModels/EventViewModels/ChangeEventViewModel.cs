@@ -62,6 +62,21 @@ namespace GiftNotation.ViewModels
             get { return _eventId; }
         }
 
+        private bool _isEventNameValid = true; // По умолчанию валидно
+        public bool IsEventNameValid
+        {
+            get => _isEventNameValid;
+            set
+            {
+                if (_isEventNameValid != value)
+                {
+                    _isEventNameValid = value;
+                    OnPropertyChanged(nameof(IsEventNameValid));
+
+                }
+            }
+        }
+
         public string EventName
         {
             get => _eventName;
@@ -69,8 +84,9 @@ namespace GiftNotation.ViewModels
             {
                 if (SetProperty(ref _eventName, value))
                 {
-                    // Пример правильного вызова RaiseCanExecuteChanged для конкретной команды
-                    ChangeEventCommand.RaiseCanExecuteChanged();
+                    _eventName = value;
+                    OnPropertyChanged(nameof(EventName));
+                    IsEventNameValid = !string.IsNullOrWhiteSpace(_eventName);
                 }
             }
         }

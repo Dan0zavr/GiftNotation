@@ -37,17 +37,18 @@
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
-                                <Border Cursor="Arrow" CornerRadius="2" Height="25" BorderBrush="#707976" BorderThickness="2" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="0,0,0,0">
+                                <Border Cursor="Arrow" Height="25" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="0,5,0,0" Width="255">
 
                                     <AdornerDecorator>
                                         <Grid>
 
-                                            <Grid Width="252" Height="30" VerticalAlignment="Center" Margin="0,0,0,0" >
+                                            <Grid Width="255" Height="30" VerticalAlignment="Center" Margin="0,0,0,0" >
                                                 <TextBox x:Name="TextVisibilityForNameGift" 
                                                          FontSize="12" Padding="5" Background="#dbd8d4"
-                                                         TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding GiftName, UpdateSourceTrigger=PropertyChanged}" 
-                                                         GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
-                                                
+                                                         TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding GiftName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                                         GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus">
+                                                </TextBox>
+
                                             </Grid>
 
                                             <TextBlock Text="Наименование подарка..." 
@@ -60,13 +61,34 @@
 
                                     </AdornerDecorator>
 
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                            <Setter Property="BorderThickness" Value="0" />
+                                            <Setter Property="CornerRadius" Value="0" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsGiftNameValid}" Value="False">
+                                                    <Setter Property="BorderBrush" Value="Red" />
+                                                    <Setter Property="BorderThickness" Value="2" />
+                                                    <Setter Property="CornerRadius" Value="2"/>
+                                                </DataTrigger>
+                                                <!-- Если поле валидно -->
+                                                <DataTrigger Binding="{Binding IsGiftNameValid}" Value="True">
+                                                    <Setter Property="BorderBrush" Value="#707976" />
+                                                    <Setter Property="BorderThickness" Value="2" />
+                                                    <Setter Property="CornerRadius" Value="2"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+
                                 </Border>
 
-                                <Border CornerRadius="2" Height="25" BorderBrush="#707976" BorderThickness="2" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="0,5,0,0">
+                                <Border CornerRadius="2" Height="25" BorderBrush="#707976" BorderThickness="2" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="0,5,0,0" Width="255">
                                     <AdornerDecorator>
                                         <Grid>
 
-                                            <Grid Width="250" Height="30" VerticalAlignment="Center" Margin="-2,0,0,0">
+                                            <Grid Width="255" Height="30" VerticalAlignment="Center" Margin="-2,0,0,0">
                                                 <TextBox x:Name="TextVisibilityForSsylkaGift"  FontSize="12" Padding="5" Background="#dbd8d4" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding Url}" />
                                             </Grid>
 
@@ -80,13 +102,13 @@
 
                                     </AdornerDecorator>
                                 </Border>
-                                <Border CornerRadius="2" Height="55" BorderBrush="#707976" BorderThickness="2" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="0,5,0,0">
+                                <Border CornerRadius="2" Height="55" BorderBrush="#707976" BorderThickness="2" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="0,5,0,0" Width="255">
                                     <AdornerDecorator>
                                         <Grid>
 
                                             
                                             <TextBox x:Name="TextVisibilityForDescription" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
-                                                     FontSize="12" Padding="2" Width="250" Background="#dbd8d4"
+                                                     FontSize="12" Padding="2" Width="255" Background="#dbd8d4"
                                                       Text="{Binding Description}"
                                                      GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus"/>
 
@@ -294,7 +316,7 @@
                 </Button>
 
 
-                <Button Background="#2c2b2a" Height="20" Width="100" Margin="275,0,0,10" Foreground="#e2ddd9" Command="{Binding AddGiftCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}" Click="Button_Click_2">
+                <Button Background="#2c2b2a" Height="20" Width="100" Margin="275,0,0,10" Foreground="#e2ddd9" Command="{Binding AddGiftCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
 
 
                     <Button.Style>

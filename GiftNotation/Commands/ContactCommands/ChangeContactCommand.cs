@@ -25,11 +25,17 @@ namespace GiftNotation.Commands.ContactCommands
 
         public bool CanExecute(object? parameter)
         {
-            return !string.IsNullOrWhiteSpace(_viewModel.ContactName);
+            return true;
         }
 
         public async void Execute(object? parameter)
         {
+            if (!ValidateFields())
+            {
+                // Подсветить текстбоксы с ошибками
+                return;
+            }
+
             var changeContact = new DisplayContactModel
             {
                 ContactId = _viewModel.ContactId,
@@ -49,6 +55,12 @@ namespace GiftNotation.Commands.ContactCommands
             {
                 window.Close();
             }
+        }
+
+        public bool ValidateFields()
+        {
+            _viewModel.IsContactNameValid = !string.IsNullOrWhiteSpace(_viewModel.ContactName);
+            return _viewModel.IsContactNameValid;
         }
 
         public void RaiseCanExecuteChanged()

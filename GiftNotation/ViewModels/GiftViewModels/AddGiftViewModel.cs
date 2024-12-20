@@ -27,6 +27,22 @@ namespace GiftNotation.ViewModels
         public ObservableCollection<Contact> Contacts { get; private set; } = new ObservableCollection<Contact>();
         public ObservableCollection<Event> Events { get; private set; } = new ObservableCollection<Event>();
 
+        private bool _isGiftNameValid = true; // По умолчанию валидно
+        public bool IsGiftNameValid
+        {
+            get => _isGiftNameValid;
+            set
+            {
+                if (_isGiftNameValid != value)
+                {
+                    _isGiftNameValid = value;
+                    OnPropertyChanged(nameof(IsGiftNameValid));
+
+
+                }
+            }
+        }
+
 
         public string GiftName
         {
@@ -36,8 +52,8 @@ namespace GiftNotation.ViewModels
                 if (_giftName != value)
                 {
                     _giftName = value;
-                    OnPropertyChanged(nameof(_giftName)); // Уведомляем об изменении свойства
-                    AddGiftCommand.RaiseCanExecuteChanged(); // Обновляем доступность команды
+                    OnPropertyChanged(nameof(_giftName));
+                    IsGiftNameValid = !string.IsNullOrWhiteSpace(_giftName); // Обновляем доступность команды
                 }
             }
         }

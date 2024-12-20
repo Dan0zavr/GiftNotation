@@ -23,11 +23,17 @@ namespace GiftNotation.Commands.GiftCommands
 
         public bool CanExecute(object? parameter)
         {
-            return !string.IsNullOrWhiteSpace(_changeGiftViewModel.GiftName);
+            return true;
         }
 
         public async void Execute(object? parameter)
         {
+            if (!ValidateFields())
+            {
+                // Подсветить текстбоксы с ошибками
+                return;
+            }
+
             var changeGift = new DisplayGiftModel
             {
                 GiftId = _changeGiftViewModel.GiftId,
@@ -49,6 +55,12 @@ namespace GiftNotation.Commands.GiftCommands
             {
                 window.Close();
             }
+        }
+
+        public bool ValidateFields()
+        {
+            _changeGiftViewModel.IsGiftNameValid = !string.IsNullOrWhiteSpace(_changeGiftViewModel.GiftName);
+            return _changeGiftViewModel.IsGiftNameValid;
         }
     }
 }

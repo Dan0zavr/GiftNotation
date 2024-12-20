@@ -36,11 +36,35 @@ namespace GiftNotation.ViewModels
             set => SetProperty(ref _contactId, value);
         }
 
+        private bool _isContactNameValid = true; // По умолчанию валидно
+        public bool IsContactNameValid
+        {
+            get => _isContactNameValid;
+            set
+            {
+                if (_isContactNameValid != value)
+                {
+                    _isContactNameValid = value;
+                    OnPropertyChanged(nameof(IsContactNameValid));
+
+                }
+            }
+        }
+
         public string ContactName
         {
             get => _contactName;
-            set => SetProperty(ref _contactName, value);
+            set
+            {
+                if (SetProperty(ref _contactName, value))
+                {
+                    _contactName = value;
+                    OnPropertyChanged(nameof(ContactName));
+                    IsContactNameValid = !string.IsNullOrWhiteSpace(_contactName);
+                }
+            }
         }
+            
 
         public DateTime Bday
         {

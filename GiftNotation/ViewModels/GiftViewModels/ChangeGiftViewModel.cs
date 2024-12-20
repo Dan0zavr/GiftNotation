@@ -36,10 +36,34 @@ namespace GiftNotation.ViewModels
 
         public int GiftId => _giftId;
 
+        private bool _isGiftNameValid = true; // По умолчанию валидно
+        public bool IsGiftNameValid
+        {
+            get => _isGiftNameValid;
+            set
+            {
+                if (_isGiftNameValid != value)
+                {
+                    _isGiftNameValid = value;
+                    OnPropertyChanged(nameof(IsGiftNameValid));
+
+                }
+            }
+        }
+
+
         public string GiftName
         {
             get => _giftName;
-            set => SetProperty(ref _giftName, value);
+            set
+            {
+                if (_giftName != value)
+                {
+                    _giftName = value;
+                    OnPropertyChanged(nameof(_giftName));
+                    IsGiftNameValid = !string.IsNullOrWhiteSpace(_giftName); // Обновляем доступность команды
+                }
+            }
         }
 
         public string Description

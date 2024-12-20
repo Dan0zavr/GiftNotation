@@ -76,32 +76,30 @@ namespace GiftNotation.Views
             }
         }
 
-        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
-        {
-            var textBox = sender as TextBox;
-            if (textBox != null && string.IsNullOrEmpty(textBox.Text))
-            {
-                textBox.Text = string.Empty;
-            }
-        }
+
+        private bool _isFirstClick = true;
 
         private void TextBox_GotFocus(object sender, RoutedEventArgs e)
         {
-            var textBox = sender as TextBox;
-            if (textBox != null && string.IsNullOrEmpty(textBox.Text))
+            if (_isFirstClick)
             {
-                textBox.Text = string.Empty;
+                // Игнорируем первый клик
+                _isFirstClick = false;
+                ((TextBox)sender).Tag = true; // Отмечаем TextBox как обработанный
             }
         }
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
 
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            var textBox = (TextBox)sender;
+            if (textBox.Tag is bool isHandled && isHandled)
+            {
+                // Разрешаем обновление данных только после первого взаимодействия
+                var bindingExpression = textBox.GetBindingExpression(TextBox.TextProperty);
+                bindingExpression?.UpdateSource();
+            }
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-
-        }
     }
 
 }

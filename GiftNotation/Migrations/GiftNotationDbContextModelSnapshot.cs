@@ -84,7 +84,6 @@ namespace GiftNotation.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("EventTypeName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("EventTypeId");
@@ -103,47 +102,37 @@ namespace GiftNotation.Migrations
                         new
                         {
                             EventTypeId = 2,
-                            EventTypeName = "23 февраля"
-                        },
-                        new
-                        {
-                            EventTypeId = 3,
                             EventTypeName = "Годовщина"
                         },
                         new
                         {
-                            EventTypeId = 4,
+                            EventTypeId = 3,
                             EventTypeName = "Новый год"
                         },
                         new
                         {
-                            EventTypeId = 5,
-                            EventTypeName = "8 марта"
-                        },
-                        new
-                        {
-                            EventTypeId = 6,
-                            EventTypeName = "9 мая"
-                        },
-                        new
-                        {
-                            EventTypeId = 7,
+                            EventTypeId = 4,
                             EventTypeName = "Рождество"
                         },
                         new
                         {
-                            EventTypeId = 8,
+                            EventTypeId = 5,
                             EventTypeName = "Свадьба"
                         },
                         new
                         {
-                            EventTypeId = 9,
+                            EventTypeId = 6,
                             EventTypeName = "Просто подарочек"
                         },
                         new
                         {
-                            EventTypeId = 10,
+                            EventTypeId = 7,
                             EventTypeName = "Важное событие"
+                        },
+                        new
+                        {
+                            EventTypeId = 8,
+                            EventTypeName = "Другой праздник"
                         });
                 });
 

@@ -40,15 +40,15 @@ namespace GiftNotation
                     // Получение строки подключения
                     string connectionString = context.Configuration.GetConnectionString("default");
 
-                    // Регистрация DbContext
+                    // Регистрация DbContext с областью Scoped
                     services.AddDbContext<GiftNotationDbContext>(options =>
                         options.UseSqlite(connectionString));
 
                     // Регистрация ViewModel и фабрик
                     RegisterViewModels(services);
 
-                    // Регистрация Navigator
-                    services.AddSingleton<INavigator, Navigator>();
+                    // Регистрация Navigator с областью Scoped
+                    services.AddScoped<INavigator, Navigator>();
 
                     // Регистрация DateMediator
                     services.AddSingleton<IDateMediator, DateMediator>();
@@ -106,7 +106,7 @@ namespace GiftNotation
         {
             services.AddScoped<AddGiftCommand>();
             services.AddScoped<UpdateCurrentVMCommand>();
-            services.AddSingleton<OpenCloseFilterCommand>();
+            services.AddScoped<OpenCloseFilterCommand>();
         }
 
         private NotificationService _notificationService;

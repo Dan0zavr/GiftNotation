@@ -91,15 +91,13 @@ public partial class GiftNotationDbContext : DbContext
 
         modelBuilder.Entity<EventType>().HasData(
             new EventType { EventTypeId = 1, EventTypeName = "День Рождения" },
-            new EventType { EventTypeId = 2, EventTypeName = "23 февраля" },
-            new EventType { EventTypeId = 3, EventTypeName = "Годовщина" },
-            new EventType { EventTypeId = 4, EventTypeName = "Новый год" },
-            new EventType { EventTypeId = 5, EventTypeName = "8 марта" },
-            new EventType { EventTypeId = 6, EventTypeName = "9 мая" },
-            new EventType { EventTypeId = 7, EventTypeName = "Рождество" },
-            new EventType { EventTypeId = 8, EventTypeName = "Свадьба" },
-            new EventType { EventTypeId = 9, EventTypeName = "Просто подарочек" },
-            new EventType { EventTypeId = 10, EventTypeName = "Важное событие" }
+            new EventType { EventTypeId = 2, EventTypeName = "Годовщина" },
+            new EventType { EventTypeId = 3, EventTypeName = "Новый год" },
+            new EventType { EventTypeId = 4, EventTypeName = "Рождество" },
+            new EventType { EventTypeId = 5, EventTypeName = "Свадьба" },
+            new EventType { EventTypeId = 6, EventTypeName = "Просто подарочек" },
+            new EventType { EventTypeId = 7, EventTypeName = "Важное событие" },
+            new EventType { EventTypeId = 8, EventTypeName = "Другой праздник" }
         );
 
         modelBuilder.Entity<RelpType>().HasData(
