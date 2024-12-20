@@ -2,18 +2,13 @@
 using GiftNotation.Services.Mediators;
 using GiftNotation.ViewModels;
 using GiftNotation.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace GiftNotation.Commands.EventCommands
 {
     public class OpenAddEventCommand : ICommand
     {
-        
+
         private readonly EventService _eventService;
         private readonly ContactService _contactService;
         private readonly EventViewModel _viewModel;

@@ -1,16 +1,8 @@
 ﻿using GiftNotation.Commands.EventCommands;
-using GiftNotation.Commands.GiftCommands;
 using GiftNotation.Models;
 using GiftNotation.Services;
 using GiftNotation.Services.Mediators;
-using Microsoft.EntityFrameworkCore.Diagnostics;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 
 namespace GiftNotation.ViewModels
@@ -65,7 +57,7 @@ namespace GiftNotation.ViewModels
                 {
                     _isEventNameValid = value;
                     OnPropertyChanged(nameof(IsEventNameValid));
-                    
+
                 }
             }
         }
@@ -145,7 +137,7 @@ namespace GiftNotation.ViewModels
             LoadContacts();
             LoadEventTypes();
             LoadGifts();
-            
+
         }
 
         private void OnDateChanged(DateTime? newDate)
@@ -180,7 +172,7 @@ namespace GiftNotation.ViewModels
             }
         }
 
-        
+
 
         private void RemoveGiftFromCollection(Gifts gift)
         {

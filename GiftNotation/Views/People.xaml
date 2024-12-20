@@ -239,10 +239,12 @@
 
             <TextBlock Text="ЛЮДИ" FontSize="25" FontWeight="Heavy" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,13,0,0" FontFamily="Britannic Bold"/>
 
-            <DataGrid x:Name="ddataGrid" BorderThickness="3"  BorderBrush="black" Background="#FFDFDBD7" CanUserAddRows="False" SelectedItem="{Binding SelectedContact, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Contacts}" VerticalAlignment="Bottom" Height="325" Width="625" AutoGenerateColumns="False" Margin="5,0,0,20">
+            <DataGrid x:Name="ddataGrid" SelectionMode="Extended" BorderThickness="3"  BorderBrush="black" Background="#FFDFDBD7" 
+          CanUserAddRows="False" SelectedItem="{Binding SelectedContact, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Contacts}"
+          VerticalAlignment="Bottom" Height="325" Width="625" AutoGenerateColumns="False" Margin="5,0,0,20"
+          CanUserResizeColumns="False">
 
                 <DataGrid.Resources>
-                    <!-- Стиль для заголовков столбцов -->
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="HorizontalContentAlignment" Value="Center"/>
                         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -254,84 +256,73 @@
                         <Setter Property="Foreground" Value="black"/>
                     </Style>
 
-                 
-                        
-
                     <Style TargetType="DataGridRow">
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding IsSelected, RelativeSource={RelativeSource Self}}" Value="True">
-                                <Setter Property="Background" Value="#d3d3d3"/>
-                                <Setter Property="BorderBrush" Value="Black" />
-                                <Setter Property="BorderThickness" Value="0,0,0,1" />
-                    </DataTrigger>
-                        </Style.Triggers>
+                        <Setter Property="BorderBrush" Value="Black" />
+                        <Setter Property="BorderThickness" Value="0,0,0,1" />
                     </Style>
-
-                    <!-- Стиль для самого DataGrid -->
-                    <!--<Style TargetType="DataGrid">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="DataGrid">
-                                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0,0,20,20">
-                                        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-                                            <Grid>
-                                                <DataGridColumnHeadersPresenter />
-                                                <DataGridCellsPresenter />
-                                            </Grid>
-                                        </ScrollViewer>
-                                    </Border>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>-->
 
                     <Style TargetType="DataGridCell">
-                        <Setter Property="BorderBrush" Value="Black"/>
-                        <Setter Property="BorderThickness" Value="0,0,2,2"/>
-                        <Setter Property="Padding" Value="5"/>
+                        <Setter Property="Background" Value="#cacac8"/>
                     </Style>
-                    
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Имя" Binding="{Binding ContactName, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding ContactName, UpdateSourceTrigger=PropertyChanged}" Width="150">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
-                    <DataGridTextColumn Header="Тип отношений" Binding="{Binding RelpTypeName, UpdateSourceTrigger=PropertyChanged}" Width="180"/>
+                    <DataGridTextColumn Header="Тип отношений" Binding="{Binding RelpTypeName, UpdateSourceTrigger=PropertyChanged}" Width="180">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
                     <DataGridTemplateColumn Header="День рождения" Width="150">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Bday, StringFormat=d, UpdateSourceTrigger=PropertyChanged}" />
+                                <TextBlock Text="{Binding Bday, StringFormat={}{0:dd.MM.yyyy}, UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                     <DataGridTemplateColumn Header="Подарки" Width="*">
-     <DataGridTemplateColumn.CellTemplate>
-         <DataTemplate>
-             <ListBox ItemsSource="{Binding MyGifts}" 
-                      HorizontalAlignment="Stretch" 
-                      VerticalAlignment="Stretch"
-                      ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                 <ListBox.ItemsPanel>
-                     <ItemsPanelTemplate>
-                         <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" />
-                     </ItemsPanelTemplate>
-                 </ListBox.ItemsPanel>
-                 <ListBox.ItemTemplate>
-                     <DataTemplate>
-                         <!-- Центрируем текст -->
-                         <TextBlock Text="{Binding GiftName}" 
-                                    HorizontalAlignment="Center" 
-                                    VerticalAlignment="Center" />
-                     </DataTemplate>
-                 </ListBox.ItemTemplate>
-             </ListBox>
-         </DataTemplate>
-     </DataGridTemplateColumn.CellTemplate>
- </DataGridTemplateColumn>
-                    <!--<DataGridTextColumn Header="История подарков" Binding="{Binding Gift, UpdateSourceTrigger=PropertyChanged}" Width="*" />-->
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Подарки" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ListBox ItemsSource="{Binding MyGifts}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" />
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <!-- Центрируем текст -->
+                                            <TextBlock Text="{Binding GiftName}" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                         FontSize="16"
+                         TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
 
                 </DataGrid.Columns>
+
             </DataGrid>
 
 

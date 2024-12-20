@@ -1,13 +1,7 @@
 ﻿using GiftNotation.Commands.EventCommands;
 using GiftNotation.Models;
 using GiftNotation.Services;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace GiftNotation.ViewModels
@@ -68,6 +62,21 @@ namespace GiftNotation.ViewModels
             get { return _eventId; }
         }
 
+        private bool _isEventNameValid = true; // По умолчанию валидно
+        public bool IsEventNameValid
+        {
+            get => _isEventNameValid;
+            set
+            {
+                if (_isEventNameValid != value)
+                {
+                    _isEventNameValid = value;
+                    OnPropertyChanged(nameof(IsEventNameValid));
+
+                }
+            }
+        }
+
         public string EventName
         {
             get => _eventName;
@@ -75,8 +84,9 @@ namespace GiftNotation.ViewModels
             {
                 if (SetProperty(ref _eventName, value))
                 {
-                    // Пример правильного вызова RaiseCanExecuteChanged для конкретной команды
-                    ChangeEventCommand.RaiseCanExecuteChanged();
+                    _eventName = value;
+                    OnPropertyChanged(nameof(EventName));
+                    IsEventNameValid = !string.IsNullOrWhiteSpace(_eventName);
                 }
             }
         }

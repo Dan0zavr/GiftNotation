@@ -1,14 +1,9 @@
-﻿using GiftNotation.Models;
+﻿using GiftNotation.Commands.GiftCommands;
+using GiftNotation.Models;
 using GiftNotation.Services;
-using GiftNotation.Commands.GiftCommands;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using GiftNotation.ViewModels.GiftViewModels;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace GiftNotation.ViewModels
 {
@@ -23,7 +18,7 @@ namespace GiftNotation.ViewModels
         private string _url;
         private double _price;
         private string _giftPic;
-        
+
         private Status? _selectedStatus;
         private Contact? _selectedContact;
         private Event? _selectedEvent;
@@ -31,6 +26,22 @@ namespace GiftNotation.ViewModels
         public ObservableCollection<Status> Statuses { get; private set; } = new ObservableCollection<Status>();
         public ObservableCollection<Contact> Contacts { get; private set; } = new ObservableCollection<Contact>();
         public ObservableCollection<Event> Events { get; private set; } = new ObservableCollection<Event>();
+
+        private bool _isGiftNameValid = true; // По умолчанию валидно
+        public bool IsGiftNameValid
+        {
+            get => _isGiftNameValid;
+            set
+            {
+                if (_isGiftNameValid != value)
+                {
+                    _isGiftNameValid = value;
+                    OnPropertyChanged(nameof(IsGiftNameValid));
+
+
+                }
+            }
+        }
 
 
         public string GiftName
@@ -41,8 +52,8 @@ namespace GiftNotation.ViewModels
                 if (_giftName != value)
                 {
                     _giftName = value;
-                    OnPropertyChanged(nameof(_giftName)); // Уведомляем об изменении свойства
-                    AddGiftCommand.RaiseCanExecuteChanged(); // Обновляем доступность команды
+                    OnPropertyChanged(nameof(_giftName));
+                    IsGiftNameValid = !string.IsNullOrWhiteSpace(_giftName); // Обновляем доступность команды
                 }
             }
         }
@@ -76,7 +87,7 @@ namespace GiftNotation.ViewModels
         {
             get => _selectedStatus;
             set => SetProperty(ref _selectedStatus, value);
-            
+
         }
 
         public Contact? SelectedContact
@@ -93,7 +104,7 @@ namespace GiftNotation.ViewModels
 
 
         public AddGiftCommand AddGiftCommand { get; }
-        public ICommand OpenFileDialogForPicture {  get; }
+        public ICommand OpenFileDialogForPicture { get; }
 
         public AddGiftViewModel(GiftService giftService, GiftViewModel giftViewModel, ContactService contactService, EventService eventService)
         {
@@ -109,14 +120,14 @@ namespace GiftNotation.ViewModels
 
         }
 
-       private async void LoadStatuses()
-       {
+        private async void LoadStatuses()
+        {
             var statuses = await _giftService.GetAllStatuses();
             foreach (var status in statuses)
             {
                 Statuses.Add(status);
             }
-       }
+        }
 
         private async void LoadContacts()
         {

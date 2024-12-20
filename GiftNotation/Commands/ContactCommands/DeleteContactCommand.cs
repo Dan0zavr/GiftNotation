@@ -1,10 +1,5 @@
 ﻿using GiftNotation.Services;
 using GiftNotation.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace GiftNotation.Commands.ContactCommands
@@ -33,8 +28,8 @@ namespace GiftNotation.Commands.ContactCommands
         {
             if (_viewModel.SelectedContact == null) return;
 
-                
-            
+
+
             var birthdayEvent = await _eventService.GetEventByContactAndTypeAsync(_viewModel.SelectedContact.ContactId);
             if (birthdayEvent != null)
             {
@@ -45,9 +40,9 @@ namespace GiftNotation.Commands.ContactCommands
 
             // Удаление из коллекции и сброс выделения
             _viewModel.Contacts.Remove(_viewModel.SelectedContact);
-                _viewModel.SelectedContact = null;
-            
-            
+            _viewModel.SelectedContact = null;
+
+
         }
         public void RaiseCanExecuteChanged()
         {

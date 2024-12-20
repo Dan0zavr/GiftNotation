@@ -1,10 +1,5 @@
 ﻿using GiftNotation.Services;
 using GiftNotation.Services.Mediators;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GiftNotation.ViewModels.Factories
 {
@@ -25,7 +20,8 @@ namespace GiftNotation.ViewModels.Factories
             _dateMediator = mediator;
         }
 
-        public CalendarViewModel CreateViewModel() { 
+        public CalendarViewModel CreateViewModel()
+        {
 
             return new CalendarViewModel(_eventService, _contactService, _eventViewModel, _giftService, _dateMediator);
         }

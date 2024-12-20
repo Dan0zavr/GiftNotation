@@ -1,15 +1,9 @@
-﻿using GiftNotation.Models;
+﻿using GiftNotation.Commands.GiftCommands;
+using GiftNotation.Models;
 using GiftNotation.Services;
-using GiftNotation.Commands.GiftCommands;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 using GiftNotation.ViewModels.GiftViewModels;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace GiftNotation.ViewModels
 {
@@ -42,10 +36,34 @@ namespace GiftNotation.ViewModels
 
         public int GiftId => _giftId;
 
+        private bool _isGiftNameValid = true; // По умолчанию валидно
+        public bool IsGiftNameValid
+        {
+            get => _isGiftNameValid;
+            set
+            {
+                if (_isGiftNameValid != value)
+                {
+                    _isGiftNameValid = value;
+                    OnPropertyChanged(nameof(IsGiftNameValid));
+
+                }
+            }
+        }
+
+
         public string GiftName
         {
             get => _giftName;
-            set => SetProperty(ref _giftName, value);
+            set
+            {
+                if (_giftName != value)
+                {
+                    _giftName = value;
+                    OnPropertyChanged(nameof(_giftName));
+                    IsGiftNameValid = !string.IsNullOrWhiteSpace(_giftName); // Обновляем доступность команды
+                }
+            }
         }
 
         public string Description
@@ -132,7 +150,7 @@ namespace GiftNotation.ViewModels
             _giftService = giftService;
             _eventService = eventService;
             _contactService = contactService;
-            
+
             LoadContacts();
             LoadEvents();
             LoadStatuses();
@@ -188,7 +206,7 @@ namespace GiftNotation.ViewModels
                 // Устанавливаем выбранные объекты по ID
                 SelectedContact = Contacts.FirstOrDefault(c => c.ContactId == _selectedGift.ContactId);
                 SelectedEvent = Events.FirstOrDefault(e => e.EventId == _selectedGift.EventId);
-                SelectedStatus = Statuses.FirstOrDefault(s => s.StatusName ==  _selectedGift.StatusName);
+                SelectedStatus = Statuses.FirstOrDefault(s => s.StatusName == _selectedGift.StatusName);
             }
         }
 

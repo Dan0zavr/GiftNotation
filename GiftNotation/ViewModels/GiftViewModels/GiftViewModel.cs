@@ -1,11 +1,7 @@
 ﻿using GiftNotation.Commands.GiftCommands;
-using GiftNotation.Data;
 using GiftNotation.Models;
 using GiftNotation.Services;
-using GiftNotation.State;
-using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Input;
 
 

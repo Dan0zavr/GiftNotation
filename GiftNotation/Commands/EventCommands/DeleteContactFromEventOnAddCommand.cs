@@ -1,10 +1,4 @@
-﻿using GiftNotation.Services;
-using GiftNotation.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GiftNotation.ViewModels;
 using System.Windows.Input;
 
 namespace GiftNotation.Commands.EventCommands
@@ -36,10 +30,10 @@ namespace GiftNotation.Commands.EventCommands
             var contact = _viewModel.SelectedContactOnEvent;
             if (contact != null)
             {
-                    // Обновляем списки
+                // Обновляем списки
                 _viewModel.ContactsOnEvent.Remove(contact);  // Удаление из списка контактов на событии
                 _viewModel.Contacts.Add(contact); // Добавление обратно в общий список контактов
-                
+
             }
         }
 

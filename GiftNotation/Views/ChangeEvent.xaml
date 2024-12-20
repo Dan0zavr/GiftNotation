@@ -27,7 +27,23 @@ Background="Transparent" MouseDown="Window_MouseDown">
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Название события:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
-                        <TextBox Width="290" FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding EventName, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Width="290" FontSize="14" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0" Text="{Binding EventName, UpdateSourceTrigger=PropertyChanged}">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsEventNameValid}" Value="False">
+                                            <Setter Property="BorderBrush" Value="Red" />
+                                            <Setter Property="BorderThickness" Value="1" />
+                                        </DataTrigger>
+                                        <!-- Если поле валидно -->
+                                        <DataTrigger Binding="{Binding IsEventNameValid}" Value="True">
+                                            <Setter Property="BorderBrush" Value="Gray" />
+                                            <Setter Property="BorderThickness" Value="1" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
                     </Grid>
                 </Border>
 

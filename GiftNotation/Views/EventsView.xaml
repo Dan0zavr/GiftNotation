@@ -296,26 +296,48 @@ From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Название"  Binding="{Binding EventName, UpdateSourceTrigger=PropertyChanged}" Width="*" />
+                    <DataGridTextColumn Header="Название"  Binding="{Binding EventName, UpdateSourceTrigger=PropertyChanged}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
                     <DataGridTextColumn Header="Дата" Binding="{Binding EventDate, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd.MM.yyyy}}" Width="*">
                         <DataGridTextColumn.ElementStyle>
                             <Style TargetType="TextBlock">
                                 <Setter Property="TextAlignment" Value="Center" />
                                 <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="16"/>
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
 
-                    <DataGridTextColumn Header="Тип" Binding="{Binding EventTypeName, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
+                    <DataGridTextColumn Header="Тип" Binding="{Binding EventTypeName, UpdateSourceTrigger=PropertyChanged}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
                     <DataGridTemplateColumn Header="Люди" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <ListBox ItemsSource="{Binding ContactsOnEvent}" 
-                     HorizontalAlignment="Stretch" 
-                     VerticalAlignment="Stretch"
-                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                         HorizontalAlignment="Center" 
+                                         VerticalAlignment="Center"
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                         Background="Transparent"
+                                         BorderBrush="Transparent"> 
+                                    
                                     <ListBox.ItemsPanel>
                                         <ItemsPanelTemplate>
                                             <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" />
@@ -325,8 +347,11 @@ From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
                                         <DataTemplate>
                                             <!-- Центрируем текст -->
                                             <TextBlock Text="{Binding ContactName}" 
-                                   HorizontalAlignment="Center" 
-                                   VerticalAlignment="Center" />
+                                                       HorizontalAlignment="Center" 
+                                                       VerticalAlignment="Center"
+                                                       TextWrapping="Wrap"
+                                                       FontSize="16">
+                                            </TextBlock>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
                                 </ListBox>

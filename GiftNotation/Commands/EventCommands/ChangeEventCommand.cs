@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Input;
-using GiftNotation.Models;
+﻿using GiftNotation.Models;
 using GiftNotation.Services;
 using GiftNotation.ViewModels;
+using System.Windows;
+using System.Windows.Input;
 
 namespace GiftNotation.Commands.EventCommands
 {
@@ -28,11 +23,17 @@ namespace GiftNotation.Commands.EventCommands
 
         public bool CanExecute(object? parameter)
         {
-            return !string.IsNullOrWhiteSpace(_changeViewModel.EventName);
+            return true;
         }
 
         public async void Execute(object? parameter)
         {
+            if (!ValidateFields())
+            {
+                // Подсветить текстбоксы с ошибками
+                return;
+            }
+
             var changeEvent = new DisplayEventModel
             {
                 EventId = _changeViewModel.EventId,
@@ -48,6 +49,12 @@ namespace GiftNotation.Commands.EventCommands
             {
                 window.Close();
             }
+        }
+
+        public bool ValidateFields()
+        {
+            _changeViewModel.IsEventNameValid = !string.IsNullOrWhiteSpace(_changeViewModel.EventName);
+            return _changeViewModel.IsEventNameValid;
         }
 
         public void RaiseCanExecuteChanged()

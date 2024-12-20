@@ -35,29 +35,50 @@
                                 <ColumnDefinition Width="auto"/>
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
-                                <Border Cursor="Arrow" CornerRadius="2" Height="25" BorderBrush="#707976" BorderThickness="2" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="0,0,0,0">
+                                <Border Cursor="Arrow"  Height="25" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="0,0,0,0" Width="255">
 
                                     <AdornerDecorator>
                                         <Grid>
 
-                                            <Grid Width="250" Height="30" VerticalAlignment="Center" Margin="-2,0,0,0">
-                                                <TextBox x:Name="TextVisibilityForNameGift"   FontSize="12" Padding="5" Background="#dbd8d4" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding GiftName, UpdateSourceTrigger=PropertyChanged}"/>
+                                            <Grid Width="255" Height="30" VerticalAlignment="Center" Margin="-2,0,0,0">
+                                                <TextBox x:Name="TextVisibilityForNameGift"   FontSize="12" Padding="5" Background="#dbd8d4" 
+                                                         GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+                                                         Text="{Binding GiftName, UpdateSourceTrigger=PropertyChanged}"/>
                                             </Grid>
 
-                                            <TextBlock Text="Наименование подарка..."   Visibility="{Binding Text, ElementName=TextVisibilityForNameGift, Converter={StaticResource StringToVisibilityConverter}}"  Opacity="0.5" Foreground="Gray" VerticalAlignment="Center" Padding="5" IsHitTestVisible="False"/>
+                                            <TextBlock Text="Наименование подарка..."   Visibility="{Binding Text, ElementName=TextVisibilityForNameGift, Converter={StaticResource StringToVisibilityConverter}}"
+                                                       Opacity="0.5" Foreground="Gray" VerticalAlignment="Center" Padding="5" IsHitTestVisible="False"/>
 
                                         </Grid>
 
 
                                     </AdornerDecorator>
 
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsGiftNameValid}" Value="False">
+                                                    <Setter Property="BorderBrush" Value="Red" />
+                                                    <Setter Property="BorderThickness" Value="2" />
+                                                    <Setter Property="CornerRadius" Value="2"/>
+                                                </DataTrigger>
+                                                <!-- Если поле валидно -->
+                                                <DataTrigger Binding="{Binding IsGiftNameValid}" Value="True">
+                                                    <Setter Property="BorderBrush" Value="#707976" />
+                                                    <Setter Property="BorderThickness" Value="2" />
+                                                    <Setter Property="CornerRadius" Value="2"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+
                                 </Border>
 
-                                <Border CornerRadius="2" Height="25" BorderBrush="#707976" BorderThickness="2" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="0,5,0,0">
+                                <Border CornerRadius="2" Height="25" BorderBrush="#707976" BorderThickness="2" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="0,5,0,0" Width="255">
                                     <AdornerDecorator>
                                         <Grid>
 
-                                            <Grid Width="250" Height="30" VerticalAlignment="Center" Margin="-2,0,0,0">
+                                            <Grid Width="255" Height="30" VerticalAlignment="Center" Margin="-2,0,0,0">
                                                 <TextBox x:Name="TextVisibilityForSsylkaGift"  FontSize="12" Padding="5" Background="#dbd8d4" GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" Text="{Binding Url}" />
                                             </Grid>
 
@@ -71,12 +92,12 @@
 
                                     </AdornerDecorator>
                                 </Border>
-                                <Border CornerRadius="2" Height="55" BorderBrush="#707976" BorderThickness="2" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="0,5,0,0">
+                                <Border CornerRadius="2" Height="55" BorderBrush="#707976" BorderThickness="2" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="0,5,0,0" Width="255">
                                     <AdornerDecorator>
                                         <Grid>
 
                                             <TextBox x:Name="TextVisibilityForDescription" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
-                                                     FontSize="12" Padding="2" Width="250" Background="#dbd8d4"
+                                                     FontSize="12" Padding="2" Width="255" Background="#dbd8d4"
                                                      GotFocus="TextBox_GotFocus" LostFocus="TextBox_LostFocus" Text="{Binding Description}"/>
 
                                             <TextBlock Text="Описание..." 
@@ -96,24 +117,28 @@
                                 <Border BorderBrush="Gray" Width="160" Height="90" BorderThickness="2" CornerRadius="8" 
                                         Background="#c5c2c2" Margin="0,0,5,0" AllowDrop="True" HorizontalAlignment="Right">
                                     <Button Command="{Binding OpenFileDialogForPicture}">
-                                        <!-- Само изображение -->
-                                        <Image Source="{Binding GiftPic}" 
-                                           VerticalAlignment="Stretch" 
-                                           HorizontalAlignment="Stretch" 
-                                           Width="auto"
-                                           Height="50" />
+                                        
 
                                         <Button.Style>
                                             <Style TargetType="Button">
                                                 <Setter Property="Template">
                                                     <Setter.Value>
                                                         <ControlTemplate TargetType="Button">
-                                                            <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
-                                                                <Border.Background>
-                                                                    <SolidColorBrush x:Name="color1" Color="#b6b7ba"/>
-                                                                </Border.Background>
+                                                            <Grid>
+
+
+                                                                <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
+                                                                    <Border.Background>
+                                                                        <SolidColorBrush x:Name="color1" Color="#b6b7ba"/>
+                                                                    </Border.Background>
+                                                                </Border>
+
+                                                                <Image Source="{Binding GiftPic}"  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Width="auto" Height="auto"/>
+
+
                                                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                                            </Border>
+
+                                                            </Grid>
                                                             <!-- Триггеры -->
                                                             <ControlTemplate.Triggers>
                                                                 <EventTrigger RoutedEvent="Border.MouseEnter">

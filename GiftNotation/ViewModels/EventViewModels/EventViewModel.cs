@@ -2,18 +2,11 @@
 using GiftNotation.Commands.EventCommands;
 using GiftNotation.Models;
 using GiftNotation.Services;
-using GiftNotation.Views;
-using GiftNotation.State.Navigators;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using System.Windows;
-using System.ComponentModel;
 using GiftNotation.Services.Mediators;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows;
+using System.Windows.Input;
 
 namespace GiftNotation.ViewModels
 {
@@ -60,7 +53,7 @@ namespace GiftNotation.ViewModels
         public ICommand OpenChangeEventCommand { get; set; }
         public ICommand OpenCloseFilterCommand { get; set; }
 
-        public EventViewModel(EventService eventService, ContactService contactService, FilterWindowService filterWindowService, 
+        public EventViewModel(EventService eventService, ContactService contactService, FilterWindowService filterWindowService,
             FiltersViewModel filtersViewModel, GiftService giftService, IDateMediator dateMediator)
         {
             _eventService = eventService;
@@ -81,7 +74,7 @@ namespace GiftNotation.ViewModels
             OpenCloseFilterCommand = new OpenCloseFilterCommand(_filterWindowService);
 
             LoadEvents();
-            
+
         }
 
         public async void LoadEvents()

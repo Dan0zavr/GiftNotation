@@ -10,6 +10,52 @@
 
     <!--d:DesignHeight="450" d:DesignWidth="600"-->
     <UserControl.Resources>
+
+
+        <Style x:Key="CustomScrollBarStyle" TargetType="ScrollBar">
+            <!-- Задаем шаблон ScrollBar -->
+            <Setter Property="Width" Value="12"/>
+            <Setter Property="Height" Value="12"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="DarkGray"/>
+            <Setter Property="Orientation" Value="Vertical"/>
+            <!-- Горизонтальная ориентация по умолчанию -->
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid x:Name="Grid">
+                            <Grid.Resources>
+                                <LinearGradientBrush x:Key="TrackBackground" StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="LightGray" Offset="0.0"/>
+                                    <GradientStop Color="DarkGray" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Grid.Resources>
+
+                            <!-- Track (Полоса прокрутки) -->
+                            <Track Name="PART_Track" IsDirectionReversed="True">
+                                
+
+                                <!-- Ползунок (Thumb) -->
+                                <Track.Thumb>
+                                    <Thumb Name="PART_Thumb" Background="SteelBlue" Width="12" />
+                                </Track.Thumb>
+
+                                <!-- Кнопки прокрутки (Button) -->
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Background="Gray" Width="12" Height="12" Content="&#9665;"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Background="Gray" Width="12" Height="12" Content="&#9655;"/>
+                                </Track.IncreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
         <SolidColorBrush x:Key="TextFon" Color="#DFB6B2" />
         <SolidColorBrush x:Key="TextColor" Color="#f3f4ea" />
         <Style TargetType="Label">
@@ -31,6 +77,27 @@
             <Setter Property="Background" Value="{DynamicResource TextFon}"/>
             <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
         </Style>
+
+        <DataTemplate x:Key="GiftNameWithHyperlinkTemplate">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+            <Hyperlink NavigateUri="{Binding Url}" RequestNavigate="Hyperlink_RequestNavigate">
+                <Run Text="{Binding GiftName}" FontSize="16"/>
+            </Hyperlink>
+                </TextBlock>
+            </Grid>
+        </DataTemplate>
+
+        <!-- Шаблон без гиперссылки -->
+        <DataTemplate x:Key="GiftNameWithoutHyperlinkTemplate">
+            <TextBlock Text="{Binding GiftName}" FontSize="16" TextWrapping="Wrap" />
+        </DataTemplate>
+
+        <!-- Селектор шаблонов -->
+        <local:GiftNameTemplateSelector x:Key="GiftNameTemplateSelector"
+        GiftNameWithHyperlinkTemplate="{StaticResource GiftNameWithHyperlinkTemplate}"
+        GiftNameWithoutHyperlinkTemplate="{StaticResource GiftNameWithoutHyperlinkTemplate}" />
+
     </UserControl.Resources>
 
     <Border Background="#7e7f7b" CornerRadius="0,0,20,20">
@@ -212,7 +279,11 @@
 
             <TextBlock Text="ПОДАРКИ" FontSize="25" FontWeight="Heavy" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,13,0,0" FontFamily="Britannic Bold"/>
 
-            <DataGrid x:Name="ddataGrid" SelectionMode="Extended" BorderThickness="3"  BorderBrush="black" Background="#FFDFDBD7" CanUserAddRows="False" SelectedItem="{Binding SelectedGift, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Gifts}" VerticalAlignment="Bottom" Height="325" Width="625" AutoGenerateColumns="False" Margin="5,0,0,20">
+            <DataGrid x:Name="ddataGrid" SelectionMode="Extended" BorderThickness="3"  BorderBrush="black" Background="#FFDFDBD7" 
+                      CanUserAddRows="False" SelectedItem="{Binding SelectedGift, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Gifts}"
+                      VerticalAlignment="Bottom" Height="325" Width="625" AutoGenerateColumns="False" Margin="5,0,0,20"
+                      CanUserResizeColumns="False">
+                
                 <DataGrid.Resources>
                     <Style TargetType="DataGridColumnHeader">
                         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -236,23 +307,19 @@
                 </DataGrid.Resources>
 
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Header="Подарок" Width="120" >
+                    <DataGridTemplateColumn Header="Подарок" Width="80" >
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <ContentControl>
-                                    <Hyperlink NavigateUri="{Binding Url}" RequestNavigate="Hyperlink_RequestNavigate">
-                                         <TextBlock Text="{Binding GiftName}"/>
-                                    </Hyperlink>
-                                </ContentControl> 
+                                <ContentControl Content="{Binding}" 
+                            ContentTemplateSelector="{StaticResource GiftNameTemplateSelector}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </DataTemplate>
-                                
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
 
-                    <DataGridTemplateColumn Header="Картинка" Width="100">
+                    <DataGridTemplateColumn Header="Картинка" Width="90">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding GiftPic}" Width="auto" Height="auto"/>
+                                <Image Source="{Binding GiftPic}" Width="auto" Height="auto" MaxHeight="90" MaxWidth="90"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                         <DataGridTemplateColumn.CellEditingTemplate>
@@ -263,13 +330,48 @@
                     </DataGridTemplateColumn>
 
 
-                    <DataGridTextColumn Header="Стоимость" Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                    <DataGridTextColumn Header="Стоимость" Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged}" Width="90">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
-                    <DataGridTextColumn Header="Люди" Binding="{Binding ContactName, UpdateSourceTrigger=PropertyChanged}" Width="90"/>
+                    <DataGridTextColumn Header="Люди" Binding="{Binding ContactName, UpdateSourceTrigger=PropertyChanged}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
-                    <DataGridTextColumn Header="Событие" Binding="{Binding EventName, UpdateSourceTrigger=PropertyChanged}" Width="100"/>
+                    <DataGridTextColumn Header="Событие" Binding="{Binding EventName, UpdateSourceTrigger=PropertyChanged}" Width="130">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
 
-                    <DataGridTextColumn Header="Статус" Width="*" Binding="{Binding StatusName, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Header="Статус" Width="100" Binding="{Binding StatusName, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

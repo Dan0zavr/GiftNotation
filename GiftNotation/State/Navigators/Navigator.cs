@@ -2,14 +2,8 @@
 using GiftNotation.Services;
 using GiftNotation.ViewModels;
 using GiftNotation.ViewModels.Factories;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using GiftNotation.Views;
 
 namespace GiftNotation.State.Navigators
 {
@@ -58,5 +52,5 @@ namespace GiftNotation.State.Navigators
         }
     }
 }
-        
+
 

@@ -1,13 +1,7 @@
-﻿using GiftNotation.Services;
+﻿using GiftNotation.Commands.ContactCommands;
 using GiftNotation.Models;
-using GiftNotation.Commands.ContactCommands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GiftNotation.Services;
 using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace GiftNotation.ViewModels
 {
@@ -31,6 +25,21 @@ namespace GiftNotation.ViewModels
         // Для хранения выбранных подарков
         public ObservableCollection<Gifts> _selectedGifts = new ObservableCollection<Gifts>();
 
+        private bool _isContactNameValid = true; // По умолчанию валидно
+        public bool IsContactNameValid
+        {
+            get => _isContactNameValid;
+            set
+            {
+                if (_isContactNameValid != value)
+                {
+                    _isContactNameValid = value;
+                    OnPropertyChanged(nameof(IsContactNameValid));
+
+                }
+            }
+        }
+
         public string ContactName
         {
             get => _contactName;
@@ -38,8 +47,12 @@ namespace GiftNotation.ViewModels
             {
                 if (SetProperty(ref _contactName, value))
                 {
-                    // Пример правильного вызова RaiseCanExecuteChanged для конкретной команды
-                    AddContactCommand.RaiseCanExecuteChanged();
+                    if (_contactName != value)
+                    {
+                        _contactName = value;
+                        OnPropertyChanged(nameof(ContactName));
+                        IsContactNameValid = !string.IsNullOrWhiteSpace(_contactName); // Обновляем состояние валидации
+                    }
                 }
             }
         }
@@ -92,12 +105,15 @@ namespace GiftNotation.ViewModels
             _contactService = contactService;
             _giftService = giftService;
             _eventService = eventService;
+
+            Bday = DateTime.Now;
+
             LoadGifts();
             LoadRelpTypes();
             AddContactCommand = new AddContactCommand(contactService, contactViewModel, this, _eventService);
             _addGiftForContactOnAddCommand = new AddGiftForContactOnAddCommand(this);
             DeleteGiftForContactCommand = new DeleteGiftForContactOnAddCommand(this);
-            
+
         }
 
         public async void LoadGifts()
@@ -113,7 +129,7 @@ namespace GiftNotation.ViewModels
             {
                 RelpTypes.Add(relpType);
             }
-        }   
+        }
     }
 
 }

@@ -1,14 +1,8 @@
-﻿using GiftNotation.ViewModels;
+﻿using GiftNotation.Models;
 using GiftNotation.Services;
-using GiftNotation.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
+using GiftNotation.ViewModels;
 using System.Windows;
-using Microsoft.EntityFrameworkCore;
+using System.Windows.Input;
 
 namespace GiftNotation.Commands.GiftCommands
 {
@@ -18,7 +12,7 @@ namespace GiftNotation.Commands.GiftCommands
         private readonly GiftViewModel _viewModelDisplay;
         private readonly AddGiftViewModel _addGiftViewModel;
 
-        public AddGiftCommand(GiftService giftService, AddGiftViewModel addGiftViewModel,GiftViewModel viewModelDisplay)
+        public AddGiftCommand(GiftService giftService, AddGiftViewModel addGiftViewModel, GiftViewModel viewModelDisplay)
         {
             _giftService = giftService;
             _addGiftViewModel = addGiftViewModel;
@@ -29,18 +23,24 @@ namespace GiftNotation.Commands.GiftCommands
 
         public bool CanExecute(object? parameter)
         {
-            return !string.IsNullOrWhiteSpace(_addGiftViewModel.GiftName);
+            return true;
         }
 
         public async void Execute(object? parameter)
-    {
-           
+        {
+
+            if (!ValidateFields())
+            {
+                // Подсветить текстбоксы с ошибками
+                return;
+            }
+
             var newGift = new DisplayGiftModel
             {
                 GiftName = _addGiftViewModel.GiftName ?? string.Empty,
                 Description = _addGiftViewModel.Description ?? string.Empty,
                 Url = _addGiftViewModel.Url ?? string.Empty,
-                Price = _addGiftViewModel.Price ,
+                Price = _addGiftViewModel.Price,
                 GiftPic = _addGiftViewModel.GiftPic ?? string.Empty,
                 SelectedEventId = _addGiftViewModel.SelectedEvent?.EventId ?? null,
                 EventName = _addGiftViewModel.SelectedEvent?.EventName,
@@ -54,7 +54,7 @@ namespace GiftNotation.Commands.GiftCommands
 
             // Обновляем список подарков после добавления
             _viewModelDisplay.LoadGifts();
-            
+
 
             if (parameter is Window window)
             {
@@ -62,6 +62,12 @@ namespace GiftNotation.Commands.GiftCommands
             }
 
         }
+        public bool ValidateFields()
+        {
+            _addGiftViewModel.IsGiftNameValid = !string.IsNullOrWhiteSpace(_addGiftViewModel.GiftName);
+            return _addGiftViewModel.IsGiftNameValid;
+        }
+
         public void RaiseCanExecuteChanged()
         {
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);

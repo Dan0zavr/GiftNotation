@@ -1,31 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GiftNotation.Views;
 
 /// <summary>
 /// Логика взаимодействия для Page2.xaml
 /// </summary>
-public partial class GiftsView : UserControl { 
+public partial class GiftsView : UserControl
+{
 
     //public ObservableCollection<Gifts> Giftss { get; set; }
     public GiftsView()
     {
-        
+
         InitializeComponent();
 
         //Giftss = new ObservableCollection<Gifts>();
@@ -88,9 +76,30 @@ public partial class GiftsView : UserControl {
 
     private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
     {
-        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
-        e.Handled = true;
+        // Попытка создания URI из строки, чтобы проверить, является ли она ссылкой
+        Uri uri;
+        bool isValidUri = Uri.TryCreate(e.Uri.ToString(), UriKind.Absolute, out uri);
+
+        if (isValidUri)
+        {
+            try
+            {
+                // Пытаемся открыть ссылку
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(uri.AbsoluteUri) { UseShellExecute = true });
+            }
+            catch (Exception ex)
+            {
+                // Обработка ошибки, если ссылка не может быть открыта
+                MessageBox.Show("Ошибка при открытии ссылки: " + ex.Message, "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+        }
+        else
+        {
+            // Если это не ссылка, игнорируем переход
+            e.Handled = true;
+        }
     }
+
 
 
 }

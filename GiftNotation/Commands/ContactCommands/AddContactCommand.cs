@@ -1,11 +1,6 @@
 ﻿using GiftNotation.Models;
 using GiftNotation.Services;
 using GiftNotation.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -30,11 +25,17 @@ namespace GiftNotation.Commands.ContactCommands
 
         public bool CanExecute(object? parameter)
         {
-            return !string.IsNullOrWhiteSpace(_addContactViewModel.ContactName);
+            return true;
         }
 
         public async void Execute(object? parameter)
         {
+            if (!ValidateFields())
+            {
+                // Подсветить текстбоксы с ошибками
+                return;
+            }
+
             var newContact = new DisplayContactModel
             {
                 ContactName = _addContactViewModel.ContactName ?? string.Empty,
@@ -54,6 +55,12 @@ namespace GiftNotation.Commands.ContactCommands
             {
                 window.Close();
             }
+        }
+
+        public bool ValidateFields()
+        {
+            _addContactViewModel.IsContactNameValid = !string.IsNullOrWhiteSpace(_addContactViewModel.ContactName);
+            return _addContactViewModel.IsContactNameValid;
         }
 
         public void RaiseCanExecuteChanged()

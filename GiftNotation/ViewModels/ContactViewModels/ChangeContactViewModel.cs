@@ -1,13 +1,7 @@
 ﻿using GiftNotation.Commands.ContactCommands;
 using GiftNotation.Models;
 using GiftNotation.Services;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GiftNotation.ViewModels
 {
@@ -25,7 +19,7 @@ namespace GiftNotation.ViewModels
         private string _selectedRelpTypeName;
         private Gifts _selectedGift;
         private Gifts _selectedGiftForContact;
-        
+
         private DisplayContactModel _selectedContact;
         private AddGiftForContactOnChangeCommand _addGiftForContactOnChangeCommand;
 
@@ -42,11 +36,35 @@ namespace GiftNotation.ViewModels
             set => SetProperty(ref _contactId, value);
         }
 
+        private bool _isContactNameValid = true; // По умолчанию валидно
+        public bool IsContactNameValid
+        {
+            get => _isContactNameValid;
+            set
+            {
+                if (_isContactNameValid != value)
+                {
+                    _isContactNameValid = value;
+                    OnPropertyChanged(nameof(IsContactNameValid));
+
+                }
+            }
+        }
+
         public string ContactName
         {
             get => _contactName;
-            set => SetProperty(ref _contactName, value);
+            set
+            {
+                if (SetProperty(ref _contactName, value))
+                {
+                    _contactName = value;
+                    OnPropertyChanged(nameof(ContactName));
+                    IsContactNameValid = !string.IsNullOrWhiteSpace(_contactName);
+                }
+            }
         }
+            
 
         public DateTime Bday
         {

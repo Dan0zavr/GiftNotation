@@ -1,9 +1,7 @@
-﻿using Microsoft.Toolkit.Uwp.Notifications;
-using System;
-using System.Linq;
-using GiftNotation.Data;
+﻿using GiftNotation.Data;
 using GiftNotation.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace GiftNotation.Services
 {
@@ -11,7 +9,8 @@ namespace GiftNotation.Services
     {
         private readonly GiftNotationDbContext _context;
 
-        public NotificationService(GiftNotationDbContext context){
+        public NotificationService(GiftNotationDbContext context)
+        {
 
             _context = context;
         }
@@ -29,7 +28,7 @@ namespace GiftNotation.Services
 
         public void CheckNextEvents(IEnumerable<Event> events)
         {
-            foreach(var event_ in events)
+            foreach (var event_ in events)
             {
                 SendHolidayNotification(event_.EventDate, event_.EventName);
             }
