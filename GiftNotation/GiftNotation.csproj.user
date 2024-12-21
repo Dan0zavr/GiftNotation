@@ -1,13 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup />
+  <PropertyGroup>
+    <_LastSelectedProfileId>C:\Users\Haier\source\repos\GiftNotation\GiftNotation\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
+  </PropertyGroup>
+  <ItemGroup />
   <ItemGroup>
-    <ApplicationDefinition Update="App.xaml">
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Controls\NavigationBar.xaml.cs">
+    <Compile Update="Views\AddEvent.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AddPeoples.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ChangeEvent.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ChangingPeople.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\EventsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Filters.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -15,16 +28,31 @@
     <Page Update="Controls\NavigationBar.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Styles\General.xaml">
+    <Page Update="Views\AddEvent.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AddPeoples.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Calendar.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\ChangeEvent.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ChangingPeople.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\EventsView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Filters.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\MyFriends.xaml">
+    <Page Update="Views\People.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

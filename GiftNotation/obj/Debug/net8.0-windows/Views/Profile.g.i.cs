@@ -47,13 +47,17 @@ namespace GiftNotation.Views {
         /// InitializeComponent
         /// </summary>
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+<<<<<<< HEAD
         [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "9.0.0.0")]
+=======
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "8.0.1.0")]
+>>>>>>> 53309b0e322f4af3c452ff940b7aa3d1b3edb16d
         public void InitializeComponent() {
             if (_contentLoaded) {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/GiftNotation;V1.0.0.0;component/views/profile.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/GiftNotation;component/views/profile.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\Profile.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
@@ -63,7 +67,11 @@ namespace GiftNotation.Views {
         }
         
         [System.Diagnostics.DebuggerNonUserCodeAttribute()]
+<<<<<<< HEAD
         [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "9.0.0.0")]
+=======
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("PresentationBuildTasks", "8.0.1.0")]
+>>>>>>> 53309b0e322f4af3c452ff940b7aa3d1b3edb16d
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Never)]
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Design", "CA1033:InterfaceMethodsShouldBeCallableByChildTypes")]
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]

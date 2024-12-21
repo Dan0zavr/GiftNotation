@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GiftNotation.ViewModels;
 using System.Windows.Input;
-using GiftNotation.ViewModels;
 
 namespace GiftNotation.State.Navigators
 {
@@ -14,15 +9,14 @@ namespace GiftNotation.State.Navigators
         Calendar,
         Contacts,
         Events,
-        Gifts,
-        Profile,
-        Settings
+        Gifts
     }
 
     public interface INavigator
     {
         ViewModelBase CurrentViewModel { get; set; }
-        
         ICommand UpdateCurrentVMCommand { get; }
+
+        event Action CurrentViewModelChanged;
     }
 }

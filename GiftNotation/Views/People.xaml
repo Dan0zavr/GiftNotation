@@ -3,16 +3,18 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:виш_лист_попытка_33334"
+      xmlns:local="clr-namespace:GiftNotation"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="650"
-      Background="#FBE4D8" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="400" Width="700">
 
 
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="TextFon" Color="#DFB6B2" />
-        <SolidColorBrush x:Key="TextColor" Color="#f3f4ea" />
+        <!--SolidColorBrush x:Key="ButtonFon" Color="#595670" />
+        <SolidColorBrush x:Key="TextColor" Color="#c7c6cb" />
+
+
+        --><!-- Стиль для Label --><!--
         <Style TargetType="Label">
             <Setter Property="Template">
                 <Setter.Value>
@@ -21,51 +23,310 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"               
                             CornerRadius="3">
-
-                            <TextBlock Text="{TemplateBinding Content}" Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+                            <TextBlock Text="{TemplateBinding Content}" 
+                                   Foreground="{TemplateBinding Foreground}" 
+                                   HorizontalAlignment="Center" 
+                                   VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+        </Style>-->
 
-            <Setter Property="Background" Value="{DynamicResource TextFon}"/>
-            <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
-        </Style>
+        <!-- Стиль для Button -->
+        <!--<Style TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="3">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                          VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="{DynamicResource ButtonFon}"/>
+
+        </Style>-->
     </UserControl.Resources>
 
-    <Grid>
-        <Label Name="MyFriendsLabel" Content="Люди" HorizontalAlignment="Center"  VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Height="25" Width="126" Margin="0,10,0,0" />
-        <DataGrid x:Name="DataGrid" CanUserAddRows="True" ItemsSource="{Binding People}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="300" Width="500" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Человек" Binding="{Binding Name, UpdateSourceTrigger=PropertyChanged}" Width="100" />
 
-                <DataGridComboBoxColumn Header="Тип отношений" SelectedItemBinding="{Binding Ship, UpdateSourceTrigger=PropertyChanged}" Width="125">
-                    <DataGridComboBoxColumn.ItemsSource>
-                        <x:Array Type="{x:Type sys:String}" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                            <sys:String>Друг</sys:String>
-                            <sys:String>Родственник</sys:String>
-                            <sys:String>Коллега</sys:String>
-                            <sys:String>Знакомый</sys:String>
-                        </x:Array>
-                    </DataGridComboBoxColumn.ItemsSource>
-                </DataGridComboBoxColumn>
+    <Border Background="#7e7d7b" CornerRadius="0,0,20,20">
+        <Grid>
 
-                <DataGridTemplateColumn Header="День рождения" Width="115">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Birthday, StringFormat=d}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <DatePicker SelectedDate="{Binding Birthday, UpdateSourceTrigger=PropertyChanged}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
+            <StackPanel Orientation="Horizontal"  Width="245" Margin="-380,-330,0,0" Height="30">
 
-                <DataGridTextColumn Header="Подарок" Binding="{Binding Gift, UpdateSourceTrigger=PropertyChanged}" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+                <Button Background="#2c2b2a" Width="100" Height="20" Margin="5,0,5,0" Command="{Binding OpenAddContactCommand}">
+
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
+                                            <Border.Background>
+                                                <SolidColorBrush x:Name="color1" Color="#292a2c"/>
+                                            </Border.Background>
+
+                                            <ContentPresenter Width="60" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,-2,0,0"/>
+
+                                        </Border>
+
+
+                                        <!--Триггеры-->
+                                        <ControlTemplate.Triggers>
+                                            <EventTrigger RoutedEvent="Border.MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                        From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            <EventTrigger RoutedEvent="Border.MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                        From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="Button_Border" Property="Background" Value="#545755"/>
+                                                <!--<Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>-->
+                                                <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
+                                            </Trigger>
+
+
+
+                                        </ControlTemplate.Triggers>
+
+
+
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+
+                    </Button.Style>
+                    
+                    <TextBlock  Foreground="#c7c6cb" Margin="0,1,0,0" Text="Добавить" Height="15" VerticalAlignment="Top"/>
+                </Button>
+
+                <Button Background="#2c2825" Width="120" Height="20" Margin="5,0,5,0" Command="{Binding OpenChangeContactCommand}">
+
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
+                                            <Border.Background>
+                                                <SolidColorBrush x:Name="color1" Color="#292a2c"/>
+                                            </Border.Background>
+
+                                            <ContentPresenter Width="80" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,-2,0,0"/>
+
+                                        </Border>
+
+
+                                        <!--Триггеры-->
+                                        <ControlTemplate.Triggers>
+                                            <EventTrigger RoutedEvent="Border.MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                        From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            <EventTrigger RoutedEvent="Border.MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                        From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="Button_Border" Property="Background" Value="#545755"/>
+                                                <!--<Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>-->
+                                                <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
+                                            </Trigger>
+
+
+
+                                        </ControlTemplate.Triggers>
+
+
+
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+
+                    </Button.Style>
+
+                    <TextBlock Text="Редактировать" Margin="0,1,0,0" HorizontalAlignment="Center" Foreground="#c7c6cb"/>
+                </Button>
+                
+            </StackPanel>
+
+            <Button Background="#2c2825" Width="90" Height="20"  Margin="530,-330,0,0" Command="{Binding DeleteContactCommand}">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
+                                        <Border.Background>
+                                            <SolidColorBrush x:Name="color1" Color="#292a2c"/>
+                                        </Border.Background>
+
+                                        <ContentPresenter Width="60" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,-2,0,0"/>
+
+                                    </Border>
+
+
+                                    <!--Триггеры-->
+                                    <ControlTemplate.Triggers>
+                                        <EventTrigger RoutedEvent="Border.MouseEnter">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                        From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+
+                                        <EventTrigger RoutedEvent="Border.MouseLeave">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                                        From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="Button_Border" Property="Background" Value="#545755"/>
+                                            <!--<Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>-->
+                                            <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
+                                        </Trigger>
+
+
+
+                                    </ControlTemplate.Triggers>
+
+
+
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                </Button.Style>
+                <TextBlock Text="Удалить" Margin="0,1,0,0" Width="45" Foreground="#c7c6cb"/>
+            </Button>
+
+            <TextBlock Text="ЛЮДИ" FontSize="25" FontWeight="Heavy" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,13,0,0" FontFamily="Britannic Bold"/>
+
+            <DataGrid x:Name="ddataGrid" SelectionMode="Extended" BorderThickness="3"  BorderBrush="black" Background="#FFDFDBD7" 
+          CanUserAddRows="False" SelectedItem="{Binding SelectedContact, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Contacts}"
+          VerticalAlignment="Bottom" Height="325" Width="625" AutoGenerateColumns="False" Margin="5,0,0,20"
+          CanUserResizeColumns="False">
+
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Background" Value="#786e65"/>
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="BorderThickness" Value="0,0,1,0"/>
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="Foreground" Value="black"/>
+                    </Style>
+
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="BorderBrush" Value="Black" />
+                        <Setter Property="BorderThickness" Value="0,0,0,1" />
+                    </Style>
+
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Background" Value="#cacac8"/>
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Имя" Binding="{Binding ContactName, UpdateSourceTrigger=PropertyChanged}" Width="150">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Тип отношений" Binding="{Binding RelpTypeName, UpdateSourceTrigger=PropertyChanged}" Width="180">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTemplateColumn Header="День рождения" Width="150">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Bday, StringFormat={}{0:dd.MM.yyyy}, UpdateSourceTrigger=PropertyChanged}" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Подарки" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ListBox ItemsSource="{Binding MyGifts}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Vertical" HorizontalAlignment="Stretch" />
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <!-- Центрируем текст -->
+                                            <TextBlock Text="{Binding GiftName}" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center"
+                         FontSize="16"
+                         TextWrapping="Wrap"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+
+        </Grid>
+    </Border>
+    
 </UserControl>

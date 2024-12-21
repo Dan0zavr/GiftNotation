@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace GiftNotation.Models;
 
 public class Event
 {
     public int EventId { get; set; }
+    [NotNull]
     public string EventName { get; set; }
+    [NotNull]
     public DateTime EventDate { get; set; }
 
     public int? EventTypeId { get; set; }

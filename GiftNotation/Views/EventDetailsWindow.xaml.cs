@@ -1,40 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
-namespace виш_лист_попытка_33334
+namespace GiftNotation.Views
 {
     /// <summary>
     /// Логика взаимодействия для EventDetailsWindow.xaml
     /// </summary>
     public partial class EventDetailsWindow : Window
     {
-        public EventDetailsWindow(DateTime selectedDate)
+        public EventDetailsWindow()
         {
             InitializeComponent();
-            EnterDate.Text = selectedDate.ToString("D");
-            Tip_prasdnicaa.ItemsSource = Tip_prasdnikaaaaa;
 
         }
 
         private void ChangedZhach(object sender, TextChangedEventArgs e)
         {
-            //TextBox textBox = (TextBox)sender;
-            //MessageBox.Show(textBox.Text);
+            TextBox textBox = (TextBox)sender;
+            MessageBox.Show(textBox.Text);
         }
 
-        
+
 
         private void Button_Soxran(object sender, RoutedEventArgs e)
         {
@@ -67,5 +54,38 @@ namespace виш_лист_попытка_33334
         {
 
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                this.DragMove();
+            }
+        }
+
+        private void LostFocus_Calendar(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (textBox != null && string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = string.Empty;
+            }
+        }
+
+        private void GotFocus_Calendar(object sender, RoutedEventArgs e)
+        {
+            var textBox = sender as TextBox;
+            if (textBox != null && string.IsNullOrEmpty(textBox.Text))
+            {
+                textBox.Text = string.Empty;
+            }
+        }
+
+
     }
 }

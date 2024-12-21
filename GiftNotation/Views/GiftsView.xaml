@@ -4,10 +4,58 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:GiftNotation.Views"
+      xmlns:commands="clr-namespace:GiftNotation.Commands"
       mc:Ignorable="d" 
-      d:DesignHeight="400" d:DesignWidth="600"
-      Background="AliceBlue" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+      Height="400" Width="700">
+
+    <!--d:DesignHeight="450" d:DesignWidth="600"-->
     <UserControl.Resources>
+
+
+        <Style x:Key="CustomScrollBarStyle" TargetType="ScrollBar">
+            <!-- Задаем шаблон ScrollBar -->
+            <Setter Property="Width" Value="12"/>
+            <Setter Property="Height" Value="12"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="DarkGray"/>
+            <Setter Property="Orientation" Value="Vertical"/>
+            <!-- Горизонтальная ориентация по умолчанию -->
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid x:Name="Grid">
+                            <Grid.Resources>
+                                <LinearGradientBrush x:Key="TrackBackground" StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="LightGray" Offset="0.0"/>
+                                    <GradientStop Color="DarkGray" Offset="1.0"/>
+                                </LinearGradientBrush>
+                            </Grid.Resources>
+
+                            <!-- Track (Полоса прокрутки) -->
+                            <Track Name="PART_Track" IsDirectionReversed="True">
+                                
+
+                                <!-- Ползунок (Thumb) -->
+                                <Track.Thumb>
+                                    <Thumb Name="PART_Thumb" Background="SteelBlue" Width="12" />
+                                </Track.Thumb>
+
+                                <!-- Кнопки прокрутки (Button) -->
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Background="Gray" Width="12" Height="12" Content="&#9665;"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Background="Gray" Width="12" Height="12" Content="&#9655;"/>
+                                </Track.IncreaseRepeatButton>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
         <SolidColorBrush x:Key="TextFon" Color="#DFB6B2" />
         <SolidColorBrush x:Key="TextColor" Color="#f3f4ea" />
         <Style TargetType="Label">
@@ -29,38 +77,305 @@
             <Setter Property="Background" Value="{DynamicResource TextFon}"/>
             <Setter Property="Foreground" Value="{DynamicResource TextColor}" />
         </Style>
+
+        <DataTemplate x:Key="GiftNameWithHyperlinkTemplate">
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center">
+            <Hyperlink NavigateUri="{Binding Url}" RequestNavigate="Hyperlink_RequestNavigate">
+                <Run Text="{Binding GiftName}" FontSize="16"/>
+            </Hyperlink>
+                </TextBlock>
+            </Grid>
+        </DataTemplate>
+
+        <!-- Шаблон без гиперссылки -->
+        <DataTemplate x:Key="GiftNameWithoutHyperlinkTemplate">
+            <TextBlock Text="{Binding GiftName}" FontSize="16" TextWrapping="Wrap" />
+        </DataTemplate>
+
+        <!-- Селектор шаблонов -->
+        <local:GiftNameTemplateSelector x:Key="GiftNameTemplateSelector"
+        GiftNameWithHyperlinkTemplate="{StaticResource GiftNameWithHyperlinkTemplate}"
+        GiftNameWithoutHyperlinkTemplate="{StaticResource GiftNameWithoutHyperlinkTemplate}" />
+
     </UserControl.Resources>
-    <Grid>
-        <Label Name="Gifts" Content="Подарок" HorizontalAlignment="Center"  VerticalAlignment="Top" FontSize="16" FontWeight="Bold" Height="25" Width="126" Margin="0,10,0,0" />
 
-        <DataGrid x:Name="ddataGrid" CanUserAddRows="True" ItemsSource="{Binding Gifts}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Height="300" Width="500" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Подарок"  Binding="{Binding GiftName, UpdateSourceTrigger=PropertyChanged}" Width="70" />
-
-                <DataGridTemplateColumn Header="Картинка" Width="70">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding Picture_of_gift}" Width="25" Height="25"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                    <DataGridTemplateColumn.CellEditingTemplate>
-                        <DataTemplate>
-                            <Image Width="25" Height="25" Source="{Binding Picture_of_gift}"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellEditingTemplate>
-                </DataGridTemplateColumn>
+    <Border Background="#7e7f7b" CornerRadius="0,0,20,20">
+        <Grid>
 
 
-                <!--Нужно создать кнопку для доб.изображения, прописать ее в обработчике-->
-                <DataGridTextColumn Header="Стоимость" Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+            <StackPanel Orientation="Horizontal"  Width="250" Margin="-375,-330,0,0" Height="30">
+                <Button Background="#2c2b2a" Width="100" Height="20" Margin="5,0,5,0" Command="{Binding OpenAddGiftCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
+                                            <Border.Background>
+                                                <SolidColorBrush x:Name="color1" Color="#292a2c"/>
+                                            </Border.Background>
 
-                <DataGridTextColumn Header="Ссылка на маркетплейс" Binding="{Binding Url, UpdateSourceTrigger=PropertyChanged}" Width="150"/>
+                                            <ContentPresenter Width="60" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,-2,0,0"/>
 
-                <DataGridTextColumn Header="Люди" Binding="{Binding People_, UpdateSourceTrigger=PropertyChanged}" Width="55"/>
+                                        </Border>
 
-                <DataGridTextColumn Header="Событие" Binding="{Binding Event_, UpdateSourceTrigger=PropertyChanged}" Width="70"/>
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+
+                                        <!--Триггеры-->
+                                        <ControlTemplate.Triggers>
+                                            <EventTrigger RoutedEvent="Border.MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                        From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            <EventTrigger RoutedEvent="Border.MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                        From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="Button_Border" Property="Background" Value="Gray"/>
+                                                <Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>
+                                                <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
+                                            </Trigger>
+
+
+
+                                        </ControlTemplate.Triggers>
+
+
+
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+
+                    </Button.Style>
+                    <TextBlock  Foreground="Gainsboro" Margin="0,1,0,0" Width="70" Text="Добавить"/>
+                </Button>
+
+                <Button Background="#2c2b2a" Width="120" Height="20" Margin="5,0,5,0" Command="{Binding OpenChangeGiftCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
+                                            <Border.Background>
+                                                <SolidColorBrush x:Name="color1" Color="#292a2c"/>
+                                            </Border.Background>
+
+                                            <ContentPresenter Width="85" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,-2,0,0"/>
+
+                                        </Border>
+
+
+                                        <!--Триггеры-->
+                                        <ControlTemplate.Triggers>
+                                            <EventTrigger RoutedEvent="Border.MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                        From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            <EventTrigger RoutedEvent="Border.MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                        From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="Button_Border" Property="Background" Value="Gray"/>
+                                                <Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>
+                                                <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
+                                            </Trigger>
+
+
+
+                                        </ControlTemplate.Triggers>
+
+
+
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+
+                    </Button.Style>
+                    <TextBlock  Foreground="Gainsboro" Text="Редактировать" Width="85" Margin="0,1,0,0"/>
+                </Button>
+            </StackPanel>
+
+            <Button Width="90" Height="20" Background="#2c2b2a" Margin="0,-330,-540,0" Command="{Binding DeleteGiftCommand}" Click="Button_Click_2">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="Button">
+                                    <Border x:Name="Button_Border" CornerRadius="7" BorderBrush="Transparent">
+                                        <Border.Background>
+                                            <SolidColorBrush x:Name="color1" Color="#292a2c"/>
+                                        </Border.Background>
+
+                                        <ContentPresenter Width="60" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="3,-2,0,0"/>
+
+                                    </Border>
+
+
+                                    <!--Триггеры-->
+                                    <ControlTemplate.Triggers>
+                                        <EventTrigger RoutedEvent="Border.MouseEnter">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                        From="#292a2c" To="#414b4d" Duration="0:0:0.2"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+
+                                        <EventTrigger RoutedEvent="Border.MouseLeave">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ColorAnimation Storyboard.TargetProperty="Color" Storyboard.TargetName="color1" 
+                        From="#414b4d" To="#292a2c" Duration="0:0:0.3"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+
+                                        <Trigger Property="IsPressed" Value="True">
+                                            <Setter TargetName="Button_Border" Property="Background" Value="Gray"/>
+                                            <Setter TargetName="Button_Border" Property="BorderBrush" Value="#121a1d"/>
+                                            <Setter TargetName="Button_Border" Property="BorderThickness" Value="2"/>
+                                        </Trigger>
+
+
+
+                                    </ControlTemplate.Triggers>
+
+
+
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+
+                </Button.Style>
+                <TextBlock  Foreground="Gainsboro" Width="46" Margin="0,1,0,0" Text="Удалить" />
+            </Button>
+
+            <TextBlock Text="ПОДАРКИ" FontSize="25" FontWeight="Heavy" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,13,0,0" FontFamily="Britannic Bold"/>
+
+            <DataGrid x:Name="ddataGrid" SelectionMode="Extended" BorderThickness="3"  BorderBrush="black" Background="#FFDFDBD7" 
+                      CanUserAddRows="False" SelectedItem="{Binding SelectedGift, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Gifts}"
+                      VerticalAlignment="Bottom" Height="325" Width="625" AutoGenerateColumns="False" Margin="5,0,0,20"
+                      CanUserResizeColumns="False">
+                
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridColumnHeader">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        <Setter Property="VerticalContentAlignment" Value="Center"/>
+                        <Setter Property="Background" Value="#786e65"/>
+                        <Setter Property="Height" Value="30"/>
+                        <Setter Property="BorderBrush" Value="Black"/>
+                        <Setter Property="BorderThickness" Value="0,0,1,0"/>
+                        <Setter Property="FontSize" Value="14"/>
+                        <Setter Property="Foreground" Value="black"/>
+                    </Style>
+
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="BorderBrush" Value="Black" />
+                        <Setter Property="BorderThickness" Value="0,0,0,1" />
+                    </Style>
+
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="Background" Value="#cacac8"/>
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Подарок" Width="80" >
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ContentControl Content="{Binding}" 
+                            ContentTemplateSelector="{StaticResource GiftNameTemplateSelector}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn Header="Картинка" Width="90">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding GiftPic}" Width="auto" Height="auto" MaxHeight="90" MaxWidth="90"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                        <DataGridTemplateColumn.CellEditingTemplate>
+                            <DataTemplate>
+                                <Image Width="auto" Height="auto" Source="{Binding GiftPic}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellEditingTemplate>
+                    </DataGridTemplateColumn>
+
+
+                    <DataGridTextColumn Header="Стоимость" Binding="{Binding Price, UpdateSourceTrigger=PropertyChanged}" Width="90">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Люди" Binding="{Binding ContactName, UpdateSourceTrigger=PropertyChanged}" Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="16"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Событие" Binding="{Binding EventName, UpdateSourceTrigger=PropertyChanged}" Width="130">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <DataGridTextColumn Header="Статус" Width="100" Binding="{Binding StatusName, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="TextAlignment" Value="Center" />
+                                <Setter Property="VerticalAlignment" Value="Center" />
+                                <Setter Property="FontSize" Value="16"/>
+                                <Setter Property="TextWrapping" Value="Wrap"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Border>
+
 
 </UserControl>

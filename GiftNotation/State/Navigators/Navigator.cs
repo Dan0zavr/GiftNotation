@@ -1,47 +1,56 @@
 ﻿using GiftNotation.Commands;
-using GiftNotation.GlobalFunctions;
 using GiftNotation.Services;
 using GiftNotation.ViewModels;
 using GiftNotation.ViewModels.Factories;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace GiftNotation.State.Navigators
 {
 
 
-    public class Navigator : NotifyObject, INavigator
+    public class Navigator : INavigator, INotifyPropertyChanged
     {
-        //Создание экзкмпляра класса ViewModelBase
         private ViewModelBase _currentViewModel;
-        private readonly IGiftNotationViewModelAbstractFactory _viewModelfactory;
+        private FilterWindowService _filterWindowService;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public ViewModelBase CurrentViewModel
         {
-            get
+            get => _currentViewModel;
+            set
             {
-                //Получаем текущую модель представления
-                return _currentViewModel;
-            }
-            set {
-                //Устанавливаем текущую модель представления и сообщаем об изменении
-                _currentViewModel = value;
-                OnPropertyChanged(nameof(CurrentViewModel));
+                if (_currentViewModel != value)
+                {
+                    _currentViewModel = value;
+                    OnPropertyChanged(nameof(CurrentViewModel));
+                    OnCurrentViewModelChanged();
+                }
             }
         }
 
-        //Команда выполняющаяся при нажатии на кнопку
         public ICommand UpdateCurrentVMCommand { get; set; }
 
-        public Navigator(IGiftNotationViewModelAbstractFactory viewModelFactory) {
+        public event Action CurrentViewModelChanged;
 
-            UpdateCurrentVMCommand = new UpdateCurrentVMCommand(this, viewModelFactory);
+        public Navigator(IGiftNotationViewModelAbstractFactory viewModelFactory, FilterWindowService filterWindowService)
+        {
+            _filterWindowService = filterWindowService;
+            UpdateCurrentVMCommand = new UpdateCurrentVMCommand(this, viewModelFactory, _filterWindowService);
 
+        }
+
+        protected virtual void OnCurrentViewModelChanged()
+        {
+            CurrentViewModelChanged?.Invoke();
+        }
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
+
+

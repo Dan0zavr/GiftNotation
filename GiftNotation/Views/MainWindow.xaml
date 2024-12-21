@@ -8,23 +8,20 @@
         xmlns:local="clr-namespace:GiftNotation.Views"
         mc:Ignorable="d"
         Title="Виш-листы" Height="440" Width="700"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
 
+    
     <!--Создание фрейма-->
 
 
-
     <Window.Resources>
+
+
         <!--Определение цвета -->
-        <SolidColorBrush x:Key="ColorMainWindow" Color="#D1C7BD" />
-        <SolidColorBrush x:Key="ColorMenu" Color="#72383D" />
-
-        <SolidColorBrush x:Key="ColorButton" Color="#AC9C8D" />
-
-        <SolidColorBrush x:Key="SecondTextColor" Color="White" />
-
-        <SolidColorBrush x:Key="PrimaryGrayColor" Color="#ffffff" />
-
+        
         <Style TargetType="Button">
             <Setter Property="Template">
                 <Setter.Value>
@@ -38,7 +35,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-            <Setter Property="Background" Value="{DynamicResource ColorButton}"/>
+            <Setter Property="Background" Value="#FF867C6F"/>
             <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="Medium" />
             <Setter Property="Foreground" Value="Black" >
@@ -49,28 +46,27 @@
 
     </Window.Resources>
 
+    
 
-    <Grid Background="{DynamicResource ColorMainWindow}">
-        
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        
-        <controls:NavigationBar DataContext="{Binding Navigator}"/>
+        <Grid>
 
-        <ContentControl Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{Binding Navigator.CurrentViewModel}"/>
+        <Border Background="#7e7d7b"
+                    CornerRadius="20"  BorderThickness="3" BorderBrush="#b6b7ba">
 
+                  <Grid>
 
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="*"/>
+                   </Grid.RowDefinitions>
 
+                  <controls:NavigationBar DataContext="{Binding Navigator}"/>
 
-        
+                  <ContentControl Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Content="{Binding Navigator.CurrentViewModel}"/>
 
-        <!--<Frame Name="MainFrame" NavigationUIVisibility="Hidden" Grid.RowSpan="2" Navigated="MainFrame_Navigated" Grid.ColumnSpan="3" Margin="130,0,0,0"/>-->
-
-        <!--<StackPanel Grid.Row="1" VerticalAlignment="Bottom" Background="{DynamicResource PrimaryColorSiren}"> -->
-        <!--<Button Content="Мой профиль" Height="25" Margin="5"/> -->
-        <!--<Button Content="Настройки" Height="25" Margin="5"/> -->
-        <!--</StackPanel> -->
+                  <!--<Frame Name="MainFrame" NavigationUIVisibility="Hidden" Grid.RowSpan="2" Navigated="MainFrame_Navigated" Grid.ColumnSpan="3" Margin="130,0,0,0"/>-->
+                  </Grid>
+            </Border>
     </Grid>
+    
 </Window>

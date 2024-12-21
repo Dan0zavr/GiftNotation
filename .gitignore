@@ -1,5 +1,10 @@
 *.sqlite3
 
+<<<<<<< HEAD
 *.g.i.cs
 *.cache
 .vs
+=======
+.vs
+
+>>>>>>> 53309b0e322f4af3c452ff940b7aa3d1b3edb16d

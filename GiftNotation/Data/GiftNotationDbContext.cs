@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using GiftNotation.Models;
+﻿using GiftNotation.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GiftNotation.Data;
@@ -22,8 +20,14 @@ public partial class GiftNotationDbContext : DbContext
     public DbSet<GiftEvent> GiftEvents { get; set; }
     public DbSet<EventContact> EventContacts { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.EnableSensitiveDataLogging();
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
         modelBuilder.Entity<Gifts>()
             .HasKey(ec => new { ec.GiftId });
         // Конфигурация таблицы-связи `event_contact`
@@ -73,6 +77,35 @@ public partial class GiftNotationDbContext : DbContext
             .WithMany(e => e.GiftEvents)
             .HasForeignKey(ge => ge.EventId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<Status>().HasIndex(x => x.StatusName).IsUnique();
+        modelBuilder.Entity<EventType>().HasIndex(x => x.EventTypeName).IsUnique();
+        modelBuilder.Entity<RelpType>().HasIndex(x => x.RelpTypeName).IsUnique();
+
+        modelBuilder.Entity<Status>().HasData(
+            new Status { StatusId = 1, StatusName = "В процессе покупки" },
+            new Status { StatusId = 2, StatusName = "Куплен" },
+            new Status { StatusId = 3, StatusName = "Упакован" },
+            new Status { StatusId = 4, StatusName = "Подарен" }
+        );
+
+        modelBuilder.Entity<EventType>().HasData(
+            new EventType { EventTypeId = 1, EventTypeName = "День Рождения" },
+            new EventType { EventTypeId = 2, EventTypeName = "Годовщина" },
+            new EventType { EventTypeId = 3, EventTypeName = "Новый год" },
+            new EventType { EventTypeId = 4, EventTypeName = "Рождество" },
+            new EventType { EventTypeId = 5, EventTypeName = "Свадьба" },
+            new EventType { EventTypeId = 6, EventTypeName = "Просто подарочек" },
+            new EventType { EventTypeId = 7, EventTypeName = "Важное событие" },
+            new EventType { EventTypeId = 8, EventTypeName = "Другой праздник" }
+        );
+
+        modelBuilder.Entity<RelpType>().HasData(
+             new RelpType { RelpTypeId = 1, RelpTypeName = "Друг" },
+             new RelpType { RelpTypeId = 2, RelpTypeName = "Родственник" },
+             new RelpType { RelpTypeId = 3, RelpTypeName = "Коллега" },
+             new RelpType { RelpTypeId = 4, RelpTypeName = "Знакомый" }
+        );
 
         base.OnModelCreating(modelBuilder);
     }
