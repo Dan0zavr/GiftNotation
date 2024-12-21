@@ -38,12 +38,12 @@
                                 <TextBox.Style>
                                     <Style TargetType="TextBox">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsEventNameValid}" Value="False">
+                                            <DataTrigger Binding="{Binding IsContactNameValid}" Value="False">
                                                 <Setter Property="BorderBrush" Value="Red" />
                                                 <Setter Property="BorderThickness" Value="1" />
                                             </DataTrigger>
                                             <!-- Если поле валидно -->
-                                            <DataTrigger Binding="{Binding IsEventNameValid}" Value="True">
+                                            <DataTrigger Binding="{Binding IsContactNameValid}" Value="True">
                                                 <Setter Property="BorderBrush" Value="Gray" />
                                                 <Setter Property="BorderThickness" Value="1" />
                                             </DataTrigger>
