@@ -4,7 +4,7 @@
 winexe
 C#
 .cs
-C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows\
+C:\Users\Haier\source\repos\GiftNotation\GiftNotation\obj\Debug\net8.0-windows10.0.17763.0\
 GiftNotation
 none
 false
@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\Haier\source\repos\GiftNotation\GiftNotation\App.xaml
 13-324333132
 
-67-1084860974
-237-1422726270
+67139148940
+242-979382730
 Controls\NavigationBar.xaml;Styles\General.xaml;Views\Calendar.xaml;Views\EventDetailsWindow.xaml;Views\GiftsView.xaml;Views\MainWindow.xaml;Views\MyFriends.xaml;Views\Page3.xaml;Views\People.xaml;Views\Profil.xaml;Views\Profile.xaml;Views\Setting.xaml;Views\SettingsView.xaml;
 
-False
+True
 

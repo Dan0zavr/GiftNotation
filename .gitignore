@@ -1,3 +1,5 @@
 *.sqlite3
 
+*.g.i.cs
+*.cache
 .vs
