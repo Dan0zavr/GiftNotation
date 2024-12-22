@@ -91,7 +91,7 @@ namespace GiftNotation.ViewModels
             {
                 if (SetProperty(ref _rawEventDateInput, value))
                 {
-                    // Преобразование введенной строки в дату
+                    // Проверяем корректность даты
                     if (DateTime.TryParseExact(value, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
                     {
                         Bday = parsedDate;
@@ -99,13 +99,12 @@ namespace GiftNotation.ViewModels
                     }
                     else
                     {
+                        // Если дата некорректна, Bday не меняется
                         IsEventDateValid = false;
                     }
                 }
             }
         }
-
-
         public DateTime Bday
         {
             get => _bday;
@@ -113,9 +112,11 @@ namespace GiftNotation.ViewModels
             {
                 if (SetProperty(ref _bday, value))
                 {
-                    // Обновляем строку ввода на основе выбранной даты
-                    RawEventDateInput = value.ToString("dd.MM.yyyy");
-                    IsEventDateValid = true;
+                    // Обновляем строку только если дата валидна
+                    if (IsEventDateValid)
+                    {
+                        RawEventDateInput = value.ToString("dd.MM.yyyy");
+                    }
                 }
             }
         }
@@ -188,6 +189,7 @@ namespace GiftNotation.ViewModels
             _contactId = _selectedContact.ContactId;
             _contactName = _selectedContact.ContactName;
             _bday = _selectedContact.Bday;
+            RawEventDateInput = _selectedContact.Bday.ToString("dd.MM.yyyy");
             _selectedRelpTypeName = _selectedContact.RelpTypeName;
         }
 

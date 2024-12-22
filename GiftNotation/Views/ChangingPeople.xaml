@@ -64,7 +64,24 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="Дата Рождения:" FontSize="14" VerticalAlignment="Center" Grid.Column="0" />
                             <TextBox FontSize="14" Width="310" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="10,0,0,0"
-Text="{Binding Bday, Converter={StaticResource DateTimeToStringConverter}, UpdateSourceTrigger=PropertyChanged}"/>
+                                    Text="{Binding RawEventDateInput, UpdateSourceTrigger=PropertyChanged}" >
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsEventDateValid}" Value="False">
+                                                <Setter Property="BorderBrush" Value="Red" />
+                                                <Setter Property="BorderThickness" Value="1" />
+                                            </DataTrigger>
+                                            <!-- Если поле валидно -->
+                                            <DataTrigger Binding="{Binding IsEventDateValid}" Value="True">
+                                                <Setter Property="BorderBrush" Value="Gray" />
+                                                <Setter Property="BorderThickness" Value="1" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+
+                            </TextBox>
                         </Grid>
                     </Border>
 
