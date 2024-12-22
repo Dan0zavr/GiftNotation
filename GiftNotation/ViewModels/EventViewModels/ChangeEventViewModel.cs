@@ -22,6 +22,7 @@ namespace GiftNotation.ViewModels
 
         private AddContactOnEventOnChangeCommand _addContactOnEventCommand;
         private Contact _selectedContact;
+        private Contact _selectedContactOnEvent;
 
         public ObservableCollection<EventType> EventTypes { get; private set; } = new ObservableCollection<EventType>();
         public ObservableCollection<Contact> Contacts { get; private set; } = new ObservableCollection<Contact>();
@@ -45,15 +46,7 @@ namespace GiftNotation.ViewModels
                 if (SetProperty(ref _rawEventDateInput, value))
                 {
                     // Преобразуем строку в DateTime при изменении
-                    if (DateTime.TryParseExact(value, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
-                    {
-                        EventDate = parsedDate;
-                        IsEventDateValid = true;
-                    }
-                    else
-                    {
-                        IsEventDateValid = false;
-                    }
+                    TrySetEventDate(value);
                 }
             }
         }
@@ -65,14 +58,27 @@ namespace GiftNotation.ViewModels
             {
                 if (SetProperty(ref _eventDate, value))
                 {
-                    // Когда дата изменяется, обновляем RawEventDateInput
+                    // Обновляем строку ввода на основе выбранной даты
                     RawEventDateInput = value.ToString("dd.MM.yyyy");
-                    IsEventDateValid = true;
+                    IsEventDateValid = CheckDateOnEventTypeTruth(RawEventDateInput);
+
                 }
             }
         }
 
-        public Contact SelectedContactOnEvent { get; set; }
+        public Contact SelectedContactOnEvent
+        {
+            get => _selectedContactOnEvent;
+            set
+            {
+                if (SetProperty(ref _selectedContactOnEvent, value))
+                {
+                    // Обновляем состояние кнопки удаления
+                    DeleteContactFromEventOnChangeCommand.RaiseCanExecuteChanged();
+                }
+            }
+        }
+
 
         public Contact SelectedContact
         {
@@ -114,8 +120,15 @@ namespace GiftNotation.ViewModels
         public EventType? SelectedEventType
         {
             get => _selectedEventType;
-            set => SetProperty(ref _selectedEventType, value);
+            set
+            {
+                if (SetProperty(ref _selectedEventType, value))
+                {
+                    IsEventDateValid = CheckDateOnEventTypeTruth(RawEventDateInput);
+                }
+            }
         }
+            
 
         public string SelectedEventTypeName
         {
@@ -152,6 +165,45 @@ namespace GiftNotation.ViewModels
                 RawEventDateInput = _selectedEvent.EventDate.ToString("dd.MM.yyyy"); // Преобразуем дату в строку для отображения
                 SelectedEventTypeName = _selectedEvent.EventTypeName;
             }
+        }
+
+        private bool TrySetEventDate(string value)
+        {
+            if (CheckDateOnEventTypeTruth(value))
+            {
+                if (DateTime.TryParseExact(value, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+                {
+                    EventDate = parsedDate; // Устанавливаем дату, если она прошла все проверки
+                    IsEventDateValid = true;
+                    return true;
+                }
+            }
+
+            IsEventDateValid = false; // Устанавливаем флаг валидности
+            return false;
+        }
+
+        private bool CheckDateOnEventTypeTruth(string value)
+        {
+            if (DateTime.TryParseExact(value, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+            {
+                // Проверяем на соответствие типу события
+                if (SelectedEventType != null)
+                {
+                    if (SelectedEventType.EventTypeName == "Новый год" && !(parsedDate.Day == 31 && parsedDate.Month == 12))
+                    {
+                        return false;
+                    }
+                    if (SelectedEventType.EventTypeName == "Рождество" && !(parsedDate.Day == 25 && parsedDate.Month == 12))
+                    {
+                        return false;
+                    }
+                }
+
+                return true; // Дата валидна
+            }
+
+            return false; // Дата невалидна
         }
 
         private async void LoadContacts()

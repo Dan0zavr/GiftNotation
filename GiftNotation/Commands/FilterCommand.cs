@@ -1,4 +1,5 @@
 ﻿using GiftNotation.ViewModels;
+using System.Windows;
 using System.Windows.Input;
 
 namespace GiftNotation.Commands
@@ -19,6 +20,11 @@ namespace GiftNotation.Commands
         public void Execute(object? parameter)
         {
             _viewModel.ApplyFilters();
+
+            if (parameter is Window window)
+            {
+                window.Close();
+            }
         }
     }
 

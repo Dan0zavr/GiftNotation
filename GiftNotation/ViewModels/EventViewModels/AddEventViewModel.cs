@@ -76,15 +76,7 @@ namespace GiftNotation.ViewModels
                 if (SetProperty(ref _rawEventDateInput, value))
                 {
                     // Преобразование введенной строки в дату
-                    if (DateTime.TryParseExact(value, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
-                    {
-                        EventDate = parsedDate;
-                        IsEventDateValid = true;
-                    }
-                    else
-                    {
-                        IsEventDateValid = false;
-                    }
+                    TrySetEventDate(value);
                 }
             }
         }
@@ -98,7 +90,8 @@ namespace GiftNotation.ViewModels
                 {
                     // Обновляем строку ввода на основе выбранной даты
                     RawEventDateInput = value.ToString("dd.MM.yyyy");
-                    IsEventDateValid = true;
+                    IsEventDateValid = CheckDateOnEventTypeTruth(RawEventDateInput);
+                    
                 }
             }
         }
@@ -150,7 +143,13 @@ namespace GiftNotation.ViewModels
         public EventType EventType
         {
             get { return _eventType; }
-            set => SetProperty(ref _eventType, value);
+            set
+            {
+                if(SetProperty(ref _eventType, value))
+                {
+                    IsEventDateValid = CheckDateOnEventTypeTruth(RawEventDateInput);
+                }
+            }
         }
 
         public DeleteContactFromEventOnAddCommand DeleteContactFromEventCommand { get; }
@@ -198,6 +197,22 @@ namespace GiftNotation.ViewModels
             }
         }
 
+        private bool TrySetEventDate(string value)
+        {
+            if (CheckDateOnEventTypeTruth(value))
+            {
+                if (DateTime.TryParseExact(value, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+                {
+                    EventDate = parsedDate; // Устанавливаем дату, если она прошла все проверки
+                    IsEventDateValid = true;
+                    return true;
+                }
+            }
+
+            IsEventDateValid = false; // Устанавливаем флаг валидности
+            return false;
+        }
+
         private async void LoadContacts()
         {
             var contacts = await _contactService.GetAllContacts();
@@ -221,11 +236,29 @@ namespace GiftNotation.ViewModels
             }
         }
 
-        private bool DateIsValid(string dateString)
+        private bool CheckDateOnEventTypeTruth(string value)
         {
-            string validFormat = "dd.MM.yyyy";
-            return DateTime.TryParseExact(dateString, validFormat, CultureInfo.InvariantCulture, DateTimeStyles.None, out _);
+            if (DateTime.TryParseExact(value, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+            {
+                // Проверяем на соответствие типу события
+                if (EventType != null)
+                {
+                    if (EventType.EventTypeName == "Новый год" && !(parsedDate.Day == 31 && parsedDate.Month == 12))
+                    {
+                        return false;
+                    }
+                    if (EventType.EventTypeName == "Рождество" && !(parsedDate.Day == 25 && parsedDate.Month == 12))
+                    {
+                        return false;
+                    }
+                }
+
+                return true; // Дата валидна
+            }
+
+            return false; // Дата невалидна
         }
+
         private void RemoveGiftFromCollection(Gifts gift)
         {
             if (gift != null)

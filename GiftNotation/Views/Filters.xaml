@@ -125,7 +125,7 @@
                     <TextBlock Text="Отменить" Width="65" Foreground="#FFF0F0F0" FontSize="14" FontFamily="Bold" Height="15" VerticalAlignment="Top"/>
                 </Button>
 
-                <Button Width="100" Height="18" Margin="200,-22,0,0" Background="#253336" Command="{Binding FilterCommand}">
+                <Button Width="100" Height="18" Margin="200,-22,0,0" Background="#253336" Command="{Binding FilterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
 
 
                     <Button.Style>

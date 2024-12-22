@@ -157,6 +157,7 @@ namespace GiftNotation.ViewModels
 
         }
 
+
         public async void LoadGifts()
         {
             var gifts = await _giftService.GetAllGifts();
