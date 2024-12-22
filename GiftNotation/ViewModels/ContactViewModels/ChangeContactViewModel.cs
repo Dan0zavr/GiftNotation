@@ -2,6 +2,7 @@
 using GiftNotation.Models;
 using GiftNotation.Services;
 using System.Collections.ObjectModel;
+using System.Globalization;
 
 namespace GiftNotation.ViewModels
 {
@@ -64,12 +65,59 @@ namespace GiftNotation.ViewModels
                 }
             }
         }
-            
+
+        private string _rawEventDateInput;  // Для привязки к TextBox
+        private bool _isEventDateValid = true;
+
+        // Валидация даты
+        public bool IsEventDateValid
+        {
+            get => _isEventDateValid;
+            set
+            {
+                if (_isEventDateValid != value)
+                {
+                    _isEventDateValid = value;
+                    OnPropertyChanged(nameof(IsEventDateValid));
+                }
+            }
+        }
+
+        // Свойство для ввода/выбора даты
+        public string RawEventDateInput
+        {
+            get => _rawEventDateInput;
+            set
+            {
+                if (SetProperty(ref _rawEventDateInput, value))
+                {
+                    // Преобразование введенной строки в дату
+                    if (DateTime.TryParseExact(value, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+                    {
+                        Bday = parsedDate;
+                        IsEventDateValid = true;
+                    }
+                    else
+                    {
+                        IsEventDateValid = false;
+                    }
+                }
+            }
+        }
+
 
         public DateTime Bday
         {
             get => _bday;
-            set => SetProperty(ref _bday, value);
+            set
+            {
+                if (SetProperty(ref _bday, value))
+                {
+                    // Обновляем строку ввода на основе выбранной даты
+                    RawEventDateInput = value.ToString("dd.MM.yyyy");
+                    IsEventDateValid = true;
+                }
+            }
         }
 
         public RelpType? SelectedRelpType

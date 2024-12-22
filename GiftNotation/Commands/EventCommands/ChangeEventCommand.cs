@@ -31,7 +31,8 @@ namespace GiftNotation.Commands.EventCommands
         {
             if (!ValidateFields())
             {
-                // Подсветить текстбоксы с ошибками
+                _changeViewModel.IsEventDateValid = _changeViewModel.CheckDateOnEventTypeTruth(_changeViewModel.RawEventDateInput);
+                _changeViewModel.IsEventNameValid = !string.IsNullOrWhiteSpace(_changeViewModel.EventName);
                 return;
             }
 

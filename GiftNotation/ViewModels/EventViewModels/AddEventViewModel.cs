@@ -236,7 +236,7 @@ namespace GiftNotation.ViewModels
             }
         }
 
-        private bool CheckDateOnEventTypeTruth(string value)
+        public bool CheckDateOnEventTypeTruth(string value)
         {
             if (DateTime.TryParseExact(value, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
             {
@@ -247,7 +247,7 @@ namespace GiftNotation.ViewModels
                     {
                         return false;
                     }
-                    if (EventType.EventTypeName == "Рождество" && !(parsedDate.Day == 25 && parsedDate.Month == 12))
+                    if (EventType.EventTypeName == "Рождество" && !((parsedDate.Day == 25 && parsedDate.Month == 12) || (parsedDate.Day == 7 && parsedDate.Month == 1)))
                     {
                         return false;
                     }

@@ -1,6 +1,7 @@
 ﻿using GiftNotation.Models;
 using GiftNotation.Services;
 using GiftNotation.ViewModels;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Input;
 
@@ -33,8 +34,17 @@ namespace GiftNotation.Commands.ContactCommands
             if (!ValidateFields())
             {
                 // Подсветить текстбоксы с ошибками
-                _addContactViewModel.IsEventDateValid = false;  // Убедитесь, что это обновит UI
+                _addContactViewModel.IsEventDateValid = DateTime.TryParseExact(
+                    _addContactViewModel.RawEventDateInput,
+                    "dd.MM.yyyy",
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out _
+                );
+
                 _addContactViewModel.IsContactNameValid = !string.IsNullOrWhiteSpace(_addContactViewModel.ContactName);
+
+                // Выход из метода, если данные некорректны
                 return;
             }
 
