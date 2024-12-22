@@ -26,13 +26,75 @@ namespace GiftNotation.ViewModels
         private Event? _selectedEvent;
         private Status? _selectedStatus;
 
+        public bool HasContacts => Contacts?.Count > 0;
+        public bool HasEvents => Events?.Count > 0;
+
         private string? _selectedContactName;
         private string? _selectedEventName;
         private string? _selectedStatusName;
 
         public ObservableCollection<Status> Statuses { get; private set; } = new ObservableCollection<Status>();
-        public ObservableCollection<Contact> Contacts { get; private set; } = new ObservableCollection<Contact>();
-        public ObservableCollection<Event> Events { get; private set; } = new ObservableCollection<Event>();
+        private ObservableCollection<Contact> _contacts = new ObservableCollection<Contact>();
+        public ObservableCollection<Contact> Contacts
+        {
+            get => _contacts;
+            private set
+            {
+                if (_contacts != value)
+                {
+                    if (_contacts != null)
+                    {
+                        _contacts.CollectionChanged -= Contacts_CollectionChanged;
+                    }
+
+                    _contacts = value;
+
+                    if (_contacts != null)
+                    {
+                        _contacts.CollectionChanged += Contacts_CollectionChanged;
+                    }
+
+                    OnPropertyChanged(nameof(Contacts));
+                    OnPropertyChanged(nameof(HasContacts));
+                }
+            }
+        }
+
+        private void Contacts_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(HasContacts));
+        }
+
+        public ObservableCollection<Event> _events = new ObservableCollection<Event>();
+
+        public ObservableCollection<Event> Events
+        {
+            get => _events;
+            private set
+            {
+                if (_events != value)
+                {
+                    if (_events != null)
+                    {
+                        _contacts.CollectionChanged -= Events_CollectionChanged;
+                    }
+
+                    _events = value;
+
+                    if (_events != null)
+                    {
+                        _events.CollectionChanged += Events_CollectionChanged;
+                    }
+
+                    OnPropertyChanged(nameof(Events));
+                    OnPropertyChanged(nameof(HasEvents));
+                }
+            }
+        }
+        private void Events_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            OnPropertyChanged(nameof(HasEvents));
+        }
 
         public int GiftId => _giftId;
 

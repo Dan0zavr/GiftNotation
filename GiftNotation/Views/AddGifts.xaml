@@ -215,7 +215,8 @@
                         <ComboBox FontSize="12" Padding="2" Width="390" Background="#cacac8" VerticalAlignment="Center" Grid.Column="1" Margin="0,0,0,0"  ItemsSource="{Binding Contacts}"
                                     DisplayMemberPath="ContactName"
                                     SelectedItem="{Binding SelectedContact}" 
-                                    IsEditable="False"/> 
+                                    IsEditable="False"
+                                    IsEnabled="{Binding HasContacts}"/> 
                     </Grid>
                 </Border>
 
@@ -229,7 +230,7 @@
                         <ComboBox Width="360" Grid.Column="1" Background="#cacac8" ItemsSource="{Binding Events}"
                         DisplayMemberPath="EventName"
                         SelectedItem="{Binding SelectedEvent}" 
-
+                        IsEnabled="{Binding HasEvents}"
                         IsEditable="False"/>
                     </Grid>
                 </Border>
