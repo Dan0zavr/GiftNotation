@@ -31,7 +31,7 @@ namespace GiftNotation.Commands.ContactCommands
 
         public async void Execute(object? parameter)
         {
-            if (!ValidateFields())
+            if (!ValidateFields() || _addContactViewModel.Bday == DateTime.MinValue)
             {
                 // Подсветить текстбоксы с ошибками
                 _addContactViewModel.IsEventDateValid = DateTime.TryParseExact(

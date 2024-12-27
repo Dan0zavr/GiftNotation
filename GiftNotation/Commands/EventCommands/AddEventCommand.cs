@@ -32,7 +32,7 @@ namespace GiftNotation.Commands.EventCommands
 
         public async void Execute(object? parameter)
         {
-            if (!ValidateFields())
+            if (!ValidateFields() || _addViewModel.EventDate == DateTime.MinValue)
             {
                 // Подсветить текстбоксы с ошибками
                 _addViewModel.IsEventDateValid = _addViewModel.CheckDateOnEventTypeTruth(_addViewModel.RawEventDateInput);  // Убедитесь, что это обновит UI

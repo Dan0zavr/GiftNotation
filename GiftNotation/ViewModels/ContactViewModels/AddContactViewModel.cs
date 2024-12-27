@@ -1,6 +1,7 @@
 ﻿using GiftNotation.Commands.ContactCommands;
 using GiftNotation.Models;
 using GiftNotation.Services;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using System.Collections.ObjectModel;
 using System.Globalization;
 
@@ -52,15 +53,7 @@ namespace GiftNotation.ViewModels
                 if (SetProperty(ref _rawEventDateInput, value))
                 {
                     // Преобразование введенной строки в дату
-                    if (DateTime.TryParseExact(value, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
-                    {
-                        Bday = parsedDate;
-                        IsEventDateValid = true;
-                    }
-                    else
-                    {
-                        IsEventDateValid = false;
-                    }
+                    TrySetEventDate(value);
                 }
             }
         }
@@ -155,6 +148,21 @@ namespace GiftNotation.ViewModels
             _addGiftForContactOnAddCommand = new AddGiftForContactOnAddCommand(this);
             DeleteGiftForContactCommand = new DeleteGiftForContactOnAddCommand(this);
 
+        }
+
+        private bool TrySetEventDate(string value)
+        {
+            
+                if (DateTime.TryParseExact(value, "dd.MM.yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+                {
+                    Bday = parsedDate; // Устанавливаем дату, если она прошла все проверки
+                    IsEventDateValid = true;
+                    return true;
+                }
+            
+
+            IsEventDateValid = false; // Устанавливаем флаг валидности
+            return false;
         }
 
 
